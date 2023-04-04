@@ -6,19 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://d4n-sec.github.io">
-  <title>D4n&#39;s Blog</title>
+  <title>Category: 随笔 | D4n&#39;s Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="Testthis is my first and last blog long long">
-<meta property="og:type" content="article">
+  <meta property="og:type" content="website">
 <meta property="og:title" content="D4n&#39;s Blog">
-<meta property="og:url" content="https://d4n-sec.github.io/2023/04/05/1/index.html">
+<meta property="og:url" content="https://d4n-sec.github.io/categories/%E9%9A%8F%E7%AC%94/index.html">
 <meta property="og:site_name" content="D4n&#39;s Blog">
-<meta property="og:description" content="Testthis is my first and last blog long long">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-04-04T18:50:55.184Z">
-<meta property="article:modified_time" content="2023-04-04T20:17:09.249Z">
 <meta property="article:author" content="D4n">
 <meta name="twitter:card" content="summary">
   
@@ -73,11 +69,11 @@
 		<nav class="header-menu">
 			<ul>
 			
-				<li><a href="/" target="_blank">主页</a></li>
+				<li><a href="/" >主页</a></li>
 			
-				<li><a href="https://zhousiwei.gitee.io/ibooks/" target="_blank">技术笔记</a></li>
+				<li><a href="/categories/%E9%9A%8F%E7%AC%94/" >随笔</a></li>
 			
-				<li><a href="/tags/%E9%9A%8F%E7%AC%94/" target="_blank">随笔</a></li>
+				<li><a href="/categories/" >分类</a></li>
 			
 			</ul>
 		</nav>
@@ -115,10 +111,47 @@
 					
 				
 			</div>
+		<br>
+		<div style="position:absolute; bottom:120px left:auto; width:100%;height:50%">
+	<script type="text/javascript" src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+  	<div id="clock" style="font-family: 'Share Tech Mono', monospace;color: #ffffff;text-align: center;position: absolute;left: 50%;top: 50%;-webkit-transform: translate(50%, 50%);transform: translate(-50%, -50%);color: #4B8CE1;text-shadow: 0 0 20px #0aafe6, 0 0 20px rgba(10, 175, 230, 0);">
+      		<p style="margin: 0;padding: 0;letter-spacing: 0.1em;font-size: 15px;">{{ date }}</p>
+      		<p style="margin: 0;padding: 0;letter-spacing: 0.01em;font-size: 38px;">{{ time }}</p>
+  	</div>
+	<script>
+		var clock = new Vue({
+			el: '#clock',
+			data: {
+				time: '',
+				date: ''
+			}
+		});
+
+		var week = ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+		var timerID = setInterval(updateTime, 1000);
+		updateTime();
+		function updateTime() {
+			var cd = new Date();
+			clock.time = zeroPadding(cd.getHours(), 2) + ':' + zeroPadding(cd.getMinutes(), 2) + ':' + zeroPadding(cd.getSeconds(), 2);
+			clock.date = zeroPadding(cd.getFullYear(), 4) + '-' + zeroPadding(cd.getMonth() + 1, 2) + '-' + zeroPadding(cd.getDate(), 2) + week[cd.getDay()];
+		};
+
+		function zeroPadding(num, digit) {
+			var zero = '';
+			for (var i = 0; i < digit; i++) {
+				zero += '0';
+			}
+			return (zero + num).slice(-digit);
+		}
+	</script>
+</div>
+		
 		
 		</nav>
 	</header>		
 </div>
+<!--时钟-->
+
 
     </div>
     <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
@@ -177,9 +210,9 @@
 				
 					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a target="_blank" rel="noopener" href="https://zhousiwei.gitee.io/ibooks/">技术笔记</a></li>
+					<li style="width: 33.333333333333336%"><a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+					<li style="width: 33.333333333333336%"><a href="/categories/">分类</a></li>
 		        
 				</ul>
 			</nav>
@@ -195,175 +228,76 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-1" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h1><p>this is my first and last blog</p>
-<p>long</p>
-<p>long</p>
-<span id="more"></span>
-
-<p>long</p>
-<p>long</p>
-<p>long</p>
-<p>long</p>
-<p>long</p>
-<p>long</p>
-<p>long</p>
-<p>long</p>
-<p>long</p>
-<p>long</p>
-<p>long</p>
-<p>long</p>
-<p>long</p>
-<p>long</p>
-<p>long</p>
-<p><code>long</code></p>
-<p>long</p>
-<p>long</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">My</span>():</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
-
-<p>long</p>
-<p>long</p>
-<p>long</p>
-<p>long</p>
-<p>long</p>
-<p>long</p>
-<p>long</p>
-
-    
-
-    
-
-    
-    <div class="declare"> 
-      <ul class="post-copyright">
-        <li>
-          <strong>本文作者：</strong>
-          D4n
-        </li>
-        <li>
-          <strong>本文链接：</strong>
-          <a href="https://d4n-sec.github.io/2023/04/05/1/" title="" target="_blank">https://d4n-sec.github.io/2023/04/05/1/</a>
-        </li>
-        
-        <li>
-          <strong>版权声明： </strong>
-          
-          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
-        </li>
-        
-      </ul>
-    </div>
-    
-
-  </div>
-  <div class="article-info article-info-index">
+            
+  
+  
     
     
-    
-
-    
-
-    
-    
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a> -->
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://d4n-sec.github.io/2023/04/05/1/" alt="微信分享二维码"> -->
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-
+        <div class="archives">
     
-    <div class="clearfix"></div>
-  </div>
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	
+<a href="/2018/11/23/1/" class="archive-article-date">
+        <time datetime="2018-11-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-23</time>
+</a>
+
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+	
+	  <a class="archive-article-title" href="/2018/11/23/1/" target="_blank">HTML入门笔记</a>
+  
+    </h1>
+  
+
+
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+          
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/随笔/" class="article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-
-<nav id="article-nav">
   
   
-    <a href="/2023/04/05/My-New-Post/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">My New Post</div>
-      <i class="icon-circle-right"></i>
-    </a>
+    </div></section>
   
-</nav>
 
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 
           </div>
@@ -378,7 +312,7 @@
       	<div class="footer-right">
 			
 			
-      		GitHub:<a href="https://github.com/JoeyBling/hexo-theme-yilia-plus" target="_blank">hexo-theme-yilia-plus</a> by Litten
+      		GitHub:<a href="https://github.com/JoeyBling/hexo-theme-yilia-plus" target="_blank">yilia-plus</a> by Litten
       	</div>
     </div>
   </div>
@@ -404,10 +338,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
-		isCategory: false,
+		isCategory: true,
 		open_in_new: true,
 		toc_hide_index: true,
 		root: "/",
@@ -490,6 +424,10 @@
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">HTML</a>

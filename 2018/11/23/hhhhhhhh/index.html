@@ -6,19 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://d4n-sec.github.io">
-  <title>HTML入门笔记 | D4n&#39;s Blog</title>
+  <title>哈哈哈哈哈哈哈哈哈哈哈哈 | D4n&#39;s Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta property="og:type" content="article">
-<meta property="og:title" content="HTML入门笔记">
-<meta property="og:url" content="https://d4n-sec.github.io/2018/11/23/hello-world/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="哈哈哈哈哈哈哈哈哈哈哈哈">
+<meta property="og:url" content="https://d4n-sec.github.io/2018/11/23/hhhhhhhh/index.html">
 <meta property="og:site_name" content="D4n&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-11-22T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-04-04T20:25:27.777Z">
+<meta property="article:modified_time" content="2023-04-04T21:12:05.774Z">
 <meta property="article:author" content="D4n">
 <meta property="article:tag" content="HTML">
 <meta property="article:tag" content="前端">
@@ -75,11 +73,11 @@
 		<nav class="header-menu">
 			<ul>
 			
-				<li><a href="/" target="_blank">主页</a></li>
+				<li><a href="/" >主页</a></li>
 			
-				<li><a href="https://zhousiwei.gitee.io/ibooks/" target="_blank">技术笔记</a></li>
+				<li><a href="/categories/%E9%9A%8F%E7%AC%94/" >随笔</a></li>
 			
-				<li><a href="/tags/%E9%9A%8F%E7%AC%94/" target="_blank">随笔</a></li>
+				<li><a href="/categories/" >分类</a></li>
 			
 			</ul>
 		</nav>
@@ -117,10 +115,47 @@
 					
 				
 			</div>
+		<br>
+		<div style="position:absolute; bottom:120px left:auto; width:100%;height:50%">
+	<script type="text/javascript" src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+  	<div id="clock" style="font-family: 'Share Tech Mono', monospace;color: #ffffff;text-align: center;position: absolute;left: 50%;top: 50%;-webkit-transform: translate(50%, 50%);transform: translate(-50%, -50%);color: #4B8CE1;text-shadow: 0 0 20px #0aafe6, 0 0 20px rgba(10, 175, 230, 0);">
+      		<p style="margin: 0;padding: 0;letter-spacing: 0.1em;font-size: 15px;">{{ date }}</p>
+      		<p style="margin: 0;padding: 0;letter-spacing: 0.01em;font-size: 38px;">{{ time }}</p>
+  	</div>
+	<script>
+		var clock = new Vue({
+			el: '#clock',
+			data: {
+				time: '',
+				date: ''
+			}
+		});
+
+		var week = ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+		var timerID = setInterval(updateTime, 1000);
+		updateTime();
+		function updateTime() {
+			var cd = new Date();
+			clock.time = zeroPadding(cd.getHours(), 2) + ':' + zeroPadding(cd.getMinutes(), 2) + ':' + zeroPadding(cd.getSeconds(), 2);
+			clock.date = zeroPadding(cd.getFullYear(), 4) + '-' + zeroPadding(cd.getMonth() + 1, 2) + '-' + zeroPadding(cd.getDate(), 2) + week[cd.getDay()];
+		};
+
+		function zeroPadding(num, digit) {
+			var zero = '';
+			for (var i = 0; i < digit; i++) {
+				zero += '0';
+			}
+			return (zero + num).slice(-digit);
+		}
+	</script>
+</div>
+		
 		
 		</nav>
 	</header>		
 </div>
+<!--时钟-->
+
 
     </div>
     <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
@@ -179,9 +214,9 @@
 				
 					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a target="_blank" rel="noopener" href="https://zhousiwei.gitee.io/ibooks/">技术笔记</a></li>
+					<li style="width: 33.333333333333336%"><a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+					<li style="width: 33.333333333333336%"><a href="/categories/">分类</a></li>
 		        
 				</ul>
 			</nav>
@@ -197,14 +232,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-hhhhhhhh" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      HTML入门笔记
+      哈哈哈哈哈哈哈哈哈哈哈哈
     </h1>
   
 
@@ -216,7 +251,7 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2018/11/23/hello-world/" class="archive-article-date">
+<a href="/2018/11/23/hhhhhhhh/" class="archive-article-date">
         <time datetime="2018-11-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-23</time>
 </a>
 
@@ -230,7 +265,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">75字</span>
+      <span class="post-count">0字</span>
     </span>
   </span>
 
@@ -250,20 +285,7 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
+    
     
 
     
@@ -277,7 +299,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://d4n-sec.github.io/2018/11/23/hello-world/" title="HTML入门笔记" target="_blank">https://d4n-sec.github.io/2018/11/23/hello-world/</a>
+          <a href="https://d4n-sec.github.io/2018/11/23/hhhhhhhh/" title="哈哈哈哈哈哈哈哈哈哈哈哈" target="_blank">https://d4n-sec.github.io/2018/11/23/hhhhhhhh/</a>
         </li>
         
         <li>
@@ -315,11 +337,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端/HTML//" class="article-tag-list-link color5">HTML</a>
+        			<a href="/categories/安全/" class="article-tag-list-link color3">安全</a>
         		</li>
       		
 		</ul>
@@ -374,7 +392,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://d4n-sec.github.io/2018/11/23/hello-world/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://d4n-sec.github.io/2018/11/23/hhhhhhhh/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -389,11 +407,11 @@
 
 <nav id="article-nav">
   
-    <a href="/2023/04/05/My-New-Post/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/11/23/1/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          My New Post
+          HTML入门笔记
         
       </div>
     </a>
@@ -422,7 +440,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>
@@ -444,6 +462,21 @@
 
 
 
+
+
+ 
+  <div class="category-all-page">
+    <div class="category-all-title">
+    TOTAL : 2
+    </div>
+ 
+    <div class="category-all">
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8/">安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">1</span></li></ul>
+    </div>
+ 
+  </div>
+
+
           </div>
         </div>
       </div>
@@ -456,7 +489,7 @@
       	<div class="footer-right">
 			
 			
-      		GitHub:<a href="https://github.com/JoeyBling/hexo-theme-yilia-plus" target="_blank">hexo-theme-yilia-plus</a> by Litten
+      		GitHub:<a href="https://github.com/JoeyBling/hexo-theme-yilia-plus" target="_blank">yilia-plus</a> by Litten
       	</div>
     </div>
   </div>
@@ -568,6 +601,10 @@
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">HTML</a>
