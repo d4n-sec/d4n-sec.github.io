@@ -6,22 +6,37 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://d4n-sec.github.io">
-  <title>My Blog Back | D4n&#39;s Blog</title>
+  <title>我的Java安全路 | D4n&#39;s Blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="This article involves the author&#39;s privacy,Please enter password to read.">
+  <meta name="description" content="本章是Java安全入门第一篇，主旨是记录作者的学习路线，望大佬指正，小白避坑">
 <meta property="og:type" content="article">
-<meta property="og:title" content="My Blog Back">
-<meta property="og:url" content="https://d4n-sec.github.io/2018/11/23/32/index.html">
+<meta property="og:title" content="我的Java安全路">
+<meta property="og:url" content="https://d4n-sec.github.io/2023/04/06/java_sec/index.html">
 <meta property="og:site_name" content="D4n&#39;s Blog">
-<meta property="og:description" content="This article involves the author&#39;s privacy,Please enter password to read.">
+<meta property="og:description" content="本章是Java安全入门第一篇，主旨是记录作者的学习路线，望大佬指正，小白避坑">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2018-11-22T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-04-06T12:51:27.344Z">
+<meta property="og:image" content="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230405231806639.png">
+<meta property="og:image" content="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230405232844595.png">
+<meta property="og:image" content="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406001437606.png">
+<meta property="og:image" content="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406190928447.png">
+<meta property="og:image" content="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406191631788.png">
+<meta property="og:image" content="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406192424409.png">
+<meta property="og:image" content="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406194620166.png">
+<meta property="og:image" content="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406195330837.png">
+<meta property="og:image" content="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406200057930.png">
+<meta property="og:image" content="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406200546082.png">
+<meta property="og:image" content="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406203654282.png">
+<meta property="og:image" content="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406203714824.png">
+<meta property="og:image" content="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406204223888.png">
+<meta property="og:image" content="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406204711090.png">
+<meta property="article:published_time" content="2023-04-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-04-06T13:03:59.439Z">
 <meta property="article:author" content="D4n">
-<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="Java学习路">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230405231806639.png">
   
     <link rel="alternative" href="/atom.xml" title="D4n&#39;s Blog" type="application/atom+xml">
   
@@ -233,14 +248,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-32" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-java_sec" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      My Blog Back
+      我的Java安全路
     </h1>
   
 
@@ -252,8 +267,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2018/11/23/32/" class="archive-article-date">
-        <time datetime="2018-11-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-23</time>
+<a href="/2023/04/06/java_sec/" class="archive-article-date">
+        <time datetime="2023-04-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-06</time>
 </a>
 
   
@@ -266,7 +281,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">4字</span>
+      <span class="post-count">3.8k字</span>
     </span>
   </span>
 
@@ -275,7 +290,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">14分</span>
     </span>
   </span>
 </div>
@@ -286,18 +301,164 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="250b4247569509e084ddf3cb98dfc8b072f149abdba0146b7a529c78ba24828c">6031008eaf30dfa9f6cee48a6a69006ec6c27df1acca526217b8c2ea8950b3c212364251a33416a36854991427b0a7a7cebf97e168ff9558edbeffdf27a7d2780057183121cfcd2f1e0e111c516254b7eebc488833ab8ab712e0d681168f8ecc78b3eafa7403258e640dfb6e5d0a5dabb9b5dedf67be7e66d8ec9d33abd05382aa27340f769c2534167d293ece5a377d3970b6516f3365a58f20e10a7bf5fc9224b7191ca79abad30acf07e8d74f35c7e1485136286ab5b120d8fd6e32d92be55385aee34a16504e4a8b755d4e94f17eae7f2ecaa009bf9cac70af0e354a389ff51218e4d6067daf9dfd4ca07f2561c31ffec5b768e7fc03092021fecff7ec6a55731fc9a24ad4002c77c33bdf085829ee440e5ae2acb82b22b773df6dc86872d9f5b4c95fa262dce54b33e9432152cae0d163eaa917638a00516077a64a1c20579337420d04bf087ab6f2af1c36f61695f38ab384b2d3132afc3815390bcd59908bcb51627db570e389509a1360e5fc0be156cb81b59e8670b6129dd4a9ef092cc8561658096c442f09561219232fecc3ed5bfbc02ff6ed18280d9ad2d49cf53eb2e1510c636cf362063e9ed9da8ecb27af207ec3f8707d88a7872cea0e30e0ddb5c5a847b81602367edf5561dd64ded6357f0347b6d547b0ba4f25c6468c695e768dda799e870c3301cc2a4c025e31332c7325cbb60ae6c2230fc3e8e7dab306f1232ef017d47b45bb5da40b2e9e077f8961bc23368b80eb5c4bc48f554a011b43f9a774f73b2d27957396f6144c5d59519081e6588997b4da152ace478afb6210594cb73d12fdbdb3093a4c7546ce21995c300d0b000b59fa44c191df753fc45b4c24980a2482a094a075de360eca18b7522f0f102da3f74f0da1e81ca7f34643bfadaf04b17b60904a9bee3364e297fce0d5a7a6097f7510184c504fa8cb7b6f764ef03d66f20d954db383ca25d92a2d650e0a96115ff0969ee70c97b1310cfbeb808fe8c040ecac1f64351822b207f0f58415e0543573a4a5a3c33e64851e026861357a63daae2223b3c6af6fa97b83454d6eefa5e732d704461c16e45e56b2ca76e2636db9a4de242a1dc5c040f1e0f9b11a3954d394d98725e76f30b557257ea25143c184104e20fa0036c6f87cfbc5033c7c9a25640ad45b4e60839ea65106d3d783ca2df80f2aeddfee152adf482eb76fce56d00062e68b39512505dc91cf66c634b95dd89dc65ed841638741ed0d6b0a6c6c74f3a8942d147e58b1</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Input password Here.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+    <p>本章是Java安全入门第一篇，主旨是记录作者的学习路线，望大佬指正，小白避坑</p>
+<span id="more"></span>
+
+<p>测试用Java版本（17.0.6）</p>
+<h2 id="Java反序列化"><a href="#Java反序列化" class="headerlink" title="Java反序列化"></a>Java反序列化</h2><h3 id="什么是反序列化"><a href="#什么是反序列化" class="headerlink" title="什么是反序列化"></a>什么是反序列化</h3><p>​		借用一下大佬的描述：</p>
+<blockquote>
+<p>Java描述的是一个‘世界’，程序运行开始时，这个‘世界’也开始运作，但‘世界’中的对象不是一成不变的，它的属性会随着程序的运行而改变。<br>但很多情况下，我们需要保存某一刻某个对象的信息，来进行一些操作。比如利用反序列化将程序运行的对象状态以二进制形式储存与文件系统中，然后可以在另一个程序中对序列化后的对象状态数据进行反序列化恢复对象。可以有效地实现多平台之间的通信、对象持久化存储。</p>
+<p>序列化与反序列化是让Java对象脱离Java运行环境的一种手段，可以有效的实现多平台之间的通信、对象持久化存储。</p>
+</blockquote>
+<p>​		用自己的话说就是，如果需要传输一个对象（或是一段数据）给目标（途径可以是网络，进程间等任何可以传输数据的地方，目标可以是客户端，子进程，线程等）需要将对象的一些或者所有信息以一种格式传输给目标，比如常见的<code>JSON、XML、YAML</code>格式，就是将一些数据格式化为相应标准格式的例子</p>
+<p>​		这种将数据格式标准化的过程就可以称之为<strong>序列化</strong>，而对应的，目标接收到这种格式化数据之后，将对象或者数据还原成原本或者需要的样子就称为<strong>反序列化</strong>。</p>
+<p>​		在Java中想要序列化一个对象，需要同时满足两个条件：</p>
+<blockquote>
+<ol>
+<li>该类必须实现 java.io.Serializable 接口。</li>
+<li>该类的所有属性必须是可序列化的。如果有一个属性不是可序列化的，则该属性必须注明是短暂的。</li>
+</ol>
+</blockquote>
+<p>​		<code>只有实现了Serializable或Externalizable接口的类的对象才能被序列化，否则抛出异常。</code><br>​		注：Externalizable 是继承了Serializable的抽象类</p>
+<p>​		所以你想知道一个Java标准类是否是可序列化的，可以查看他的类描述，看是否实现了java.io.Serializable接口</p>
+<h3 id="为什么要序列化"><a href="#为什么要序列化" class="headerlink" title="为什么要序列化"></a>为什么要序列化</h3><blockquote>
+<p>对象不只是存储在内存中，它还需要在传输网络中进行传输，并且保存起来之后下次再加载出来，这时候就需要序列化技术。</p>
+<p>Java的序列化技术就是把<strong>对象转换成一串由二进制字节组成的数组</strong>，然后将这二进制数据保存在磁盘或传输网络。而后需要用到这对象时，磁盘或者网络接收者可以通过反序列化得到此对象，达到<strong>对象持久化</strong>的目的。</p>
+</blockquote>
+<h3 id="如何序列化与反序列化"><a href="#如何序列化与反序列化" class="headerlink" title="如何序列化与反序列化"></a>如何序列化与反序列化</h3><h4 id="JDK类库提供的序列化API"><a href="#JDK类库提供的序列化API" class="headerlink" title="JDK类库提供的序列化API"></a>JDK类库提供的序列化API</h4><blockquote>
+<ul>
+<li>java.io.ObjectOutputStream：表示对象输出流<br>它的writeObject(Object obj)方法可以对参数指定的obj对象进行序列化，把得到的字节序列写到一个目标输出流中。</li>
+<li>java.io.ObjectInputStream：表示对象输入流<br>它的readObject()方法从源输入流中读取字节序列，再把它们反序列化成为一个对象，并将其返回。</li>
+</ul>
+</blockquote>
+<h4 id="Java对象序列化与反序列化的调用流程"><a href="#Java对象序列化与反序列化的调用流程" class="headerlink" title="Java对象序列化与反序列化的调用流程"></a>Java对象序列化与反序列化的调用流程</h4><blockquote>
+<ol>
+<li><p>方法一：</p>
+<p>若Student类仅仅实现了Serializable接口，则可以按照以下方式进行序列化和反序列化。<br>ObjectOutputStream采用默认的序列化方式，对Student对象的非transient的实例变量进行序列化。<br>ObjcetInputStream采用默认的反序列化方式，对对Student对象的非transient的实例变量进行反序列化。</p>
+</li>
+<li><p>方法二：</p>
+<p>若Student类仅仅实现了Serializable接口，并且还定义了readObject(ObjectInputStream in)和writeObject(ObjectOutputSteam out)，<br>ObjectOutputStream调用Student对象的writeObject(ObjectOutputStream out)的方法进行序列化。<br>ObjectInputStream会调用Student对象的readObject(ObjectInputStream in)的方法进行反序列化。</p>
+</li>
+<li><p>方法三：</p>
+<p>若Student类实现了Externalnalizable接口，且Student类必须实现readExternal(ObjectInput in)和writeExternal(ObjectOutput out)方法，则按照以下方式进行序列化与反序列化。<br>ObjectOutputStream调用Student对象的writeExternal(ObjectOutput out))的方法进行序列化。<br>ObjectInputStream会调用Student对象的readExternal(ObjectInput in)的方法进行反序列化。</p>
+</li>
+</ol>
+</blockquote>
+<h4 id="尝试序列化"><a href="#尝试序列化" class="headerlink" title="尝试序列化"></a>尝试序列化</h4><p>先写一个待反序列化的类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Employee</span> <span class="keyword">implements</span> <span class="title class_">java</span>.io.Serializable</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">public</span> String identify;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">mailCheck</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;This is the &quot;</span>+<span class="built_in">this</span>.identify+<span class="string">&quot; of our company&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后再写一个序列化和反序列化测试类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectOutputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SerializeDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String [] args)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">Employee</span> <span class="variable">e</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Employee</span>();</span><br><span class="line">        e.name = <span class="string">&quot;my name&quot;</span>;</span><br><span class="line">        e.identify = <span class="string">&quot;General staff&quot;</span>;</span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 打开一个文件输入流</span></span><br><span class="line">            <span class="type">FileOutputStream</span> <span class="variable">fileOut</span> <span class="operator">=</span></span><br><span class="line">                    <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;C:\\Users\\DAN\\Desktop\\Serialize.txt&quot;</span>);</span><br><span class="line">            <span class="comment">// 建立对象输入流</span></span><br><span class="line">            <span class="type">ObjectOutputStream</span> <span class="variable">out</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(fileOut);</span><br><span class="line">            <span class="comment">//输出反序列化对象</span></span><br><span class="line">            out.writeObject(e);</span><br><span class="line">            out.close();</span><br><span class="line">            fileOut.close();</span><br><span class="line">            System.out.printf(<span class="string">&quot;Serialized data is saved in C:\\Users\\DAN\\Desktop\\Serialize.txt&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span>(IOException i)</span><br><span class="line">        &#123;</span><br><span class="line">            i.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行后，Employee对象的序列化数据就存储到了<code>Serialize.txt</code>中，我们打开看一下（使用二进制查看器）</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230405231806639.png" alt="image-20230405231806639"></p>
+<p>可以依稀看见：类名，属性名称，属性类型，以及属性对应的值<br>值得注意的是：大部分的反序列化数据均是以<code>AC ED 00 05 </code>开头的</p>
+<p>反序列化操作就是从字节流中提取对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SerializeDemo2</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String [] args)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">Employee</span> <span class="variable">e</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 打开一个文件输入流</span></span><br><span class="line">            <span class="type">FileInputStream</span> <span class="variable">fileIn</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;C:\\Users\\DAN\\Desktop\\Serialize.txt&quot;</span>);</span><br><span class="line">            <span class="comment">// 建立对象输入流</span></span><br><span class="line">            <span class="type">ObjectInputStream</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(fileIn);</span><br><span class="line">            <span class="comment">// 读取对象</span></span><br><span class="line">            e = (Employee) in.readObject();</span><br><span class="line">            in.close();</span><br><span class="line">            fileIn.close();</span><br><span class="line">        &#125;<span class="keyword">catch</span>(IOException i)</span><br><span class="line">        &#123;</span><br><span class="line">            i.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;<span class="keyword">catch</span>(ClassNotFoundException c)</span><br><span class="line">        &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Employee class not found&quot;</span>);</span><br><span class="line">            c.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;Deserialized Employee...&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;Name: &quot;</span> + e.name);</span><br><span class="line">        System.out.println(<span class="string">&quot;This is the &quot;</span>+e.identify+<span class="string">&quot; of our company&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行后可以发现Employee的数据已经获取到了目标程序中对象e里</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230405232844595.png" alt="image-20230405232844595"></p>
+<p>上诉就是一个完整的序列化周期，中间使用文件暂时作为了传输介质，其实实际应用中的序列化无非就是传输的方式和传输机制稍微复杂一点</p>
+<h4 id="总结序列化具体步骤"><a href="#总结序列化具体步骤" class="headerlink" title="总结序列化具体步骤"></a>总结序列化具体步骤</h4><p>从上面的可以看出对象的序列化步骤是：</p>
+<blockquote>
+<ol>
+<li><p>创建一个对象输出流，它可以包装一个其它类型的目标输出流，如文件输出流：<br><code>ObjectOutputStream out = new ObjectOutputStream(new fileOutputStream(“D:\\objectfile.obj”));</code></p>
+</li>
+<li><p>通过对象输出流的writeObject()方法写对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">out.writeObject(“Hello”);</span><br><span class="line">out.writeObject(<span class="keyword">new</span> <span class="title class_">Date</span>());</span><br></pre></td></tr></table></figure></li>
+</ol>
+</blockquote>
+<p>对象的反序列化步骤是：</p>
+<blockquote>
+<ol>
+<li><p>创建一个对象输入流，它可以包装一个其它类型输入流，如文件输入流：<br><code>ObjectInputStream in = new ObjectInputStream(new fileInputStream(“D:\\objectfile.obj”));</code></p>
+</li>
+<li><p>通过对象输出流的writeObject()方法写对象：</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">obj1</span> <span class="operator">=</span> (String)in.readObject();</span><br><span class="line"><span class="type">Date</span> <span class="variable">obj2</span> <span class="operator">=</span> (Date)in.readObject();</span><br></pre></td></tr></table></figure></li>
+</ol>
+</blockquote>
+<h3 id="序列化与反序列化的必要条件"><a href="#序列化与反序列化的必要条件" class="headerlink" title="序列化与反序列化的必要条件"></a>序列化与反序列化的必要条件</h3><blockquote>
+<ol>
+<li>必须是同包，同名。</li>
+<li>serialVersionUID必须一致。有时候两个类的属性稍微不一致的时候，可以通过将此属性写死值，实现序列化和反序列化。</li>
+</ol>
+</blockquote>
+<h3 id="序列化中涉及细节"><a href="#序列化中涉及细节" class="headerlink" title="序列化中涉及细节"></a>序列化中涉及细节</h3><h4 id="serialVersionUID"><a href="#serialVersionUID" class="headerlink" title="serialVersionUID"></a>serialVersionUID</h4><h5 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h5><p>​	Java的序列化机制是通过在运行时判断类的 serialVersionUID 来<strong>验证版本一致性</strong>的。在进行反序列化时，JVM会把传来的字节流中的serialVersionUID与本地相应实体（类）的serialVersionUID进行比较，如果相同就认为是一致的，可以进行反序列化，否则就会出现序列化版本不一致的异常。</p>
+<p>​	虚拟机是否允许反序列化，不仅取决于类路径和功能代码是否一致，一个非常重要的一点是两个类的序列化 ID 是否一致，代码中设置 serialVersionUID 可以在类中添加 <code>private static final long serialVersionUID = 1L</code></p>
+<p>​	当实现java.io.Serializable接口的实体（类）没有显式地定义一个名为serialVersionUID，类型为long的变量时，Java序列化机制会根据编译的class自动生成一个serialVersionUID作序列化版本比较用，这种情况下，只有同一次编译生成的class才会生成相同的serialVersionUID </p>
+<p>​	如果我们不希望通过编译来强制划分软件版本，即实现序列化接口的实体能够兼容先前版本，未作更改的类，就需要显式地定义一个名为serialVersionUID，类型为long的变量，不修改这个变量值的序列化实体都可以相互进行串行化和反串行化。</p>
+<h5 id="常见场景"><a href="#常见场景" class="headerlink" title="常见场景"></a>常见场景</h5><blockquote>
+<p>问题出现场景：两个客户端 A 和 B 试图通过网络传递对象数据，A 端将对象 C 序列化为二进制数据再传给 B，B 反序列化得到 C。<br>问题：C 对象的全类路径假设为 com.inout.Test，在 A 和 B 端都有这么一个类文件，功能代码完全一致。也都实现了 Serializable 接口，但是反序列化时总是提示不成功。<br>解决：统一serialVersionUID的值</p>
+</blockquote>
+<p>虽然两个类的功能代码完全一致，但是序列化 ID 不同，他们无法相互序列化和反序列化。</p>
+<h5 id="serialVersionUID-使用场景"><a href="#serialVersionUID-使用场景" class="headerlink" title="serialVersionUID 使用场景"></a>serialVersionUID 使用场景</h5><p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406001437606.png" alt="image-20230406001437606"></p>
+<h4 id="序列化存储规则"><a href="#序列化存储规则" class="headerlink" title="序列化存储规则"></a>序列化存储规则</h4><ol>
+<li>将同一对象序列化并两次写入同一文件时</li>
+</ol>
+<blockquote>
+<p>Java 序列化机制为了节省磁盘空间，具有特定的存储规则，当写入文件的为同一对象时，并不会再将对象的内容进行存储，而只是再次存储一份引用，文件只会增加小小的几个字节，这几个字节的存储空间就是新增引用和一些控制信息的空间。反序列化时，恢复引用关系，使得反序列化的 e1 和 e2 指向唯一的对象，二者相等，为引用关系，该存储规则极大的节省了存储空间。</p>
+</blockquote>
+<ol start="2">
+<li>将对象序列化后写入文件，修改对象参数值后再次序列化后写入同一文件时</li>
+</ol>
+<blockquote>
+<p>第一次写入对象以后，第二次再试图写的时候，虚拟机根据引用关系知道已经有一个相同对象已经写入文件，因此只保存第二次写的引用，所以读取时，都是第一次保存的对象。读者在使用一个文件多次 writeObject 需要特别注意这个问题。</p>
+</blockquote>
+<h4 id="更多细节"><a href="#更多细节" class="headerlink" title="更多细节"></a>更多细节</h4><p>关于 静态变量序列化 ，父类的序列化与 Transient 关键字，对敏感字段加密，移步<a href='#link'>链接3</a></p>
+<h3 id="初识反序列化漏洞"><a href="#初识反序列化漏洞" class="headerlink" title="初识反序列化漏洞"></a>初识反序列化漏洞</h3><p>Java反序列化时，会调用readObject方法就行反序列化操作，当readObject方法书写不当时就会引发漏洞</p>
+<blockquote>
+<p>有时也会使用readUnshared()方法来读取对象，readUnshared()不允许后续的readObject和readUnshared调用引用这次调用反序列化得到的对象，而readObject读取的对象可以</p>
+</blockquote>
+<p>大佬给的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test0</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String args[])</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">UnsafeClass0</span> <span class="variable">Unsafe</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UnsafeClass0</span>();</span><br><span class="line">        Unsafe.name = <span class="string">&quot;hacked by ph0rse&quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">FileOutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;C:\\Users\\DAN\\Desktop\\Serialize.txt&quot;</span>);</span><br><span class="line">        <span class="type">ObjectOutputStream</span> <span class="variable">os</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(fos);</span><br><span class="line">        <span class="comment">//writeObject()方法将Unsafe对象写入object文件</span></span><br><span class="line">        os.writeObject(Unsafe);</span><br><span class="line">        os.close();</span><br><span class="line">        <span class="comment">//从文件中反序列化obj对象</span></span><br><span class="line">        <span class="type">FileInputStream</span> <span class="variable">fis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;C:\\Users\\DAN\\Desktop\\Serialize.txt&quot;</span>);</span><br><span class="line">        <span class="type">ObjectInputStream</span> <span class="variable">ois</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(fis);</span><br><span class="line">        <span class="comment">//恢复对象</span></span><br><span class="line">        <span class="type">UnsafeClass0</span> <span class="variable">objectFromDisk</span> <span class="operator">=</span> (UnsafeClass0)ois.readObject();</span><br><span class="line">        System.out.println(objectFromDisk.name);</span><br><span class="line">        ois.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UnsafeClass0</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="comment">//重写readObject()方法</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">readObject</span><span class="params">(java.io.ObjectInputStream in)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException&#123;</span><br><span class="line">        <span class="comment">//执行默认的readObject()方法</span></span><br><span class="line">        in.defaultReadObject();</span><br><span class="line">        <span class="comment">//执行命令</span></span><br><span class="line">        Runtime.getRuntime().exec(<span class="string">&quot;calc.exe&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406190928447.png" alt="image-20230406190928447"></p>
+<p>能够成功执行到<code>Runtime.getRuntime().exec(&quot;calc.exe&quot;);</code></p>
+<p>关于大佬的代码我有几个疑问：</p>
+<ol>
+<li><p><code>Runtime.getRuntime().exec(&quot;calc.exe&quot;);</code> 只能够控制弹出一个计算器，我能不能使用一个字符串变量代替（PHP反序列化的经验告诉我应该是可行的）</p>
+</li>
+<li><p>UnsafeClass0 的 readObject 是何时被执行的，是被谁调用的（因为当我查看下图readObject执行时的源码时 <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406191631788.png"><br>跳转的是ObjectInputStream类的readObject<br><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406192424409.png" alt="image-20230406192424409"></p>
+<p>那么是什么时候调用的UnsafeClass0的readObject呢？（强转类型的时候吗？）</p>
+</li>
+</ol>
+<p><strong>关于第一个问题</strong>，只需要将断点打到<code>Runtime.getRuntime().exec(&quot;calc.exe&quot;);</code>，然后观察变量就不难看出可以使用<code>this.command</code>打到我想要的效果，所以修改代码为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test0</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String args[])</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        ----</span><br><span class="line">        Unsafe.name = <span class="string">&quot;hacked by D4n&quot;</span>;</span><br><span class="line">        Unsafe.command = <span class="string">&quot;notepad&quot;</span>;<span class="comment">//增加</span></span><br><span class="line">		----</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UnsafeClass0</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span>&#123;</span><br><span class="line">    ---</span><br><span class="line">    <span class="keyword">public</span> String command; <span class="comment">//增加</span></span><br><span class="line">    <span class="comment">//重写readObject()方法</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">readObject</span><span class="params">(java.io.ObjectInputStream in)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException&#123;</span><br><span class="line">        ---</span><br><span class="line">        Runtime.getRuntime().exec(<span class="built_in">this</span>.command); <span class="comment">//修改</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时只需要控制 Unsafe 对象的 command 属性值即可执行不同命令</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406194620166.png" alt="image-20230406194620166"></p>
+<p><strong>关于第二个问题</strong>，对我来说稍显复杂，所以我就暂时浅看一下源码吧</p>
+<p>首先将断点打在下图处</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406195330837.png" alt="image-20230406195330837"><br>Debug后发现没有记事本弹出，直接步过的话就已经弹出了，所以问题就出在这一步，直接步入的话，就进入了<code>UnsafeClass0</code>的<code>readObject()</code>方法，此时<code>this</code>在没有执行<code>in.defaultReadObject()</code>时，<code>this</code>中的变量值还没有被赋值<br><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406200057930.png" alt="image-20230406200057930"><br>再步过<code>in.defaultReadObject();</code>的时候，this 的变量值就被赋值成了我们设置的样子：<br><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406200546082.png" alt="image-20230406200546082"></p>
+<p>所以关于变量的赋值，应该着重分析<code>in.defaultReadObject();</code>干了哪些事，并且在此之前，其他相关反序列化代码做的事只是创建好对象，开辟好空间，没有赋值操作（猜测）</p>
+<p>让我们进入<code>in.defaultReadObject();</code>看看（没法直接步入，所以要先 ctrl + B 进入源码后再打断点）</p>
+<p>其中第一句赋值完成后就可以看到<br><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406203654282.png" alt="image-20230406203654282"></p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406203714824.png" alt="image-20230406203714824"></p>
+<p>ctx中已经存放好了 UnsafeClass0 类的未初始化对象</p>
+<p><a href='#SerialCallbackContext'>SerialCallbackContext类理解</a></p>
+<p>ctrl + 左键查看 <code>ois.readObject()</code>源码</p>
+<p>在分析第一，二个问题的时候我脑子里又出现了新的问题：</p>
+<ol start="3">
+<li><code>this</code>变量所指向的对象是什么时候发生修改的呢（等下看看能不能从源码中看出来）</li>
+<li>UnsafeClass0 的 readObject 是有参数的，所以<code>UnsafeClass0 objectFromDisk = (UnsafeClass0)ois.readObject();</code>肯定不是直接调用 UnsafeClass0 中的 readObject，那是谁调用的呢？</li>
+</ol>
+<p><a name='SerialCallbackContext'>SerialCallbackContext类理解</a></p>
+<p>ctx 是一个 SerialCallbackContext 类对象， SerialCallbackContext类是内部类，无法在包（java.io）外引用，且该类为final，无法被继承，该类的描述：<img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406204223888.png" alt="image-20230406204223888"></p>
+<p>大意就是</p>
+<blockquote>
+<p>从对象流向上调用类定义的readObject&#x2F;writeObject方法时的上下文。保存当前被反序列化的对象和当前类的描述符。这个上下文跟踪构造它的线程，并且只允许一个defaultReadObject, readFields, defaultWriteObject或writeFields的调用，这些必须在类的readObject&#x2F;writeObject方法返回之前在同一个线程上调用。如果未设置为当前线程，getObj方法将抛出NotActiveException。</p>
+</blockquote>
+<p>有如下成员变量：</p>
+<p>被操作的Object，内含的对象流类，当前操作线程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">private final Object obj;</span><br><span class="line">private final ObjectStreamClass desc;</span><br><span class="line">private Thread thread;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230406204711090.png" alt="image-20230406204711090"></p>
+<p><a name='link'>参考链接</a>：</p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/2041">Java反序列化漏洞从入门到深入</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yyhuni/p/14755940.html">JAVA反序列化漏洞基础原理</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_58559010/article/details/117925076">Java 中序列化与反序列化，看这篇就够了！</a> </p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/github_37666068/article/details/80213623">Java 日看一类（53）之IO包中的SerialCallbackContext类</a> </p>
+
     
 
     
@@ -311,7 +472,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://d4n-sec.github.io/2018/11/23/32/" title="My Blog Back" target="_blank">https://d4n-sec.github.io/2018/11/23/32/</a>
+          <a href="https://d4n-sec.github.io/2023/04/06/java_sec/" title="我的Java安全路" target="_blank">https://d4n-sec.github.io/2023/04/06/java_sec/</a>
         </li>
         
         <li>
@@ -333,7 +494,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java学习路</a>
         		</li>
       		
 		</ul>
@@ -345,7 +506,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/随笔/" class="article-tag-list-link color3">随笔</a>
+        			<a href="/categories/安全学习/" class="article-tag-list-link color5">安全学习</a>
         		</li>
       		
 		</ul>
@@ -400,7 +561,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://d4n-sec.github.io/2018/11/23/32/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://d4n-sec.github.io/2023/04/06/java_sec/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -415,15 +576,11 @@
 
 <nav id="article-nav">
   
-    <a href="/2018/11/23/1/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          My Blog Back
-        
-      </div>
-    </a>
   
+    <a href="/2018/11/23/1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">My Blog Back</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -448,7 +605,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">1.</span> <span class="toc-text">Java反序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">1.1.</span> <span class="toc-text">什么是反序列化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">1.2.</span> <span class="toc-text">为什么要序列化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">1.3.</span> <span class="toc-text">如何序列化与反序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JDK%E7%B1%BB%E5%BA%93%E6%8F%90%E4%BE%9B%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96API"><span class="toc-number">1.3.1.</span> <span class="toc-text">JDK类库提供的序列化API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Java%E5%AF%B9%E8%B1%A1%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9A%84%E8%B0%83%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="toc-number">1.3.2.</span> <span class="toc-text">Java对象序列化与反序列化的调用流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%9D%E8%AF%95%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">1.3.3.</span> <span class="toc-text">尝试序列化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E5%BA%8F%E5%88%97%E5%8C%96%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.3.4.</span> <span class="toc-text">总结序列化具体步骤</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9A%84%E5%BF%85%E8%A6%81%E6%9D%A1%E4%BB%B6"><span class="toc-number">1.4.</span> <span class="toc-text">序列化与反序列化的必要条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%AD%E6%B6%89%E5%8F%8A%E7%BB%86%E8%8A%82"><span class="toc-number">1.5.</span> <span class="toc-text">序列化中涉及细节</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#serialVersionUID"><span class="toc-number">1.5.1.</span> <span class="toc-text">serialVersionUID</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">版本控制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%9C%BA%E6%99%AF"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">常见场景</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#serialVersionUID-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.5.1.3.</span> <span class="toc-text">serialVersionUID 使用场景</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E5%AD%98%E5%82%A8%E8%A7%84%E5%88%99"><span class="toc-number">1.5.2.</span> <span class="toc-text">序列化存储规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E5%A4%9A%E7%BB%86%E8%8A%82"><span class="toc-number">1.5.3.</span> <span class="toc-text">更多细节</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E8%AF%86%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.6.</span> <span class="toc-text">初识反序列化漏洞</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
