@@ -6,10 +6,11 @@
         <description>Recent content in Java学习路 on Dan`s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>DanSec</copyright><atom:link href="https://d4n-sec.github.io/tags/java%E5%AD%A6%E4%B9%A0%E8%B7%AF/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>DanSec</copyright>
+        <lastBuildDate>Thu, 06 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/java%E5%AD%A6%E4%B9%A0%E8%B7%AF/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>D4n的Java安全路</title>
         <link>https://d4n-sec.github.io/p/d4n%E7%9A%84java%E5%AE%89%E5%85%A8%E8%B7%AF/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        <pubDate>Thu, 06 Apr 2023 00:00:00 +0000</pubDate>
         
         <guid>https://d4n-sec.github.io/p/d4n%E7%9A%84java%E5%AE%89%E5%85%A8%E8%B7%AF/</guid>
         <description>&lt;p&gt;本章是 D4n的Java安全入门 第一篇，望大佬指正，小白避坑&lt;/p&gt;
