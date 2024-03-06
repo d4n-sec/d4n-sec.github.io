@@ -75,8 +75,8 @@
 &lt;li&gt;记得修改客户端的配置文件，指定私钥路径&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;之后使用vscode的ssh连接直接连接即可
-&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/p-20240306180439.png&#34;
+&lt;p&gt;之后使用vscode的ssh连接直接连接即可&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/p-20240306180439.png&#34;
 	
 	
 	
