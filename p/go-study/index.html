@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='本文记录VScode Docker Python Debug 相关设置已经遇见的问题 为何 日益增多的框架和漏洞学习中，VulDB一键搭建成为安全研究福音。为更好地跟踪Payloa'>
-<title>VScode&#43;Docker&#43;Python&#43;Debug安装指南</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='有关一些Go语言的学习记录'>
+<title>Go Study</title>
 
-<link rel='canonical' href='https://d4n-sec.github.io/p/vscode-docker-python-debug%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/'>
+<link rel='canonical' href='https://d4n-sec.github.io/p/go-study/'>
 
-<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='VScode&#43;Docker&#43;Python&#43;Debug安装指南'>
-<meta property='og:description' content='本文记录VScode Docker Python Debug 相关设置已经遇见的问题 为何 日益增多的框架和漏洞学习中，VulDB一键搭建成为安全研究福音。为更好地跟踪Payloa'>
-<meta property='og:url' content='https://d4n-sec.github.io/p/vscode-docker-python-debug%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/'>
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='Go Study'>
+<meta property='og:description' content='有关一些Go语言的学习记录'>
+<meta property='og:url' content='https://d4n-sec.github.io/p/go-study/'>
 <meta property='og:site_name' content='Dan`s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='环境搭建' /><meta property='article:tag' content='Tips' />
-<meta name="twitter:title" content="VScode&#43;Docker&#43;Python&#43;Debug安装指南">
-<meta name="twitter:description" content="本文记录VScode Docker Python Debug 相关设置已经遇见的问题 为何 日益增多的框架和漏洞学习中，VulDB一键搭建成为安全研究福音。为更好地跟踪Payloa">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-03-06T14:45:23&#43;08:00'/><meta property='article:modified_time' content='2024-03-06T14:45:23&#43;08:00'/><meta property='og:image' content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/OIP-C.jpg' />
+<meta name="twitter:title" content="Go Study">
+<meta name="twitter:description" content="有关一些Go语言的学习记录"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/OIP-C.jpg' />
     <link rel="shortcut icon" href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/paper-plane-64.webp" />
 
     </head>
@@ -270,24 +271,8 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li>
-      <ol>
-        <li><a href="#为何">为何</a></li>
-        <li><a href="#前提">前提</a></li>
-        <li><a href="#笔者环境">笔者环境</a></li>
-        <li><a href="#记录">记录</a>
-          <ol>
-            <li><a href="#python版本确认">python版本确认</a></li>
-          </ol>
-        </li>
-        <li><a href="#问题以及解决">问题以及解决</a>
-          <ol>
-            <li><a href="#问题">问题</a></li>
-            <li><a href="#解决">解决</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
+    <li><a href="#混淆点">混淆点</a></li>
+    <li><a href="#tips">Tips</a></li>
   </ol>
 </nav>
         </div>
@@ -299,25 +284,29 @@
 
 
             <main class="main full-width">
-    <article class="main-article">
+    <article class="has-image main-article">
     <header class="article-header">
+        <div class="article-image">
+            <a href="/p/go-study/">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/OIP-C.jpg" loading="lazy" alt="Featured image of post Go Study" />
+                
+            </a>
+        </div>
+    
 
     <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/%E7%8E%AF%E5%A2%83/" >
-                环境
-            </a>
-        
-    </header>
     
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/vscode-docker-python-debug%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/">VScode&#43;Docker&#43;Python&#43;Debug安装指南</a>
+            <a href="/p/go-study/">Go Study</a>
         </h2>
     
+        
+        <h3 class="article-subtitle">
+            有关一些Go语言的学习记录
+        </h3>
         
     </div>
 
@@ -326,6 +315,19 @@
     
     
     <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 06, 2024 14:45 &#43;0800</time>
+            </div>
         
 
         
@@ -339,7 +341,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 2 分钟
+                    阅读时长: 1 分钟
                 </time>
             </div>
         
@@ -354,220 +356,107 @@
     <section class="article-content">
     
     
-    <p>本文记录VScode Docker Python Debug 相关设置已经遇见的问题</p>
-<h2 id="为何">为何</h2>
+    <p>Go学习难点记录与解决（希望能解决）</p>
+<h1 id="混淆点">混淆点</h1>
+<p>1.Go的包导入</p>
 <blockquote>
-<p>日益增多的框架和漏洞学习中，VulDB一键搭建成为安全研究福音。为更好地跟踪Payload利用路径，调试成为必不可少的一步，但VulDB以Docker为基石，随之而来只能选择非本地搭建而使用现有的Docker进行远程调试，本文记录VScode Docker Python Debug 相关设置已经遇见的问题</p>
+<p>导入本质，导入顺序，依赖顺序以及导入优先级，默认路径，为什么是这个默认路径，如何结合默认路径设计项目结构</p>
 </blockquote>
-<h2 id="前提">前提</h2>
-<p>有与本地互通的Docker环境</p>
-<p>VulDB源码已安装</p>
-<p>正常的逻辑思维，动手能力，观察能力以及信息搜集能力</p>
-<h2 id="笔者环境">笔者环境</h2>
-<p>Windows10家庭版
-WSL2 + Docker Desktop
-VScode</p>
-<h2 id="记录">记录</h2>
-<p>VScode正常安装，Docker 参照VulDB正常启动后，VScode本地安装 Remote Development 插件包（起作用的是Dev Containers，但作者未研究相关插件依赖关系，遂建议均安装）
-<img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109155109468.png"
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240129183550897.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20240109155109468"
+		alt="image-20240129183550897"
 	
 	
 ></p>
-<p>查看右侧发现出现此图标<img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109155523872.png"
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240129183602815.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20240109155523872"
-	
-	
->点击发现有已启动的Docker环境</p>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109155640777.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20240109155640777"
+		alt="image-20240129183602815"
 	
 	
 ></p>
-<p>右键Files上一栏（如图）后点击<code>Attach Visual Dtudio Code</code> 另起一个窗口</p>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109155736705.png"
+<p>且同一目录下的所有<code>.go</code>文件必须同属于一个package</p>
+<p>2.基本类型和数组传参是传值（值复制）（待验证数组）</p>
+<p>3.函数传参传地址如何使用（传地址值，传引用）如何使用</p>
+<p>4.自定义数据类型（给类型起别名但是严格区分）的意义何在，使用场景</p>
+<p>5.匿名函数常用形式：</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240129184519215.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20240109155736705"
+		alt="image-20240129184519215"
 	
 	
 ></p>
-<p>后等待VScode安装Server端，等待启动便可</p>
-<p>Docker端（后述为远端）需安装插件如下（除红框外其他插件并非笔者主动安装）</p>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109160802730.png"
+<p>全程序调用本文件的匿名函数如何处理：将匿名函数赋值给全局变量即可</p>
+<p>6.闭包使用的内存图解，闭包的使用场景和妙用</p>
+<p>7.defer 关键字的使用场景 妙用？</p>
+<p>8.<code>strings.TrimSpace(&quot;&quot;)</code>处理去掉了左右两边的空格，会去掉字符串结尾的<code>\n</code>吗？</p>
+<p>9.数组初始化</p>
+<p>一维</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240130110603551.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20240109160802730"
+		alt="image-20240130110603551"
 	
 	
 ></p>
+<p>二维</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240201163913218.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240201163913218"
+	
+	
+></p>
+<p>二维数组遍历</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240201164307806.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240201164307806"
+	
+	
+></p>
+<h1 id="tips">Tips</h1>
 <blockquote>
-<p>注：python新版本插件 Python 不支持3.7版本以下的python，需要指定安装旧版本，实测插件版本为2022.6.0版本支持 python 3.6 debug</p>
+<p>1.本地保存页面路径<code>D:\Program Files (Green)\JJDown\Download</code></p>
+<p>2.函数 retrun 支持在返回类型声明处定义返回变量名</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240129183057720.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240129183057720"
+	
+	
+></p>
+<p>3.全局变量初始化&gt;init函数&gt;main函数  被导包文件init&gt;导包文件 且被导包深度优先</p>
 </blockquote>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109160725386.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20240109160725386"
-	
-	
-></p>
-<h3 id="python版本确认">python版本确认</h3>
-<p>右下角查看Python环境发现出现不知一个</p>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109155932960.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20240109155932960"
-	
-	
-></p>
-<p>利用各种方法确认当前Docker启动时使用哪个版本的Python
-方案 0 ：进入Terminal，python 运行临时环境，import 项目扩展包（项目使用但非基础环境），如果导入失败即可排除该版本</p>
-<p>在准备好后，切换到项目需求的python版本后点击Debug模块，创建launch.json</p>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109161124932.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20240109161124932"
-	
-	
-></p>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109161215895.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20240109161215895"
-	
-	
-></p>
-<p>无启动特殊设置的话（启动脚本与主要编写脚本不一致，需要带参运行）使用默认即可，如需设置自行百度</p>
-<p>打上断点后尝试运行基本脚本测试</p>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109161350879.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20240109161350879"
-	
-	
-></p>
-<p>能断代表设置成功</p>
-<h2 id="问题以及解决">问题以及解决</h2>
-<h3 id="问题">问题</h3>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109161459892.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20240109161459892"
-	
-	
-></p>
-<p>在调试时发现框架函数无法如本地一样进入查看细节</p>
-<h3 id="解决">解决</h3>
-<p>在确认使用python版本号的前提下，使用该版本python全路径运行以下命令：</p>
-<p><code>python -c &quot;import site;print(site.getusersitepackages())&quot;</code></p>
-<p>确认项目扩展包位置，笔者如图</p>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109160945872.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20240109160945872"
-	
-	
-></p>
-<p>在远端设置（setting.json）中（user或者WorkSpace均可）设置如下字段后，再次尝试Debug</p>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109161714950.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20240109161714950"
-	
-	
-></p>
-<p>进入函数失败，右下角提示</p>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109161820381.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20240109161820381"
-	
-	
-></p>
-<p>launch.json 中设置相关字段，如下图</p>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109162402886.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20240109162402886"
-	
-	
-></p>
-<p>再次尝试，成功进入框架函数，但依旧无法主动点击进入，此时更换该插件版本，与Python插件对应，即可（笔者同样使用2022.6.0）</p>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109164853642.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20240109164853642"
-	
-	
-></p>
 
 </section>
 
 
     <footer class="article-footer">
     
-    <section class="article-tags">
-        
-            <a href="/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">环境搭建</a>
-        
-            <a href="/tags/tips/">Tips</a>
-        
-    </section>
-
 
     
     <section class="article-copyright">
@@ -592,6 +481,50 @@ VScode</p>
     
 
      
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-th" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
     
 
     <footer class="site-footer">
