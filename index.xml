@@ -7,7 +7,88 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>DanSec</copyright>
-        <lastBuildDate>Wed, 06 Mar 2024 16:26:40 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 06 Mar 2024 17:38:40 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Vscode Windows 远程连接</title>
+        <link>https://d4n-sec.github.io/p/vscode-windows-%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/</link>
+        <pubDate>Wed, 06 Mar 2024 17:38:40 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/vscode-windows-%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/</guid>
+        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240306174015000.png" alt="Featured image of post Vscode Windows 远程连接" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
+&lt;p&gt;笔者目前有两个电脑，一个A在家（高性能），一个B在公司（较低性能），如何同步两个电脑的环境一直是一个问题，较低性能的笔记本写文档完全没问题，但是如果涉及一些工具编译，多台虚拟机同时使用，不可。上传github需要push，但是笔者并没有良好的push习惯。相反，只需要git作为存储单元的笔者深受其git版本控制的困扰，git方案失败，有向日葵这样的远控软件但是远控在免费使用的情况下，并不能做到合二为一的感受（延迟）&lt;/p&gt;
+&lt;h1 id=&#34;解决方案&#34;&gt;解决方案&lt;/h1&gt;
+&lt;p&gt;目前使用高性能在家电脑作为服务端，笔记本作为客户端，所有代码位于在家电脑 build and run，客户端只需要联网+vscode即可实现所有项目共享&lt;/p&gt;
+&lt;h1 id=&#34;工具&#34;&gt;工具&lt;/h1&gt;
+&lt;p&gt;1.蒲公英（内网搭建工具）&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;方便，免费。个人免费额度为三台电脑组成一个内网，个人用户完全足够&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;2.ssh&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;vscode远程连接需要使用&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;3.客户机（B）安装 vscode&lt;/p&gt;
+&lt;h1 id=&#34;安装&#34;&gt;安装&lt;/h1&gt;
+&lt;p&gt;提前安装向日葵作为辅助软件，在远程安装前期和后续出现问题时，向日葵会更加有应急作用&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;蒲公英正常安装即可，两台电脑同时登录同一账号，即可完成组网。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;测试：远端与本地端均关闭防火墙后互ping（IP地址可以在蒲公英软件上查看），互通即互连&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;ssh windows 安装，windows打开设置，找到应用和功能，在可选功能中找到 Openssh 服务端 和 客户端 远端一定安装服务端，本地端一定安装客户端（好像服务端和客户端合并了？）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;然后开启ssh服务开机自启，两端均需要&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;依次点击：开始菜单 &amp;ndash; Windows Administrative Tools &amp;mdash; Services，打开 Services 窗口
+&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/p-20240306180435.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Alt text&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在里面找到 OpenSSH Authentication Agent，在上面单击右键，选择“属性”，将 Startup type 改为 Automatic 、Automatic(Delayed Start) 或 Manual，并点击 Service status 下的 Start 按钮。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/p-20240306180437.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Alt text&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;然后测试ssh连接&lt;code&gt;ssh 用户名@IP&lt;/code&gt; 如果出现输入密码界面，即完成&lt;/p&gt;
+&lt;p&gt;为方便后续vscode使用，可以设置公私钥连接，教程很多，但是有注意事项&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;服务端要开启使用公钥连接，并且注释掉配置文件的最后两行&lt;/li&gt;
+&lt;li&gt;客户端的公钥赋值添加到.ssh/authorized_keys中，没有创建，有的话追加&lt;/li&gt;
+&lt;li&gt;为了安全起见，最好关闭密码登录&lt;/li&gt;
+&lt;li&gt;记得修改客户端的配置文件，指定私钥路径&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;之后使用vscode的ssh连接直接连接即可
+&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/p-20240306180439.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Alt text&#34;
+	
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>BlogToHugo</title>
         <link>https://d4n-sec.github.io/p/blogtohugo/</link>
         <pubDate>Wed, 06 Mar 2024 16:26:40 +0800</pubDate>
