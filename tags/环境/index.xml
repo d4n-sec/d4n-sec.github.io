@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>环境 on Dan`s Blog</title>
+        <link>https://d4n-sec.github.io/tags/%E7%8E%AF%E5%A2%83/</link>
+        <description>Recent content in 环境 on Dan`s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>DanSec</copyright>
+        <lastBuildDate>Wed, 06 Mar 2024 16:26:40 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/%E7%8E%AF%E5%A2%83/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>BlogToHugo</title>
+        <link>https://d4n-sec.github.io/p/blogtohugo/</link>
+        <pubDate>Wed, 06 Mar 2024 16:26:40 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/blogtohugo/</guid>
+        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240306162853109.png" alt="Featured image of post BlogToHugo" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
+&lt;p&gt;Hugo 搭建其实和hexo差不多，但是介于作者有幸尝试过hexo编译大量文章的经历，可以说hexo的性能已经无法满足我对个人博客的向往，于是乎转Hugo，Hugo 基于Go开发，效率方面毋庸置疑，但是由于该工具出现时间短暂，目前参考资料少，所以笔者在这通过搭建做一些总结&lt;/p&gt;
+&lt;h1 id=&#34;hugo-安装&#34;&gt;Hugo 安装&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Hugo 下载
+&lt;code&gt;Hugo&lt;/code&gt; 的 &lt;code&gt;github&lt;/code&gt; &lt;a class=&#34;link&#34; href=&#34;https://github.com/gohugoio/hugo&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;主页&lt;/a&gt;找到Releases，根据个人喜好安装Hugo对应版本，建议 &lt;code&gt;hugo_extended&lt;/code&gt; 版本的安装，有额外功能（虽然读者可能根本用不上），但因笔者安装使用此，固推荐，具体异同可以参考这个&lt;a class=&#34;link&#34; href=&#34;https://github.com/gohugoio/hugoDocs/issues/1152&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Issues&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Hugo 安装
+安装时选择任意文件夹，但基于程序员的严谨，不建议安装在含有中文的路径上。之后读者需自行配置安装路径到系统变量（Path）中，如果cmd中Hugo 命令成功识别，此步即完成&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;PS D:&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ome&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ugo_Blog&amp;gt; hugo version
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hugo v0.123.7-312735366b20d64bd61bff8627f593749f86c964+extended windows/amd64 &lt;span class=&#34;nv&#34;&gt;BuildDate&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;2024-03-01T16:16:06Z &lt;span class=&#34;nv&#34;&gt;VendorInfo&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;gohugoio
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;Hugo test&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;参照&lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/getting-started/quick-start/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;官方start文档&lt;/a&gt;逐步操作，即可初见成效，建议读者尝试跟踪操作，方便后续理解&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Hugo 目录结构理解&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├─archetypes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├─assets
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├─content
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├─data
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├─i18n
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├─layouts
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├─public
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├─resources
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├─static
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;└─themes
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;有文章写的不错，笔者偷懒：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;archetypes 目录&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;默认，通过 hugo new 创建的内容会添加 date, title, draft = true 等扉页 front matter 设置信息，它们就是从archetypes 模板文件中拷贝的。这可以节省时间，同时保证统一性。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;拓展：
+Hugo中的md文件分为两种类型，简单的文章md文件和page页面md文件，在读者使用中非强需求自定义美化者，否则不需要去理解page页面，使用theme自带的即可&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;简单理解即是执行&lt;code&gt;hugo new post/test.md&lt;/code&gt;时，新创建文章的基本模版是参照 &lt;code&gt;archetypes&lt;/code&gt; 目录下的 &lt;code&gt;defult.md&lt;/code&gt; 如果对后续有更改默认创建文件的读者可以打开&lt;code&gt;defult.md&lt;/code&gt;尝试理解如何使用&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;assets 目录&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;不是默认创建的资源目录，保存所有需要通过 Hugo Pipes 处理的资源，只有那些 .Permalink 和 .RelPermalink 引用的文件会发布到 public 目录中，参考 Hugo 管道处理。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;默认即可，无需过多在意&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;content 目录&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;所有内容页面存放目录，content 下的一级子目录看作一个对应的 section 内容分类区 content section。比如，为博客设置一个 blog 目录，为文章设置一个 articles 目录，为教程设置一个 tutorials 目录等，Hugo 使用内容分类区分作为默认内容类型 content type，如果在扉页 front matter 设置了 type 则以具体设置的类型为准。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;该目录中的post目录即为之后文章存放地址，&lt;code&gt;content/post&lt;/code&gt;下可以存在子目录，对Hugo渲染不产生大的影响&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;layouts 目录&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;布局模板文件目录，存放 .html 布局模板文件，对应不同的内容，模板有多种，data-templates、homepage、lists、menu-templates、partials、section-templates 等等。&lt;/p&gt;
+&lt;p&gt;站点的首页模板在主题目录中 layouts/index.html，除首页外，Hugo 有两类基本页面：
+Single page 单体页面，如 hugo new demo.md 创建的 Post 页面；
+List page 列表页面，如 tags 或 categories 页面；
+这两种页面的默认模板都在主题目录中 layouts/_default，分别对应着 single.html 和 list.html。参考单页面内容模板 single-page-templates.&amp;gt; md 和 lists.md 文档。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;此目录与data目录，static目录一样，若非初次使用时无需理解&lt;/p&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;public 目录&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;默认输出目录，可以通过 -d 参数修改输出路径&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;theme 目录&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;用于存放主题文件的目录，且主题文件名与配置文件使用主题相关&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&#34;7&#34;&gt;
+&lt;li&gt;config 目录&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;config目录根据hugo创建的流程不同，有些读者有有些读者没有，不过本质只是把本应该处于 theme 目录中的config.yaml 拆开放入 config目录下，按照设置类型分类&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;默认根目录下的配置文件在Hugo早期是config.toml文件（config.yaml也可以 Hugo支持多种文件类型）现在统一改为了hugo.toml(hugo.yaml)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Hugo 主题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;深度自定义患者需要使用酷炫的主题，有多种方式下载与安装Theme，理解本质其实并不复杂（笔者的主题为Stack，以此为基础阐述，若非特别说明均为通用）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;下载方式多种，git clone | git submoudle | 手动下载 均可，将下载的压缩包放入theme目录下，解压（注意，如主题名为aaa,则theme/aaa目录下应有 config.yaml）&lt;/li&gt;
+&lt;li&gt;安装，在主题根目录下的hugo.toml中添加&lt;code&gt;theme = &#39;主题文件夹名&#39;&lt;/code&gt;即可完成配置，此时配置完毕，主题已更换&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;之后可以&lt;code&gt;hugo server&lt;/code&gt;在本地端查看博客目前的情况，并且可以在不关闭本地服务端的情况下编辑博客，实时查看博客情况&lt;/p&gt;
+&lt;p&gt;注意：
+hugo new 出来的博客默认可能不展示，建议在新文件头中加入或者修改字段&lt;code&gt;draft&lt;/code&gt;值为false，即可出现&lt;/p&gt;
+&lt;p&gt;（读者如果没有隐藏文章的计划，可以尝试修改 archetypes 目录中的defult.md文件中相应字段值，修改默认模版）&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -7,7 +7,23 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>DanSec</copyright>
-        <lastBuildDate>Thu, 07 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 06 Mar 2024 16:26:40 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>环境</title>
+        <link>https://d4n-sec.github.io/tags/%E7%8E%AF%E5%A2%83/</link>
+        <pubDate>Wed, 06 Mar 2024 16:26:40 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/%E7%8E%AF%E5%A2%83/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Go</title>
+        <link>https://d4n-sec.github.io/tags/go/</link>
+        <pubDate>Wed, 06 Mar 2024 14:45:23 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/go/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>PTE学习</title>
         <link>https://d4n-sec.github.io/tags/pte%E5%AD%A6%E4%B9%A0/</link>
         <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
