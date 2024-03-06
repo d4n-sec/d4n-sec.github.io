@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='摘要
+'>
+<title>渗透测试个人经验</title>
+
+<link rel='canonical' href='https://d4n-sec.github.io/p/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E4%B8%AA%E4%BA%BA%E7%BB%8F%E9%AA%8C/'>
+
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='渗透测试个人经验'>
+<meta property='og:description' content='摘要
+'>
+<meta property='og:url' content='https://d4n-sec.github.io/p/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E4%B8%AA%E4%BA%BA%E7%BB%8F%E9%AA%8C/'>
+<meta property='og:site_name' content='Dan`s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='渗透测试学习' /><meta property='article:tag' content='工具类' /><meta property='article:published_time' content='2023-06-25T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-06-25T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="渗透测试个人经验">
+<meta name="twitter:description" content="摘要
+">
+    <link rel="shortcut icon" href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/paper-plane-64.webp" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/TX.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🐹</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Dan`s Blog</a></h1>
+            <h2 class="site-description">今人不见古时月</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='/%E5%85%B3%E4%BA%8E'
+                        target="_blank"
+                        title="contactMe"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1709702435352" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8388" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32z m-40 110.8V792H136V270.8l-27.6-21.5 39.3-50.5 42.8 33.3h643.1l42.8-33.3 39.3 50.5-27.7 21.5z" fill="#bfbfbf" p-id="8389"></path><path d="M833.6 232L512 482 190.4 232l-42.8-33.3-39.3 50.5 27.6 21.5 341.6 265.6c20.2 15.7 48.5 15.7 68.7 0L888 270.8l27.6-21.5-39.3-50.5-42.7 33.2z" p-id="8390" fill="#bfbfbf"></path></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/d4n-sec'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='http://wpa.qq.com/msgrd?v=3&amp;uin=1664022865&amp;site=qq&amp;menu=yes'
+                        target="_blank"
+                        title="QQNum"
+                        rel="me"
+                    >
+                        
+                        
+                            
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1709702077457" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13062" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3C766.5 262.2 689.3 112 511.5 112 331.7 112 256.2 265.2 261 447.9c-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z" p-id="13063" fill="#bfbfbf"></path></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+    </ol>
+    <div class="menu-bottom-section">
+        <ol class="menu">
+
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </ol>
+    </div>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#渗透测试个人经验">渗透测试个人经验</a>
+      <ol>
+        <li><a href="#ssh">ssh</a>
+          <ol>
+            <li><a href="#ssh爆破">ssh爆破</a></li>
+            <li><a href="#ssh密码生成">ssh密码生成</a></li>
+          </ol>
+        </li>
+        <li><a href="#linux常用命令">Linux常用命令</a></li>
+        <li><a href="#受限shell逃逸">受限shell逃逸</a></li>
+        <li><a href="#找不到执行的命令">找不到执行的命令</a></li>
+        <li><a href="#sudoers权限查看">sudoers权限查看</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%B8%97%E9%80%8F/" >
+                渗透
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E4%B8%AA%E4%BA%BA%E7%BB%8F%E9%AA%8C/">渗透测试个人经验</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jun 25, 2023 00:00 UTC</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>摘要</p>
+<h1 id="渗透测试个人经验">渗透测试个人经验</h1>
+<h2 id="ssh">ssh</h2>
+<h3 id="ssh爆破">ssh爆破</h3>
+<p>ssh爆破使用工具 <strong>hydra</strong> ，主要因为快速，其他工具速度过慢</p>
+<blockquote>
+<p>使用hydra爆破：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">hydra -l ezpd -P 1.txt  192.168.229.129 ssh -v
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-l 指定用户名
+</span></span><span class="line"><span class="cl">-L 指定用户名字典文件
+</span></span><span class="line"><span class="cl">-p 指定密码 
+</span></span><span class="line"><span class="cl">-P 指定密码字典文件
+</span></span><span class="line"><span class="cl">-v 显示详细的执行过程
+</span></span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<h3 id="ssh密码生成">ssh密码生成</h3>
+<p>ssh密码生成工具 <strong>crunch</strong></p>
+<blockquote>
+<p><code>cat /usr/share/crunch/charset.lst</code> 选择要使用的crunch字典字符集范围</p>
+</blockquote>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230702213556873.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230702213556873"
+	
+	
+></p>
+<p>找到合适的字符集，然后使用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">crunch <span class="m">8</span> <span class="m">8</span> -f /usr/share/crunch/charset.lst lalpha-numeric -t k1ll0r@@ &gt; pass.dic
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>关于上面命令的疑问 <code>@替代未知字符未知</code>？</p>
+</blockquote>
+<h2 id="linux常用命令">Linux常用命令</h2>
+<p>遇到一个被限制的shell，想要整理一个命令清单，后期想办法爆破一下有哪些命令可以使用</p>
+<p><a class="link" href="https://blog.csdn.net/luansj/article/details/97272672"  target="_blank" rel="noopener"
+    >主要参考</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ls                 <span class="c1">#	列出目录的内容</span>
+</span></span><span class="line"><span class="cl"><span class="nb">alias</span>              <span class="c1">#	定义或显示别名</span>
+</span></span><span class="line"><span class="cl"><span class="nb">unalias</span>            <span class="c1">#	删除别名定义</span>
+</span></span><span class="line"><span class="cl"><span class="nb">pwd</span>                <span class="c1">#	打印工作目录</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span>                 <span class="c1">#	更改目录</span>
+</span></span><span class="line"><span class="cl">cat                <span class="c1">#	读取文件</span>
+</span></span><span class="line"><span class="cl">more               <span class="c1">#	查看一个长文件的内容 </span>
+</span></span><span class="line"><span class="cl">less               <span class="c1">#	查看一个长文件的内容 但是它允许在文件中和正向操作一样的反向操作 </span>
+</span></span><span class="line"><span class="cl">head               <span class="c1">#	head -2 file1 查看一个文件的前两行 </span>
+</span></span><span class="line"><span class="cl">tail               <span class="c1">#	tail -2 file1 查看一个文件的最后两行 </span>
+</span></span><span class="line"><span class="cl">tac                <span class="c1">#	从最后一行开始反向查看一个文件的内容 </span>
+</span></span><span class="line"><span class="cl">cp                 <span class="c1">#	复制文件和目录</span>
+</span></span><span class="line"><span class="cl">rm                 <span class="c1">#	删除文件和目录</span>
+</span></span><span class="line"><span class="cl">mv                 <span class="c1">#	移动（重命名）文件和目录</span>
+</span></span><span class="line"><span class="cl">mkdir              <span class="c1">#	创建目录</span>
+</span></span><span class="line"><span class="cl">man                <span class="c1">#	显示其他命令的手册页面</span>
+</span></span><span class="line"><span class="cl">touch              <span class="c1">#	创建空文件</span>
+</span></span><span class="line"><span class="cl">groupadd           <span class="c1">#	创建一个新用户组 </span>
+</span></span><span class="line"><span class="cl">groupdel           <span class="c1">#	删除一个用户组 </span>
+</span></span><span class="line"><span class="cl">groupmod           <span class="c1">#	重命名一个用户组 </span>
+</span></span><span class="line"><span class="cl">useradd            <span class="c1">#	创建用户</span>
+</span></span><span class="line"><span class="cl">userdel            <span class="c1">#	删除用户</span>
+</span></span><span class="line"><span class="cl">usermod            <span class="c1">#	修改用户属性</span>
+</span></span><span class="line"><span class="cl">chage              <span class="c1">#	（-E 2005-12-31 user1 设置用户口令的失效期限 ）</span>
+</span></span><span class="line"><span class="cl">pwck               <span class="c1">#	检查 &#39;/etc/passwd&#39; 的文件格式和语法修正以及存在的用户 </span>
+</span></span><span class="line"><span class="cl">grpck              <span class="c1">#	检查 &#39;/etc/passwd&#39; 的文件格式和语法修正以及存在的群组 </span>
+</span></span><span class="line"><span class="cl">newgrp             <span class="c1">#	(newgrp group_name 登陆进一个新的群组以改变新创建文件的预设群组 )</span>
+</span></span><span class="line"><span class="cl">chmod              <span class="c1">#	更改文件权限</span>
+</span></span><span class="line"><span class="cl">chown              <span class="c1">#	更改文件拥有者</span>
+</span></span><span class="line"><span class="cl">chattr             <span class="c1">#	文件的特殊属性</span>
+</span></span><span class="line"><span class="cl">lsattr             <span class="c1">#	显示文件的特殊属性</span>
+</span></span><span class="line"><span class="cl">sudo               <span class="c1">#	以超级用户身份执行命令</span>
+</span></span><span class="line"><span class="cl">su                 <span class="c1">#	切换用户</span>
+</span></span><span class="line"><span class="cl">htop               <span class="c1">#	显示进程和资源信息</span>
+</span></span><span class="line"><span class="cl">unzip              <span class="c1">#	解压zip文件</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span>               <span class="c1">#	显示文本行</span>
+</span></span><span class="line"><span class="cl">cat                <span class="c1">#	打印文件内容</span>
+</span></span><span class="line"><span class="cl">ps                 <span class="c1">#	报告shell进程状态</span>
+</span></span><span class="line"><span class="cl"><span class="nb">kill</span>               <span class="c1">#	终止程序</span>
+</span></span><span class="line"><span class="cl">ping               <span class="c1">#	测试网络连接</span>
+</span></span><span class="line"><span class="cl"><span class="nb">history</span>            <span class="c1">#	显示以前的命令列表</span>
+</span></span><span class="line"><span class="cl">passwd             <span class="c1">#	更改用户密码</span>
+</span></span><span class="line"><span class="cl">which              <span class="c1">#	返回程序的完整二进制路径</span>
+</span></span><span class="line"><span class="cl">shred              <span class="c1">#	覆盖文件以隐藏其内容</span>
+</span></span><span class="line"><span class="cl">grep               <span class="c1">#	打印与给定条件匹配行</span>
+</span></span><span class="line"><span class="cl">sort               <span class="c1">#	排序文件的内容</span>
+</span></span><span class="line"><span class="cl">comm               <span class="c1">#	对比两个文件内容</span>
+</span></span><span class="line"><span class="cl">ifconfig           <span class="c1">#	显示网络配置 </span>
+</span></span><span class="line"><span class="cl">netstat            <span class="c1">#	端口查看？</span>
+</span></span><span class="line"><span class="cl">nslookup           <span class="c1">#	查看DNS解析</span>
+</span></span><span class="line"><span class="cl">whoami             <span class="c1">#	输出用户名</span>
+</span></span><span class="line"><span class="cl">whatis             <span class="c1">#	显示单行说明</span>
+</span></span><span class="line"><span class="cl">wc                 <span class="c1">#	字数文件</span>
+</span></span><span class="line"><span class="cl">paste              <span class="c1">#	paste file1 file2 合并两个文件或两栏的内容 </span>
+</span></span><span class="line"><span class="cl">bunzip2            <span class="c1">#	解压软件</span>
+</span></span><span class="line"><span class="cl">bzip3              <span class="c1">#	同上</span>
+</span></span><span class="line"><span class="cl">bzip2              <span class="c1">#	同上</span>
+</span></span><span class="line"><span class="cl">gzip               <span class="c1">#	同上</span>
+</span></span><span class="line"><span class="cl">lunzip             <span class="c1">#	同上</span>
+</span></span><span class="line"><span class="cl">unzip              <span class="c1">#	同上</span>
+</span></span><span class="line"><span class="cl">eb-utils           <span class="c1">#	同上</span>
+</span></span><span class="line"><span class="cl">rzip               <span class="c1">#	同上</span>
+</span></span><span class="line"><span class="cl">gunzip             <span class="c1">#	同上</span>
+</span></span><span class="line"><span class="cl">rar                <span class="c1">#	同上</span>
+</span></span><span class="line"><span class="cl">unrar              <span class="c1">#	同上</span>
+</span></span><span class="line"><span class="cl">zip                <span class="c1">#	同上</span>
+</span></span><span class="line"><span class="cl">unzip              <span class="c1">#	同上</span>
+</span></span><span class="line"><span class="cl">uname              <span class="c1">#	显示操作系统信息</span>
+</span></span><span class="line"><span class="cl">neofetch           <span class="c1">#	显示操作系统和硬件信息</span>
+</span></span><span class="line"><span class="cl">find               <span class="c1">#	搜索遵循模式的文件</span>
+</span></span><span class="line"><span class="cl">sed                <span class="c1">#	每次仅读取一行内容（读取文件）</span>
+</span></span><span class="line"><span class="cl">ssh                <span class="c1">#	ssh远程登录</span>
+</span></span><span class="line"><span class="cl">ftp                <span class="c1">#	访问ftp服务器</span>
+</span></span><span class="line"><span class="cl">wget               <span class="c1">#	从互联网检索文件</span>
+</span></span><span class="line"><span class="cl">file               <span class="c1">#	查看文件类型</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span>             <span class="c1">#	环境变量相关</span>
+</span></span><span class="line"><span class="cl">apt                <span class="c1">#	包管理器（下载安装工具）</span>
+</span></span><span class="line"><span class="cl">yum                <span class="c1">#	同上</span>
+</span></span><span class="line"><span class="cl">rpm                <span class="c1">#	同上</span>
+</span></span><span class="line"><span class="cl">pacman             <span class="c1">#	同上</span>
+</span></span><span class="line"><span class="cl">dpkg               <span class="c1">#	好像也是同上</span>
+</span></span><span class="line"><span class="cl">arch               <span class="c1">#	显示机器的处理器架构</span>
+</span></span><span class="line"><span class="cl">dmidecode          <span class="c1">#	推荐参数（-q） 显示硬件系统部件 - (SMBIOS / DMI) </span>
+</span></span><span class="line"><span class="cl">hdparm             <span class="c1">#	（-i） /dev/hda 罗列一个磁盘的架构特性（-tT /dev/sda） 在磁盘上执行测试性读取操作</span>
+</span></span><span class="line"><span class="cl">lspci              <span class="c1">#	（-tv）罗列 PCI 设备 （-tv）显示 USB 设备</span>
+</span></span><span class="line"><span class="cl">date               <span class="c1">#	显示系统日期</span>
+</span></span><span class="line"><span class="cl">cal                <span class="c1">#	（cal 2007） 显示2007年的日历表</span>
+</span></span><span class="line"><span class="cl">clock              <span class="c1">#	（-w）将时间修改保存到 BIOS </span>
+</span></span><span class="line"><span class="cl">tree               <span class="c1">#	显示文件和目录由根目录开始的树形结构</span>
+</span></span><span class="line"><span class="cl">ostree             <span class="c1">#	操作系统树</span>
+</span></span><span class="line"><span class="cl">pstree             <span class="c1">#	进程树</span>
+</span></span><span class="line"><span class="cl">iconv              <span class="c1">#	列出已知的编码 </span>
+</span></span><span class="line"><span class="cl">locate             <span class="c1">#	文件搜索</span>
+</span></span><span class="line"><span class="cl">whereis            <span class="c1">#	文件搜索（显示一个二进制文件、源码或man的位置 ）</span>
+</span></span><span class="line"><span class="cl">which              <span class="c1">#	文件搜索（显示一个二进制文件或可执行文件的完整路径 ）</span>
+</span></span><span class="line"><span class="cl">mount              <span class="c1">#	挂载一个文件系统 </span>
+</span></span><span class="line"><span class="cl">umount             <span class="c1">#	卸载一个文件系统</span>
+</span></span><span class="line"><span class="cl">fuser              <span class="c1">#	当设备繁忙时强制卸载</span>
+</span></span><span class="line"><span class="cl">df                 <span class="c1">#	（-h 显示已经挂载的分区列表 ）</span>
+</span></span><span class="line"><span class="cl">du                 <span class="c1">#	（-sh dir1 估算目录 &#39;dir1&#39; 已经使用的磁盘空间&#39; ）</span>
+</span></span><span class="line"><span class="cl">ln                 <span class="c1">#	创建一个指向文件或目录的软链接 </span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-BASH" data-lang="BASH"><span class="line"><span class="cl">vim                <span class="c1">#	高效文本编辑</span>
+</span></span><span class="line"><span class="cl">vi                 <span class="c1">#	同上</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>下面是不要轻易尝试的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">shutdown           <span class="c1">#	关闭您的机器</span>
+</span></span><span class="line"><span class="cl">reboot             <span class="c1">#	重启</span>
+</span></span><span class="line"><span class="cl"><span class="nb">logout</span>             <span class="c1">#	注销</span>
+</span></span><span class="line"><span class="cl">telinit            <span class="c1">#	关机相关命令</span>
+</span></span><span class="line"><span class="cl"><span class="nb">exit</span>               <span class="c1">#	退出当前shell会话</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>OK，发现盲点：本次靶机ssh登录后，无输入直接两次tab键即可查看可用命令</p>
+<h2 id="受限shell逃逸">受限shell逃逸</h2>
+<p><a class="link" href="https://www.ipcpu.com/2015/07/shell-restricted-shell/"  target="_blank" rel="noopener"
+    >参考文章</a></p>
+<p>顾名思义：受限制的shell，有以下功能受限（可以设置某些选项不受限）</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230711144924572.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230711144924572"
+	
+	
+></p>
+<p>WikiPedia上有提到受限shell的弱点</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230711145021594.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230711145021594"
+	
+	
+></p>
+<blockquote>
+<p>A user can break out of the restricted environment by running a program that features a shell function
+<code>用户可以通过运行具有shell功能的程序来打破限制环境</code></p>
+</blockquote>
+<p>Linux 自带程序里<code>vi/vim</code>有类似功能，当然如果能够再开一个shell也能达到相同目的</p>
+<p>实战靶机里逃逸所用语句：</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230711145604014.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230711145604014"
+	
+	
+></p>
+<h2 id="找不到执行的命令">找不到执行的命令</h2>
+<p>尝试完整路径执行命令如<code>/bin/whoami</code></p>
+<p>最好还是设置一下环境变量</p>
+<p><code>export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</code></p>
+<h2 id="sudoers权限查看">sudoers权限查看</h2>
+<p>命令的话直接<code>sudo -l</code>查看就OK了</p>
+<p>权限管理文件是<code>/etc/sudoers</code></p>
+<p>sudoers文件编辑结构</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230711152555129.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230711152555129"
+	
+	
+></p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230711155005851.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230711155005851"
+	
+	
+></p>
+<blockquote>
+<p>u002 代表对 u002 用户的权限编辑</p>
+<p>第一个 ALL  代表网络中的主机（具体的权限控制，根据初步阅读可以设置为<code>机器组。这些可能包括主机名(可选择使用通配符)、IP地址、网络号码或网络组。</code>）</p>
+<blockquote>
+<p>Groups of machines.  These may include host names (optionally with wildcards) IP addresses, network numbers or netgroups.</p>
+</blockquote>
+<p>第二个 ALL 规定可以使用谁的身份去执行命令  （目前发现 如果是root的话就可以使用root权限执行命令 ）</p>
+<p>如果设置了 NOPASSWD 可以免密执行</p>
+<p>第三个 ALL 规定可以使用（指定身份）执行的命令</p>
+</blockquote>
+<p>如果是如下权限设置的话，就可以使用 python 一句话提权</p>
+<p><code>sudo python -c 'import pty;pty.spawn(&quot;/bin/bash&quot;)'</code></p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20230711155134271.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230711155134271"
+	
+	
+></p>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/62984051"  target="_blank" rel="noopener"
+    >其他配置后可以使用root权限的方式</a></p>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%AD%A6%E4%B9%A0/">渗透测试学习</a>
+        
+            <a href="/tags/%E5%B7%A5%E5%85%B7%E7%B1%BB/">工具类</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2024 DanSec
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.23.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Tips on Dan`s Blog</title>
+        <link>https://d4n-sec.github.io/tags/tips/</link>
+        <description>Recent content in Tips on Dan`s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>DanSec</copyright><atom:link href="https://d4n-sec.github.io/tags/tips/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>VScode&#43;Docker&#43;Python&#43;Debug安装指南</title>
+        <link>https://d4n-sec.github.io/p/vscode-docker-python-debug%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/vscode-docker-python-debug%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;p&gt;本文记录VScode Docker Python Debug 相关设置已经遇见的问题&lt;/p&gt;
+&lt;h2 id=&#34;为何&#34;&gt;为何&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;日益增多的框架和漏洞学习中，VulDB一键搭建成为安全研究福音。为更好地跟踪Payload利用路径，调试成为必不可少的一步，但VulDB以Docker为基石，随之而来只能选择非本地搭建而使用现有的Docker进行远程调试，本文记录VScode Docker Python Debug 相关设置已经遇见的问题&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;前提&#34;&gt;前提&lt;/h2&gt;
+&lt;p&gt;有与本地互通的Docker环境&lt;/p&gt;
+&lt;p&gt;VulDB源码已安装&lt;/p&gt;
+&lt;p&gt;正常的逻辑思维，动手能力，观察能力以及信息搜集能力&lt;/p&gt;
+&lt;h2 id=&#34;笔者环境&#34;&gt;笔者环境&lt;/h2&gt;
+&lt;p&gt;Windows10家庭版
+WSL2 + Docker Desktop
+VScode&lt;/p&gt;
+&lt;h2 id=&#34;记录&#34;&gt;记录&lt;/h2&gt;
+&lt;p&gt;VScode正常安装，Docker 参照VulDB正常启动后，VScode本地安装 Remote Development 插件包（起作用的是Dev Containers，但作者未研究相关插件依赖关系，遂建议均安装）
+&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109155109468.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240109155109468&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;查看右侧发现出现此图标&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109155523872.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240109155523872&#34;
+	
+	
+&gt;点击发现有已启动的Docker环境&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109155640777.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240109155640777&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;右键Files上一栏（如图）后点击&lt;code&gt;Attach Visual Dtudio Code&lt;/code&gt; 另起一个窗口&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109155736705.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240109155736705&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;后等待VScode安装Server端，等待启动便可&lt;/p&gt;
+&lt;p&gt;Docker端（后述为远端）需安装插件如下（除红框外其他插件并非笔者主动安装）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109160802730.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240109160802730&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注：python新版本插件 Python 不支持3.7版本以下的python，需要指定安装旧版本，实测插件版本为2022.6.0版本支持 python 3.6 debug&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109160725386.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240109160725386&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;python版本确认&#34;&gt;python版本确认&lt;/h3&gt;
+&lt;p&gt;右下角查看Python环境发现出现不知一个&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109155932960.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240109155932960&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;利用各种方法确认当前Docker启动时使用哪个版本的Python
+方案 0 ：进入Terminal，python 运行临时环境，import 项目扩展包（项目使用但非基础环境），如果导入失败即可排除该版本&lt;/p&gt;
+&lt;p&gt;在准备好后，切换到项目需求的python版本后点击Debug模块，创建launch.json&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109161124932.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240109161124932&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109161215895.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240109161215895&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;无启动特殊设置的话（启动脚本与主要编写脚本不一致，需要带参运行）使用默认即可，如需设置自行百度&lt;/p&gt;
+&lt;p&gt;打上断点后尝试运行基本脚本测试&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109161350879.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240109161350879&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;能断代表设置成功&lt;/p&gt;
+&lt;h2 id=&#34;问题以及解决&#34;&gt;问题以及解决&lt;/h2&gt;
+&lt;h3 id=&#34;问题&#34;&gt;问题&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109161459892.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240109161459892&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在调试时发现框架函数无法如本地一样进入查看细节&lt;/p&gt;
+&lt;h3 id=&#34;解决&#34;&gt;解决&lt;/h3&gt;
+&lt;p&gt;在确认使用python版本号的前提下，使用该版本python全路径运行以下命令：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;python -c &amp;quot;import site;print(site.getusersitepackages())&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;确认项目扩展包位置，笔者如图&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109160945872.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240109160945872&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在远端设置（setting.json）中（user或者WorkSpace均可）设置如下字段后，再次尝试Debug&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109161714950.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240109161714950&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;进入函数失败，右下角提示&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109161820381.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240109161820381&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;launch.json 中设置相关字段，如下图&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109162402886.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240109162402886&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;再次尝试，成功进入框架函数，但依旧无法主动点击进入，此时更换该插件版本，与Python插件对应，即可（笔者同样使用2022.6.0）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240109164853642.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240109164853642&#34;
+	
+	
+&gt;&lt;/p&gt;</description>
+        </item>
+        
+    </channel>
+</rss>
