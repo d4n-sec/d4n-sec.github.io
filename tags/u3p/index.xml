@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>U3p on Dan`s Blog</title>
+        <link>https://d4n-sec.github.io/tags/u3p/</link>
+        <description>Recent content in U3p on Dan`s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>DanSec</copyright>
+        <lastBuildDate>Sun, 07 Apr 2024 11:03:04 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/u3p/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>About_u3p</title>
+        <link>https://d4n-sec.github.io/p/about_u3p/</link>
+        <pubDate>Sun, 07 Apr 2024 11:03:04 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/about_u3p/</guid>
+        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240407111740164.png" alt="Featured image of post About_u3p" /&gt;&lt;h2 id=&#34;什么是u3p文件&#34;&gt;什么是u3p文件&lt;/h2&gt;
+&lt;p&gt;.u3p 文件是存储在U3智能驱动器（一种特殊类型的USB闪存驱动器，包括U3 Launchpad平台）上的便携式应用程序。它包含程序可执行文件和配置数据。如果需要在计算机上运行某些文件，请在计算机上运行一些文件。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;A U3P file is a portable application stored on a U3 Smart Drive, a special type of USB flash drive that includes the U3 Launchpad platform. It contains program executables and configuration data. U3P files enable a program to be run from the flash drive on any Windows computer and may install some files on the local computer if needed.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;其中提及的 &lt;a class=&#34;link&#34; href=&#34;https://baike.baidu.com/item/U3/68202&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;U3&lt;/a&gt; Smart Drive （U3智能驱动器）是一种特殊的U盘，相关创建或者推动组织试图建立一个新标准的软硬件开发平台，但相关技术已经在2009年年底开始逐步淘汰并停止U3技术支持。&lt;/p&gt;
+&lt;h2 id=&#34;详细说明&#34;&gt;详细说明&lt;/h2&gt;
+&lt;p&gt;.U3P 文件以压缩.ZIP 格式保存。它们可能包含四个目录：data\、device\、host\、manifest\。主机\目录包含.EXE 文件。manifest\目录保存应用程序配置信息（.U3I 文件）和程序图标。&lt;/p&gt;
+&lt;p&gt;如下实例为wireshark的u3p安装包&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240407111628656.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240407111628656&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;修改后缀为zip后直接解压缩即可&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240407111553676.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240407111553676&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;通常情况下，由SanDisk、Verbatim、Kingston、Memorex和Intuix等制造商将U3 Launchpad安装到U3智能驱动器上。但是，要手动安装.U3P 启动板，请下载并运行U3 Launchpad安装程序，该安装程序可从SanDisk免费获得。可以使用SanDisk的Launchpad移除工具从USB闪存驱动器中删除U3 Launchpad程序。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;当USB闪存驱动器插入计算机的USB端口时，U3启动板程序运行。.U3P 程序可从类似于Windows“开始”菜单的用户界面中使用。
+&lt;strong&gt;注意：SanDisk U3 Launchpad已停止使用，不再进行维护。&lt;/strong&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
