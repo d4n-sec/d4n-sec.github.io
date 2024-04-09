@@ -13,7 +13,7 @@
         <pubDate>Mon, 08 Apr 2024 17:29:24 +0800</pubDate>
         
         <guid>https://d4n-sec.github.io/p/rmi-study/</guid>
-        <description>&lt;h1 id=&#34;什么是rmi&#34;&gt;什么是RMI&lt;/h1&gt;
+        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240409172707180.png" alt="Featured image of post Rmi Study" /&gt;&lt;h1 id=&#34;什么是rmi&#34;&gt;什么是RMI&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;RMI (Remote Method Invocation) 模型是一种分布式对象应用，使用 RMI 技术可以使一个 JVM 中的对象，调用另一个 JVM 中的对象方法并获取调用结果。这里的另一个 JVM 可以在同一台计算机也可以是远程计算机。因此，RMI 意味着需要一个 Server 端和一个 Client 端。&lt;/p&gt;
 &lt;p&gt;Server 端通常会创建一个对象，并使之可以被远程访问。&lt;/p&gt;
