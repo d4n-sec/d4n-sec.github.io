@@ -57,7 +57,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;其中看到了不懂的 &lt;code&gt;transformer&lt;/code&gt; ，尝试理解 &lt;code&gt;transformer&lt;/code&gt;的设计理念与意图&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;其中没见过 &lt;code&gt;transformer&lt;/code&gt; ，&lt;code&gt;TransformedMap&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;接下来尝试理解他们&lt;del&gt;的设计理念与意图&lt;/del&gt;&lt;/p&gt;
 &lt;h2 id=&#34;transformer&#34;&gt;Transformer&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -545,7 +546,7 @@
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;TransformedMap是Map的功能扩展类！！&lt;/strong&gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;简易例子完全理解&#34;&gt;简易例子完全理解&lt;/h2&gt;
+&lt;h2 id=&#34;简易例子的理解&#34;&gt;简易例子的理解&lt;/h2&gt;
 &lt;p&gt;回到大佬的简易例子&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -585,7 +586,9 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;首先1-10配置ChainedTransformer，11-13配置TransformedMap，14行放入数据，触发一系列transformer。&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;首先1-10配置ChainedTransformer，以此放好触发的最终执行环境&lt;/p&gt;
+&lt;p&gt;11-13配置TransformedMap，以此触发ChainedTransformer，&lt;/p&gt;
+&lt;p&gt;14 放入数据，触发TransformedMap机制。&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;未完待续&amp;hellip;&amp;hellip;.&lt;/p&gt;
 </description>

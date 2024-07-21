@@ -286,7 +286,7 @@
           </ol>
         </li>
         <li><a href="#transformedmap">TransformedMap</a></li>
-        <li><a href="#简易例子完全理解">简易例子完全理解</a></li>
+        <li><a href="#简易例子的理解">简易例子的理解</a></li>
       </ol>
     </li>
   </ol>
@@ -424,7 +424,8 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>其中看到了不懂的 <code>transformer</code> ，尝试理解 <code>transformer</code>的设计理念与意图</p>
+</div><p>其中没见过 <code>transformer</code> ，<code>TransformedMap</code></p>
+<p>接下来尝试理解他们<del>的设计理念与意图</del></p>
 <h2 id="transformer">Transformer</h2>
 <ul>
 <li>
@@ -912,7 +913,7 @@
 </blockquote>
 <p><strong>TransformedMap是Map的功能扩展类！！</strong></p>
 <hr>
-<h2 id="简易例子完全理解">简易例子完全理解</h2>
+<h2 id="简易例子的理解">简易例子的理解</h2>
 <p>回到大佬的简易例子</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -952,7 +953,9 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>首先1-10配置ChainedTransformer，11-13配置TransformedMap，14行放入数据，触发一系列transformer。</p>
+</div><p>首先1-10配置ChainedTransformer，以此放好触发的最终执行环境</p>
+<p>11-13配置TransformedMap，以此触发ChainedTransformer，</p>
+<p>14 放入数据，触发TransformedMap机制。</p>
 <hr>
 <p>未完待续&hellip;&hellip;.</p>
 
