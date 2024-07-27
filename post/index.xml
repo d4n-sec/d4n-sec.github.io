@@ -2937,10 +2937,10 @@ JAVA RMI使用一种特殊的类（这些类被称作stubs）来发起对远程�
         </item>
         <item>
         <title>Vscode Windows 远程连接</title>
-        <link>https://d4n-sec.github.io/p/vscode-windows-%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/</link>
+        <link>https://d4n-sec.github.io/p/vscode/</link>
         <pubDate>Wed, 06 Mar 2024 17:38:40 +0800</pubDate>
         
-        <guid>https://d4n-sec.github.io/p/vscode-windows-%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/</guid>
+        <guid>https://d4n-sec.github.io/p/vscode/</guid>
         <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240306174015000.png" alt="Featured image of post Vscode Windows 远程连接" /&gt;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;笔者目前有两个电脑，一个A在家（高性能），一个B在公司（较低性能），如何同步两个电脑的环境一直是一个问题，较低性能的笔记本写文档完全没问题，但是如果涉及一些工具编译，多台虚拟机同时使用，不可。上传github需要push，但是笔者并没有良好的push习惯。相反，只需要git作为存储单元的笔者深受其git版本控制的困扰，git方案失败，有向日葵这样的远控软件但是远控在免费使用的情况下，并不能做到合二为一的感受（延迟）&lt;/p&gt;
 &lt;h1 id=&#34;解决方案&#34;&gt;解决方案&lt;/h1&gt;
