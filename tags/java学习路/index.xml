@@ -242,10 +242,10 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;code&gt;Proxy.newProxyInstance&lt;/code&gt;的传参是实现的关键&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;newProxyInstance(): 创建代理对象
-参数一:   被代理类对象
-参数二：接口类对象     被代理对象所实现的接口
-参数三：调用处理器。 被调用对象方法被调用后该如何处理&lt;/p&gt;
+&lt;p&gt;newProxyInstance(): 创建代理对象&lt;/p&gt;
+&lt;p&gt;参数一:   被代理类对象&lt;/p&gt;
+&lt;p&gt;参数二：接口类对象     被代理对象所实现的接口&lt;/p&gt;
+&lt;p&gt;参数三：调用处理器。 被调用对象方法被调用后该如何处理&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h4 id=&#34;jdk实现原理&#34;&gt;JDK实现原理&lt;/h4&gt;
 &lt;p&gt;我们可以在main函数的最开始添加这段代码&lt;/p&gt;

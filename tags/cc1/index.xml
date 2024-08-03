@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>CC on Dan`s Blog</title>
-        <link>https://d4n-sec.github.io/tags/cc/</link>
-        <description>Recent content in CC on Dan`s Blog</description>
+        <title>CC1 on Dan`s Blog</title>
+        <link>https://d4n-sec.github.io/tags/cc1/</link>
+        <description>Recent content in CC1 on Dan`s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>DanSec</copyright>
-        <lastBuildDate>Sun, 21 Jul 2024 15:58:24 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/cc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 21 Jul 2024 15:58:24 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/cc1/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>CC1Demo</title>
         <link>https://d4n-sec.github.io/p/cc1demo/</link>
         <pubDate>Sun, 21 Jul 2024 15:58:24 +0800</pubDate>

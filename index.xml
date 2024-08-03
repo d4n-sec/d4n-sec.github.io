@@ -7,7 +7,15 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>DanSec</copyright>
-        <lastBuildDate>Sun, 28 Jul 2024 01:05:01 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 03 Aug 2024 13:11:25 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>文章标题</title>
+        <link>https://d4n-sec.github.io/p/javaclassiccc1/</link>
+        <pubDate>Sat, 03 Aug 2024 13:11:25 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/javaclassiccc1/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Java代理模式</title>
         <link>https://d4n-sec.github.io/p/javaproxystudy/</link>
         <pubDate>Sun, 28 Jul 2024 01:05:01 +0800</pubDate>
@@ -242,10 +250,10 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;code&gt;Proxy.newProxyInstance&lt;/code&gt;的传参是实现的关键&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;newProxyInstance(): 创建代理对象
-参数一:   被代理类对象
-参数二：接口类对象     被代理对象所实现的接口
-参数三：调用处理器。 被调用对象方法被调用后该如何处理&lt;/p&gt;
+&lt;p&gt;newProxyInstance(): 创建代理对象&lt;/p&gt;
+&lt;p&gt;参数一:   被代理类对象&lt;/p&gt;
+&lt;p&gt;参数二：接口类对象     被代理对象所实现的接口&lt;/p&gt;
+&lt;p&gt;参数三：调用处理器。 被调用对象方法被调用后该如何处理&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h4 id=&#34;jdk实现原理&#34;&gt;JDK实现原理&lt;/h4&gt;
 &lt;p&gt;我们可以在main函数的最开始添加这段代码&lt;/p&gt;
