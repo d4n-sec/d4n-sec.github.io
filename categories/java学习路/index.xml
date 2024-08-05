@@ -683,8 +683,8 @@
 &lt;p&gt;设计模式主要是基于&lt;a class=&#34;link&#34; href=&#34;#OOP&#34; &gt;OOP&lt;/a&gt;编程提炼的，而OOP编程最典型的语言为Java，所以具体实例文章使用Java代码作为示例&lt;/p&gt;
 &lt;p&gt;注意：本质是学习设计思维而非代码学习，所以需要一定的Java基础。&lt;/p&gt;
 &lt;h1 id=&#34;补充&#34;&gt;补充&lt;/h1&gt;
-&lt;p&gt;&lt;span id=&#34;OOP&#34;&gt;OOP&lt;/span&gt;：&lt;code&gt;Object-oriented Programming&lt;/code&gt;，即&lt;code&gt;面向对象编程&lt;/code&gt;
-&lt;span id=&#34;GoF&#34;&gt;GoF&lt;/span&gt;：Gang of Four，即&lt;code&gt;四人帮&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span id=&#34;OOP&#34;&gt;OOP&lt;/span&gt;：&lt;code&gt;Object-oriented Programming&lt;/code&gt;，即&lt;code&gt;面向对象编程&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span id=&#34;GoF&#34;&gt;GoF&lt;/span&gt;：Gang of Four，即&lt;code&gt;四人帮&lt;/code&gt;&lt;/p&gt;
 &lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.runoob.com/design-pattern/design-pattern-intro.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;菜鸟&lt;/a&gt;&lt;/p&gt;
