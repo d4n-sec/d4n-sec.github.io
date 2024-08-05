@@ -563,6 +563,142 @@
 </description>
         </item>
         <item>
+        <title>文章标题</title>
+        <link>https://d4n-sec.github.io/p/designmode/</link>
+        <pubDate>Sun, 28 Jul 2024 00:05:01 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/designmode/</guid>
+        <description>&lt;h1 id=&#34;设计模式&#34;&gt;设计模式&lt;/h1&gt;
+&lt;h2 id=&#34;设计模式简介&#34;&gt;设计模式简介&lt;/h2&gt;
+&lt;p&gt;设计模式（Design pattern）代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式是软件开发人员在软件开发过程中面临的一般问题的解决方案。这些解决方案是众多软件开发人员经过相当长的一段时间的试验和错误总结出来的。&lt;/p&gt;
+&lt;p&gt;设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了&lt;em&gt;&lt;strong&gt;重用代码&lt;/strong&gt;&lt;/em&gt;、让代码更容易被他人理解、&lt;em&gt;&lt;strong&gt;保证代码可靠性&lt;/strong&gt;&lt;/em&gt;。&lt;/p&gt;
+&lt;p&gt;毫无疑问，设计模式于己于他人于系统都是多赢的，设计模式使代码编制真正工程化，设计模式是软件工程的基石，如同大厦的一块块砖石一样。项目中合理地运用设计模式可以完美地解决很多问题，每种模式在现实中都有相应的原理来与之对应，每种模式都描述了一个在我们周围不断重复发生的问题，以及该问题的核心解决方案，这也是设计模式能被广泛应用的原因。&lt;/p&gt;
+&lt;h3 id=&#34;设计模式来源&#34;&gt;设计模式来源&lt;/h3&gt;
+&lt;p&gt;设计模式这个术语是上个世纪90年代由Erich Gamma、Richard Helm、Raplh Johnson和Jonhn Vlissides四个人总结提炼出来的，并且写了一本 Design Patterns 的书。这四人也被称为四人帮（&lt;a class=&#34;link&#34; href=&#34;#GoF&#34; &gt;GoF&lt;/a&gt;）。&lt;/p&gt;
+&lt;p&gt;他们所提出的设计模式主要是基于以下的面向对象设计原则：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对接口编程而不是对实现编程&lt;/li&gt;
+&lt;li&gt;优先使用对象组合而不是继承&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;设计模式优点&#34;&gt;设计模式优点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;提供了一种共享的设计词汇和概念，使开发人员能够更好地沟通和理解彼此的设计意图。&lt;/li&gt;
+&lt;li&gt;提供了经过验证的解决方案，可以提高软件的可维护性、可复用性和灵活性。&lt;/li&gt;
+&lt;li&gt;促进了代码的重用，避免了重复的设计和实现。&lt;/li&gt;
+&lt;li&gt;通过遵循设计模式，可以减少系统中的错误和问题，提高代码质量。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;基本原则&#34;&gt;基本原则&lt;/h2&gt;
+&lt;p&gt;设计模式基于以下几个原则，&lt;del&gt;可以跳过，不影响学习设计模式&lt;/del&gt;&lt;/p&gt;
+&lt;h3 id=&#34;开闭原则&#34;&gt;开闭原则&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Open Close Principle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;对扩展开放，对修改关闭。在程序需要进行拓展的时候，不能去修改原有的代码，实现一个热插拔的效果。&lt;/p&gt;
+&lt;p&gt;简言之，是为了使程序的扩展性好，易于维护和升级。想要达到这样的效果，我们需要使用接口和抽象类，后面的具体设计中我们会提到这点。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;里氏代换原则&#34;&gt;里氏代换原则&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Liskov Substitution Principle（LSP）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;任何基类可以出现的地方，子类一定可以出现。LSP 是继承复用的基石，只有当派生类可以替换掉基类，且软件单位的功能不受到影响时，基类才能真正被复用，而派生类也能够在基类的基础上增加新的行为。&lt;/p&gt;
+&lt;p&gt;里氏代换原则是对开闭原则的补充。实现开闭原则的关键步骤就是抽象化，而基类与子类的继承关系就是抽象化的具体实现，所以里氏代换原则是对实现抽象化的具体步骤的规范。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;依赖倒转原则&#34;&gt;依赖倒转原则&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Dependence Inversion Principle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;开闭原则的基础，具体内容：针对接口编程，依赖于抽象而不依赖于具体。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;接口隔离原则&#34;&gt;接口隔离原则&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Interface Segregation Principle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;使用多个隔离的接口，比使用单个接口要好。&lt;/p&gt;
+&lt;p&gt;它还有另外一个意思是：降低类之间的耦合度。由此可见，其实设计模式就是从大型软件架构出发、便于升级和维护的软件设计思想，它强调降低依赖，降低耦合。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;最少知道原则&#34;&gt;最少知道原则&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Demeter Principle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;又称迪米特法则，是指一个实体应当尽量少地与其他实体之间发生相互作用，使得系统功能模块相对独立。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;合成复用原则&#34;&gt;合成复用原则&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Composite Reuse Principle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;是指：尽量使用合成/聚合的方式，而不是使用继承。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;设计模式的分类&#34;&gt;设计模式的分类&lt;/h2&gt;
+&lt;p&gt;参考四人帮的书籍： Design Patterns - Elements of Reusable Object-Oriented Software（中文译名：设计模式 - 可复用的面向对象软件元素）&lt;/p&gt;
+&lt;h3 id=&#34;创建型模式&#34;&gt;创建型模式&lt;/h3&gt;
+&lt;p&gt;这些设计模式提供了一种&lt;em&gt;&lt;strong&gt;在创建对象的同时隐藏创建逻辑&lt;/strong&gt;&lt;/em&gt;的方式，而不是使用 new 运算符直接实例化对象。这使得程序在判断针对某个给定实例需要创建哪些对象时更加灵活。&lt;/p&gt;
+&lt;p&gt;包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;工厂模式（Factory Pattern）&lt;/li&gt;
+&lt;li&gt;抽象工厂模式（Abstract Factory Pattern）&lt;/li&gt;
+&lt;li&gt;单例模式（Singleton Pattern）&lt;/li&gt;
+&lt;li&gt;建造者模式（Builder Pattern）&lt;/li&gt;
+&lt;li&gt;原型模式（Prototype Pattern）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;结构型模式&#34;&gt;结构型模式&lt;/h3&gt;
+&lt;p&gt;这些模式关注&lt;em&gt;&lt;strong&gt;对象之间的组合和关系&lt;/strong&gt;&lt;/em&gt;，旨在解决如何构建灵活且可复用的类和对象结构。&lt;/p&gt;
+&lt;p&gt;包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;适配器模式（Adapter Pattern）&lt;/li&gt;
+&lt;li&gt;桥接模式（Bridge Pattern）&lt;/li&gt;
+&lt;li&gt;过滤器模式（Filter、Criteria Pattern）（非主流的分类）&lt;/li&gt;
+&lt;li&gt;组合模式（Composite Pattern）&lt;/li&gt;
+&lt;li&gt;装饰器模式（Decorator Pattern）&lt;/li&gt;
+&lt;li&gt;外观模式（Facade Pattern）&lt;/li&gt;
+&lt;li&gt;享元模式（Flyweight Pattern）&lt;/li&gt;
+&lt;li&gt;代理模式（Proxy Pattern）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;行为型模式&#34;&gt;行为型模式&lt;/h3&gt;
+&lt;p&gt;这些模式关注&lt;em&gt;&lt;strong&gt;对象之间的通信和交互&lt;/strong&gt;&lt;/em&gt;，旨在解决对象之间的责任分配和算法的封装。&lt;/p&gt;
+&lt;p&gt;包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;责任链模式（Chain of Responsibility Pattern）&lt;/li&gt;
+&lt;li&gt;命令模式（Command Pattern）&lt;/li&gt;
+&lt;li&gt;解释器模式（Interpreter Pattern）&lt;/li&gt;
+&lt;li&gt;迭代器模式（Iterator Pattern）&lt;/li&gt;
+&lt;li&gt;中介者模式（Mediator Pattern）&lt;/li&gt;
+&lt;li&gt;备忘录模式（Memento Pattern）&lt;/li&gt;
+&lt;li&gt;观察者模式（Observer Pattern）&lt;/li&gt;
+&lt;li&gt;状态模式（State Pattern）&lt;/li&gt;
+&lt;li&gt;空对象模式（Null Object Pattern）（非主流的分类）&lt;/li&gt;
+&lt;li&gt;策略模式（Strategy Pattern）&lt;/li&gt;
+&lt;li&gt;模板模式（Template Pattern）&lt;/li&gt;
+&lt;li&gt;访问者模式（Visitor Pattern）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;j2ee-模式&#34;&gt;J2EE 模式&lt;/h3&gt;
+&lt;p&gt;此项是非主流的分类，这些设计模式特别关注表示层。这些模式是由 Sun Java Center 鉴定的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MVC 模式（MVC Pattern）&lt;/li&gt;
+&lt;li&gt;业务代表模式（Business Delegate Pattern）&lt;/li&gt;
+&lt;li&gt;组合实体模式（Composite Entity Pattern）&lt;/li&gt;
+&lt;li&gt;数据访问对象模式（Data Access Object Pattern）&lt;/li&gt;
+&lt;li&gt;前端控制器模式（Front Controller Pattern）&lt;/li&gt;
+&lt;li&gt;拦截过滤器模式（Intercepting Filter Pattern）&lt;/li&gt;
+&lt;li&gt;服务定位器模式（Service Locator Pattern）&lt;/li&gt;
+&lt;li&gt;传输对象模式（Transfer Object Pattern）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;设计模式主要是基于&lt;a class=&#34;link&#34; href=&#34;#OOP&#34; &gt;OOP&lt;/a&gt;编程提炼的，而OOP编程最典型的语言为Java，所以具体实例文章使用Java代码作为示例&lt;/p&gt;
+&lt;p&gt;注意：本质是学习设计思维而非代码学习，所以需要一定的Java基础。&lt;/p&gt;
+&lt;h1 id=&#34;补充&#34;&gt;补充&lt;/h1&gt;
+&lt;p&gt;&lt;span id=&#34;OOP&#34;&gt;OOP&lt;/span&gt;：&lt;code&gt;Object-oriented Programming&lt;/code&gt;，即&lt;code&gt;面向对象编程&lt;/code&gt;
+&lt;span id=&#34;GoF&#34;&gt;GoF&lt;/span&gt;：Gang of Four，即&lt;code&gt;四人帮&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.runoob.com/design-pattern/design-pattern-intro.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;菜鸟&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>How to Ask Questions The Smart Way</title>
         <link>https://d4n-sec.github.io/p/how2ask/</link>
         <pubDate>Sat, 27 Jul 2024 01:19:29 +0800</pubDate>

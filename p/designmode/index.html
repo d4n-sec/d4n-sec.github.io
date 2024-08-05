@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='设计模式 设计模式简介 设计模式（Design pattern）代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式是软件开发人'>
+<title>文章标题</title>
+
+<link rel='canonical' href='https://d4n-sec.github.io/p/designmode/'>
+
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='文章标题'>
+<meta property='og:description' content='设计模式 设计模式简介 设计模式（Design pattern）代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式是软件开发人'>
+<meta property='og:url' content='https://d4n-sec.github.io/p/designmode/'>
+<meta property='og:site_name' content='Dan`s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-07-28T00:05:01&#43;08:00'/><meta property='article:modified_time' content='2024-07-28T00:05:01&#43;08:00'/>
+<meta name="twitter:title" content="文章标题">
+<meta name="twitter:description" content="设计模式 设计模式简介 设计模式（Design pattern）代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式是软件开发人">
+    <link rel="shortcut icon" href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/paper-plane-64.webp" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/TX.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🐹</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Dan`s Blog</a></h1>
+            <h2 class="site-description">今人不见古时月</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='/%E5%85%B3%E4%BA%8E'
+                        target="_blank"
+                        title="contactMe"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1709702435352" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8388" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32z m-40 110.8V792H136V270.8l-27.6-21.5 39.3-50.5 42.8 33.3h643.1l42.8-33.3 39.3 50.5-27.7 21.5z" fill="#bfbfbf" p-id="8389"></path><path d="M833.6 232L512 482 190.4 232l-42.8-33.3-39.3 50.5 27.6 21.5 341.6 265.6c20.2 15.7 48.5 15.7 68.7 0L888 270.8l27.6-21.5-39.3-50.5-42.7 33.2z" p-id="8390" fill="#bfbfbf"></path></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/d4n-sec'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='http://wpa.qq.com/msgrd?v=3&amp;uin=1664022865&amp;site=qq&amp;menu=yes'
+                        target="_blank"
+                        title="QQNum"
+                        rel="me"
+                    >
+                        
+                        
+                            
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1709702077457" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13062" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3C766.5 262.2 689.3 112 511.5 112 331.7 112 256.2 265.2 261 447.9c-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z" p-id="13063" fill="#bfbfbf"></path></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+    </ol>
+    <div class="menu-bottom-section">
+        <ol class="menu">
+
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </ol>
+    </div>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#设计模式">设计模式</a>
+      <ol>
+        <li><a href="#设计模式简介">设计模式简介</a>
+          <ol>
+            <li><a href="#设计模式来源">设计模式来源</a></li>
+            <li><a href="#设计模式优点">设计模式优点</a></li>
+          </ol>
+        </li>
+        <li><a href="#基本原则">基本原则</a>
+          <ol>
+            <li><a href="#开闭原则">开闭原则</a></li>
+            <li><a href="#里氏代换原则">里氏代换原则</a></li>
+            <li><a href="#依赖倒转原则">依赖倒转原则</a></li>
+            <li><a href="#接口隔离原则">接口隔离原则</a></li>
+            <li><a href="#最少知道原则">最少知道原则</a></li>
+            <li><a href="#合成复用原则">合成复用原则</a></li>
+          </ol>
+        </li>
+        <li><a href="#设计模式的分类">设计模式的分类</a>
+          <ol>
+            <li><a href="#创建型模式">创建型模式</a></li>
+            <li><a href="#结构型模式">结构型模式</a></li>
+            <li><a href="#行为型模式">行为型模式</a></li>
+            <li><a href="#j2ee-模式">J2EE 模式</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#补充">补充</a>
+      <ol>
+        <li><a href="#参考链接">参考链接</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/designmode/">文章标题</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jul 28, 2024 00:05 &#43;0800</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="设计模式">设计模式</h1>
+<h2 id="设计模式简介">设计模式简介</h2>
+<p>设计模式（Design pattern）代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式是软件开发人员在软件开发过程中面临的一般问题的解决方案。这些解决方案是众多软件开发人员经过相当长的一段时间的试验和错误总结出来的。</p>
+<p>设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了<em><strong>重用代码</strong></em>、让代码更容易被他人理解、<em><strong>保证代码可靠性</strong></em>。</p>
+<p>毫无疑问，设计模式于己于他人于系统都是多赢的，设计模式使代码编制真正工程化，设计模式是软件工程的基石，如同大厦的一块块砖石一样。项目中合理地运用设计模式可以完美地解决很多问题，每种模式在现实中都有相应的原理来与之对应，每种模式都描述了一个在我们周围不断重复发生的问题，以及该问题的核心解决方案，这也是设计模式能被广泛应用的原因。</p>
+<h3 id="设计模式来源">设计模式来源</h3>
+<p>设计模式这个术语是上个世纪90年代由Erich Gamma、Richard Helm、Raplh Johnson和Jonhn Vlissides四个人总结提炼出来的，并且写了一本 Design Patterns 的书。这四人也被称为四人帮（<a class="link" href="#GoF" >GoF</a>）。</p>
+<p>他们所提出的设计模式主要是基于以下的面向对象设计原则：</p>
+<ul>
+<li>对接口编程而不是对实现编程</li>
+<li>优先使用对象组合而不是继承</li>
+</ul>
+<h3 id="设计模式优点">设计模式优点</h3>
+<ul>
+<li>提供了一种共享的设计词汇和概念，使开发人员能够更好地沟通和理解彼此的设计意图。</li>
+<li>提供了经过验证的解决方案，可以提高软件的可维护性、可复用性和灵活性。</li>
+<li>促进了代码的重用，避免了重复的设计和实现。</li>
+<li>通过遵循设计模式，可以减少系统中的错误和问题，提高代码质量。</li>
+</ul>
+<h2 id="基本原则">基本原则</h2>
+<p>设计模式基于以下几个原则，<del>可以跳过，不影响学习设计模式</del></p>
+<h3 id="开闭原则">开闭原则</h3>
+<ul>
+<li>Open Close Principle</li>
+</ul>
+<blockquote>
+<p>对扩展开放，对修改关闭。在程序需要进行拓展的时候，不能去修改原有的代码，实现一个热插拔的效果。</p>
+<p>简言之，是为了使程序的扩展性好，易于维护和升级。想要达到这样的效果，我们需要使用接口和抽象类，后面的具体设计中我们会提到这点。</p>
+</blockquote>
+<h3 id="里氏代换原则">里氏代换原则</h3>
+<ul>
+<li>Liskov Substitution Principle（LSP）</li>
+</ul>
+<blockquote>
+<p>任何基类可以出现的地方，子类一定可以出现。LSP 是继承复用的基石，只有当派生类可以替换掉基类，且软件单位的功能不受到影响时，基类才能真正被复用，而派生类也能够在基类的基础上增加新的行为。</p>
+<p>里氏代换原则是对开闭原则的补充。实现开闭原则的关键步骤就是抽象化，而基类与子类的继承关系就是抽象化的具体实现，所以里氏代换原则是对实现抽象化的具体步骤的规范。</p>
+</blockquote>
+<h3 id="依赖倒转原则">依赖倒转原则</h3>
+<ul>
+<li>Dependence Inversion Principle</li>
+</ul>
+<blockquote>
+<p>开闭原则的基础，具体内容：针对接口编程，依赖于抽象而不依赖于具体。</p>
+</blockquote>
+<h3 id="接口隔离原则">接口隔离原则</h3>
+<ul>
+<li>Interface Segregation Principle</li>
+</ul>
+<blockquote>
+<p>使用多个隔离的接口，比使用单个接口要好。</p>
+<p>它还有另外一个意思是：降低类之间的耦合度。由此可见，其实设计模式就是从大型软件架构出发、便于升级和维护的软件设计思想，它强调降低依赖，降低耦合。</p>
+</blockquote>
+<h3 id="最少知道原则">最少知道原则</h3>
+<ul>
+<li>Demeter Principle</li>
+</ul>
+<blockquote>
+<p>又称迪米特法则，是指一个实体应当尽量少地与其他实体之间发生相互作用，使得系统功能模块相对独立。</p>
+</blockquote>
+<h3 id="合成复用原则">合成复用原则</h3>
+<ul>
+<li>Composite Reuse Principle</li>
+</ul>
+<blockquote>
+<p>是指：尽量使用合成/聚合的方式，而不是使用继承。</p>
+</blockquote>
+<h2 id="设计模式的分类">设计模式的分类</h2>
+<p>参考四人帮的书籍： Design Patterns - Elements of Reusable Object-Oriented Software（中文译名：设计模式 - 可复用的面向对象软件元素）</p>
+<h3 id="创建型模式">创建型模式</h3>
+<p>这些设计模式提供了一种<em><strong>在创建对象的同时隐藏创建逻辑</strong></em>的方式，而不是使用 new 运算符直接实例化对象。这使得程序在判断针对某个给定实例需要创建哪些对象时更加灵活。</p>
+<p>包含：</p>
+<ul>
+<li>工厂模式（Factory Pattern）</li>
+<li>抽象工厂模式（Abstract Factory Pattern）</li>
+<li>单例模式（Singleton Pattern）</li>
+<li>建造者模式（Builder Pattern）</li>
+<li>原型模式（Prototype Pattern）</li>
+</ul>
+<h3 id="结构型模式">结构型模式</h3>
+<p>这些模式关注<em><strong>对象之间的组合和关系</strong></em>，旨在解决如何构建灵活且可复用的类和对象结构。</p>
+<p>包含：</p>
+<ul>
+<li>适配器模式（Adapter Pattern）</li>
+<li>桥接模式（Bridge Pattern）</li>
+<li>过滤器模式（Filter、Criteria Pattern）（非主流的分类）</li>
+<li>组合模式（Composite Pattern）</li>
+<li>装饰器模式（Decorator Pattern）</li>
+<li>外观模式（Facade Pattern）</li>
+<li>享元模式（Flyweight Pattern）</li>
+<li>代理模式（Proxy Pattern）</li>
+</ul>
+<h3 id="行为型模式">行为型模式</h3>
+<p>这些模式关注<em><strong>对象之间的通信和交互</strong></em>，旨在解决对象之间的责任分配和算法的封装。</p>
+<p>包含：</p>
+<ul>
+<li>责任链模式（Chain of Responsibility Pattern）</li>
+<li>命令模式（Command Pattern）</li>
+<li>解释器模式（Interpreter Pattern）</li>
+<li>迭代器模式（Iterator Pattern）</li>
+<li>中介者模式（Mediator Pattern）</li>
+<li>备忘录模式（Memento Pattern）</li>
+<li>观察者模式（Observer Pattern）</li>
+<li>状态模式（State Pattern）</li>
+<li>空对象模式（Null Object Pattern）（非主流的分类）</li>
+<li>策略模式（Strategy Pattern）</li>
+<li>模板模式（Template Pattern）</li>
+<li>访问者模式（Visitor Pattern）</li>
+</ul>
+<h3 id="j2ee-模式">J2EE 模式</h3>
+<p>此项是非主流的分类，这些设计模式特别关注表示层。这些模式是由 Sun Java Center 鉴定的。</p>
+<ul>
+<li>MVC 模式（MVC Pattern）</li>
+<li>业务代表模式（Business Delegate Pattern）</li>
+<li>组合实体模式（Composite Entity Pattern）</li>
+<li>数据访问对象模式（Data Access Object Pattern）</li>
+<li>前端控制器模式（Front Controller Pattern）</li>
+<li>拦截过滤器模式（Intercepting Filter Pattern）</li>
+<li>服务定位器模式（Service Locator Pattern）</li>
+<li>传输对象模式（Transfer Object Pattern）</li>
+</ul>
+<p>设计模式主要是基于<a class="link" href="#OOP" >OOP</a>编程提炼的，而OOP编程最典型的语言为Java，所以具体实例文章使用Java代码作为示例</p>
+<p>注意：本质是学习设计思维而非代码学习，所以需要一定的Java基础。</p>
+<h1 id="补充">补充</h1>
+<p><span id="OOP">OOP</span>：<code>Object-oriented Programming</code>，即<code>面向对象编程</code>
+<span id="GoF">GoF</span>：Gang of Four，即<code>四人帮</code></p>
+<h2 id="参考链接">参考链接</h2>
+<p><a class="link" href="https://www.runoob.com/design-pattern/design-pattern-intro.html"  target="_blank" rel="noopener"
+    >菜鸟</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2024 DanSec
+    </section>
+    
+    <section class="powerby">
+        
+            Dan❤Anan <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.23.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
