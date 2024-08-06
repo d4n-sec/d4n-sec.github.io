@@ -450,10 +450,13 @@
 &lt;/div&gt;&lt;p&gt;直接运行，成功。&lt;/p&gt;
 &lt;p&gt;结束了吗，没有。&lt;/p&gt;
 &lt;h2 id=&#34;踩坑中的踩坑&#34;&gt;踩坑中的踩坑&lt;/h2&gt;
-&lt;p&gt;如果你想对CC6的链路过程做Debug跟踪，恭喜你，有很强思考，验证和动手能力，但是你会发现，无法触发RCE。&lt;/p&gt;
+&lt;p&gt;如果你想对CC6的链路运行过程做Debug跟踪，看变量如何修改，程序如何调用，路径如何被劫持。&lt;/p&gt;
+&lt;p&gt;恭喜你，有很强思考，验证和动手能力，但是你会发现，无法触发RCE。&lt;/p&gt;
 &lt;p&gt;或者说，不使用断点的情况下，可以RCE，其他大多数情况下，&lt;code&gt;LazyMap.get()&lt;/code&gt;总是无法做到&lt;code&gt;IF == true&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;为什么？抛出结论，IDEA自动调用类的&lt;code&gt;toString()&lt;/code&gt;且&lt;code&gt;TiedMapEntry.toString()&lt;/code&gt;中和&lt;code&gt;TiedMapEntry.hashCode()&lt;/code&gt;一样，都会调用&lt;code&gt;TiedMapEntry.getValue()&lt;/code&gt;，这里就是我们的利用链！！！！&lt;/p&gt;
-&lt;p&gt;所以一旦IDEA需要自动化解析&lt;code&gt;TiedMapEntry&lt;/code&gt;，去调用了&lt;code&gt;TiedMapEntry.toString()&lt;/code&gt;，那么我们的利用链就会走一遍，即使使用了&lt;code&gt;outerMap.clear();&lt;/code&gt;，但是由于IDEA自动调用&lt;code&gt;TiedMapEntry.toString()&lt;/code&gt;，且不会触发断点，clear了也没有用。&lt;/p&gt;
+&lt;p&gt;为什么？抛出结论，IDEA自动调用类的&lt;code&gt;toString()&lt;/code&gt;，且不会触发断点。&lt;/p&gt;
+&lt;p&gt;再且！！！&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;TiedMapEntry.toString()&lt;/code&gt;中和&lt;code&gt;TiedMapEntry.hashCode()&lt;/code&gt;一样，都会调用&lt;code&gt;TiedMapEntry.getValue()&lt;/code&gt;，这里就是我们的利用链！！！！&lt;/p&gt;
+&lt;p&gt;所以一旦IDEA尝试解析&lt;code&gt;TiedMapEntry&lt;/code&gt;，去调用了&lt;code&gt;TiedMapEntry.toString()&lt;/code&gt;，那么我们的利用链就会走一遍，即使使用了&lt;code&gt;outerMap.clear();&lt;/code&gt;，也不一定有效。&lt;/p&gt;
 &lt;h3 id=&#34;证明一&#34;&gt;证明一&lt;/h3&gt;
 &lt;p&gt;第一步：直接断点&lt;code&gt;LazyMap.get()&lt;/code&gt;，发现&lt;code&gt;map.size == 0&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240806235317775.png&#34;

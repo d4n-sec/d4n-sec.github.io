@@ -812,10 +812,13 @@
 </div><p>直接运行，成功。</p>
 <p>结束了吗，没有。</p>
 <h2 id="踩坑中的踩坑">踩坑中的踩坑</h2>
-<p>如果你想对CC6的链路过程做Debug跟踪，恭喜你，有很强思考，验证和动手能力，但是你会发现，无法触发RCE。</p>
+<p>如果你想对CC6的链路运行过程做Debug跟踪，看变量如何修改，程序如何调用，路径如何被劫持。</p>
+<p>恭喜你，有很强思考，验证和动手能力，但是你会发现，无法触发RCE。</p>
 <p>或者说，不使用断点的情况下，可以RCE，其他大多数情况下，<code>LazyMap.get()</code>总是无法做到<code>IF == true</code>。</p>
-<p>为什么？抛出结论，IDEA自动调用类的<code>toString()</code>且<code>TiedMapEntry.toString()</code>中和<code>TiedMapEntry.hashCode()</code>一样，都会调用<code>TiedMapEntry.getValue()</code>，这里就是我们的利用链！！！！</p>
-<p>所以一旦IDEA需要自动化解析<code>TiedMapEntry</code>，去调用了<code>TiedMapEntry.toString()</code>，那么我们的利用链就会走一遍，即使使用了<code>outerMap.clear();</code>，但是由于IDEA自动调用<code>TiedMapEntry.toString()</code>，且不会触发断点，clear了也没有用。</p>
+<p>为什么？抛出结论，IDEA自动调用类的<code>toString()</code>，且不会触发断点。</p>
+<p>再且！！！</p>
+<p><code>TiedMapEntry.toString()</code>中和<code>TiedMapEntry.hashCode()</code>一样，都会调用<code>TiedMapEntry.getValue()</code>，这里就是我们的利用链！！！！</p>
+<p>所以一旦IDEA尝试解析<code>TiedMapEntry</code>，去调用了<code>TiedMapEntry.toString()</code>，那么我们的利用链就会走一遍，即使使用了<code>outerMap.clear();</code>，也不一定有效。</p>
 <h3 id="证明一">证明一</h3>
 <p>第一步：直接断点<code>LazyMap.get()</code>，发现<code>map.size == 0</code></p>
 <p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240806235317775.png"
