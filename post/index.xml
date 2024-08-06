@@ -456,7 +456,7 @@
 &lt;p&gt;为什么？抛出结论，IDEA自动调用类的&lt;code&gt;toString()&lt;/code&gt;，且不会触发断点。&lt;/p&gt;
 &lt;p&gt;再且！！！&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;TiedMapEntry.toString()&lt;/code&gt;中和&lt;code&gt;TiedMapEntry.hashCode()&lt;/code&gt;一样，都会调用&lt;code&gt;TiedMapEntry.getValue()&lt;/code&gt;，这里就是我们的利用链！！！！&lt;/p&gt;
-&lt;p&gt;所以一旦IDEA尝试解析&lt;code&gt;TiedMapEntry&lt;/code&gt;，去调用了&lt;code&gt;TiedMapEntry.toString()&lt;/code&gt;，那么我们的利用链就会走一遍，即使使用了&lt;code&gt;outerMap.clear();&lt;/code&gt;，也不一定有效。&lt;/p&gt;
+&lt;p&gt;所以一旦IDEA尝试解析&lt;code&gt;TiedMapEntry&lt;/code&gt;，去调用了&lt;code&gt;TiedMapEntry.toString()&lt;/code&gt;，那么我们的利用链就会走一遍，map就会自动填充上一对&lt;code&gt;Key =&amp;gt; Value&lt;/code&gt;，即使使用了&lt;code&gt;outerMap.clear();&lt;/code&gt;，也不一定有效。&lt;/p&gt;
 &lt;h3 id=&#34;证明一&#34;&gt;证明一&lt;/h3&gt;
 &lt;p&gt;第一步：直接断点&lt;code&gt;LazyMap.get()&lt;/code&gt;，发现&lt;code&gt;map.size == 0&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240806235317775.png&#34;

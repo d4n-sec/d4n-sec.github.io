@@ -818,7 +818,7 @@
 <p>为什么？抛出结论，IDEA自动调用类的<code>toString()</code>，且不会触发断点。</p>
 <p>再且！！！</p>
 <p><code>TiedMapEntry.toString()</code>中和<code>TiedMapEntry.hashCode()</code>一样，都会调用<code>TiedMapEntry.getValue()</code>，这里就是我们的利用链！！！！</p>
-<p>所以一旦IDEA尝试解析<code>TiedMapEntry</code>，去调用了<code>TiedMapEntry.toString()</code>，那么我们的利用链就会走一遍，即使使用了<code>outerMap.clear();</code>，也不一定有效。</p>
+<p>所以一旦IDEA尝试解析<code>TiedMapEntry</code>，去调用了<code>TiedMapEntry.toString()</code>，那么我们的利用链就会走一遍，map就会自动填充上一对<code>Key =&gt; Value</code>，即使使用了<code>outerMap.clear();</code>，也不一定有效。</p>
 <h3 id="证明一">证明一</h3>
 <p>第一步：直接断点<code>LazyMap.get()</code>，发现<code>map.size == 0</code></p>
 <p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240806235317775.png"
