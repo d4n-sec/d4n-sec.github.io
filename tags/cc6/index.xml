@@ -491,7 +491,7 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;此时再步入，就无法进入&lt;code&gt;IF ==  true&lt;/code&gt;代码块了。&lt;/p&gt;
+&lt;p&gt;此时再步入，也无法进入&lt;code&gt;IF ==  true&lt;/code&gt;代码块了。&lt;/p&gt;
 &lt;h3 id=&#34;证明二&#34;&gt;证明二&lt;/h3&gt;
 &lt;p&gt;断点在主函数43行，发现&lt;code&gt;outerMap.clear()&lt;/code&gt;执行之前，&lt;code&gt;outerMap.size == 1&lt;/code&gt;，按照逻辑来说，&lt;code&gt;clear()&lt;/code&gt;之后size为0，步过运行，发现不变，连内容都没变。&lt;/p&gt;
 &lt;p&gt;解释：因为main Debug途中，会对所有涉及变量做展示，其中包括&lt;code&gt;keyinner&lt;/code&gt;这个&lt;code&gt;TiedMapEntry&lt;/code&gt;对象，就会自动调用&lt;code&gt;TiedMapEntry.toString()&lt;/code&gt;了。&lt;/p&gt;
