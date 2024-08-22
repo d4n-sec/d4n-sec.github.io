@@ -383,6 +383,11 @@
 </span><span class="lnt">47
 </span><span class="lnt">48
 </span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#正式开始安装</span>
@@ -401,17 +406,22 @@
 </span></span><span class="line"><span class="cl">wget https://xdebug.org/files/xdebug-版本
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">tar -xvzf xdebug-版本.tgz
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> xdebug-3.1.6
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> xdebug-版本
 </span></span><span class="line"><span class="cl">phpize <span class="c1">#确保和网上的一样</span>
 </span></span><span class="line"><span class="cl">./configure
-</span></span><span class="line"><span class="cl">sudo make <span class="c1">#或者sudo make &amp;&amp;sudo make install</span>
+</span></span><span class="line"><span class="cl">make <span class="c1">#或者make &amp;&amp;sudo make install</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 这个时候 modules 文件夹下已经有xdebug.so了</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 把他保存到一个路径短，且路径上没有-号的文件夹下</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 可用路径 /home/dan/xdebug/xdebug3.1.6/xdebug.so</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 使用一个phpinfo();也可以找到，推荐phpinfo();虽然麻烦</span>
 </span></span><span class="line"><span class="cl">php -i<span class="p">|</span>grep <span class="s2">&#34;php.ini&#34;</span> <span class="c1">#找到php.ini路径</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">#vim 编辑添加</span>
 </span></span><span class="line"><span class="cl"><span class="o">[</span>Xdebug<span class="o">]</span>
-</span></span><span class="line"><span class="cl"><span class="nv">zend_extension</span> <span class="o">=</span> /usr/lib64/php/modules/xdebug.so
+</span></span><span class="line"><span class="cl"><span class="nv">zend_extension</span> <span class="o">=</span> /home/dan/xdebug/xdebug3.1.6/xdebug.so
 </span></span><span class="line"><span class="cl">xdebug.remote_enable<span class="o">=</span><span class="m">1</span>
 </span></span><span class="line"><span class="cl">xdebug.remote_autostart<span class="o">=</span><span class="m">1</span>
 </span></span><span class="line"><span class="cl">xdebug.remote_handler<span class="o">=</span>dbgp
@@ -426,8 +436,8 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">#重启PHP服务</span>
-</span></span><span class="line"><span class="cl">service php-fpm restart
-</span></span><span class="line"><span class="cl">service apache2 restart
+</span></span><span class="line"><span class="cl">sudo service php版本-fpm restart
+</span></span><span class="line"><span class="cl">sudo service apache2 restart
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">#查看一下xdebug有没有</span>
 </span></span><span class="line"><span class="cl">php -i （只能查看cli版本的）
