@@ -7,7 +7,214 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>DanSec</copyright>
-        <lastBuildDate>Tue, 15 Oct 2024 20:53:41 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 17 Oct 2024 16:09:39 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Windows 右键菜单</title>
+        <link>https://d4n-sec.github.io/p/windowsrightmenu/</link>
+        <pubDate>Thu, 17 Oct 2024 16:09:39 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/windowsrightmenu/</guid>
+        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914182009341.png" alt="Featured image of post Windows 右键菜单" /&gt;&lt;h1 id=&#34;windows-多级右键菜单基础&#34;&gt;Windows 多级右键菜单基础&lt;/h1&gt;
+&lt;h2 id=&#34;修改的键与项&#34;&gt;修改的键与项&lt;/h2&gt;
+&lt;p&gt;Win10鼠标右键菜单管理分为三种情形：右键文件夹、文件以及右键空白区域&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;右键空白区域（分为桌面空白区域和其他文件夹下空白区域）&lt;/li&gt;
+&lt;li&gt;右键文件夹&lt;/li&gt;
+&lt;li&gt;右键文件（分为所有文件和某类型文件两种）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914180800214.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240914180800214&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;绝大部分情况只需要关系&lt;code&gt;HKEY_CLASSES_ROOT&lt;/code&gt;即可&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;项：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;SubCommands&lt;/code&gt;：如果某键需要设置为拥有子菜单，那么需要&lt;code&gt;SubCommands&lt;/code&gt;，如样例图2&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;MUIVerb&lt;/code&gt;：显示的字符串&lt;/p&gt;
+&lt;p&gt;键：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;shell&lt;/code&gt;：自定义的键需要在&lt;code&gt;shell&lt;/code&gt;键下&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;command&lt;/code&gt;：绑定exe，并对其传参&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;关于传参&#34;&gt;关于传参&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;%0  //选中的单个文件的路径
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;%1  //选中的单个文件的路径
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;%2  //选中的单个文件的所在文件夹路径
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;%*  //选中的所有文件的所有文件路径，空格分隔
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;%V  //选中的若为快捷方式，则为目标路径，否则同%1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;%n  //选中的文件名（无扩展名）
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;%x  //选中的文件扩展名
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;%W  //工作目录
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;%0&lt;/code&gt;和&lt;code&gt;%1&lt;/code&gt;在对多个文件夹和单个文件夹选中右键时，表现均一致&lt;/p&gt;
+&lt;p&gt;笔者环境为Win11&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;command&lt;/code&gt;设置为&lt;code&gt;cmd.exe /c 1.bat %0&lt;/code&gt;时，&lt;/p&gt;
+&lt;p&gt;有趣的是，选中多个文件夹右键点击时，传参是分别传递的，例如选中了文件夹a,b两个，会调用两次command里的内容，即执行两次command，分别为&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;cmd.exe /c 1.bat a&lt;/p&gt;
+&lt;p&gt;cmd.exe /c 1.bat b&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;%*&lt;/code&gt;也是一样&lt;/p&gt;
+&lt;h2 id=&#34;示例&#34;&gt;示例&lt;/h2&gt;
+&lt;p&gt;样例：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914181852906.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240914181852906&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914182035881.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240914182035881&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914182046217.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240914182046217&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914182101568.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240914182101568&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914182135215.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240914182135215&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;效果：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914182009341.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240914182009341&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;点击后会调用指定的vbs文件，传参是&lt;code&gt; deletexxxx&lt;/code&gt; 和 &lt;code&gt;%0&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;vbs脚本内容如下&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;strpass = &amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;For each i in WScript.Arguments
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    strpass = strpass &amp;amp; &amp;#34; &amp;#34; &amp;amp; i
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Next
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#39; msgbox strpass
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Set WshShell = CreateObject(&amp;#34;WScript.Shell&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;strPythonScript = &amp;#34;D:\Users\lidm11\Code\rightMenu\fenfa.py&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;strCommand = &amp;#34;python.exe &amp;#34; &amp;amp; strPythonScript &amp;amp; &amp;#34; &amp;#34; &amp;amp; strpass
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#39; msgbox strCommand
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;WshShell.Run strCommand, 0, true
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;第一段拼接获得的参数，第二段传递给python脚本静默执行&lt;/p&gt;
+&lt;p&gt;脚本内容就根据传参灵活自定义了&lt;/p&gt;
+&lt;p&gt;存档，脱敏的导出文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Windows Registry Editor Version 5.00
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;HKEY_CLASSES_ROOT&lt;span class=&#34;se&#34;&gt;\D&lt;/span&gt;irectory&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;hell&lt;span class=&#34;se&#34;&gt;\L&lt;/span&gt;idaming.tool&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;MUIVerb&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;tools&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;SubCommands&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;HKEY_CLASSES_ROOT&lt;span class=&#34;se&#34;&gt;\D&lt;/span&gt;irectory&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;hell&lt;span class=&#34;se&#34;&gt;\L&lt;/span&gt;idaming.tool&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;hell&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;HKEY_CLASSES_ROOT&lt;span class=&#34;se&#34;&gt;\D&lt;/span&gt;irectory&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;hell&lt;span class=&#34;se&#34;&gt;\L&lt;/span&gt;idaming.tool&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;hell&lt;span class=&#34;se&#34;&gt;\L&lt;/span&gt;idaming.deleteEmptyDir&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;MUIVerb&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;递归清除空子文件夹&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;HKEY_CLASSES_ROOT&lt;span class=&#34;se&#34;&gt;\D&lt;/span&gt;irectory&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;hell&lt;span class=&#34;se&#34;&gt;\L&lt;/span&gt;idaming.tool&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;hell&lt;span class=&#34;se&#34;&gt;\L&lt;/span&gt;idaming.deleteEmptyDir&lt;span class=&#34;se&#34;&gt;\c&lt;/span&gt;ommand&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;@&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;wscript.exe D:\\fenfa.vbs deleteEmptyDir %0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;HKEY_CLASSES_ROOT&lt;span class=&#34;se&#34;&gt;\D&lt;/span&gt;irectory&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;hell&lt;span class=&#34;se&#34;&gt;\L&lt;/span&gt;idaming.tool&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;hell&lt;span class=&#34;se&#34;&gt;\L&lt;/span&gt;idaming.deleteEmptyFile&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;MUIVerb&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;递归清除空文件&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;HKEY_CLASSES_ROOT&lt;span class=&#34;se&#34;&gt;\D&lt;/span&gt;irectory&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;hell&lt;span class=&#34;se&#34;&gt;\L&lt;/span&gt;idaming.tool&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;hell&lt;span class=&#34;se&#34;&gt;\L&lt;/span&gt;idaming.deleteEmptyFile&lt;span class=&#34;se&#34;&gt;\c&lt;/span&gt;ommand&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;@&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;wscript.exe D:\\fenfa.vbs deleteEmptyFile %0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
         <title>Windows 注册表基础</title>
         <link>https://d4n-sec.github.io/p/windowsregeditbase/</link>
         <pubDate>Tue, 15 Oct 2024 20:53:41 +0800</pubDate>
@@ -99,7 +306,7 @@
 &lt;p&gt;&lt;code&gt;reg unload&lt;/code&gt;使用&lt;code&gt;reg load&lt;/code&gt;操作删除已加载的部分注册表&lt;/p&gt;
 &lt;h2 id=&#34;tips&#34;&gt;Tips&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;code&gt;HKEY_CLASSES_ROOT\.3fr\OpenWithProgids&lt;/code&gt;其实可以再命令行写作&lt;code&gt;HKCR\.3fr\OpenWithProgids&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HKEY_CLASSES_ROOT\.3fr\OpenWithProgids&lt;/code&gt;其实可以在命令行写作&lt;code&gt;HKCR\.3fr\OpenWithProgids&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
         </item>

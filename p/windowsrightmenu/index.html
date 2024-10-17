@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Windows 注册表相关学习'>
-<title>Windows 注册表基础</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='创建属于自己的右键菜单吧 ~'>
+<title>Windows 右键菜单</title>
 
-<link rel='canonical' href='https://d4n-sec.github.io/p/windowsregeditbase/'>
+<link rel='canonical' href='https://d4n-sec.github.io/p/windowsrightmenu/'>
 
-<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='Windows 注册表基础'>
-<meta property='og:description' content='Windows 注册表相关学习'>
-<meta property='og:url' content='https://d4n-sec.github.io/p/windowsregeditbase/'>
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='Windows 右键菜单'>
+<meta property='og:description' content='创建属于自己的右键菜单吧 ~'>
+<meta property='og:url' content='https://d4n-sec.github.io/p/windowsrightmenu/'>
 <meta property='og:site_name' content='Dan`s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Regedit' /><meta property='article:published_time' content='2024-10-15T20:53:41&#43;08:00'/><meta property='article:modified_time' content='2024-10-15T20:53:41&#43;08:00'/><meta property='og:image' content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241017160018161.png' />
-<meta name="twitter:title" content="Windows 注册表基础">
-<meta name="twitter:description" content="Windows 注册表相关学习"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241017160018161.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Regedit' /><meta property='article:tag' content='右键菜单' /><meta property='article:published_time' content='2024-10-17T16:09:39&#43;08:00'/><meta property='article:modified_time' content='2024-10-17T16:09:39&#43;08:00'/><meta property='og:image' content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914182009341.png' />
+<meta name="twitter:title" content="Windows 右键菜单">
+<meta name="twitter:description" content="创建属于自己的右键菜单吧 ~"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914182009341.png' />
     <link rel="shortcut icon" href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/paper-plane-64.webp" />
 
     </head>
@@ -271,12 +271,11 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#windows-注册表基础">Windows 注册表基础</a>
+    <li><a href="#windows-多级右键菜单基础">Windows 多级右键菜单基础</a>
       <ol>
-        <li><a href="#windows注册表的本质">Windows注册表的本质</a></li>
-        <li><a href="#如何打开">如何打开</a></li>
-        <li><a href="#cmd对注册表的基本操作">Cmd对注册表的基本操作</a></li>
-        <li><a href="#tips">Tips</a></li>
+        <li><a href="#修改的键与项">修改的键与项</a></li>
+        <li><a href="#关于传参">关于传参</a></li>
+        <li><a href="#示例">示例</a></li>
       </ol>
     </li>
   </ol>
@@ -293,9 +292,9 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/windowsregeditbase/">
+            <a href="/p/windowsrightmenu/">
                 
-                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241017160018161.png" loading="lazy" alt="Featured image of post Windows 注册表基础" />
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914182009341.png" loading="lazy" alt="Featured image of post Windows 右键菜单" />
                 
             </a>
         </div>
@@ -314,12 +313,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/windowsregeditbase/">Windows 注册表基础</a>
+            <a href="/p/windowsrightmenu/">Windows 右键菜单</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            Windows 注册表相关学习
+            创建属于自己的右键菜单吧 ~
         </h3>
         
     </div>
@@ -340,7 +339,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Oct 15, 2024 20:53 &#43;0800</time>
+                <time class="article-time--published">Oct 17, 2024 16:09 &#43;0800</time>
             </div>
         
 
@@ -370,95 +369,206 @@
     <section class="article-content">
     
     
-    <h1 id="windows-注册表基础">Windows 注册表基础</h1>
-<h2 id="windows注册表的本质">Windows注册表的本质</h2>
-<p>官方描述</p>
-<blockquote>
-<p>注册表是一个分层数据库，其中包含对 Windows 的操作以及 Windows 上运行的应用程序和服务至关重要的数据。 数据以树格式进行结构化。 树中的每个节点称为 <em>键</em>。 每个键可以同时包含 <em>子项</em> 和数据条目（称为 <em>值</em>）。</p>
-</blockquote>
-<p>图解</p>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914173859269.png"
+    <h1 id="windows-多级右键菜单基础">Windows 多级右键菜单基础</h1>
+<h2 id="修改的键与项">修改的键与项</h2>
+<p>Win10鼠标右键菜单管理分为三种情形：右键文件夹、文件以及右键空白区域</p>
+<ul>
+<li>右键空白区域（分为桌面空白区域和其他文件夹下空白区域）</li>
+<li>右键文件夹</li>
+<li>右键文件（分为所有文件和某类型文件两种）</li>
+</ul>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914180800214.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20240914173859269"
+		alt="image-20240914180800214"
 	
 	
 ></p>
-<p>可以补充的是项类型</p>
+<p>绝大部分情况只需要关系<code>HKEY_CLASSES_ROOT</code>即可</p>
 <blockquote>
-<p>REG_SZ：字符串：文本字符串</p>
-<p>REG_MULTI_SZ：多字符串值：含有多个文本值的字符串</p>
-<p>REG_BINARY：二进制数：二进制值，以十六进制显示，</p>
-<p>REG_DWORD：双字值；一个32位的二进制值，显示为8位的十六进制值。</p>
+<p>项：</p>
+<p><code>SubCommands</code>：如果某键需要设置为拥有子菜单，那么需要<code>SubCommands</code>，如样例图2</p>
+<p><code>MUIVerb</code>：显示的字符串</p>
+<p>键：</p>
+<p><code>shell</code>：自定义的键需要在<code>shell</code>键下</p>
+<p><code>command</code>：绑定exe，并对其传参</p>
 </blockquote>
-<h2 id="如何打开">如何打开</h2>
-<p><code>win+R</code>打开运行，输入<code>regedit</code>，回车即可打开图形化界面</p>
-<h2 id="cmd对注册表的基本操作">Cmd对注册表的基本操作</h2>
-<p><em><strong>操作前建议备份，以便恢复</strong></em></p>
-<ol>
-<li><code>reg add KeyName [/v EntryName|/ve] [/t DataType] [/s separator] [/d value] [/f]</code></li>
-</ol>
-<p><code>reg add</code>将新的子项或项添加到注册表中</p>
-<p>示例：<code>reg add &quot;HKLM\Software\Microsoft\Windows\CurrentVersion\explorer\Advanced\Folder\Hidden\SHOWALL&quot; /v Checkedvalue /t reg_dword /d 1 /f</code></p>
+<h2 id="关于传参">关于传参</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">%0  //选中的单个文件的路径
+</span></span><span class="line"><span class="cl">%1  //选中的单个文件的路径
+</span></span><span class="line"><span class="cl">%2  //选中的单个文件的所在文件夹路径
+</span></span><span class="line"><span class="cl">%*  //选中的所有文件的所有文件路径，空格分隔
+</span></span><span class="line"><span class="cl">%V  //选中的若为快捷方式，则为目标路径，否则同%1
+</span></span><span class="line"><span class="cl">%n  //选中的文件名（无扩展名）
+</span></span><span class="line"><span class="cl">%x  //选中的文件扩展名
+</span></span><span class="line"><span class="cl">%W  //工作目录
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>%0</code>和<code>%1</code>在对多个文件夹和单个文件夹选中右键时，表现均一致</p>
+<p>笔者环境为Win11</p>
+<p>在<code>command</code>设置为<code>cmd.exe /c 1.bat %0</code>时，</p>
+<p>有趣的是，选中多个文件夹右键点击时，传参是分别传递的，例如选中了文件夹a,b两个，会调用两次command里的内容，即执行两次command，分别为</p>
 <blockquote>
-<p><code>KeyName</code>：键路径</p>
-<p><code>/v</code>：指定项-名称</p>
-<p><code>/t</code>：指定项-类型</p>
-<p><code>/d</code>：指定项-值</p>
-<p><code>/f</code>：强制，无需询问</p>
+<p>cmd.exe /c 1.bat a</p>
+<p>cmd.exe /c 1.bat b</p>
 </blockquote>
-<ol start="2">
-<li><code>reg delete KeyName [{/v EntryName|/ve|/va}] [/f]</code></li>
-</ol>
-<p><code>reg delete</code>从注册表删除项或子项</p>
-<p>与<code>reg add</code>细节一致，有一些参数不同，最常用的如下</p>
-<blockquote>
-<p><code>/ve</code>：指定只可以删除为空值的项</p>
-</blockquote>
-<ol start="3">
-<li><code>reg query KeyName [{/v EntryName|/ve}] [/s]</code></li>
-</ol>
-<p><code>reg query</code>返回注册表的子项下的项和下一层子项的列表</p>
-<ol start="4">
-<li><code>reg compare KeyName1 KeyName2 [/v EntryName | /ve] {[/oa]|[/od]|[/os]|[on]} [/s]</code></li>
-</ol>
-<p><code>reg compare</code>比较指定的注册表子项或项</p>
-<ol start="5">
-<li><code>reg copy KeyName1 KeyName2 [/s] [/f]</code></li>
-</ol>
-<p><code>reg copy</code>将一个注册表项复制到本地或远程计算机的指定位置</p>
-<ol start="6">
-<li><code>reg export KeyName FileName</code></li>
-</ol>
-<p><code>reg export</code>将指定子项、项和值的副本创建到文件中，以便将其传输到其它服务器</p>
-<ol start="7">
-<li><code>reg import FileName</code></li>
-</ol>
-<p><code>reg import</code>将包含导出的注册表子项、项和值的文件复制到本地计算机的注册表中</p>
-<ol start="8">
-<li><code>reg load KeyName FileName</code></li>
-</ol>
-<p><code>reg load</code>将保存的子项和项写回到注册表的不同子项中</p>
-<ol start="9">
-<li><code>reg restore KeyName FileName</code></li>
-</ol>
-<p><code>reg restore</code>将保存的子项和项写回到注册表</p>
-<ol start="10">
-<li><code>reg save KeyName FileName</code></li>
-</ol>
-<p><code>reg save</code>将指定的子项、项和注册表值的副本保存到指定文件中。</p>
-<ol start="11">
-<li><code>reg unload KeyName</code></li>
-</ol>
-<p><code>reg unload</code>使用<code>reg load</code>操作删除已加载的部分注册表</p>
-<h2 id="tips">Tips</h2>
-<ol>
-<li><code>HKEY_CLASSES_ROOT\.3fr\OpenWithProgids</code>其实可以在命令行写作<code>HKCR\.3fr\OpenWithProgids</code></li>
-</ol>
-
+<p><code>%*</code>也是一样</p>
+<h2 id="示例">示例</h2>
+<p>样例：</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914181852906.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240914181852906"
+	
+	
+></p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914182035881.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240914182035881"
+	
+	
+></p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914182046217.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240914182046217"
+	
+	
+></p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914182101568.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240914182101568"
+	
+	
+></p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914182135215.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240914182135215"
+	
+	
+></p>
+<p>效果：</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914182009341.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240914182009341"
+	
+	
+></p>
+<p>点击后会调用指定的vbs文件，传参是<code> deletexxxx</code> 和 <code>%0</code></p>
+<p>vbs脚本内容如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">strpass = &#34;&#34;
+</span></span><span class="line"><span class="cl">For each i in WScript.Arguments
+</span></span><span class="line"><span class="cl">    strpass = strpass &amp; &#34; &#34; &amp; i
+</span></span><span class="line"><span class="cl">Next
+</span></span><span class="line"><span class="cl">&#39; msgbox strpass
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Set WshShell = CreateObject(&#34;WScript.Shell&#34;)
+</span></span><span class="line"><span class="cl">strPythonScript = &#34;D:\Users\lidm11\Code\rightMenu\fenfa.py&#34;
+</span></span><span class="line"><span class="cl">strCommand = &#34;python.exe &#34; &amp; strPythonScript &amp; &#34; &#34; &amp; strpass
+</span></span><span class="line"><span class="cl">&#39; msgbox strCommand
+</span></span><span class="line"><span class="cl">WshShell.Run strCommand, 0, true
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>第一段拼接获得的参数，第二段传递给python脚本静默执行</p>
+<p>脚本内容就根据传参灵活自定义了</p>
+<p>存档，脱敏的导出文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Windows Registry Editor Version 5.00
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>HKEY_CLASSES_ROOT<span class="se">\D</span>irectory<span class="se">\s</span>hell<span class="se">\L</span>idaming.tool<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;MUIVerb&#34;</span><span class="o">=</span><span class="s2">&#34;tools&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;SubCommands&#34;</span><span class="o">=</span><span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>HKEY_CLASSES_ROOT<span class="se">\D</span>irectory<span class="se">\s</span>hell<span class="se">\L</span>idaming.tool<span class="se">\s</span>hell<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>HKEY_CLASSES_ROOT<span class="se">\D</span>irectory<span class="se">\s</span>hell<span class="se">\L</span>idaming.tool<span class="se">\s</span>hell<span class="se">\L</span>idaming.deleteEmptyDir<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;MUIVerb&#34;</span><span class="o">=</span><span class="s2">&#34;递归清除空子文件夹&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>HKEY_CLASSES_ROOT<span class="se">\D</span>irectory<span class="se">\s</span>hell<span class="se">\L</span>idaming.tool<span class="se">\s</span>hell<span class="se">\L</span>idaming.deleteEmptyDir<span class="se">\c</span>ommand<span class="o">]</span>
+</span></span><span class="line"><span class="cl">@<span class="o">=</span><span class="s2">&#34;wscript.exe D:\\fenfa.vbs deleteEmptyDir %0&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>HKEY_CLASSES_ROOT<span class="se">\D</span>irectory<span class="se">\s</span>hell<span class="se">\L</span>idaming.tool<span class="se">\s</span>hell<span class="se">\L</span>idaming.deleteEmptyFile<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;MUIVerb&#34;</span><span class="o">=</span><span class="s2">&#34;递归清除空文件&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>HKEY_CLASSES_ROOT<span class="se">\D</span>irectory<span class="se">\s</span>hell<span class="se">\L</span>idaming.tool<span class="se">\s</span>hell<span class="se">\L</span>idaming.deleteEmptyFile<span class="se">\c</span>ommand<span class="o">]</span>
+</span></span><span class="line"><span class="cl">@<span class="o">=</span><span class="s2">&#34;wscript.exe D:\\fenfa.vbs deleteEmptyFile %0&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 
@@ -467,6 +577,8 @@
     <section class="article-tags">
         
             <a href="/tags/regedit/">Regedit</a>
+        
+            <a href="/tags/%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95/">右键菜单</a>
         
     </section>
 
@@ -500,18 +612,18 @@
             
                 
 <article class="has-image">
-    <a href="/p/windowsrightmenu/">
+    <a href="/p/windowsregeditbase/">
         
         
             <div class="article-image">
                 
-                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914182009341.png" loading="lazy" data-key="WindowsRightMenu" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914182009341.png"/>
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241017160018161.png" loading="lazy" data-key="WindowsRegeditBase" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241017160018161.png"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">Windows 右键菜单</h2>
+            <h2 class="article-title">Windows 注册表基础</h2>
         </div>
     </a>
 </article>
