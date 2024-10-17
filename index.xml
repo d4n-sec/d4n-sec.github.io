@@ -7,7 +7,103 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>DanSec</copyright>
-        <lastBuildDate>Mon, 19 Aug 2024 22:11:14 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 15 Oct 2024 20:53:41 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Windows 注册表基础</title>
+        <link>https://d4n-sec.github.io/p/windowsregeditbase/</link>
+        <pubDate>Tue, 15 Oct 2024 20:53:41 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/windowsregeditbase/</guid>
+        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241017160018161.png" alt="Featured image of post Windows 注册表基础" /&gt;&lt;h1 id=&#34;windows-注册表基础&#34;&gt;Windows 注册表基础&lt;/h1&gt;
+&lt;h2 id=&#34;windows注册表的本质&#34;&gt;Windows注册表的本质&lt;/h2&gt;
+&lt;p&gt;官方描述&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注册表是一个分层数据库，其中包含对 Windows 的操作以及 Windows 上运行的应用程序和服务至关重要的数据。 数据以树格式进行结构化。 树中的每个节点称为 &lt;em&gt;键&lt;/em&gt;。 每个键可以同时包含 &lt;em&gt;子项&lt;/em&gt; 和数据条目（称为 &lt;em&gt;值&lt;/em&gt;）。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;图解&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914173859269.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240914173859269&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可以补充的是项类型&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;REG_SZ：字符串：文本字符串&lt;/p&gt;
+&lt;p&gt;REG_MULTI_SZ：多字符串值：含有多个文本值的字符串&lt;/p&gt;
+&lt;p&gt;REG_BINARY：二进制数：二进制值，以十六进制显示，&lt;/p&gt;
+&lt;p&gt;REG_DWORD：双字值；一个32位的二进制值，显示为8位的十六进制值。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;如何打开&#34;&gt;如何打开&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;win+R&lt;/code&gt;打开运行，输入&lt;code&gt;regedit&lt;/code&gt;，回车即可打开图形化界面&lt;/p&gt;
+&lt;h2 id=&#34;cmd对注册表的基本操作&#34;&gt;Cmd对注册表的基本操作&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;操作前建议备份，以便恢复&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;reg add KeyName [/v EntryName|/ve] [/t DataType] [/s separator] [/d value] [/f]&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;reg add&lt;/code&gt;将新的子项或项添加到注册表中&lt;/p&gt;
+&lt;p&gt;示例：&lt;code&gt;reg add &amp;quot;HKLM\Software\Microsoft\Windows\CurrentVersion\explorer\Advanced\Folder\Hidden\SHOWALL&amp;quot; /v Checkedvalue /t reg_dword /d 1 /f&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;KeyName&lt;/code&gt;：键路径&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;/v&lt;/code&gt;：指定项-名称&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;/t&lt;/code&gt;：指定项-类型&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;/d&lt;/code&gt;：指定项-值&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;/f&lt;/code&gt;：强制，无需询问&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;code&gt;reg delete KeyName [{/v EntryName|/ve|/va}] [/f]&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;reg delete&lt;/code&gt;从注册表删除项或子项&lt;/p&gt;
+&lt;p&gt;与&lt;code&gt;reg add&lt;/code&gt;细节一致，有一些参数不同，最常用的如下&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;/ve&lt;/code&gt;：指定只可以删除为空值的项&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;code&gt;reg query KeyName [{/v EntryName|/ve}] [/s]&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;reg query&lt;/code&gt;返回注册表的子项下的项和下一层子项的列表&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;&lt;code&gt;reg compare KeyName1 KeyName2 [/v EntryName | /ve] {[/oa]|[/od]|[/os]|[on]} [/s]&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;reg compare&lt;/code&gt;比较指定的注册表子项或项&lt;/p&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;&lt;code&gt;reg copy KeyName1 KeyName2 [/s] [/f]&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;reg copy&lt;/code&gt;将一个注册表项复制到本地或远程计算机的指定位置&lt;/p&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;&lt;code&gt;reg export KeyName FileName&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;reg export&lt;/code&gt;将指定子项、项和值的副本创建到文件中，以便将其传输到其它服务器&lt;/p&gt;
+&lt;ol start=&#34;7&#34;&gt;
+&lt;li&gt;&lt;code&gt;reg import FileName&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;reg import&lt;/code&gt;将包含导出的注册表子项、项和值的文件复制到本地计算机的注册表中&lt;/p&gt;
+&lt;ol start=&#34;8&#34;&gt;
+&lt;li&gt;&lt;code&gt;reg load KeyName FileName&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;reg load&lt;/code&gt;将保存的子项和项写回到注册表的不同子项中&lt;/p&gt;
+&lt;ol start=&#34;9&#34;&gt;
+&lt;li&gt;&lt;code&gt;reg restore KeyName FileName&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;reg restore&lt;/code&gt;将保存的子项和项写回到注册表&lt;/p&gt;
+&lt;ol start=&#34;10&#34;&gt;
+&lt;li&gt;&lt;code&gt;reg save KeyName FileName&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;reg save&lt;/code&gt;将指定的子项、项和注册表值的副本保存到指定文件中。&lt;/p&gt;
+&lt;ol start=&#34;11&#34;&gt;
+&lt;li&gt;&lt;code&gt;reg unload KeyName&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;reg unload&lt;/code&gt;使用&lt;code&gt;reg load&lt;/code&gt;操作删除已加载的部分注册表&lt;/p&gt;
+&lt;h2 id=&#34;tips&#34;&gt;Tips&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;HKEY_CLASSES_ROOT\.3fr\OpenWithProgids&lt;/code&gt;其实可以再命令行写作&lt;code&gt;HKCR\.3fr\OpenWithProgids&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>WSL2 PHP Xdebug 调试环境，安装速记</title>
         <link>https://d4n-sec.github.io/p/devphpdebug/</link>
         <pubDate>Mon, 19 Aug 2024 22:11:14 +0800</pubDate>
