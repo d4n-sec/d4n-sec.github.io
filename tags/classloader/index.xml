@@ -7,13 +7,147 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>DanSec</copyright>
-        <lastBuildDate>Wed, 07 Aug 2024 21:46:50 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/classloader/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 06 Nov 2024 14:52:13 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/classloader/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Java动态加载字节码</title>
         <link>https://d4n-sec.github.io/p/dynamicloadclass/</link>
-        <pubDate>Wed, 07 Aug 2024 21:46:50 +0800</pubDate>
+        <pubDate>Wed, 06 Nov 2024 14:52:13 +0800</pubDate>
         
         <guid>https://d4n-sec.github.io/p/dynamicloadclass/</guid>
-        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240807214918011.png" alt="Featured image of post Java动态加载字节码" /&gt;&lt;p&gt;待补充&amp;mdash;&amp;mdash;&lt;/p&gt;
+        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240807214918011.png" alt="Featured image of post Java动态加载字节码" /&gt;&lt;p&gt;本章深入了解Java字节码相关以及动态加载Java字节码姿势&lt;/p&gt;
+&lt;h1 id=&#34;java动态加载字节码&#34;&gt;Java动态加载字节码&lt;/h1&gt;
+&lt;h2 id=&#34;java字节码&#34;&gt;Java字节码&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Java 在刚刚诞生之时曾经提出过一个非常著名的口号: “&lt;strong&gt;一次编写，到处运行（write once，run anywhere）&lt;/strong&gt;”，这句话充分表达了软件开发人员对冲破平台界限的渴求。“与平台无关”的理想最终实现在操作系统的运用层上: 虚拟机提供商开发了许多可以运行在不同平台上的虚拟机，这些虚拟机都可以载入和执行同一种平台无关的字节码，从而实现了程序的“一次编写到处运行”。&lt;/p&gt;
+&lt;p&gt;各种不同平台的虚拟机与所有平台都统一使用的程序存储格式—&lt;strong&gt;字节码（ByteCode）&lt;/strong&gt;，因此，可以看出字节码对 Java 生态的重要性。之所以被称为字节码，是因为字节码是由十六进制组成的，而 JVM（Java Virtual Machine）以两个十六进制为一组，即以字节为单位进行读取。在 Java 中使用 &lt;strong&gt;javac&lt;/strong&gt; 命令把源代码编译成字节码文件，一个 .java 源文件从编译成 .class 字节码文件的示例&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241106165423165.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241106165423165&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;由此可见，Java字节码是“与平台无关”的关键点。且要说明的是，只要能生成符合 JVM 字节码规范的文件，都可以认为是Java字节码文件，来源不一定是&lt;code&gt;.java&lt;/code&gt;文件或者&lt;code&gt;javac&lt;/code&gt;编译生成，python也可以，Golang也行。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241106165923055.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241106165923055&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;甚至，只要能够在JVM中恢复为一个类的字节序列，也可以称之为Java字节码，例如&lt;code&gt;BCEL&lt;/code&gt;码&lt;/p&gt;
+&lt;p&gt;后续非特殊情况简称字节码&lt;/p&gt;
+&lt;h2 id=&#34;java类加载器&#34;&gt;Java类加载器&lt;/h2&gt;
+&lt;h3 id=&#34;什么是java类加载器&#34;&gt;什么是Java类加载器&lt;/h3&gt;
+&lt;p&gt;定义完字节码，还需要了解一个东西，叫做类加载器 - &lt;code&gt;ClassLoader&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Java的&lt;code&gt;ClassLoader&lt;/code&gt;是根据字节码加载类的最基础的方法，负责将类的字节码加载到内存中，并将其转换为可执行的Java对象。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ClassLoader&lt;/code&gt;会告诉Java虚拟机如何加载这个类。Java默认的 &lt;code&gt;ClassLoader&lt;/code&gt;就是根据类名来加载类，这个类名是类完整路径，如&lt;code&gt;java.lang.Runtime&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在Java中，每个类都由类加载器加载，并在运行时被创建为一个Class对象。类加载器负责从文件系统、网络或其他来源中加载类的字节码，并将其转换为可执行的Java对象。类加载器还负责解析类的依赖关系，即加载所需的其他类。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;java类加载器有哪些&#34;&gt;Java类加载器有哪些&lt;/h3&gt;
+&lt;p&gt;Java虚拟机定义了三个主要的类加载器：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;启动类加载器&lt;/strong&gt;（Bootstrap Class Loader）：也称为根类加载器，它负责加载Java虚拟机的核心类库，如&lt;code&gt;java.lang.Object&lt;/code&gt;等。启动类加载器是虚拟机实现的一部分，它通常是由&lt;code&gt;C++&lt;/code&gt;等底层语言实现的，而不是Java实现。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;扩展类加载器&lt;/strong&gt;（Extension Class Loader）：它是用来加载Java扩展类库的类加载器。扩展类库包括&lt;code&gt;javax&lt;/code&gt;和&lt;code&gt;java.util&lt;/code&gt;等包，它们位于&lt;code&gt;jre/lib/ext&lt;/code&gt;目录下。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用程序类加载器&lt;/strong&gt;（Application Class Loader）：也称为系统类加载器，它负责加载应用程序的类。它会搜索应用程序的类路径（包括用户定义的类路径和系统类路径），并加载类文件。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;除了这三个主要的类加载器，Java还支持自定义类加载器，开发人员可以根据需要实现&lt;strong&gt;自己的类加载器&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;java类加载器做什么&#34;&gt;Java类加载器做什么&lt;/h3&gt;
+&lt;p&gt;类加载器的工作可以简化为三个步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;加载&lt;/strong&gt;（Loading）：根据类的全限定名（包括包路径和类名），定位并读取类文件的字节码。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;链接&lt;/strong&gt;（Linking）：将类的字节码转换为可以在虚拟机中运行的格式。&lt;/p&gt;
+&lt;p&gt;链接过程包括三个阶段：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;​		1）&lt;strong&gt;验证&lt;/strong&gt;（Verification）：验证字节码的正确性和安全性，确保它符合Java虚拟机的规范。&lt;/p&gt;
+&lt;p&gt;​		2）&lt;strong&gt;准备&lt;/strong&gt;（Preparation）：为类的静态变量分配内存，并设置默认的初始值。&lt;/p&gt;
+&lt;p&gt;​		3）&lt;strong&gt;解析&lt;/strong&gt;（Resolution）：将类的符号引用（比如方法和字段的引用）解析为直接引用（内存地址）。&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;strong&gt;初始化&lt;/strong&gt;（Initialization）：执行类的初始化代码，包括静态变量的赋值和静态块的执行。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;java类加载器怎么做&#34;&gt;Java类加载器怎么做&lt;/h3&gt;
+&lt;p&gt;Java类加载器实行的是双亲委派机制&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241106171432448.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241106171432448&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;最上方的&lt;code&gt;ClassLoad&lt;/code&gt;是&lt;strong&gt;最父类&lt;/strong&gt;的Loader，目前可以这样理解&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在图中可以明显看出来，在符合Java的推荐标准的情况下，类加载器的继承顺序是&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;User Define ClassLoader -&amp;gt; Application ClassLoader -&amp;gt; Extension ClassLoader -&amp;gt; Bootstrap ClassLoader&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;但是加载顺序却不一定，&lt;code&gt;ClassLoader&lt;/code&gt;收到加载请求时，会做大致两件事来确定加载顺序&lt;/p&gt;
+&lt;p&gt;例如：需要加载类&lt;code&gt;Boy&lt;/code&gt;时：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;ClassLoaderA&lt;/code&gt;查看自身是否已经加载过&lt;code&gt;Boy&lt;/code&gt;，如果有直接返回，如果没有，会将请求给到父类&lt;code&gt;ClassLoaderB&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;如果下一个&lt;code&gt;ClassLoaderB&lt;/code&gt;并没有加载或者返回&lt;code&gt;Boy&lt;/code&gt;类并结束了，&lt;code&gt;ClassLoaderA&lt;/code&gt;会尝试加载&lt;code&gt;Boy&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;ClassLoaderB&lt;/code&gt;会做和&lt;code&gt;ClassLoaderA&lt;/code&gt;相同的事&lt;/p&gt;
+&lt;p&gt;如果结合图来看，再给个完全的栗子：&lt;/p&gt;
+&lt;p&gt;假设类&lt;code&gt;Boy&lt;/code&gt;没有被加载过，且&lt;code&gt;Boy&lt;/code&gt;类字节码&lt;em&gt;&lt;strong&gt;被加密&lt;/strong&gt;&lt;/em&gt;，最终只能被&lt;code&gt;User Define ClassLoader&lt;/code&gt;解密加载，那么执行流会如下&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;User Define ClassLoader&lt;/code&gt; 查看自身是否已经加载过&lt;code&gt;Boy&lt;/code&gt;，由于&lt;code&gt;Boy&lt;/code&gt;没有被加载过，所以失败，请求给到父类&lt;code&gt;Application ClassLoader&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Application ClassLoader&lt;/code&gt;查看自身是否已经加载过&lt;code&gt;Boy&lt;/code&gt;，由于&lt;code&gt;Boy&lt;/code&gt;没有被加载过，所以失败，请求给到父类&lt;code&gt;Extension ClassLoader&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Extension ClassLoader&lt;/code&gt;查看自身是否已经加载过&lt;code&gt;Boy&lt;/code&gt;，由于&lt;code&gt;Boy&lt;/code&gt;没有被加载过，所以失败，请求给到父类&lt;code&gt;Bootstrap ClassLoader&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Bootstrap ClassLoader&lt;/code&gt;查看自身是否已经加载过&lt;code&gt;Boy&lt;/code&gt;，由于&lt;code&gt;Boy&lt;/code&gt;没有被加载过，所以失败，没有父类，尝试加载，加载失败，因为&lt;strong&gt;不是Java虚拟机的核心类&lt;/strong&gt;，返回&lt;/li&gt;
+&lt;li&gt;执行流回到&lt;code&gt;Extension ClassLoader&lt;/code&gt;，父类没有加载，尝试加载，加载失败，因为&lt;code&gt;Boy&lt;/code&gt;类&lt;strong&gt;不是Java扩展类&lt;/strong&gt;，返回&lt;/li&gt;
+&lt;li&gt;执行流回到&lt;code&gt;Application ClassLoader&lt;/code&gt;，父类没有加载，尝试加载，加载失败，&lt;code&gt;Boy&lt;/code&gt;类无法识别（因为是用户加密了），返回&lt;/li&gt;
+&lt;li&gt;执行流回到&lt;code&gt;User Define ClassLoader&lt;/code&gt;，父类没有加载，尝试解密并加载，&lt;strong&gt;加载成功&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;双亲委派的优劣&#34;&gt;双亲委派的优劣&lt;/h3&gt;
+&lt;h4 id=&#34;优点&#34;&gt;优点&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;因为双亲委派是向上委托加载的，所以它可以确保类只被加载一次。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;共享功能：一些framework层级的类一旦被顶层加载器加载，缓存在内存。在其他任何地方用到时，都遵守双亲加载机制，派发到顶层加载器因已经加载，所以都不需要重新加载，避免重复加载&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;避免核心类被串改：Java的核心API都是通过引导类加载器进行加载的，如果别人通过定义同样路径的类比如&lt;code&gt;java.lang.Integer&lt;/code&gt;，类加载器通过向上委托，两个Integer，那么最终被加载的应该是jdk的Integer类，而并非我们自定义的，这样就避免了我们恶意篡改核心包的风险&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;隔离功能：保证核心类库的纯净和安全，防止恶意加载。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;优点1,2是由于只会加载一次，优点3,4是因为加载优先级是从父类到子类&lt;/p&gt;
+&lt;h4 id=&#34;缺点&#34;&gt;缺点&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;双亲委派模型的典型问题是加载 SPI 实现类的场景，比如 JNDI（Java Naming and Directory Interface，Java 命名与目录接口）服务。&lt;/p&gt;
+&lt;p&gt;它的代码由启动类加载器去加载(在 JDK 1.3 时放进 rt.jar)，但 JNDI 的目的就是对资源进行集中管理和查找，它需要调用独立厂商实现部部署在应用程序的 classpath 下的 JNDI 接口提供者（SPI, Service Provider Interface）的代码，但启动类加载器不可能“认识”之些代码，这就双亲委派模型的问题，JDBC 也是同样的问题。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;自定义类加载器&#34;&gt;自定义类加载器&lt;/h2&gt;
+&lt;p&gt;——TODO——&lt;/p&gt;
+&lt;p&gt;参考链接&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/382020126&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://zhuanlan.zhihu.com/p/382020126&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/qq_21484461/article/details/131421264&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.csdn.net/qq_21484461/article/details/131421264&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/603047338&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://zhuanlan.zhihu.com/p/603047338&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://frank909.blog.csdn.net/article/details/54973413&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://frank909.blog.csdn.net/article/details/54973413&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         
