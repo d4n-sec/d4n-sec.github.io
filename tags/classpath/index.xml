@@ -7,10 +7,10 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>DanSec</copyright>
-        <lastBuildDate>Thu, 07 Nov 2024 14:40:15 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/classpath/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 Nov 2024 16:31:15 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/classpath/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Java ClassPath</title>
         <link>https://d4n-sec.github.io/p/javaclasspath/</link>
-        <pubDate>Thu, 07 Nov 2024 14:40:15 +0800</pubDate>
+        <pubDate>Thu, 07 Nov 2024 16:31:15 +0800</pubDate>
         
         <guid>https://d4n-sec.github.io/p/javaclasspath/</guid>
         <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241107144702889.png" alt="Featured image of post Java ClassPath" /&gt;&lt;p&gt;ClassPath是Java中一个重要的环境变量，弄懂他对于Java运行环境的理解有重大的帮助&lt;/p&gt;
@@ -170,7 +170,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    └── MainTestClassPath.java
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;那我们稍微修改一下&lt;code&gt;MainTest.java&lt;/code&gt;，让他处于包环境内，变成&lt;code&gt;MainTestClassPath.java&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;那我们稍微修改一下&lt;code&gt;MainTest.java&lt;/code&gt;，让他处于包环境内，变成&lt;code&gt;MainTestClassPath.java&lt;/code&gt;，只添加了&lt;code&gt;package&lt;/code&gt;关键字以及包路径&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;MainTestClassPath.java&lt;/code&gt;内容如下&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -222,8 +222,9 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;报错了，为什么？原因很清楚的告知了我们，&lt;em&gt;&lt;strong&gt;没有找到或者无法加载主类&lt;/strong&gt;&lt;/em&gt;，但是我们运行的类很简单，不应该出现类层面的问题，唯一出现的问题，就是添加了&lt;code&gt;package&lt;/code&gt;关键字。&lt;/p&gt;
-&lt;p&gt;并且没有找到类，是因为&lt;code&gt;ClassLoader&lt;/code&gt;查找失败了&lt;/p&gt;
+&lt;p&gt;没有找到类，是因为&lt;code&gt;ClassLoader&lt;/code&gt;查找失败了&lt;/p&gt;
 &lt;p&gt;这些问题是怎么形成的，暂时按下不表，至于如何修复，或者说如何正确调用呢？&lt;/p&gt;
+&lt;h2 id=&#34;解决&#34;&gt;解决&lt;/h2&gt;
 &lt;p&gt;步骤应该如下&lt;/p&gt;
 &lt;p&gt;目录结构没有变化&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -310,10 +311,11 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hello-hi
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;成功执行了，为什么，不同的点在于使用了 &lt;code&gt;-d&lt;/code&gt; 参数，&lt;code&gt;-d&lt;/code&gt;指定了生成目录，在&lt;code&gt;bin&lt;/code&gt;目录下生成，这个时候&lt;code&gt;javac&lt;/code&gt;自动创建了多级目录，按照&lt;code&gt;package&lt;/code&gt;的&lt;code&gt;.&lt;/code&gt;号作为目录划分符，将创建好的&lt;code&gt;MainTestClassPath.class&lt;/code&gt;放在了目录最深处&lt;/p&gt;
-&lt;p&gt;这个时候，使用&lt;code&gt;java&lt;/code&gt;命令，指定&lt;code&gt;classpath&lt;/code&gt;为&lt;code&gt;bin&lt;/code&gt;目录，执行&lt;code&gt;com.study.java.MainTestClassPath&lt;/code&gt;类时，&lt;code&gt;ClassLoader&lt;/code&gt;会在&lt;code&gt;bin&lt;/code&gt;目录下寻找&lt;code&gt;com.study.java.MainTestClassPath&lt;/code&gt;类，并且将&lt;code&gt;.&lt;/code&gt;作为目录分隔符，进入目录查找类，此时就找到了&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;成功执行了，为什么，不同的点在于使用了 &lt;code&gt;-d&lt;/code&gt; 参数，&lt;code&gt;-d&lt;/code&gt;指定了生成目录，在&lt;code&gt;bin&lt;/code&gt;目录下生成。&lt;/p&gt;
+&lt;p&gt;这个时候&lt;code&gt;javac&lt;/code&gt;自动创建了多级目录，按照&lt;code&gt;package&lt;/code&gt;的&lt;code&gt;.&lt;/code&gt;号作为目录划分符，将创建好的&lt;code&gt;MainTestClassPath.class&lt;/code&gt;放在了目录最深处&lt;/p&gt;
+&lt;p&gt;然后使用&lt;code&gt;java&lt;/code&gt;命令，指定&lt;code&gt;classpath&lt;/code&gt;为&lt;code&gt;bin&lt;/code&gt;目录，执行&lt;code&gt;com.study.java.MainTestClassPath&lt;/code&gt;类时，&lt;code&gt;ClassLoader&lt;/code&gt;会在&lt;code&gt;bin&lt;/code&gt;目录下寻找&lt;code&gt;com.study.java.MainTestClassPath&lt;/code&gt;类，并且将&lt;code&gt;.&lt;/code&gt;作为目录分隔符，进入目录查找类，此时就找到了&lt;/p&gt;
 &lt;p&gt;如果运行&lt;code&gt;java&lt;/code&gt;命令时，不指定&lt;code&gt;ClassPath&lt;/code&gt;参数，需要先进入&lt;code&gt;bin&lt;/code&gt;目录，再执行&lt;code&gt;java.exe com.study.java.MainTestClassPath&lt;/code&gt;，这样&lt;code&gt;java&lt;/code&gt;除了默认查找路径外（这些默认路径和项目文件无关），也会查找当前目录下有没有&lt;code&gt;com.study.java.MainTestClassPath&lt;/code&gt;类，同样将&lt;code&gt;.&lt;/code&gt;作为目录分隔符，进入目录查找类，此时也能找到&lt;/p&gt;
-&lt;p&gt;可以尝试将&lt;code&gt;MainTestClassPath.class&lt;/code&gt;拿出目录时，同样会得到&lt;code&gt;错误: 找不到或无法加载主类&lt;/code&gt;的情况&lt;/p&gt;
+&lt;p&gt;可以尝试将&lt;code&gt;MainTestClassPath.class&lt;/code&gt;拿出目录时，不管怎么执行都同样会得到&lt;code&gt;错误: 找不到或无法加载主类&lt;/code&gt;的情况，所以默认的&lt;code&gt;ClassLoader&lt;/code&gt;的查找是和路径强相关的。&lt;/p&gt;
 &lt;h1 id=&#34;classpath&#34;&gt;ClassPath&lt;/h1&gt;
 &lt;p&gt;所以ClassPath是什么？&lt;/p&gt;
 &lt;p&gt;ClassPath是一个环境变量，&lt;em&gt;&lt;strong&gt;表示JVM从哪里去寻找要运行的class文件&lt;/strong&gt;&lt;/em&gt;，ClassPath会包含默认路径与执行命令的当前目录&lt;/p&gt;
@@ -341,12 +343,35 @@
 	
 &gt;&lt;/p&gt;
 &lt;h1 id=&#34;总结&#34;&gt;总结&lt;/h1&gt;
-&lt;p&gt;在&lt;a class=&#34;link&#34; href=&#34;https://d4n-sec.github.io/p/bytecodeanndloadclass/#java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%81%9A%E4%BB%80%E4%B9%88&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;p&gt;在&lt;a class=&#34;link&#34; href=&#34;https://d4n-sec.github.io/p/classloaderloadpath/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;这篇文章&lt;/a&gt;中提到的类加载器的&lt;em&gt;&lt;strong&gt;加载&lt;/strong&gt;&lt;/em&gt;阶段，&lt;strong&gt;应用程序类加载器&lt;/strong&gt; - &lt;code&gt;Application Class Loader&lt;/code&gt;是会根据&lt;code&gt;ClassPath&lt;/code&gt;来加载类（&lt;code&gt;Bootstrap Class Loader&lt;/code&gt; 和 &lt;code&gt;Extension Class Loader&lt;/code&gt;不会），所以做此补充，并且ClassPath可以做为参数传递给JVM，使其包含除默认目录外的其他目录&lt;/p&gt;
 &lt;p&gt;所以如果你到类找不到了，好好配置一下ClassPath吧&lt;/p&gt;
+&lt;h1 id=&#34;tips&#34;&gt;Tips&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我们强烈&lt;em&gt;不推荐&lt;/em&gt;在系统环境变量中设置&lt;code&gt;classpath&lt;/code&gt;，那样会污染整个系统环境。在启动JVM时设置&lt;code&gt;classpath&lt;/code&gt;才是推荐的做法。实际上就是给&lt;code&gt;java&lt;/code&gt;命令传入&lt;code&gt;-classpath&lt;/code&gt;参数：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;java -classpath .;C:\work\project1\bin;C:\shared abc.xyz.Hello
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;或者使用&lt;code&gt;-cp&lt;/code&gt;的简写：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-plain&#34; data-lang=&#34;plain&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;java -cp .;C:\work\project1\bin;C:\shared abc.xyz.Hello
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/blockquote&gt;
 &lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://liaoxuefeng.com/books/java/oop/basic/package/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://liaoxuefeng.com/books/java/oop/basic/package/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://liaoxuefeng.com/books/java/oop/basic/classpath-jar/index.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://liaoxuefeng.com/books/java/oop/basic/classpath-jar/index.html&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         

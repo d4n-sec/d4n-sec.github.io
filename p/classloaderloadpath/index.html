@@ -249,7 +249,64 @@
     </div>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#全量输出">全量输出</a></li>
+    <li><a href="#class-loader">Class Loader</a></li>
+    <li><a href="#进阶一点">进阶一点</a>
+      <ol>
+        <li><a href="#bootstrap-class-loader">Bootstrap Class Loader</a>
+          <ol>
+            <li><a href="#-xbootclasspatha-示例">-Xbootclasspath/a 示例</a></li>
+            <li><a href="#-xbootclasspathp-示例">-Xbootclasspath/p 示例</a></li>
+            <li><a href="#tips">Tips</a></li>
+          </ol>
+        </li>
+        <li><a href="#extension-class-loader">Extension Class Loader</a>
+          <ol>
+            <li><a href="#-djavaextdirs-示例">-Djava.ext.dirs 示例</a></li>
+            <li><a href="#tips-1">Tips</a></li>
+          </ol>
+        </li>
+        <li><a href="#application-class-loader">Application Class Loader</a>
+          <ol>
+            <li><a href="#-classpath-示例">-classpath 示例</a></li>
+            <li><a href="#tips-2">Tips</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#tips-3">Tips</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="has-image main-article">
@@ -317,7 +374,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 1 分钟
+                    阅读时长: 5 分钟
                 </time>
             </div>
         
@@ -332,30 +389,454 @@
     <section class="article-content">
     
     
-    <p><a class="link" href="https://d4n-sec.github.io/p/bytecodeanndloadclass/#AppClassLoader"  target="_blank" rel="noopener"
-    >前文</a>有提到</p>
-<p>，<code>Application Class Loader</code>会搜索应用程序的类路径（包括用户定义的类路径和系统类路径）来尝试加载类</p>
-<p>，对于加载路径可能目前有些模糊，这里做一些补充</p>
+    <p><a class="link" href="https://d4n-sec.github.io/p/bytecodeanndloadclass/#java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E6%9C%89%E5%93%AA%E4%BA%9B"  target="_blank" rel="noopener"
+    >前文</a>有提到Java的默认<code>ClassLoader</code>有三种，且三种的<code>ClassLoader</code>会加载不同的Java类。</p>
+<p>他们加载的类的路径在哪？</p>
+<p>是否可以进行设置？</p>
+<p>本文做一个初步探讨</p>
+<h1 id="全量输出">全量输出</h1>
+<p>在不配置任何参数的情况下，执行<code>MainTest.java</code>查看默认路径</p>
+<p><code>MainTest.java</code>内容如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URL</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URLClassLoader</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MainTest</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;BootstrapClassLoader LoadPath: &#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">URL</span><span class="o">[]</span><span class="w"> </span><span class="n">urls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sun</span><span class="p">.</span><span class="na">misc</span><span class="p">.</span><span class="na">Launcher</span><span class="p">.</span><span class="na">getBootstrapClassPath</span><span class="p">().</span><span class="na">getURLs</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="n">URL</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">urls</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">url</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// System.out.println(System.getProperty(&#34;sun.boot.class.path&#34;)); 也可以</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;----------------------------&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//取得扩展类加载器</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">URLClassLoader</span><span class="w"> </span><span class="n">extClassLoader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">URLClassLoader</span><span class="p">)</span><span class="n">ClassLoader</span><span class="p">.</span><span class="na">getSystemClassLoader</span><span class="p">().</span><span class="na">getParent</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">extClassLoader</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;ExtClassLoader LoadPath: &#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">urls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">extClassLoader</span><span class="p">.</span><span class="na">getURLs</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="n">URL</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">urls</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">url</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="c1">// System.out.println(System.getProperty(&#34;java.ext.dirs&#34;)); 也可以</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;----------------------------&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">//取得应用(系统)类加载器</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">URLClassLoader</span><span class="w"> </span><span class="n">appClassLoader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">URLClassLoader</span><span class="p">)</span><span class="n">ClassLoader</span><span class="p">.</span><span class="na">getSystemClassLoader</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">appClassLoader</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;AppClassLoader LoadPath: &#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">urls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">appClassLoader</span><span class="p">.</span><span class="na">getURLs</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="n">URL</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">urls</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">url</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="c1">// System.out.println(System.getProperty(&#34;java.class.path&#34;)); 也可以</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;----------------------------&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用最原始的方法运行，结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">cmd<span class="p">&gt;</span>javac.exe .\MainTest.java
+</span></span><span class="line"><span class="cl"># 有一个warning，删除了，不重要，jdk version 如下
+</span></span><span class="line"><span class="cl"># java version <span class="s2">&#34;1.8.0_181&#34;</span>
+</span></span><span class="line"><span class="cl"># Java(TM) SE Runtime Environment (build 1.8.0_181-b13)
+</span></span><span class="line"><span class="cl"># Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 此时的目录结构
+</span></span><span class="line"><span class="cl"># ./
+</span></span><span class="line"><span class="cl"># ├── MainTest.class
+</span></span><span class="line"><span class="cl"># └── MainTest.java
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cmd<span class="p">&gt;</span>java.exe MainTest
+</span></span><span class="line"><span class="cl"># 全量输出如下
+</span></span><span class="line"><span class="cl">BootstrapClassLoader LoadPath:
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/resources.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/rt.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/sunrsasign.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/jsse.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/jce.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/charsets.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/jfr.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/classes
+</span></span><span class="line"><span class="cl">----------------------------
+</span></span><span class="line"><span class="cl">sun.misc.Launcher$ExtClassLoader@15db9742
+</span></span><span class="line"><span class="cl">ExtClassLoader LoadPath:
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/access-bridge-64.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/cldrdata.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/dnsns.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/jaccess.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/jfxrt.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/localedata.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/nashorn.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/sunec.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/sunjce_provider.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/sunmscapi.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/sunpkcs11.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/zipfs.jar
+</span></span><span class="line"><span class="cl">----------------------------
+</span></span><span class="line"><span class="cl">sun.misc.Launcher$AppClassLoader@73d16e93
+</span></span><span class="line"><span class="cl">AppClassLoader LoadPath:
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/Desktop/ppppppp/
+</span></span><span class="line"><span class="cl">----------------------------
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="class-loader">Class Loader</h1>
 <ol>
-<li><code>Bootstrap Class Loader</code>：加载<code>System.getProperty(&quot;sun.boot.class.path&quot;)</code>所指定的路径或jar。</li>
+<li><code>Bootstrap Class Loader</code>：加载<code>sun.boot.class.path</code>所指定的路径或jar</li>
 </ol>
-<blockquote>
-<p>在不配置的情况下，运行<code>System.out.println(System.getProperty(&quot;sun.boot.class.path&quot;));</code>查看默认路径</p>
-</blockquote>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241107102544478.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20241107102544478"
-	
-	
-></p>
-<p>或者使用最原始的方法运行</p>
+<p>默认情况下，可以看到加载的类集中在<code>jre\lib</code>目录和<code>jre\classes</code>目录下。</p>
 <ol start="2">
-<li><code>Extension Class Loader</code>：</li>
+<li><code>Extension Class Loader</code>：加载<code>java.ext.dirs</code>所指定的路径或jar。</li>
 </ol>
+<p>默认情况下，可以看到加载的类集中在<code>jre\lib\ext</code>目录下。</p>
+<ol start="3">
+<li><code>Application Class Loader</code>加载<code>java.class.path</code>并会搜索应用程序的类路径（包括用户定义的类路径和系统类路径）</li>
+</ol>
+<p>默认情况下，最简单的情况，可以看到加载的类只有<code>java</code>命令的执行目录。也就是ClassPath的默认路径，<a class="link" href="https://d4n-sec.github.io/p/javaclasspath/"  target="_blank" rel="noopener"
+    >相关知识链接</a></p>
+<h1 id="进阶一点">进阶一点</h1>
+<p>可以看到三个类加载的默认路径还是挺单一的，所以如果我们想要增加类加载器的加载路径，应该如何做呢？</p>
+<blockquote>
+<p>bootclasspath：对应 Bootstrap CLassLoader。java虚拟机系统参数<code>sun.boot.class.path</code>。
+Extensions JAR files：对应 Extention ClassLoader 。java虚拟机系统参数<code>java.ext.dirs</code>。
+classpath：对应 AppClassLoader。java虚拟机系统参数<code>java.class.path</code>。</p>
+</blockquote>
+<h2 id="bootstrap-class-loader">Bootstrap Class Loader</h2>
+<p>如果要修改或者增加<code>Bootstrap Class Loader</code>的加载路径，三个参数</p>
+<ul>
+<li><code>-Xbootclasspath</code>: 完全取代基本核心的Java class 搜索路径.不常用（慎用）,否则要重新写所有Java核心类</li>
+<li><code>-Xbootclasspath/a</code>: 后缀。在bootclasspath后面添加。常用！！</li>
+<li><code>-Xbootclasspath/p</code>: 前缀。在bootclasspath前面添加。不常用，避免引起不必要的冲突。</li>
+</ul>
+<h3 id="-xbootclasspatha-示例">-Xbootclasspath/a 示例</h3>
+<p>省略无关部分，结果如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">cmd<span class="p">&gt;</span>java.exe -Xbootclasspath/a:.\lib\ MainTest
+</span></span><span class="line"><span class="cl">BootstrapClassLoader LoadPath:
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/resources.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/rt.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/sunrsasign.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/jsse.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/jce.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/charsets.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/jfr.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/classes
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/Desktop/ppppppp/lib
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到<em><strong>最后一行</strong></em>添加了当前路径下的lib文件夹</p>
+<h3 id="-xbootclasspathp-示例">-Xbootclasspath/p 示例</h3>
+<p>省略无关部分，结果如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">cmd<span class="p">&gt;</span>java.exe -Xbootclasspath/p:.\lib\ MainTest
+</span></span><span class="line"><span class="cl">BootstrapClassLoader LoadPath:
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/Desktop/ppppppp/lib
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/resources.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/rt.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/sunrsasign.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/jsse.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/jce.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/charsets.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/jfr.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/classes
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到<em><strong>第一行</strong></em>添加了当前路径下的lib文件夹</p>
+<h3 id="tips">Tips</h3>
+<blockquote>
+<ul>
+<li>可以添加<code>.class</code>文件目录</li>
+<li>可以添加<code>.yml</code>、<code>.xml</code>、<code>.properties</code>（或其它配置文件）文件目录</li>
+<li>可以添加<code>.jar</code>文件</li>
+<li>不可以添加<code>.jar</code>文件所在目录</li>
+</ul>
+</blockquote>
+<h2 id="extension-class-loader">Extension Class Loader</h2>
+<ul>
+<li><code>java -Djava.ext.dirs=...</code>即可添加</li>
+</ul>
+<h3 id="-djavaextdirs-示例">-Djava.ext.dirs 示例</h3>
+<p>需要使用<code>System.out.println(System.getProperty(&quot;java.ext.dirs&quot;))</code>来输出，观察变化</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;ExtClassLoader LoadPath: &#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="s">&#34;java.ext.dirs&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;----------------------------&#34;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>省略无关部分，结果如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">cmd<span class="p">&gt;</span>java.exe MainTest
+</span></span><span class="line"><span class="cl"># 默认结果 C:\Windows\Sun\Java\lib\ext 不存在该目录
+</span></span><span class="line"><span class="cl">sun.misc.Launcher$ExtClassLoader@15db9742
+</span></span><span class="line"><span class="cl">ExtClassLoader LoadPath:
+</span></span><span class="line"><span class="cl">D<span class="p">:</span><span class="nl">\Program</span><span class="c1"> Files\Java\jdk1.8.0_181\jre\lib\ext;C:\Windows\Sun\Java\lib\ext</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cmd<span class="p">&gt;</span>java.exe -Djava.ext.dirs=.\test MainTest
+</span></span><span class="line"><span class="cl"># 设置后的结果，只剩下了设置目录
+</span></span><span class="line"><span class="cl">sun.misc.Launcher$ExtClassLoader@15db9742
+</span></span><span class="line"><span class="cl">ExtClassLoader LoadPath:
+</span></span><span class="line"><span class="cl">.\test
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cmd<span class="p">&gt;</span>java.exe -Djava.ext.dirs=<span class="s2">&#34;</span><span class="nv">%JAVA_HOME%</span><span class="s2">jre\lib\ext;.\target&#34;</span> MainTest
+</span></span><span class="line"><span class="cl"># 推荐设置结果，包含了默认结果中的重要部分和自定义部分
+</span></span><span class="line"><span class="cl">sun.misc.Launcher$ExtClassLoader@15db9742
+</span></span><span class="line"><span class="cl">ExtClassLoader LoadPath:
+</span></span><span class="line"><span class="cl">D<span class="p">:</span><span class="nl">\Program</span><span class="c1"> Files\Java\jdk1.8.0_181\jre\lib\ext;.\target</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对栗子的解释</p>
+<blockquote>
+<ul>
+<li><code>-Djava.ext.dirs=&quot;%JAVA_HOME%jre\lib\ext;.\target&quot;</code>加引号是因为<code>%JAVA_HOME%</code>包含空格。</li>
+<li>尽量将java自带的<code>lib\ext</code>目录带上，即<code>%JAVA_HOME%jre\lib\ext</code>。否则，在用其下.jar时，会发生错误。如果<em><strong>确定不需要</strong></em>其下.jar时，则不用加上java自带的<code>lib\ext</code>目录。</li>
+<li>缺少java自带的lib\ext目录时，<code>java.security</code>包不能使用（NoSuchAlgorithmException）。</li>
+</ul>
+</blockquote>
+<h3 id="tips-1">Tips</h3>
+<blockquote>
+<ul>
+<li>不可以添加<code>.class</code>文件目录</li>
+<li>不可以添加<code>.jar</code>文件</li>
+<li>可以添加<code>.jar</code>文件所在目录</li>
+<li>推荐将java自带的<code>lib\ext</code>目录带上</li>
+</ul>
+</blockquote>
+<h2 id="application-class-loader">Application Class Loader</h2>
+<ul>
+<li><code>java -classpath ...</code></li>
+<li><code>java -cp ...</code></li>
+</ul>
+<p>注：<code>java -cp ...</code> 是 <code>java -classpath ...</code> 的简写</p>
+<h3 id="-classpath-示例">-classpath 示例</h3>
+<p>省略无关部分，结果如下 在<a class="link" href="https://d4n-sec.github.io/p/javaclasspath/#%E8%A7%A3%E5%86%B3"  target="_blank" rel="noopener"
+    >这篇文章</a>中也有用到</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">cmd<span class="p">&gt;</span>java.exe -cp .\ttttest MainTest
+</span></span><span class="line"><span class="cl"># 因为-cp参数被覆盖，默认有当前路径 . 但是覆盖后只有 .\ttttest ，不在当前路径就找不到字节码文件，所以报错
+</span></span><span class="line"><span class="cl">错误: 找不到或无法加载主类 MainTest
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cmd<span class="p">&gt;</span>java.exe -cp .;.\ttttest MainTest
+</span></span><span class="line"><span class="cl"># 多个路径以;符号为分隔，.表示当前路径，添加后报错解除
+</span></span><span class="line"><span class="cl">sun.misc.Launcher$AppClassLoader@73d16e93
+</span></span><span class="line"><span class="cl">AppClassLoader LoadPath:
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/Desktop/ppppppp/
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/Desktop/ppppppp/ttttest
+</span></span><span class="line"><span class="cl">----------------------------
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到<em><strong>最后一行</strong></em>添加了<code>ttttest</code>文件夹</p>
+<p>如果参数为<code>.\ttttest;.</code>则结果为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">cmd<span class="p">&gt;</span>java.exe -cp .\ttttest;. MainTest
+</span></span><span class="line"><span class="cl">sun.misc.Launcher$AppClassLoader@73d16e93
+</span></span><span class="line"><span class="cl">AppClassLoader LoadPath:
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/Desktop/ppppppp/ttttest
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/Desktop/ppppppp/
+</span></span><span class="line"><span class="cl">----------------------------
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到<em><strong>第一行</strong></em>添加了<code>ttttest</code>文件夹</p>
+<h3 id="tips-2">Tips</h3>
+<blockquote>
+<ul>
+<li>
+<p>鸡粒推荐！！加入当前文件路径</p>
+</li>
+<li>
+<p>可以添加.class文件目录</p>
+</li>
+<li>
+<p>可以添加.jar文件</p>
+</li>
+<li>
+<p>不可以添加.jar文件所在目录</p>
+</li>
+<li>
+<p>可以通配符*
+<code>java -cp target\* test.Test</code> <code>target\*</code>是个特例，可以让java自动搜索其下的<code>.jar</code>文件，并加载。</p>
+</li>
+</ul>
+</blockquote>
+<h1 id="tips-3">Tips</h1>
+<ul>
+<li>自JDK 1.2以后，JVM采用了委托(delegate)模式来载入class。采用这种设计的原因可以参考： <a class="link" href="http://java.sun.com/docs/books/tutorial/ext/basics/load.html"  target="_blank" rel="noopener"
+    >http://java.sun.com/docs/books/tutorial/ext/basics/load.html</a></li>
+<li>ExtClassLoader 和 AppClassLoader在JVM启动后，会在JVM中保存一份，并且在程序运行中无法改变其搜索路径。如果想在运行时从其他搜索路径加载类，就要产生新的类加载器。</li>
+</ul>
+<h1 id="参考">参考</h1>
+<p><a class="link" href="https://blog.csdn.net/sayyy/article/details/81120749"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/sayyy/article/details/81120749</a> ！！</p>
 
 </section>
 
