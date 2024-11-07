@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Java语言中字节码的动态加载学习'>
-<title>Java动态加载字节码</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='尝试使用两个栗子理解Java自定义类加载器'>
+<title>Java自定义类加载器</title>
 
-<link rel='canonical' href='https://d4n-sec.github.io/p/dynamicloadclass/'>
+<link rel='canonical' href='https://d4n-sec.github.io/p/userdefineclassloader/'>
 
-<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='Java动态加载字节码'>
-<meta property='og:description' content='Java语言中字节码的动态加载学习'>
-<meta property='og:url' content='https://d4n-sec.github.io/p/dynamicloadclass/'>
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='Java自定义类加载器'>
+<meta property='og:description' content='尝试使用两个栗子理解Java自定义类加载器'>
+<meta property='og:url' content='https://d4n-sec.github.io/p/userdefineclassloader/'>
 <meta property='og:site_name' content='Dan`s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Classloader' /><meta property='article:published_time' content='2024-11-06T14:52:13&#43;08:00'/><meta property='article:modified_time' content='2024-11-06T14:52:13&#43;08:00'/><meta property='og:image' content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240807214918011.png' />
-<meta name="twitter:title" content="Java动态加载字节码">
-<meta name="twitter:description" content="Java语言中字节码的动态加载学习"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240807214918011.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Class loader' /><meta property='article:published_time' content='2024-11-07T14:44:34&#43;08:00'/><meta property='article:modified_time' content='2024-11-07T14:44:34&#43;08:00'/><meta property='og:image' content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241107144702889.png' />
+<meta name="twitter:title" content="Java自定义类加载器">
+<meta name="twitter:description" content="尝试使用两个栗子理解Java自定义类加载器"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241107144702889.png' />
     <link rel="shortcut icon" href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/paper-plane-64.webp" />
 
     </head>
@@ -271,26 +271,7 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#java动态加载字节码">Java动态加载字节码</a>
-      <ol>
-        <li><a href="#java字节码">Java字节码</a></li>
-        <li><a href="#java类加载器">Java类加载器</a>
-          <ol>
-            <li><a href="#什么是java类加载器">什么是Java类加载器</a></li>
-            <li><a href="#java类加载器有哪些">Java类加载器有哪些</a></li>
-            <li><a href="#java类加载器做什么">Java类加载器做什么</a></li>
-            <li><a href="#java类加载器怎么做">Java类加载器怎么做</a></li>
-            <li><a href="#双亲委派的优劣">双亲委派的优劣</a>
-              <ol>
-                <li><a href="#优点">优点</a></li>
-                <li><a href="#缺点">缺点</a></li>
-              </ol>
-            </li>
-          </ol>
-        </li>
-        <li><a href="#自定义类加载器">自定义类加载器</a></li>
-      </ol>
-    </li>
+    <li><a href="#类加载器的使用">类加载器的使用</a></li>
   </ol>
 </nav>
         </div>
@@ -305,9 +286,9 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/dynamicloadclass/">
+            <a href="/p/userdefineclassloader/">
                 
-                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240807214918011.png" loading="lazy" alt="Featured image of post Java动态加载字节码" />
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241107144702889.png" loading="lazy" alt="Featured image of post Java自定义类加载器" />
                 
             </a>
         </div>
@@ -326,12 +307,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/dynamicloadclass/">Java动态加载字节码</a>
+            <a href="/p/userdefineclassloader/">Java自定义类加载器</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            Java语言中字节码的动态加载学习
+            尝试使用两个栗子理解Java自定义类加载器
         </h3>
         
     </div>
@@ -352,7 +333,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Nov 06, 2024 14:52 &#43;0800</time>
+                <time class="article-time--published">Nov 07, 2024 14:44 &#43;0800</time>
             </div>
         
 
@@ -367,7 +348,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 6 分钟
+                    阅读时长: 1 分钟
                 </time>
             </div>
         
@@ -382,141 +363,9 @@
     <section class="article-content">
     
     
-    <p>本章深入了解Java字节码相关以及动态加载Java字节码姿势</p>
-<h1 id="java动态加载字节码">Java动态加载字节码</h1>
-<h2 id="java字节码">Java字节码</h2>
-<blockquote>
-<p>Java 在刚刚诞生之时曾经提出过一个非常著名的口号: “<strong>一次编写，到处运行（write once，run anywhere）</strong>”，这句话充分表达了软件开发人员对冲破平台界限的渴求。“与平台无关”的理想最终实现在操作系统的运用层上: 虚拟机提供商开发了许多可以运行在不同平台上的虚拟机，这些虚拟机都可以载入和执行同一种平台无关的字节码，从而实现了程序的“一次编写到处运行”。</p>
-<p>各种不同平台的虚拟机与所有平台都统一使用的程序存储格式—<strong>字节码（ByteCode）</strong>，因此，可以看出字节码对 Java 生态的重要性。之所以被称为字节码，是因为字节码是由十六进制组成的，而 JVM（Java Virtual Machine）以两个十六进制为一组，即以字节为单位进行读取。在 Java 中使用 <strong>javac</strong> 命令把源代码编译成字节码文件，一个 .java 源文件从编译成 .class 字节码文件的示例</p>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241106165423165.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20241106165423165"
-	
-	
-></p>
-</blockquote>
-<p>由此可见，Java字节码是“与平台无关”的关键点。且要说明的是，只要能生成符合 JVM 字节码规范的文件，都可以认为是Java字节码文件，来源不一定是<code>.java</code>文件或者<code>javac</code>编译生成，python也可以，Golang也行。</p>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241106165923055.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20241106165923055"
-	
-	
-></p>
-<p>甚至，只要能够在JVM中恢复为一个类的字节序列，也可以称之为Java字节码，例如<code>BCEL</code>码</p>
-<p>后续非特殊情况简称字节码</p>
-<h2 id="java类加载器">Java类加载器</h2>
-<h3 id="什么是java类加载器">什么是Java类加载器</h3>
-<p>定义完字节码，还需要了解一个东西，叫做类加载器 - <code>ClassLoader</code></p>
-<p>Java的<code>ClassLoader</code>是根据字节码加载类的最基础的方法，负责将类的字节码加载到内存中，并将其转换为可执行的Java对象。</p>
-<p><code>ClassLoader</code>会告诉Java虚拟机如何加载这个类。Java默认的 <code>ClassLoader</code>就是根据类名来加载类，这个类名是类完整路径，如<code>java.lang.Runtime</code></p>
-<blockquote>
-<p>在Java中，每个类都由类加载器加载，并在运行时被创建为一个Class对象。类加载器负责从文件系统、网络或其他来源中加载类的字节码，并将其转换为可执行的Java对象。类加载器还负责解析类的依赖关系，即加载所需的其他类。</p>
-</blockquote>
-<h3 id="java类加载器有哪些">Java类加载器有哪些</h3>
-<p>Java虚拟机定义了三个主要的类加载器：</p>
-<ol>
-<li><strong>启动类加载器</strong>（Bootstrap Class Loader）：也称为根类加载器，它负责加载Java虚拟机的核心类库，如<code>java.lang.Object</code>等。启动类加载器是虚拟机实现的一部分，它通常是由<code>C++</code>等底层语言实现的，而不是Java实现。</li>
-<li><strong>扩展类加载器</strong>（Extension Class Loader）：它是用来加载Java扩展类库的类加载器。扩展类库包括<code>javax</code>和<code>java.util</code>等包，它们位于<code>jre/lib/ext</code>目录下。</li>
-<li><strong>应用程序类加载器</strong>（Application Class Loader）：也称为系统类加载器，它负责加载应用程序的类。它会搜索应用程序的类路径（包括用户定义的类路径和系统类路径），并加载类文件。</li>
-</ol>
-<p>除了这三个主要的类加载器，Java还支持自定义类加载器，开发人员可以根据需要实现<strong>自己的类加载器</strong>。</p>
-<h3 id="java类加载器做什么">Java类加载器做什么</h3>
-<p>类加载器的工作可以简化为三个步骤：</p>
-<ol>
-<li>
-<p><strong>加载</strong>（Loading）：根据类的全限定名（包括包路径和类名），定位并读取类文件的字节码。</p>
-</li>
-<li>
-<p><strong>链接</strong>（Linking）：将类的字节码转换为可以在虚拟机中运行的格式。</p>
-<p>链接过程包括三个阶段：</p>
-</li>
-</ol>
-<p>​		1）<strong>验证</strong>（Verification）：验证字节码的正确性和安全性，确保它符合Java虚拟机的规范。</p>
-<p>​		2）<strong>准备</strong>（Preparation）：为类的静态变量分配内存，并设置默认的初始值。</p>
-<p>​		3）<strong>解析</strong>（Resolution）：将类的符号引用（比如方法和字段的引用）解析为直接引用（内存地址）。</p>
-<ol start="3">
-<li><strong>初始化</strong>（Initialization）：执行类的初始化代码，包括静态变量的赋值和静态块的执行。</li>
-</ol>
-<h3 id="java类加载器怎么做">Java类加载器怎么做</h3>
-<p>Java类加载器实行的是双亲委派机制</p>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241106171432448.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image-20241106171432448"
-	
-	
-></p>
-<blockquote>
-<p>最上方的<code>ClassLoad</code>是<strong>最父类</strong>的Loader，目前可以这样理解</p>
-</blockquote>
-<p>在图中可以明显看出来，在符合Java的推荐标准的情况下，类加载器的继承顺序是</p>
-<blockquote>
-<p>User Define ClassLoader -&gt; Application ClassLoader -&gt; Extension ClassLoader -&gt; Bootstrap ClassLoader</p>
-</blockquote>
-<p>但是加载顺序却不一定，<code>ClassLoader</code>收到加载请求时，会做大致两件事来确定加载顺序</p>
-<p>例如：需要加载类<code>Boy</code>时：</p>
-<ol>
-<li><code>ClassLoaderA</code>查看自身是否已经加载过<code>Boy</code>，如果有直接返回，如果没有，会将请求给到父类<code>ClassLoaderB</code></li>
-<li>如果下一个<code>ClassLoaderB</code>并没有加载或者返回<code>Boy</code>类并结束了，<code>ClassLoaderA</code>会尝试加载<code>Boy</code></li>
-</ol>
-<p><code>ClassLoaderB</code>会做和<code>ClassLoaderA</code>相同的事</p>
-<p>如果结合图来看，再给个完全的栗子：</p>
-<p>假设类<code>Boy</code>没有被加载过，且<code>Boy</code>类字节码<em><strong>被加密</strong></em>，最终只能被<code>User Define ClassLoader</code>解密加载，那么执行流会如下</p>
-<blockquote>
-<ol>
-<li><code>User Define ClassLoader</code> 查看自身是否已经加载过<code>Boy</code>，由于<code>Boy</code>没有被加载过，所以失败，请求给到父类<code>Application ClassLoader</code></li>
-<li><code>Application ClassLoader</code>查看自身是否已经加载过<code>Boy</code>，由于<code>Boy</code>没有被加载过，所以失败，请求给到父类<code>Extension ClassLoader</code></li>
-<li><code>Extension ClassLoader</code>查看自身是否已经加载过<code>Boy</code>，由于<code>Boy</code>没有被加载过，所以失败，请求给到父类<code>Bootstrap ClassLoader</code></li>
-<li><code>Bootstrap ClassLoader</code>查看自身是否已经加载过<code>Boy</code>，由于<code>Boy</code>没有被加载过，所以失败，没有父类，尝试加载，加载失败，因为<strong>不是Java虚拟机的核心类</strong>，返回</li>
-<li>执行流回到<code>Extension ClassLoader</code>，父类没有加载，尝试加载，加载失败，因为<code>Boy</code>类<strong>不是Java扩展类</strong>，返回</li>
-<li>执行流回到<code>Application ClassLoader</code>，父类没有加载，尝试加载，加载失败，<code>Boy</code>类无法识别（因为是用户加密了），返回</li>
-<li>执行流回到<code>User Define ClassLoader</code>，父类没有加载，尝试解密并加载，<strong>加载成功</strong></li>
-</ol>
-</blockquote>
-<h3 id="双亲委派的优劣">双亲委派的优劣</h3>
-<h4 id="优点">优点</h4>
-<ol>
-<li>
-<p>因为双亲委派是向上委托加载的，所以它可以确保类只被加载一次。</p>
-</li>
-<li>
-<p>共享功能：一些framework层级的类一旦被顶层加载器加载，缓存在内存。在其他任何地方用到时，都遵守双亲加载机制，派发到顶层加载器因已经加载，所以都不需要重新加载，避免重复加载</p>
-</li>
-<li>
-<p>避免核心类被串改：Java的核心API都是通过引导类加载器进行加载的，如果别人通过定义同样路径的类比如<code>java.lang.Integer</code>，类加载器通过向上委托，两个Integer，那么最终被加载的应该是jdk的Integer类，而并非我们自定义的，这样就避免了我们恶意篡改核心包的风险</p>
-</li>
-<li>
-<p>隔离功能：保证核心类库的纯净和安全，防止恶意加载。</p>
-</li>
-</ol>
-<p>优点1,2是由于只会加载一次，优点3,4是因为加载优先级是从父类到子类</p>
-<h4 id="缺点">缺点</h4>
-<blockquote>
-<p>双亲委派模型的典型问题是加载 SPI 实现类的场景，比如 JNDI（Java Naming and Directory Interface，Java 命名与目录接口）服务。</p>
-<p>它的代码由启动类加载器去加载(在 JDK 1.3 时放进 rt.jar)，但 JNDI 的目的就是对资源进行集中管理和查找，它需要调用独立厂商实现部部署在应用程序的 classpath 下的 JNDI 接口提供者（SPI, Service Provider Interface）的代码，但启动类加载器不可能“认识”之些代码，这就双亲委派模型的问题，JDBC 也是同样的问题。</p>
-</blockquote>
-<h2 id="自定义类加载器">自定义类加载器</h2>
-<p>——TODO——</p>
-<p>参考链接</p>
-<p><a class="link" href="https://zhuanlan.zhihu.com/p/382020126"  target="_blank" rel="noopener"
-    >https://zhuanlan.zhihu.com/p/382020126</a></p>
-<p><a class="link" href="https://blog.csdn.net/qq_21484461/article/details/131421264"  target="_blank" rel="noopener"
-    >https://blog.csdn.net/qq_21484461/article/details/131421264</a></p>
-<p><a class="link" href="https://zhuanlan.zhihu.com/p/603047338"  target="_blank" rel="noopener"
-    >https://zhuanlan.zhihu.com/p/603047338</a></p>
-<p><a class="link" href="https://frank909.blog.csdn.net/article/details/54973413"  target="_blank" rel="noopener"
-    >https://frank909.blog.csdn.net/article/details/54973413</a></p>
+    <h1 id="类加载器的使用">类加载器的使用</h1>
+<p>不管是Bootstrap ClassLoader还是ExtClassLoader等，这些类加载器都只是加载指定的目录下的jar包或者资源。如果在某种情况下，我们需要动态加载一些东西呢？比如从D盘某个文件夹加载一个class文件，或者从网络上下载class主内容然后再进行加载，这样可以吗？</p>
+<p><a class="link" href="#DefineClassLoader" >上文</a>提到可以自定义类加载器，我们使用一个栗子来尝试理解自定义类加载器的用途（实现上方<code>Boy</code>类加密解密加载）</p>
 
 </section>
 
@@ -525,7 +374,7 @@
     
     <section class="article-tags">
         
-            <a href="/tags/classloader/">Classloader</a>
+            <a href="/tags/class-loader/">Class Loader</a>
         
     </section>
 
@@ -556,6 +405,44 @@
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/bytecodeanndloadclass/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240807214918011.png" loading="lazy" data-key="ByteCodeAnNDLoadClass" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240807214918011.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Java字节码与类加载器</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/javaclasspath/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241107144702889.png" loading="lazy" data-key="JavaClassPath" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241107144702889.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Java ClassPath</h2>
+        </div>
+    </a>
+</article>
+
             
                 
 <article class="has-image">
@@ -609,44 +496,6 @@
 
         <div class="article-details">
             <h2 class="article-title">Java代理模式</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/designmode/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240805210553120.png" loading="lazy" data-key="DesignMode" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240805210553120.png"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">程序的设计模式</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/cc1demo/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240721160313033.png" loading="lazy" data-key="" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240721160313033.png"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">CC1Demo</h2>
         </div>
     </a>
 </article>
