@@ -249,7 +249,48 @@
     </div>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#classpath是什么">ClassPath是什么</a></li>
+    <li><a href="#体验package">体验package</a></li>
+    <li><a href="#体验classpath">体验ClassPath</a></li>
+    <li><a href="#classpath">ClassPath</a>
+      <ol>
+        <li><a href="#idea报错">IDEA报错</a></li>
+        <li><a href="#idea正常">IDEA正常</a></li>
+      </ol>
+    </li>
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="has-image main-article">
@@ -317,7 +358,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 1 分钟
+                    阅读时长: 5 分钟
                 </time>
             </div>
         
@@ -332,28 +373,340 @@
     <section class="article-content">
     
     
-    <h1 id="classpath">ClassPath</h1>
-<p><a class="link" href="#AppClassLoader" >上文</a>有提到，<code>Application Class Loader</code>会搜索应用程序的类路径（包括用户定义的类路径和系统类路径）来尝试加载类，对于加载路径可能目前有些模糊，这里做一些补充</p>
-<ol>
-<li><code>Bootstrap Class Loader</code>：加载<code>System.getProperty(&quot;sun.boot.class.path&quot;)</code>所指定的路径或jar。</li>
-</ol>
-<blockquote>
-<p>在不配置的情况下，运行<code>System.out.println(System.getProperty(&quot;sun.boot.class.path&quot;));</code>查看默认路径</p>
-</blockquote>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241107102544478.png"
+    <p>ClassPath是Java中一个重要的环境变量，弄懂他对于Java运行环境的理解有重大的帮助</p>
+<h1 id="classpath是什么">ClassPath是什么</h1>
+<p>CLASSPATH直译过来是类路径，是Java环境配置中要设置的一个环境变量，就是.class文件的路径，<em><strong>表示JVM从哪里去寻找要运行的class文件</strong></em>，<code>CLASSPATH = D:\java</code>表示执行java命令时去<code>D:\java</code>目录中去找需要被执行的class文件并运行。</p>
+<h1 id="体验package">体验package</h1>
+<p>先来体验一个正常的Java项目，目录结构如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./
+</span></span><span class="line"><span class="cl">└── com
+</span></span><span class="line"><span class="cl">    └── study
+</span></span><span class="line"><span class="cl">        ├── java
+</span></span><span class="line"><span class="cl">        │   ├── MainTest.java
+</span></span><span class="line"><span class="cl">        └── school
+</span></span><span class="line"><span class="cl">            └── Student.java
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>Student.java</code>内容如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nn">com.study.school</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Student</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">study</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;I&#39;m studying...&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>MainTest.java</code>内容如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nn">com.study.java</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">com.study.school.Student</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MainTest</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Student</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Student</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">s</span><span class="p">.</span><span class="na">study</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行<code>MainTest.java</code>中的<code>main()</code>，可以得到</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241107152808239.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20241107102544478"
+		alt="image-20241107152808239"
 	
 	
 ></p>
-<p>或者使用最原始的方法运行</p>
-<ol start="2">
-<li><code>Extension Class Loader</code>：</li>
-</ol>
+<p>正常调用</p>
+<p>可以看到，两个Java类处于不同的目录，也能正常调用，前提是<code>MainTest.java</code>识别到了<code>Student.java</code>的包路径，准确<code>import</code>了<code>com.study.school.Student</code>，这个包路径是<code>package</code>定义的！</p>
+<h1 id="体验classpath">体验ClassPath</h1>
+<p>首先我们整个目录结构如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./
+</span></span><span class="line"><span class="cl">├── MainTest.java
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们先关注<code>MainTest.java</code>，看看他的内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MainTest</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;hello-hi&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>很简单，只是一句输出，那么我们先执行<code>javac</code>命令，将他编译为字节码文件，再使用<code>java</code>命令去执行他</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">C<span class="p">:</span><span class="nl">\Users\Dan\Desktop\pppppp</span><span class="c1">&gt;&#34;D:\Program Files\Java\jdk1.8.0_181\bin\javac.exe&#34; MainTest.java</span>
+</span></span><span class="line"><span class="cl"># 此时产生了 MainTest.class 在 MainTest.java 同级路径下，如下，
+</span></span><span class="line"><span class="cl"># ./
+</span></span><span class="line"><span class="cl"># ├── MainTest.class # 默认和.java文件同路径
+</span></span><span class="line"><span class="cl"># ├── MainTest.java  # 源.java文件
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">C<span class="p">:</span><span class="nl">\Users\Dan\Desktop\pppppp</span><span class="c1">&gt;&#34;D:\Program Files\Java\jdk1.8.0_181\bin\java.exe&#34; MainTest</span>
+</span></span><span class="line"><span class="cl">hello-hi
+</span></span><span class="line"><span class="cl"># 符合预期
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>目前为止所有的输出都符合预期。</p>
+<p>但同时我们也理解，一个大型的，或者可拓展性强的Java项目，是按照模块化思维来进行开发的，所以不同的功能会交给不同的包来执行，Java提供了<code>package</code>关键字来做到这点。正如<a class="link" href="#%e4%bd%93%e9%aa%8cpackage" >上面</a>的案例一样</p>
+<p>为了模拟项目环境，我们需要修改目录结构以及<code>.java</code>的内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./
+</span></span><span class="line"><span class="cl">├── MainTest.java
+</span></span><span class="line"><span class="cl">├── bin
+</span></span><span class="line"><span class="cl">└── src
+</span></span><span class="line"><span class="cl">    └── MainTestClassPath.java
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>那我们稍微修改一下<code>MainTest.java</code>，让他处于包环境内，变成<code>MainTestClassPath.java</code></p>
+<p><code>MainTestClassPath.java</code>内容如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nn">com.study.java</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MainTestClassPath</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;hello-hi&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>此时我们再执行<code>javac</code>命令，将他编译为字节码文件，再使用<code>java</code>命令去执行他</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">C<span class="p">:</span><span class="nl">\Users\Dan\Desktop\pppppp</span><span class="c1">&gt;javac.exe .\src\MainTestClassPath.java</span>
+</span></span><span class="line"><span class="cl"># 此时产生了 MainTestClassPath.class 在 MainTestClassPatht.java 同级路径下，如下是当前的目录结构，
+</span></span><span class="line"><span class="cl"># ./
+</span></span><span class="line"><span class="cl"># ├── MainTest.java
+</span></span><span class="line"><span class="cl"># ├── bin
+</span></span><span class="line"><span class="cl"># └── src
+</span></span><span class="line"><span class="cl">#     ├── MainTestClassPath.class
+</span></span><span class="line"><span class="cl">#     └── MainTestClassPath.java
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">C<span class="p">:</span><span class="nl">\Users\Dan\Desktop\pppppp</span><span class="c1">&gt;java.exe .\src\MainTestClassPath</span>
+</span></span><span class="line"><span class="cl">错误: 找不到或无法加载主类 C:\Users\Dan\Desktop\pppppp\src\MainTestClassPath
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>报错了，为什么？原因很清楚的告知了我们，<em><strong>没有找到或者无法加载主类</strong></em>，但是我们运行的类很简单，不应该出现类层面的问题，唯一出现的问题，就是添加了<code>package</code>关键字。</p>
+<p>并且没有找到类，是因为<code>ClassLoader</code>查找失败了</p>
+<p>这些问题是怎么形成的，暂时按下不表，至于如何修复，或者说如何正确调用呢？</p>
+<p>步骤应该如下</p>
+<p>目录结构没有变化</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./
+</span></span><span class="line"><span class="cl">├── bin
+</span></span><span class="line"><span class="cl">└── src
+</span></span><span class="line"><span class="cl">    └── MainTestClassPath.java
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>MainTestClassPath.java</code>内容也不变</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nn">com.study.java</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MainTestClassPath</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;hello-hi&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>执行如下命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">C<span class="p">:</span><span class="nl">\Users\Dan\Desktop\pppppp</span><span class="c1">&gt;javac.exe .\src\MainTestClassPath.java -d bin</span>
+</span></span><span class="line"><span class="cl"># 执行完此命令后，目录结构如下
+</span></span><span class="line"><span class="cl"># ./
+</span></span><span class="line"><span class="cl"># ├── MainTest.java
+</span></span><span class="line"><span class="cl"># ├── bin
+</span></span><span class="line"><span class="cl"># │   └── com
+</span></span><span class="line"><span class="cl"># │       └── study
+</span></span><span class="line"><span class="cl"># │           └── java
+</span></span><span class="line"><span class="cl"># │               └── MainTestClassPath.class
+</span></span><span class="line"><span class="cl"># └── src
+</span></span><span class="line"><span class="cl">#     └── MainTestClassPath.java
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">C<span class="p">:</span><span class="nl">\Users\Dan\Desktop\pppppp</span><span class="c1">&gt;java.exe -classpath bin com.study.java.MainTestClassPath</span>
+</span></span><span class="line"><span class="cl"># 成功
+</span></span><span class="line"><span class="cl">hello-hi
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 也可以
+</span></span><span class="line"><span class="cl">C<span class="p">:</span><span class="nl">\Users\Dan\Desktop\pppppp</span><span class="c1">&gt;cd bin</span>
+</span></span><span class="line"><span class="cl">C<span class="p">:</span><span class="nl">\Users\Dan\Desktop\pppppp\bin</span><span class="c1">&gt;java.exe com.study.java.MainTestClassPath</span>
+</span></span><span class="line"><span class="cl">#成功
+</span></span><span class="line"><span class="cl">hello-hi
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>成功执行了，为什么，不同的点在于使用了 <code>-d</code> 参数，<code>-d</code>指定了生成目录，在<code>bin</code>目录下生成，这个时候<code>javac</code>自动创建了多级目录，按照<code>package</code>的<code>.</code>号作为目录划分符，将创建好的<code>MainTestClassPath.class</code>放在了目录最深处</p>
+<p>这个时候，使用<code>java</code>命令，指定<code>classpath</code>为<code>bin</code>目录，执行<code>com.study.java.MainTestClassPath</code>类时，<code>ClassLoader</code>会在<code>bin</code>目录下寻找<code>com.study.java.MainTestClassPath</code>类，并且将<code>.</code>作为目录分隔符，进入目录查找类，此时就找到了</p>
+<p>如果运行<code>java</code>命令时，不指定<code>ClassPath</code>参数，需要先进入<code>bin</code>目录，再执行<code>java.exe com.study.java.MainTestClassPath</code>，这样<code>java</code>除了默认查找路径外（这些默认路径和项目文件无关），也会查找当前目录下有没有<code>com.study.java.MainTestClassPath</code>类，同样将<code>.</code>作为目录分隔符，进入目录查找类，此时也能找到</p>
+<p>可以尝试将<code>MainTestClassPath.class</code>拿出目录时，同样会得到<code>错误: 找不到或无法加载主类</code>的情况</p>
+<h1 id="classpath">ClassPath</h1>
+<p>所以ClassPath是什么？</p>
+<p>ClassPath是一个环境变量，<em><strong>表示JVM从哪里去寻找要运行的class文件</strong></em>，ClassPath会包含默认路径与执行命令的当前目录</p>
+<p>根据<code>javac</code>的生成可以得知，<code>package</code>关键字会将包路径中的<code>.</code>号作为目录分隔符。这样就解释了为什么IDEA中，源码路径也需要保持和<code>package</code>声明保持一致的原因，为了尽量和生成路径一致</p>
+<h2 id="idea报错">IDEA报错</h2>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241107161558231.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241107161558231"
+	
+	
+></p>
+<h2 id="idea正常">IDEA正常</h2>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241107161638350.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241107161638350"
+	
+	
+></p>
+<h1 id="总结">总结</h1>
+<p>在<a class="link" href="https://d4n-sec.github.io/p/bytecodeanndloadclass/#java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%81%9A%E4%BB%80%E4%B9%88"  target="_blank" rel="noopener"
+    >这篇文章</a>中提到的类加载器的<em><strong>加载</strong></em>阶段，<strong>应用程序类加载器</strong> - <code>Application Class Loader</code>是会根据<code>ClassPath</code>来加载类（<code>Bootstrap Class Loader</code> 和 <code>Extension Class Loader</code>不会），所以做此补充，并且ClassPath可以做为参数传递给JVM，使其包含除默认目录外的其他目录</p>
+<p>所以如果你到类找不到了，好好配置一下ClassPath吧</p>
+<h1 id="参考">参考</h1>
+<p><a class="link" href="https://liaoxuefeng.com/books/java/oop/basic/package/"  target="_blank" rel="noopener"
+    >https://liaoxuefeng.com/books/java/oop/basic/package/</a></p>
 
 </section>
 
@@ -393,6 +746,25 @@
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/classloaderloadpath/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241107162525270.png" loading="lazy" data-key="ClassLoaderLoadPath" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241107162525270.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Java默认类加载器的加载路径</h2>
+        </div>
+    </a>
+</article>
+
             
                 
 <article class="has-image">
@@ -465,25 +837,6 @@
 
         <div class="article-details">
             <h2 class="article-title">经典CC1链构造</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/javaproxystudy/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240728010634169.png" loading="lazy" data-key="JavaProxyStudy" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240728010634169.png"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Java代理模式</h2>
         </div>
     </a>
 </article>
