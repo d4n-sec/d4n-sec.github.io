@@ -7,7 +7,180 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>DanSec</copyright>
-        <lastBuildDate>Fri, 08 Nov 2024 17:06:57 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 08 Nov 2024 17:13:30 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>编译原理-语法分析</title>
+        <link>https://d4n-sec.github.io/p/grammaranalysis/</link>
+        <pubDate>Fri, 08 Nov 2024 17:13:30 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/grammaranalysis/</guid>
+        <description>&lt;h1 id=&#34;语法分析&#34;&gt;语法分析&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;任务
+&lt;ul&gt;
+&lt;li&gt;在&lt;a class=&#34;link&#34; href=&#34;https://d4n-sec.github.io/p/lexicalanalysis/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;词法分析&lt;/a&gt;的基础上，根据语言的&lt;a class=&#34;link&#34; href=&#34;#grammarRules&#34; &gt;&lt;em&gt;&lt;strong&gt;语法规则&lt;/strong&gt;&lt;/em&gt;&lt;/a&gt;，把单词符号组成的各类&lt;a class=&#34;link&#34; href=&#34;#grammarUnits&#34; &gt;语法单位&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;span id=&#34;grammarRules&#34;&gt;语法规则&lt;/span&gt;
+&lt;ul&gt;
+&lt;li&gt;语言的规则，又称为文法：规定单词如何构成&lt;a class=&#34;link&#34; href=&#34;#grammarUnits&#34; &gt;语法单位&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;span id=&#34;grammarUnits&#34;&gt;语法单位&lt;/span&gt;
+&lt;ul&gt;
+&lt;li&gt;语法单位包括：短语、子句、语句、过程、程序&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;语法规则如何表示&#34;&gt;语法规则如何表示&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;BNF（巴科斯范式）：&lt;code&gt;A::=B|C&lt;/code&gt; -&amp;gt; 表示A定义为B或C&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;语法分析的方法&#34;&gt;语法分析的方法&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;推导（Derive）和归约（Reduce）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;推导&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;最左推导、最右推导
+&lt;ul&gt;
+&lt;li&gt;最&lt;em&gt;&lt;strong&gt;右&lt;/strong&gt;&lt;/em&gt;推导：每次推导都把最&lt;em&gt;&lt;strong&gt;右&lt;/strong&gt;&lt;/em&gt;方的&lt;strong&gt;字母&lt;/strong&gt;按照规则&lt;strong&gt;转化为标识符或者常量&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;归约（推导的逆过程）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;最右归约、最左归约
+&lt;ul&gt;
+&lt;li&gt;最&lt;em&gt;&lt;strong&gt;左&lt;/strong&gt;&lt;/em&gt;归约：每次归约都把最&lt;em&gt;&lt;strong&gt;左&lt;/strong&gt;&lt;/em&gt;方的&lt;strong&gt;标识符或者常量&lt;/strong&gt;按照规则转化为&lt;strong&gt;字母&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;两个栗子&#34;&gt;两个栗子&lt;/h2&gt;
+&lt;h3 id=&#34;语法规则&#34;&gt;语法规则&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 定义&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;V::&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;标识符
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;C::&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;常数
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 规则&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;A::&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;V&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;E
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;E::&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;T&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;E+T
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;T::&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;F&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;T*F
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;F::&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;V&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;E&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;例子一&#34;&gt;例子一&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;下图中，箭头方向是最左推导，箭头反方向最右归约&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241108181103905.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241108181103905&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;例子二&#34;&gt;例子二&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;下图中，箭头方向是最右推导，箭头反方向最左归约&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241108181310685.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241108181310685&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h1 id=&#34;语法分析过程&#34;&gt;语法分析过程&lt;/h1&gt;
+&lt;p&gt;语法分析过程也可以用一颗倒着的树来表示，这棵树叫语法树，如下&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241108181746919.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241108181746919&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;解析过程思维导图&#34;&gt;解析过程思维导图&lt;/h2&gt;
+&lt;p&gt;仅做理解使用&lt;/p&gt;
+&lt;h3 id=&#34;语法规则-1&#34;&gt;语法规则&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 定义&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;V::&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;标识符
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;C::&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;常数
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 规则&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;A::&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;V&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;E
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;E::&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;T&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;E+T
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;T::&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;F&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;T*F
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;F::&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;V&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;E&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;赋值语句&#34;&gt;赋值语句&lt;/h3&gt;
+&lt;p&gt;例如&lt;code&gt;var a=b*10&lt;/code&gt;，可以按照语法规则解析时，思维流程图为：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241108175418382.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241108175418382&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;语法规则会递归解析，直到变成最开始的定义&lt;/p&gt;
+&lt;p&gt;步骤为：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;原式子&lt;/li&gt;
+&lt;li&gt;处理原式子的规则&lt;/li&gt;
+&lt;li&gt;处理后的子式子&lt;/li&gt;
+&lt;li&gt;按照刚才处理的规则，子式子对应的所属&lt;/li&gt;
+&lt;li&gt;查看所属是否可以对应为&lt;em&gt;&lt;strong&gt;定义&lt;/strong&gt;&lt;/em&gt;或者&lt;em&gt;&lt;strong&gt;匹配下一个规则&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;确定结束或者用下一个规则处理&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如此循环，直到所有式子处理结束&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>编译原理-词法分析</title>
         <link>https://d4n-sec.github.io/p/lexicalanalysis/</link>
         <pubDate>Fri, 08 Nov 2024 17:06:57 +0800</pubDate>

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='编译原理 词法分析章'>
-<title>编译原理-词法分析</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='编译原理 语法分析章'>
+<title>编译原理-语法分析</title>
 
-<link rel='canonical' href='https://d4n-sec.github.io/p/lexicalanalysis/'>
+<link rel='canonical' href='https://d4n-sec.github.io/p/grammaranalysis/'>
 
-<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='编译原理-词法分析'>
-<meta property='og:description' content='编译原理 词法分析章'>
-<meta property='og:url' content='https://d4n-sec.github.io/p/lexicalanalysis/'>
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='编译原理-语法分析'>
+<meta property='og:description' content='编译原理 语法分析章'>
+<meta property='og:url' content='https://d4n-sec.github.io/p/grammaranalysis/'>
 <meta property='og:site_name' content='Dan`s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='编译原理' /><meta property='article:published_time' content='2024-11-08T17:06:57&#43;08:00'/><meta property='article:modified_time' content='2024-11-08T17:06:57&#43;08:00'/>
-<meta name="twitter:title" content="编译原理-词法分析">
-<meta name="twitter:description" content="编译原理 词法分析章">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='编译原理' /><meta property='article:published_time' content='2024-11-08T17:13:30&#43;08:00'/><meta property='article:modified_time' content='2024-11-08T17:13:30&#43;08:00'/>
+<meta name="twitter:title" content="编译原理-语法分析">
+<meta name="twitter:description" content="编译原理 语法分析章">
     <link rel="shortcut icon" href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/paper-plane-64.webp" />
 
     </head>
@@ -270,7 +270,29 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#词法分析">词法分析</a></li>
+    <li><a href="#语法分析">语法分析</a></li>
+    <li><a href="#语法规则如何表示">语法规则如何表示</a></li>
+    <li><a href="#语法分析的方法">语法分析的方法</a>
+      <ol>
+        <li><a href="#两个栗子">两个栗子</a>
+          <ol>
+            <li><a href="#语法规则">语法规则</a></li>
+            <li><a href="#例子一">例子一</a></li>
+            <li><a href="#例子二">例子二</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#语法分析过程">语法分析过程</a>
+      <ol>
+        <li><a href="#解析过程思维导图">解析过程思维导图</a>
+          <ol>
+            <li><a href="#语法规则-1">语法规则</a></li>
+            <li><a href="#赋值语句">赋值语句</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -298,12 +320,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/lexicalanalysis/">编译原理-词法分析</a>
+            <a href="/p/grammaranalysis/">编译原理-语法分析</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            编译原理 词法分析章
+            编译原理 语法分析章
         </h3>
         
     </div>
@@ -324,7 +346,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Nov 08, 2024 17:06 &#43;0800</time>
+                <time class="article-time--published">Nov 08, 2024 17:13 &#43;0800</time>
             </div>
         
 
@@ -339,7 +361,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 1 分钟
+                    阅读时长: 2 分钟
                 </time>
             </div>
         
@@ -354,41 +376,171 @@
     <section class="article-content">
     
     
-    <h1 id="词法分析">词法分析</h1>
+    <h1 id="语法分析">语法分析</h1>
+<ul>
+<li>任务
+<ul>
+<li>在<a class="link" href="https://d4n-sec.github.io/p/lexicalanalysis/"  target="_blank" rel="noopener"
+    >词法分析</a>的基础上，根据语言的<a class="link" href="#grammarRules" ><em><strong>语法规则</strong></em></a>，把单词符号组成的各类<a class="link" href="#grammarUnits" >语法单位</a></li>
+</ul>
+</li>
+<li><span id="grammarRules">语法规则</span>
+<ul>
+<li>语言的规则，又称为文法：规定单词如何构成<a class="link" href="#grammarUnits" >语法单位</a></li>
+</ul>
+</li>
+<li><span id="grammarUnits">语法单位</span>
+<ul>
+<li>语法单位包括：短语、子句、语句、过程、程序</li>
+</ul>
+</li>
+</ul>
+<h1 id="语法规则如何表示">语法规则如何表示</h1>
+<ul>
+<li>BNF（巴科斯范式）：<code>A::=B|C</code> -&gt; 表示A定义为B或C</li>
+</ul>
+<h1 id="语法分析的方法">语法分析的方法</h1>
 <ul>
 <li>
-<p>任务</p>
-<ul>
-<li>输入源程序，对构成源程序的字符串进行扫描和分解，识别出一个个的<a class="link" href="#word" >单词</a></li>
-<li>词法分析依照词法规则，识别出正确的单词，<a class="link" href="#trans" >转换</a>为统一规格，备用</li>
-</ul>
+<p>推导（Derive）和归约（Reduce）</p>
 </li>
 <li>
-<p><span id="word">单词</span></p>
+<p>推导</p>
 <ul>
-<li>高级语言中有实在意义的最小语法单位，字符组成（关键字？）</li>
-<li>包括：
+<li>最左推导、最右推导
 <ul>
-<li>基本字：<code>void int float</code>等</li>
-<li>标识符：变量名，函数名等</li>
-<li>整常数：例如 a*50 中的50</li>
-<li>运算符：<code>+ - * / =</code>等</li>
-<li>界限符：<code>{} '' ; ()</code>等</li>
+<li>最<em><strong>右</strong></em>推导：每次推导都把最<em><strong>右</strong></em>方的<strong>字母</strong>按照规则<strong>转化为标识符或者常量</strong></li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<p><span id="trans">转换</span></p>
+<p>归约（推导的逆过程）</p>
 <ul>
-<li>对基本字、运算符、界限符的转换</li>
-<li>标识符的转换</li>
-<li>常数的转换</li>
-<li>转换完成后的格式：<em><strong>（类号，内码）</strong></em></li>
+<li>最右归约、最左归约
+<ul>
+<li>最<em><strong>左</strong></em>归约：每次归约都把最<em><strong>左</strong></em>方的<strong>标识符或者常量</strong>按照规则转化为<strong>字母</strong></li>
 </ul>
 </li>
 </ul>
-<p>描述词法规则的有效工具是<em><strong>正规式</strong></em>和<em><strong>有限自动机</strong></em></p>
+</li>
+</ul>
+<h2 id="两个栗子">两个栗子</h2>
+<h3 id="语法规则">语法规则</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 定义</span>
+</span></span><span class="line"><span class="cl">V::<span class="o">=</span>标识符
+</span></span><span class="line"><span class="cl">C::<span class="o">=</span>常数
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 规则</span>
+</span></span><span class="line"><span class="cl">A::<span class="o">=</span><span class="nv">V</span><span class="o">=</span>E
+</span></span><span class="line"><span class="cl">E::<span class="o">=</span>T<span class="p">|</span>E+T
+</span></span><span class="line"><span class="cl">T::<span class="o">=</span>F<span class="p">|</span>T*F
+</span></span><span class="line"><span class="cl">F::<span class="o">=</span>V<span class="p">|</span><span class="o">(</span>E<span class="o">)</span><span class="p">|</span>C
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="例子一">例子一</h3>
+<ul>
+<li>下图中，箭头方向是最左推导，箭头反方向最右归约</li>
+</ul>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241108181103905.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241108181103905"
+	
+	
+></p>
+<h3 id="例子二">例子二</h3>
+<ul>
+<li>下图中，箭头方向是最右推导，箭头反方向最左归约</li>
+</ul>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241108181310685.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241108181310685"
+	
+	
+></p>
+<h1 id="语法分析过程">语法分析过程</h1>
+<p>语法分析过程也可以用一颗倒着的树来表示，这棵树叫语法树，如下</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241108181746919.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241108181746919"
+	
+	
+></p>
+<h2 id="解析过程思维导图">解析过程思维导图</h2>
+<p>仅做理解使用</p>
+<h3 id="语法规则-1">语法规则</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 定义</span>
+</span></span><span class="line"><span class="cl">V::<span class="o">=</span>标识符
+</span></span><span class="line"><span class="cl">C::<span class="o">=</span>常数
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 规则</span>
+</span></span><span class="line"><span class="cl">A::<span class="o">=</span><span class="nv">V</span><span class="o">=</span>E
+</span></span><span class="line"><span class="cl">E::<span class="o">=</span>T<span class="p">|</span>E+T
+</span></span><span class="line"><span class="cl">T::<span class="o">=</span>F<span class="p">|</span>T*F
+</span></span><span class="line"><span class="cl">F::<span class="o">=</span>V<span class="p">|</span><span class="o">(</span>E<span class="o">)</span><span class="p">|</span>C
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="赋值语句">赋值语句</h3>
+<p>例如<code>var a=b*10</code>，可以按照语法规则解析时，思维流程图为：</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241108175418382.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241108175418382"
+	
+	
+></p>
+<p>语法规则会递归解析，直到变成最开始的定义</p>
+<p>步骤为：</p>
+<ol>
+<li>原式子</li>
+<li>处理原式子的规则</li>
+<li>处理后的子式子</li>
+<li>按照刚才处理的规则，子式子对应的所属</li>
+<li>查看所属是否可以对应为<em><strong>定义</strong></em>或者<em><strong>匹配下一个规则</strong></em></li>
+<li>确定结束或者用下一个规则处理</li>
+</ol>
+<p>如此循环，直到所有式子处理结束</p>
 
 </section>
 
@@ -431,12 +583,12 @@
             
                 
 <article class="">
-    <a href="/p/grammaranalysis/">
+    <a href="/p/lexicalanalysis/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">编译原理-语法分析</h2>
+            <h2 class="article-title">编译原理-词法分析</h2>
         </div>
     </a>
 </article>
