@@ -7,7 +7,95 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>DanSec</copyright>
-        <lastBuildDate>Thu, 07 Nov 2024 16:31:15 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 08 Nov 2024 17:06:57 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>编译原理-词法分析</title>
+        <link>https://d4n-sec.github.io/p/lexicalanalysis/</link>
+        <pubDate>Fri, 08 Nov 2024 17:06:57 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/lexicalanalysis/</guid>
+        <description>&lt;h1 id=&#34;词法分析&#34;&gt;词法分析&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;任务&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;输入源程序，对构成源程序的字符串进行扫描和分解，识别出一个个的&lt;a class=&#34;link&#34; href=&#34;#word&#34; &gt;单词&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;词法分析依照词法规则，识别出正确的单词，&lt;a class=&#34;link&#34; href=&#34;#trans&#34; &gt;转换&lt;/a&gt;为统一规格，备用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span id=&#34;word&#34;&gt;单词&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;高级语言中有实在意义的最小语法单位，字符组成（关键字？）&lt;/li&gt;
+&lt;li&gt;包括：
+&lt;ul&gt;
+&lt;li&gt;基本字：&lt;code&gt;void int float&lt;/code&gt;等&lt;/li&gt;
+&lt;li&gt;标识符：变量名，函数名等&lt;/li&gt;
+&lt;li&gt;整常数：例如 a*50 中的50&lt;/li&gt;
+&lt;li&gt;运算符：&lt;code&gt;+ - * / =&lt;/code&gt;等&lt;/li&gt;
+&lt;li&gt;界限符：&lt;code&gt;{} &#39;&#39; ; ()&lt;/code&gt;等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span id=&#34;trans&#34;&gt;转换&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对基本字、运算符、界限符的转换&lt;/li&gt;
+&lt;li&gt;标识符的转换&lt;/li&gt;
+&lt;li&gt;常数的转换&lt;/li&gt;
+&lt;li&gt;转换完成后的格式：&lt;em&gt;&lt;strong&gt;（类号，内码）&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;描述词法规则的有效工具是&lt;em&gt;&lt;strong&gt;正规式&lt;/strong&gt;&lt;/em&gt;和&lt;em&gt;&lt;strong&gt;有限自动机&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>编译原理</title>
+        <link>https://d4n-sec.github.io/p/compilationprinciple/</link>
+        <pubDate>Fri, 08 Nov 2024 17:02:31 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/compilationprinciple/</guid>
+        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241108170335764.png" alt="Featured image of post 编译原理" /&gt;&lt;h1 id=&#34;编译程序的工作&#34;&gt;编译程序的工作&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://d4n-sec.github.io/p/LexicalAnalysis/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;词法分析&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;语法分析&lt;/li&gt;
+&lt;li&gt;语义分析和中间代码生成&lt;/li&gt;
+&lt;li&gt;优化&lt;/li&gt;
+&lt;li&gt;目标代码生成&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241108164207108.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241108164207108&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;上图中的语义分析一般来说会被融合进语法分析中&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Java自定义类加载器</title>
+        <link>https://d4n-sec.github.io/p/userdefineclassloader/</link>
+        <pubDate>Fri, 08 Nov 2024 11:10:34 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/userdefineclassloader/</guid>
+        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241107144702889.png" alt="Featured image of post Java自定义类加载器" /&gt;&lt;h1 id=&#34;自定义类加载器的使用&#34;&gt;自定义类加载器的使用&lt;/h1&gt;
+&lt;p&gt;根据&lt;a class=&#34;link&#34; href=&#34;https://d4n-sec.github.io/p/classloaderloadpath/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;前文&lt;/a&gt;，不管是Bootstrap ClassLoader还是ExtClassLoader等，这些类加载器都只是加载指定的目录下的jar包或者资源。如果在某种情况下，我们需要动态加载一些东西呢？&lt;/p&gt;
+&lt;p&gt;比如从D盘某个文件夹加载一个class文件，这个路径是输入的而非程序运行时配置参数。&lt;/p&gt;
+&lt;p&gt;或者从网络上下载class主内容然后再进行加载，这样可以吗？&lt;/p&gt;
+&lt;p&gt;包的，通过自定义类加载器完全可以实现。&lt;/p&gt;
+&lt;p&gt;我们使用两个栗子来感受自定义类加载器的使用场景。&lt;/p&gt;
+&lt;h1 id=&#34;本地动态指定加载类路径&#34;&gt;本地动态指定加载类路径&lt;/h1&gt;
+&lt;h1 id=&#34;classloader加载加密类&#34;&gt;ClassLoader加载加密类&lt;/h1&gt;
+</description>
+        </item>
+        <item>
         <title>Java ClassPath</title>
         <link>https://d4n-sec.github.io/p/javaclasspath/</link>
         <pubDate>Thu, 07 Nov 2024 16:31:15 +0800</pubDate>
@@ -1210,17 +1298,6 @@ classpath：对应 AppClassLoader。java虚拟机系统参数&lt;code&gt;java.cl
 &lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/sayyy/article/details/81120749&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://blog.csdn.net/sayyy/article/details/81120749&lt;/a&gt; ！！&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>Java自定义类加载器</title>
-        <link>https://d4n-sec.github.io/p/userdefineclassloader/</link>
-        <pubDate>Thu, 07 Nov 2024 14:44:34 +0800</pubDate>
-        
-        <guid>https://d4n-sec.github.io/p/userdefineclassloader/</guid>
-        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241107144702889.png" alt="Featured image of post Java自定义类加载器" /&gt;&lt;h1 id=&#34;类加载器的使用&#34;&gt;类加载器的使用&lt;/h1&gt;
-&lt;p&gt;不管是Bootstrap ClassLoader还是ExtClassLoader等，这些类加载器都只是加载指定的目录下的jar包或者资源。如果在某种情况下，我们需要动态加载一些东西呢？比如从D盘某个文件夹加载一个class文件，或者从网络上下载class主内容然后再进行加载，这样可以吗？&lt;/p&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;#DefineClassLoader&#34; &gt;上文&lt;/a&gt;提到可以自定义类加载器，我们使用一个栗子来尝试理解自定义类加载器的用途（实现上方&lt;code&gt;Boy&lt;/code&gt;类加密解密加载）&lt;/p&gt;
 </description>
         </item>
         <item>
