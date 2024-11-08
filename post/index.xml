@@ -90,20 +90,6 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;例子一&#34;&gt;例子一&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;下图中，箭头方向是最左推导，箭头反方向最右归约&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241108181103905.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20241108181103905&#34;
-	
-	
-&gt;&lt;/p&gt;
-&lt;h3 id=&#34;例子二&#34;&gt;例子二&lt;/h3&gt;
-&lt;ul&gt;
 &lt;li&gt;下图中，箭头方向是最右推导，箭头反方向最左归约&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241108181310685.png&#34;
@@ -113,6 +99,20 @@
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image-20241108181310685&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;例子二&#34;&gt;例子二&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;下图中，箭头方向是最左推导，箭头反方向最右归约&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241108181103905.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241108181103905&#34;
 	
 	
 &gt;&lt;/p&gt;
