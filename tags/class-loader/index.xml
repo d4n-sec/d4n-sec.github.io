@@ -453,8 +453,7 @@ classpath：对应 AppClassLoader。java虚拟机系统参数&lt;code&gt;java.cl
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;h1 id=&#34;idea-结果一探&#34;&gt;IDEA 结果一探&lt;/h1&gt;
-&lt;p&gt;将&lt;a class=&#34;link&#34; href=&#34;https://d4n-sec.github.io/p/classloaderloadpath/#%E5%85%A8%E9%87%8F%E8%BE%93%E5%87%BA&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;代码&lt;/a&gt;放入IDEA进行执行，会发现结果不同&lt;/p&gt;
+&lt;p&gt;将&lt;a class=&#34;link&#34; href=&#34;#%E5%85%A8%E9%87%8F%E8%BE%93%E5%87%BA&#34; &gt;代码&lt;/a&gt;放入IDEA进行执行，会发现结果不同&lt;/p&gt;
 &lt;p&gt;IDEA结果如下&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
