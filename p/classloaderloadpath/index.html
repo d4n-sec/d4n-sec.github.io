@@ -296,6 +296,7 @@
         </li>
       </ol>
     </li>
+    <li><a href="#idea-结果一探">IDEA 结果一探</a></li>
     <li><a href="#tips-3">Tips</a></li>
     <li><a href="#参考">参考</a></li>
   </ol>
@@ -374,7 +375,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 5 分钟
+                    阅读时长: 6 分钟
                 </time>
             </div>
         
@@ -828,6 +829,389 @@ classpath：对应 AppClassLoader。java虚拟机系统参数<code>java.class.pa
 </li>
 </ul>
 </blockquote>
+<h1 id="idea-结果一探">IDEA 结果一探</h1>
+<p>将<a class="link" href="https://d4n-sec.github.io/p/classloaderloadpath/#%E5%85%A8%E9%87%8F%E8%BE%93%E5%87%BA"  target="_blank" rel="noopener"
+    >代码</a>放入IDEA进行执行，会发现结果不同</p>
+<p>IDEA结果如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">BootstrapClassLoader LoadPath: 
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/resources.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/rt.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/sunrsasign.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/jsse.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/jce.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/charsets.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/jfr.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/classes
+</span></span><span class="line"><span class="cl">----------------------------
+</span></span><span class="line"><span class="cl">sun.misc.Launcher$ExtClassLoader@3eb07fd3
+</span></span><span class="line"><span class="cl">ExtClassLoader LoadPath: 
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/access-bridge-64.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/cldrdata.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/dnsns.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/jaccess.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/jfxrt.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/localedata.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/nashorn.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/sunec.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/sunjce_provider.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/sunmscapi.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/sunpkcs11.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/zipfs.jar
+</span></span><span class="line"><span class="cl">----------------------------
+</span></span><span class="line"><span class="cl">sun.misc.Launcher$AppClassLoader@18b4aac2
+</span></span><span class="line"><span class="cl">AppClassLoader LoadPath: 
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/charsets.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/deploy.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/access-bridge-64.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/cldrdata.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/dnsns.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/jaccess.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/jfxrt.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/localedata.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/nashorn.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/sunec.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/sunjce_provider.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/sunmscapi.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/sunpkcs11.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/ext/zipfs.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/javaws.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/jce.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/jfr.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/jfxswt.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/jsse.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/management-agent.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/plugin.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/resources.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/Java/jdk1.8.0_181/jre/lib/rt.jar
+</span></span><span class="line"><span class="cl">file:/D:/Users/Dan/Code/Java/Empty/target/classes/
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/reflections/reflections/0.9.9/reflections-0.9.9.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/com/google/guava/guava/15.0/guava-15.0.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/com/google/code/findbugs/annotations/2.0.1/annotations-2.0.1.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/shrinkwrap/resolver/shrinkwrap-resolver-api/2.2.6/shrinkwrap-resolver-api-2.2.6.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/shrinkwrap/resolver/shrinkwrap-resolver-spi/2.2.6/shrinkwrap-resolver-spi-2.2.6.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/shrinkwrap/resolver/shrinkwrap-resolver-api-maven/2.2.6/shrinkwrap-resolver-api-maven-2.2.6.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/shrinkwrap/resolver/shrinkwrap-resolver-spi-maven/2.2.6/shrinkwrap-resolver-spi-maven-2.2.6.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/shrinkwrap/resolver/shrinkwrap-resolver-api-maven-archive/2.2.6/shrinkwrap-resolver-api-maven-archive-2.2.6.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/shrinkwrap/shrinkwrap-api/1.2.6/shrinkwrap-api-1.2.6.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/shrinkwrap/resolver/shrinkwrap-resolver-impl-maven/2.2.6/shrinkwrap-resolver-impl-maven-2.2.6.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/eclipse/aether/aether-api/1.0.0.v20140518/aether-api-1.0.0.v20140518.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/eclipse/aether/aether-impl/1.0.0.v20140518/aether-impl-1.0.0.v20140518.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/eclipse/aether/aether-spi/1.0.0.v20140518/aether-spi-1.0.0.v20140518.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/eclipse/aether/aether-util/1.0.0.v20140518/aether-util-1.0.0.v20140518.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/eclipse/aether/aether-connector-basic/1.0.0.v20140518/aether-connector-basic-1.0.0.v20140518.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/eclipse/aether/aether-transport-wagon/1.0.0.v20140518/aether-transport-wagon-1.0.0.v20140518.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/apache/maven/maven-aether-provider/3.2.5/maven-aether-provider-3.2.5.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/apache/maven/maven-model/3.2.5/maven-model-3.2.5.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/apache/maven/maven-model-builder/3.2.5/maven-model-builder-3.2.5.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/apache/maven/maven-repository-metadata/3.2.5/maven-repository-metadata-3.2.5.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/apache/maven/maven-settings/3.2.5/maven-settings-3.2.5.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/apache/maven/maven-settings-builder/3.2.5/maven-settings-builder-3.2.5.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.21/plexus-interpolation-1.21.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/codehaus/plexus/plexus-utils/3.0.20/plexus-utils-3.0.20.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/sonatype/plexus/plexus-sec-dispatcher/1.3/plexus-sec-dispatcher-1.3.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/sonatype/plexus/plexus-cipher/1.4/plexus-cipher-1.4.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/apache/maven/wagon/wagon-provider-api/2.6/wagon-provider-api-2.6.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/apache/maven/wagon/wagon-file/2.6/wagon-file-2.6.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/apache/maven/wagon/wagon-http-lightweight/2.6/wagon-http-lightweight-2.6.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/apache/maven/wagon/wagon-http-shared/2.6/wagon-http-shared-2.6.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/shrinkwrap/resolver/shrinkwrap-resolver-impl-maven-archive/2.2.6/shrinkwrap-resolver-impl-maven-archive-2.2.6.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/shrinkwrap/shrinkwrap-impl-base/1.2.6/shrinkwrap-impl-base-1.2.6.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/shrinkwrap/shrinkwrap-spi/1.2.6/shrinkwrap-spi-1.2.6.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/shrinkwrap/resolver/shrinkwrap-resolver-spi-maven-archive/2.2.6/shrinkwrap-resolver-spi-maven-archive-2.2.6.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/eclipse/sisu/org.eclipse.sisu.plexus/0.3.0.M1/org.eclipse.sisu.plexus-0.3.0.M1.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/eclipse/sisu/org.eclipse.sisu.inject/0.3.0.M1/org.eclipse.sisu.inject-0.3.0.M1.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/codehaus/plexus/plexus-compiler-javac/2.3/plexus-compiler-javac-2.3.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/codehaus/plexus/plexus-compiler-api/2.3/plexus-compiler-api-2.3.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/javassist/javassist/3.19.0-GA/javassist-3.19.0-GA.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/com/nqzero/permit-reflect/0.3/permit-reflect-0.3.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/commons-codec/commons-codec/1.9/commons-codec-1.9.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/commons-io/commons-io/2.6/commons-io-2.6.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jenkins-ci/main/remoting/2.55/remoting-2.55.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jenkins-ci/constant-pool-scanner/1.2/constant-pool-scanner-1.2.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/logging/jboss-logging/3.3.0.Final/jboss-logging-3.3.0.Final.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/remoting/jboss-remoting/4.0.19.Final/jboss-remoting-4.0.19.Final.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/xnio/xnio-api/3.3.4.Final/xnio-api-3.3.4.Final.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/jboss-common-core/2.5.0.Final/jboss-common-core-2.5.0.Final.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/xnio/xnio-nio/3.3.4.Final/xnio-nio-3.3.4.Final.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/sasl/jboss-sasl/1.0.5.Final/jboss-sasl-1.0.5.Final.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/remotingjmx/remoting-jmx/2.0.1.Final/remoting-jmx-2.0.1.Final.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/logging/jboss-logging-processor/1.2.0.Final/jboss-logging-processor-1.2.0.Final.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/jdeparser/jdeparser/1.0.0.Final/jdeparser-1.0.0.Final.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/marshalling/jboss-marshalling/1.4.10.Final/jboss-marshalling-1.4.10.Final.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/marshalling/jboss-marshalling-river/1.4.10.Final/jboss-marshalling-river-1.4.10.Final.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/commons-collections/commons-collections/3.1/commons-collections-3.1.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/beanshell/bsh/2.0b5/bsh-2.0b5.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/commons-beanutils/commons-beanutils/1.9.2/commons-beanutils-1.9.2.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/apache/commons/commons-collections4/4.0/commons-collections4-4.0.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/codehaus/groovy/groovy/2.3.9/groovy-2.3.9.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/springframework/spring-core/4.1.4.RELEASE/spring-core-4.1.4.RELEASE.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/springframework/spring-beans/4.1.4.RELEASE/spring-beans-4.1.4.RELEASE.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/hibernate/hibernate-core/4.3.11.Final/hibernate-core-4.3.11.Final.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/logging/jboss-logging-annotations/1.2.0.Beta1/jboss-logging-annotations-1.2.0.Beta1.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/spec/javax/transaction/jboss-transaction-api_1.2_spec/1.0.0.Final/jboss-transaction-api_1.2_spec-1.0.0.Final.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/hibernate/common/hibernate-commons-annotations/4.0.5.Final/hibernate-commons-annotations-4.0.5.Final.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/hibernate/javax/persistence/hibernate-jpa-2.1-api/1.0.0.Final/hibernate-jpa-2.1-api-1.0.0.Final.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/jandex/1.1.0.Final/jandex-1.1.0.Final.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/springframework/spring-aop/4.1.4.RELEASE/spring-aop-4.1.4.RELEASE.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/net/sf/json-lib/json-lib/2.4/json-lib-2.4-jdk15.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/commons-lang/commons-lang/2.5/commons-lang-2.5.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/net/sf/ezmorph/ezmorph/1.0.6/ezmorph-1.0.6.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/commons-fileupload/commons-fileupload/1.3/commons-fileupload-1.3.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/apache/wicket/wicket-util/6.23.0/wicket-util-6.23.0.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/com/mchange/c3p0/0.9.5.2/c3p0-0.9.5.2.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/com/mchange/mchange-commons-java/0.2.11/mchange-commons-java-0.2.11.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/apache/myfaces/core/myfaces-impl/2.2.9/myfaces-impl-2.2.9.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/apache/myfaces/core/myfaces-api/2.2.9/myfaces-api-2.2.9.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/apache/geronimo/specs/geronimo-atinject_1.0_spec/1.0/geronimo-atinject_1.0_spec-1.0.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/commons-digester/commons-digester/1.8/commons-digester-1.8.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/xalan/xalan/2.7.2/xalan-2.7.2.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/xalan/serializer/2.7.2/serializer-2.7.2.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/rome/rome/1.0/rome-1.0.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/jdom/jdom/1.0/jdom-1.0.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/python/jython-standalone/2.5.2/jython-standalone-2.5.2.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/rhino/js/1.7R2/js-1.7R2.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/javassist/javassist/3.12.0.GA/javassist-3.12.0.GA.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/weld/weld-core/1.1.33.Final/weld-core-1.1.33.Final.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/weld/weld-api/1.1.Final/weld-api-1.1.Final.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/weld/weld-spi/1.1.Final/weld-spi-1.1.Final.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/javax/annotation/jsr250-api/1.0/jsr250-api-1.0.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/spec/javax/interceptor/jboss-interceptors-api_1.1_spec/1.0.0.Beta1/jboss-interceptors-api_1.1_spec-1.0.0.Beta1.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/slf4j/slf4j-ext/1.7.2/slf4j-ext-1.7.2.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/ch/qos/cal10n/cal10n-api/0.7.7/cal10n-api-0.7.7.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/interceptor/jboss-interceptor-core/2.0.0.Final/jboss-interceptor-core-2.0.0.Final.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/interceptor/jboss-interceptor-spi/2.0.0.Final/jboss-interceptor-spi-2.0.0.Final.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/javax/enterprise/cdi-api/1.0-SP1/cdi-api-1.0-SP1.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jboss/interceptor/jboss-interceptor-api/1.1/jboss-interceptor-api-1.1.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/javax/interceptor/javax.interceptor-api/3.1/javax.interceptor-api-3.1.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/slf4j/slf4j-api/1.7.21/slf4j-api-1.7.21.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/slf4j/slf4j-jdk14/1.7.21/slf4j-jdk14-1.7.21.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/clojure/clojure/1.8.0/clojure-1.8.0.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/com/vaadin/vaadin-server/7.7.14/vaadin-server-7.7.14.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/com/vaadin/vaadin-sass-compiler/0.9.13/vaadin-sass-compiler-0.9.13.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/w3c/css/sac/1.3/sac-1.3.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/com/vaadin/external/flute/flute/1.3.0.gg2/flute-1.3.0.gg2.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/com/vaadin/vaadin-shared/7.7.14/vaadin-shared-7.7.14.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/jsoup/jsoup/1.8.3/jsoup-1.8.3.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/aspectj/aspectjweaver/1.9.5/aspectjweaver-1.9.5.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/apache/click/click-nodeps/2.3.0/click-nodeps-2.3.0.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/ognl/ognl/2.6.9/ognl-2.6.9.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/apache/velocity/velocity/1.7/velocity-1.7.jar
+</span></span><span class="line"><span class="cl">file:/C:/Users/Dan/.m2/repository/org/mortbay/jasper/apache-el/8.0.27/apache-el-8.0.27.jar
+</span></span><span class="line"><span class="cl">file:/D:/Program<span class="nv">%2</span>0Files/JetBrains/IntelliJ<span class="nv">%2</span>0IDEA<span class="nv">%2</span>02024.2.3/lib/idea_rt.jar
+</span></span><span class="line"><span class="cl">----------------------------
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对比图如下：</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241108105240679.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241108105240679"
+	
+	
+></p>
+<p>发现在<code>AppClassLoader LoadPath</code>这一栏增加了巨量的jar文件，这是怎么回事？</p>
+<p>原因是因为IDEA的启动语句</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl"><span class="s2">&#34;D:\Program Files\Java\jdk1.8.0_181\bin\java.exe&#34;</span> <span class="s2">&#34;-javaagent:D:\Program Files\JetBrains\IntelliJ IDEA 2024.2.3\lib\idea_rt.jar=1928:D:\Program Files\JetBrains\IntelliJ IDEA 2024.2.3\bin&#34;</span> -Dfile.encoding=UTF-8 -classpath <span class="s2">&#34;D:\Program Files\Java\jdk1.8.0_181\jre\lib\charsets.jar;......#超级多&#34;</span> com.study.java.MainTest
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到，第一个参数是确定启动的java程序全路径，第二个<code>-javaagent</code>参数暂时不做学习</p>
+<p><code>-Dfile.encoding=UTF-8</code>是做了编码统一，最后就是<code>-classpath</code>指定<code>ClassPath</code> 这个参数后面跟了很多包路径</p>
+<p>所以最后，IDEA只是根据我们的设置去<em><strong>自动配置好了需要执行的命令</strong></em>，不需要我们去手动配置相关环境</p>
+<p>豪用，爱用</p>
 <h1 id="tips-3">Tips</h1>
 <ul>
 <li>自JDK 1.2以后，JVM采用了委托(delegate)模式来载入class。采用这种设计的原因可以参考： <a class="link" href="http://java.sun.com/docs/books/tutorial/ext/basics/load.html"  target="_blank" rel="noopener"
