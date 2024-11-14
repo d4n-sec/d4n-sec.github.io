@@ -7,7 +7,131 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>DanSec</copyright>
-        <lastBuildDate>Fri, 08 Nov 2024 17:13:30 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 11 Nov 2024 17:15:43 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>编译原理-目标代码生成</title>
+        <link>https://d4n-sec.github.io/p/compilationprinciplecodegeneration/</link>
+        <pubDate>Mon, 11 Nov 2024 17:15:43 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/compilationprinciplecodegeneration/</guid>
+        <description>&lt;h1 id=&#34;目标代码生成&#34;&gt;目标代码生成&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;任务&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;把经过优化的中间代码转化成特定机器上的低级语言代码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;目标代码的形式&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;绝对指令代码：可立即执行的目标代码。&lt;/li&gt;
+&lt;li&gt;汇编指令代码：汇编语言程序，需要通过汇编程序汇编后才能运行。&lt;/li&gt;
+&lt;li&gt;可重定位指令代码：先将各目标模块连接起来，确定变量、常数在主存中的位置，装入主存后才能成为可以运行的绝对指令代码。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>编译原理-优化</title>
+        <link>https://d4n-sec.github.io/p/compilationprincipleoptimize/</link>
+        <pubDate>Mon, 11 Nov 2024 16:59:47 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/compilationprincipleoptimize/</guid>
+        <description>&lt;h1 id=&#34;优化&#34;&gt;优化&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;任务
+&lt;ul&gt;
+&lt;li&gt;对前面产生的中间代码进行加工变换，以期在最后阶段能产生更为高效的目标代码。
+&lt;ul&gt;
+&lt;li&gt;原则:等价变换&lt;/li&gt;
+&lt;li&gt;主要关注：公共子表达式的提取、合并已知量、删除无用语句、循环优化等。
+&lt;ul&gt;
+&lt;li&gt;循环优化：将循环内的语句优化为必需语句&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;优化举例&#34;&gt;优化举例&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241111170905973.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241111170905973&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;上图左边是C语句，右边为for循环的拆解，根据右边语句生成中间代码&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241111170844192.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241111170844192&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;中间代码如上，优化结果如下&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241111171147194.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241111171147194&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;优化结果中可以看到，乘法消失了&lt;/p&gt;
+&lt;p&gt;如果循环中只有示例中的代码的话，可以使用加法一次性计算代替循环计算（&lt;code&gt;+1到100&lt;/code&gt;变为&lt;code&gt;+5050&lt;/code&gt;，依旧等价）&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>编译原理-语义分析和中间代码生成</title>
+        <link>https://d4n-sec.github.io/p/semanticanalysis/</link>
+        <pubDate>Fri, 08 Nov 2024 19:41:32 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/semanticanalysis/</guid>
+        <description>&lt;h1 id=&#34;语义分析和中间代码生成&#34;&gt;语义分析和中间代码生成&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;任务
+&lt;ul&gt;
+&lt;li&gt;对语法分析识别出的各类语法范畴，分析其含义，进行和初步翻译，产生介于源代码和目标代码之间的一种代码。&lt;/li&gt;
+&lt;li&gt;分为两阶段工作：
+&lt;ul&gt;
+&lt;li&gt;对每种语法范畴进行静态语义检查&lt;/li&gt;
+&lt;li&gt;若语义正确，就进行&lt;a class=&#34;link&#34; href=&#34;#middleCode&#34; &gt;中间代码&lt;/a&gt;的翻译&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;span id=&#34;middleCode&#34;&gt;中间代码&lt;/span&gt;
+&lt;ul&gt;
+&lt;li&gt;中间代码形式有：四元式、三元式、逆波兰式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;中间代码生成举例：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241108195040955.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241108195040955&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;T3为什么是左操作数？&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>编译原理-语法分析</title>
         <link>https://d4n-sec.github.io/p/grammaranalysis/</link>
         <pubDate>Fri, 08 Nov 2024 17:13:30 +0800</pubDate>
