@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='编译原理 优化章'>
-<title>编译原理-优化</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='编译原理 基本知识章'>
+<title>编译原理-基本知识</title>
 
-<link rel='canonical' href='https://d4n-sec.github.io/p/compilationprincipleoptimize/'>
+<link rel='canonical' href='https://d4n-sec.github.io/p/compilationprinciplebaseknowledge/'>
 
-<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='编译原理-优化'>
-<meta property='og:description' content='编译原理 优化章'>
-<meta property='og:url' content='https://d4n-sec.github.io/p/compilationprincipleoptimize/'>
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='编译原理-基本知识'>
+<meta property='og:description' content='编译原理 基本知识章'>
+<meta property='og:url' content='https://d4n-sec.github.io/p/compilationprinciplebaseknowledge/'>
 <meta property='og:site_name' content='Dan`s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='编译原理' /><meta property='article:published_time' content='2024-11-11T16:59:47&#43;08:00'/><meta property='article:modified_time' content='2024-11-11T16:59:47&#43;08:00'/>
-<meta name="twitter:title" content="编译原理-优化">
-<meta name="twitter:description" content="编译原理 优化章">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='编译原理' /><meta property='article:published_time' content='2024-11-14T14:03:12&#43;08:00'/><meta property='article:modified_time' content='2024-11-14T14:03:12&#43;08:00'/>
+<meta name="twitter:title" content="编译原理-基本知识">
+<meta name="twitter:description" content="编译原理 基本知识章">
     <link rel="shortcut icon" href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/paper-plane-64.webp" />
 
     </head>
@@ -270,11 +270,72 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#优化">优化</a>
+    <li><a href="#表格管理">表格管理</a>
       <ol>
-        <li><a href="#优化举例">优化举例</a></li>
+        <li><a href="#符号表">符号表</a></li>
+        <li><a href="#常数表与标号表">常数表与标号表</a></li>
+        <li><a href="#入口名表">入口名表</a></li>
+        <li><a href="#中间代码表">中间代码表</a></li>
       </ol>
     </li>
+    <li><a href="#出错处理">出错处理</a></li>
+    <li><a href="#遍">遍</a>
+      <ol>
+        <li><a href="#一遍扫描">一遍扫描</a></li>
+        <li><a href="#多遍扫描">多遍扫描</a></li>
+      </ol>
+    </li>
+    <li><a href="#编译程序">编译程序</a>
+      <ol>
+        <li><a href="#自编译">自编译</a></li>
+        <li><a href="#编译工具">编译工具</a></li>
+      </ol>
+    </li>
+    <li><a href="#基础知识">基础知识</a>
+      <ol>
+        <li><a href="#高级语言">高级语言</a></li>
+        <li><a href="#语法">语法</a></li>
+        <li><a href="#单词符号">单词符号</a></li>
+        <li><a href="#词法规则">词法规则</a></li>
+        <li><a href="#语法规则">语法规则</a></li>
+        <li><a href="#语法单位">语法单位</a></li>
+        <li><a href="#语义">语义</a></li>
+        <li><a href="#文法">文法</a></li>
+        <li><a href="#非终结符">非终结符</a></li>
+        <li><a href="#终结符">终结符</a></li>
+        <li><a href="#开始符号">开始符号</a></li>
+        <li><a href="#产生式">产生式</a></li>
+        <li><a href="#推导">推导</a></li>
+        <li><a href="#归约">归约</a></li>
+        <li><a href="#句型句子和语言">句型，句子和语言</a></li>
+        <li><a href="#文法规则的递归">文法规则的递归</a></li>
+        <li><a href="#文法规则的扩充表示">文法规则的扩充表示</a></li>
+        <li><a href="#元语言符号">元语言符号</a></li>
+        <li><a href="#语法树">语法树</a></li>
+      </ol>
+    </li>
+    <li><a href="#文法与语言的关系">文法与语言的关系</a>
+      <ol>
+        <li><a href="#文法与语言的形式定义">文法与语言的形式定义</a>
+          <ol>
+            <li><a href="#chomsky对文法的定义">Chomsky对文法的定义</a></li>
+            <li><a href="#chomsky对文法的分类">Chomsky对文法的分类</a>
+              <ol>
+                <li><a href="#0型文法">0型文法</a></li>
+                <li><a href="#1型文法">1型文法</a></li>
+                <li><a href="#2型文法">2型文法</a></li>
+                <li><a href="#3型文法">3型文法</a></li>
+                <li><a href="#总结">总结</a></li>
+              </ol>
+            </li>
+            <li><a href="#i型语">i型语</a></li>
+          </ol>
+        </li>
+        <li><a href="#注意">注意</a></li>
+      </ol>
+    </li>
+    <li><a href="#文法的简化">文法的简化</a></li>
+    <li><a href="#笔者记">笔者记</a></li>
   </ol>
 </nav>
         </div>
@@ -302,12 +363,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/compilationprincipleoptimize/">编译原理-优化</a>
+            <a href="/p/compilationprinciplebaseknowledge/">编译原理-基本知识</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            编译原理 优化章
+            编译原理 基本知识章
         </h3>
         
     </div>
@@ -328,7 +389,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Nov 11, 2024 16:59 &#43;0800</time>
+                <time class="article-time--published">Nov 14, 2024 14:03 &#43;0800</time>
             </div>
         
 
@@ -343,7 +404,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 1 分钟
+                    阅读时长: 5 分钟
                 </time>
             </div>
         
@@ -358,58 +419,512 @@
     <section class="article-content">
     
     
-    <h1 id="优化">优化</h1>
-<ul>
-<li>任务
-<ul>
-<li>对前面产生的中间代码进行加工变换，以期在最后阶段能产生更为高效的目标代码。
-<ul>
-<li>原则:等价变换</li>
-<li>主要关注：公共子表达式的提取、合并已知量、删除无用语句、循环优化等。
-<ul>
-<li>循环优化：将循环内的语句优化为必需语句</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="优化举例">优化举例</h2>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241111170905973.png"
+    <p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114140514841.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20241111170905973"
+		alt="image-20241114140514841"
 	
 	
 ></p>
-<p>上图左边是C语句，右边为for循环的拆解，根据右边语句生成中间代码</p>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241111170844192.png"
+<h1 id="表格管理">表格管理</h1>
+<ul>
+<li>
+<p>作用：用来记录源程序的各种信息以及编译过程中的各种状况</p>
+</li>
+<li>
+<p>与编译前三阶段有关的表格有：符号表、常数表、标号表、分程序入口表、中间代码表等</p>
+</li>
+</ul>
+<h2 id="符号表">符号表</h2>
+<p>用来登记源程序中的常量名变量名、发数组名、过程名等，记录它们的性质、定义和引用情况</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114140659798.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20241111170844192"
+		alt="image-20241114140659798"
 	
 	
 ></p>
-<p>中间代码如上，优化结果如下</p>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241111171147194.png"
+<h2 id="常数表与标号表">常数表与标号表</h2>
+<ul>
+<li>常数表：登记各类常量值</li>
+<li>标号表：登记标号的定义与应用 <code>例如 goto 代码后的标号</code>，实际指向的是4元式的标号</li>
+</ul>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114140911159.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20241111171147194"
+		alt="image-20241114140911159"
 	
 	
 ></p>
-<p>优化结果中可以看到，乘法消失了</p>
-<p>如果循环中只有示例中的代码的话，可以使用加法一次性计算代替循环计算（<code>+1到100</code>变为<code>+5050</code>，依旧等价）</p>
+<h2 id="入口名表">入口名表</h2>
+<ul>
+<li>登记过程的层号，分程序符号表入口等</li>
+</ul>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114141528050.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241114141528050"
+	
+	
+></p>
+<h2 id="中间代码表">中间代码表</h2>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114141559050.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241114141559050"
+	
+	
+></p>
+<h1 id="出错处理">出错处理</h1>
+<ul>
+<li>如果源程序有错误，编译程序应当设法发现错误，并报告给用户</li>
+<li>由专门的出错处理程序来完成</li>
+</ul>
+<p>可以检查的错误类型有：</p>
+<ol>
+<li>语法错误：在词法分析和语法分析阶段检测出来</li>
+<li>语义错误：一般在语义分析阶段检测</li>
+</ol>
+<h1 id="遍">遍</h1>
+<ul>
+<li>指对源程序或者源程序的中间结果从头到尾扫描一次，并做有关的加工处理，生成新的中间结果或者目标代码</li>
+<li>与阶段的含义毫无关系</li>
+</ul>
+<h2 id="一遍扫描">一遍扫描</h2>
+<p>以<em><strong>语法分析</strong></em>为中心</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114142016399.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241114142016399"
+	
+	
+></p>
+<h2 id="多遍扫描">多遍扫描</h2>
+<ul>
+<li>优点：节省内存空间，提高目标代码质量，使得编译的逻辑结构清晰</li>
+<li>缺点：编译时间较长</li>
+</ul>
+<p>内存许可的情况下，遍数少一点</p>
+<h1 id="编译程序">编译程序</h1>
+<ol>
+<li>直接用机器语言编写编译程序</li>
+<li>用汇编编写编译程序，去适配某个语言</li>
+<li>用高级语言编写编译程序（普遍使用）</li>
+</ol>
+<h2 id="自编译">自编译</h2>
+<p>例如Go语言的编译器是Go语言写的，这就叫做自编译</p>
+<blockquote>
+<p>怎么做到的？语言开发的前期的编译器不是Go语言写的</p>
+</blockquote>
+<ul>
+<li>优点：</li>
+<li>缺点：</li>
+</ul>
+<h2 id="编译工具">编译工具</h2>
+<ul>
+<li>
+<p>LEX（词法分析）</p>
+</li>
+<li>
+<p>YACC（用于自动产生LALR分析表）</p>
+</li>
+</ul>
+<h1 id="基础知识">基础知识</h1>
+<h2 id="高级语言">高级语言</h2>
+<p>程序语言是一个记号系统</p>
+<ul>
+<li>语法</li>
+<li>语义</li>
+</ul>
+<h2 id="语法">语法</h2>
+<ul>
+<li>任何语言程序都可以看成是一定字符集（字母表）上的字符串</li>
+<li>语法使得这串字符形成一个形式上正确的程序</li>
+<li>语法=<a class="link" href="#%E8%AF%8D%E6%B3%95%E8%A7%84%E5%88%99" >词法规则</a>+<a class="link" href="#%E8%AF%AD%E6%B3%95%E8%A7%84%E5%88%99" >语法规则</a></li>
+</ul>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114143201503.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241114143201503"
+	
+	
+></p>
+<h2 id="单词符号">单词符号</h2>
+<ul>
+<li>语言中具有独立意义的最基本结构</li>
+<li>单词符号一般包括：常数，标识符，基本字，算符，界限符等。</li>
+</ul>
+<h2 id="词法规则">词法规则</h2>
+<ul>
+<li>规定了字母表中哪些字符串是单词符号</li>
+<li>我们用<a class="link" href="" >正规式</a>和<a class="link" href="" >有限自动机理论</a>来描述词法结构和进行词法分析</li>
+</ul>
+<h2 id="语法规则">语法规则</h2>
+<ul>
+<li>规定了如何从单词符号来形成<a class="link" href="#%E8%AF%AD%E6%B3%95%E5%8D%95%E4%BD%8D" >语法单位</a>。</li>
+<li>现在多数程序语言使用<a class="link" href="" >上下文无关文法</a>来描述语法规则。</li>
+<li>语言的词法规则和语法规则定义了程序的形式结构，是判断输入字符串是否构成一个形式上正确的程序的依据。</li>
+</ul>
+<h2 id="语法单位">语法单位</h2>
+<ul>
+<li>语法单位一般包括：表达式，子句，语句，函数，过程，程序</li>
+</ul>
+<h2 id="语义">语义</h2>
+<ul>
+<li>对于一个语言来说，不仅要给出它的词法、语法规则，而且要定义它的单词符号河语法单位的意义。</li>
+<li>离开语义，语言只是一堆符号的集合。</li>
+<li>各种语言中有形式上完全相同的语法单位，含义却不尽相同。</li>
+<li>对某种语言，可以定义一个程序的意义的一组规则称为语义规则。</li>
+<li>目前，大多数编译程序使用<a class="link" href="" >基于属性文法的语法制导翻译方法</a>来分析语义。</li>
+</ul>
+<h2 id="文法">文法</h2>
+<p>是描述语言的语法结构的形式规则</p>
+<p>例子：Young men like pop music</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114144542422.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h2 id="非终结符">非终结符</h2>
+<ul>
+<li>出现在规则的左部、用&lt;&gt;括起来、表示一定语法概念的词。</li>
+</ul>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114144753546.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241114144753546"
+	
+	
+></p>
+<h2 id="终结符">终结符</h2>
+<ul>
+<li>语言中不可再分割的字符串（包括单个字符组成的串）</li>
+</ul>
+<blockquote>
+<p>终结符是组成句子的基本单位。</p>
+</blockquote>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114144855180.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241114144855180"
+	
+	
+></p>
+<h2 id="开始符号">开始符号</h2>
+<ul>
+<li>表示所定义的语法范畴的非终结符</li>
+</ul>
+<blockquote>
+<p>开始符号又称为识别符号</p>
+</blockquote>
+<h2 id="产生式">产生式</h2>
+<ul>
+<li>是用来定义符号串之间关系的一组（语法）规则</li>
+</ul>
+<blockquote>
+<p><code>A -&gt; a</code>表示<code>A产生a</code></p>
+</blockquote>
+<h2 id="推导">推导</h2>
+<ul>
+<li>推导是从开始符号开始，通过使用产生式的右部取代左部，最终能产生语言的一个句子的过程。</li>
+</ul>
+<ul>
+<li>最左（右）推导：每次使用一个规则，以其右部取代符号串最左（右）非终结符。</li>
+</ul>
+<p>最左（右）推导被称为规范推导</p>
+<h2 id="归约">归约</h2>
+<ul>
+<li>
+<p>归约是推导的逆过程，即，从给定的源语言的句子开始，通过规则的左部取代右部，最终达到开始符号的过程。</p>
+</li>
+<li>
+<p>最左（右）归约是最右（左）推导的逆过程。</p>
+</li>
+</ul>
+<p>最左归约和最右归约称为规范归约</p>
+<h2 id="句型句子和语言">句型，句子和语言</h2>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114145508614.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241114145508614"
+	
+	
+></p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114145918702.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241114145918702"
+	
+	
+></p>
+<p>句子符合语法规则，但是不一定具有含义，所以语言是句子的子集</p>
+<h2 id="文法规则的递归">文法规则的递归</h2>
+<ul>
+<li>非终结符的定义中包含了非终结符自身</li>
+<li>使用文法的递归定义要谨慎</li>
+</ul>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114150203626.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h2 id="文法规则的扩充表示">文法规则的扩充表示</h2>
+<ul>
+<li>
+<p>扩充的BNF表示</p>
+<ul>
+<li>提因子：U-&gt;ax|ay|az  写为 U-&gt;a(x|y|z)</li>
+<li>重复次数的指定</li>
+</ul>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114150455861.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241114150455861"
+	
+	
+></p>
+<ul>
+<li>任选符号</li>
+</ul>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114150559477.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241114150559477"
+	
+	
+></p>
+<h2 id="元语言符号">元语言符号</h2>
+<p><code>|</code>表示或者，<code>-&gt;</code>表示可以转化，这两个属于元语言符号</p>
+</li>
+</ul>
+<h2 id="语法树">语法树</h2>
+<p>用来表示语言句子结构的树</p>
+<p>使用语法树</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/bicycle-4417_256.gif"
+	
+	
+	
+	loading="lazy"
+	
+		alt="bicycle-4417_256"
+	
+	
+></p>
+<h1 id="文法与语言的关系">文法与语言的关系</h1>
+<h2 id="文法与语言的形式定义">文法与语言的形式定义</h2>
+<h3 id="chomsky对文法的定义">Chomsky对文法的定义</h3>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114151030440.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241114151030440"
+	
+	
+></p>
+<h3 id="chomsky对文法的分类">Chomsky对文法的分类</h3>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114151207644.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241114151207644"
+	
+	
+></p>
+<h4 id="0型文法">0型文法</h4>
+<p>短语文法，无限制文法</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114151409810.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241114151409810"
+	
+	
+></p>
+<ul>
+<li>识别0型语言的自动机称为图灵机（TM）</li>
+<li>0型文法是对产生式限制最少的文法</li>
+<li>任何0型语言都是递归可枚举的</li>
+<li>对0型文法产生式的形式作某些限制，可以得到其他类型文法的定义</li>
+</ul>
+<h4 id="1型文法">1型文法</h4>
+<p>长度增加文法，上下文有关文法</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114151854524.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241114151854524"
+	
+	
+></p>
+<p>或者也可以定义为：</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114151929581.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241114151929581"
+	
+	
+></p>
+<ul>
+<li>识别1型语言的自动机称为线性界限自动机（<a class="link" href="" >LBA</a>）</li>
+<li>1型文法意味着，对非终结符进行替换时务必考虑上下文，并且，一般不允许替换成s，除非是开始符号产生ε</li>
+</ul>
+<h4 id="2型文法">2型文法</h4>
+<p><em><strong>上下文无关文法</strong></em></p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114152305516.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241114152305516"
+	
+	
+></p>
+<ul>
+<li>
+<p>2型文法对产生式的要求是：产生式左部一定是非终结符，产生式右部可以是VN、VT或ε；非终结符的替换不必考虑上下文</p>
+</li>
+<li>
+<p>识别2型语言的自动机称为下推自动机（PDA）</p>
+</li>
+</ul>
+<h4 id="3型文法">3型文法</h4>
+<p>正规文法RG、左/右线性文法</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114152527166.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241114152527166"
+	
+	
+></p>
+<ul>
+<li>3型文法中的产生式要么均是右线性产生式，要么是左线性产生式，不能既有左线性产生式，又有右线性产生式。若所有产生式均是左线性，则称为左线性文法；若所有产生式均是右线性，则称为右线性文法</li>
+<li>识别3型语言的自动机称为有限状态自动机。</li>
+</ul>
+<h4 id="总结">总结</h4>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114153803345.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241114153803345"
+	
+	
+></p>
+<h3 id="i型语">i型语</h3>
+<ul>
+<li>由i型文法生成的语言成为i型语言。</li>
+</ul>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114152843678.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241114152843678"
+	
+	
+></p>
+<h2 id="注意">注意</h2>
+<p>在词法分析和语法分析中对产生式有限制</p>
+<ul>
+<li>不存在P→P产生式</li>
+<li>产生式中出现的任何非终结符P必须有用</li>
+</ul>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241114153226386.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241114153226386"
+	
+	
+></p>
+<h1 id="文法的简化">文法的简化</h1>
+<ol>
+<li>同一语言可以用不同文法来描述，显然应当选择产生式的个数最少，最符合语言特征的来描述</li>
+<li>在文法中，有些产生式对推导不起作用，要删除掉
+<ol>
+<li>如某个产生式在推导过程中永远不会被用到，即由开始符号推导，永远推不到的左部的非终结符。</li>
+<li>再如永远导不出终结符串的产生式。</li>
+<li>形如P→&gt;P的产生式。</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>
+<p>简化步骤：</p>
+<ul>
+<li>查找有无形如P-&gt;P的产生式，若有则删除；</li>
+<li>若某个产生式在推导过程中永远不会被用到，删除它；</li>
+<li>若某个产生式在推导过程中不能从中导出终结符，删除它。</li>
+</ul>
+<p>最后，整理所有剩余产生式，就得到简化的文法。</p>
+</li>
+</ul>
+<h1 id="笔者记">笔者记</h1>
+<p>归约是更加符合编译程序逻辑的过程</p>
 
 </section>
 
@@ -452,12 +967,12 @@
             
                 
 <article class="">
-    <a href="/p/compilationprinciplebaseknowledge/">
+    <a href="/p/compilationprinciplecodegeneration/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">编译原理-基本知识</h2>
+            <h2 class="article-title">编译原理-目标代码生成</h2>
         </div>
     </a>
 </article>
@@ -465,12 +980,12 @@
             
                 
 <article class="">
-    <a href="/p/compilationprinciplecodegeneration/">
+    <a href="/p/compilationprincipleoptimize/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">编译原理-目标代码生成</h2>
+            <h2 class="article-title">编译原理-优化</h2>
         </div>
     </a>
 </article>
