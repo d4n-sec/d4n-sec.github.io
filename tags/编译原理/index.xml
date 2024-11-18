@@ -839,7 +839,7 @@
         <pubDate>Fri, 08 Nov 2024 17:06:57 +0800</pubDate>
         
         <guid>https://d4n-sec.github.io/p/lexicalanalysis/</guid>
-        <description>&lt;h1 id=&#34;词法分析&#34;&gt;词法分析&lt;/h1&gt;
+        <description>&lt;h1 id=&#34;关于&#34;&gt;关于&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;任务&lt;/p&gt;
@@ -874,6 +874,132 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;描述词法规则的有效工具是&lt;em&gt;&lt;strong&gt;正规式&lt;/strong&gt;&lt;/em&gt;和&lt;em&gt;&lt;strong&gt;有限自动机&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;h1 id=&#34;词法分析&#34;&gt;词法分析&lt;/h1&gt;
+&lt;p&gt;编译的第一阶段，在单词的级别上分析和翻译源程序。&lt;/p&gt;
+&lt;h1 id=&#34;理论基础&#34;&gt;理论基础&lt;/h1&gt;
+&lt;h2 id=&#34;有限自动机理论&#34;&gt;有限自动机理论&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;有限自动机理论与&lt;a class=&#34;link&#34; href=&#34;https://d4n-sec.github.io/p/compilationprinciplebaseknowledge/#3%E5%9E%8B%E6%96%87%E6%B3%95&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;正规文法&lt;/a&gt;、正规式之间在描述语言方面有一一对应的关系。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;正规集&#34;&gt;正规集&lt;/h3&gt;
+&lt;p&gt;由正规文法产生的语言&lt;/p&gt;
+&lt;p&gt;正规集是集合，可有穷也可无穷。可通过&lt;a class=&#34;link&#34; href=&#34;#%E6%AD%A3%E8%A7%84%E5%BC%8F&#34; &gt;正规式&lt;/a&gt;来形式化表示。&lt;/p&gt;
+&lt;h3 id=&#34;正规式&#34;&gt;正规式&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241115102302153.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241115102302153&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;诶，蛙趣，笔者被做掉了，正规文法，正规式，正规集傻傻分不清楚。&amp;ndash;TODO&amp;ndash;&lt;/p&gt;
+&lt;h2 id=&#34;有限自动机&#34;&gt;有限自动机&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;有限自动机是一种识别装置，它能准确地识别正规集。它为词法分析程序的构造提供了方法和工具。&lt;/p&gt;
+&lt;p&gt;有限自动机是具有离散输入输出系统的数学模型，它具有有限数目的内部状态，系统可以根据当前所处的状态和面临的输入字符决定系统的后继行为。其当前状态概括了过去输入处理的信息。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;基本模型&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241115103332070.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241115103332070&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;包含确定的有限状态自动机 DFA 和 不确定的有限状态自动机 NFA&lt;/p&gt;
+&lt;p&gt;考试考点如下，笔者用不着，不学&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;NFA确定化
+有限状态自动机的简化&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;有限状态自动机可以和正规式互相转化，正向是简化，反向是分裂&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241115110006664.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241115110006664&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h1 id=&#34;词法分析程序&#34;&gt;词法分析程序&lt;/h1&gt;
+&lt;p&gt;扫描源程序字符串，按照词法规则识别出一个个正确的单词，并转换为相应的二元式形式（类号，内码），交给语法分析使用。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241118161941360.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241118161941360&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;预处理
+&lt;ol&gt;
+&lt;li&gt;源程序中包含注解部分，还有无用的空格、跳格、回车换行等编辑字符，它们与词法分析无关。&lt;/li&gt;
+&lt;li&gt;一行语句结束应配上一个特殊字符说明。&lt;/li&gt;
+&lt;li&gt;有些语言要识别标号区，区分标号语句，找出续行符连接成完整语句等。&lt;/li&gt;
+&lt;li&gt;输出源程序清单以便复核。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;预处理程序任务：
+&lt;ul&gt;
+&lt;li&gt;从输入缓冲区中读取源程序，预处理后送入扫描缓冲区。此时，扫描缓冲区中的字符都是有效字符。&lt;/li&gt;
+&lt;li&gt;词法分析程序这时可以再对扫描缓冲区进行扫描&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;超前搜索&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;一般高级语言不必超前搜索&lt;/p&gt;
+&lt;p&gt;但有些对关键字不加保护的语言，单词间没有明确界符，要在上下文环境中识别单词，这时需要超前搜索。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;词法分析程序输出格式&#34;&gt;词法分析程序输出格式&lt;/h2&gt;
+&lt;p&gt;二元式（类号，内码）：每个单词对应一个二元式。其中类号用整数表示，类号既可区分单词种类，又可便于程序处理。&lt;/p&gt;
+&lt;p&gt;类号用于区分单词的种类，考虑的原则是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;每个基本字占有一个类号，内码缺省；&lt;/li&gt;
+&lt;li&gt;各种标识符统一为一类，由内码来区分不同的标识符名。通常将各标识符的符号表入口地址作为其内码。&lt;/li&gt;
+&lt;li&gt;对于常量，以常量的数据类型区分不同类号，对每类设置相应常量表。各常量在其常量表中的入口地址作为其内码。&lt;/li&gt;
+&lt;li&gt;对于界符，通常一个符号一个类号，内码缺省，&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;单词分类&#34;&gt;单词分类&lt;/h3&gt;
+&lt;p&gt;以C语言为例&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;基本字（关键字、保留字）&lt;/p&gt;
+&lt;p&gt;标识符：变量名、数组名、函数名、过程名&lt;/p&gt;
+&lt;p&gt;常量&lt;/p&gt;
+&lt;p&gt;运算符&lt;/p&gt;
+&lt;p&gt;边界符（界符）：&lt;code&gt;. , ; ( ) : {}&lt;/code&gt;等，有时把运算符当做边界符&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;词法分析程序设计方法&#34;&gt;词法分析程序设计方法&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;写出该语言的词法规则。&lt;/li&gt;
+&lt;li&gt;把词法规则转换为相应的状态转换图，&lt;/li&gt;
+&lt;li&gt;把各转换图的初态连在一起，构成识别该语言的自动机&lt;/li&gt;
+&lt;li&gt;设计扫描器
+&lt;ol&gt;
+&lt;li&gt;把扫描器作为语法分析的一个过程，当语法分析需要一个单词时，就调用扫描器。&lt;/li&gt;
+&lt;li&gt;扫描器从初态出发，当识别一个单词便进入终态，送出二元式。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;可以用状态矩阵代替状态图，以便于计算机处理。&lt;/p&gt;
+&lt;p&gt;词法分析程序=状态转换图+控制程序&lt;/p&gt;
+&lt;p&gt;控制程序简单，关键是构造状态转换矩阵及其相应的语义动作。可根据单词的正规式及其相应的语义动作&lt;em&gt;&lt;strong&gt;自动产生词法分析程序&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
