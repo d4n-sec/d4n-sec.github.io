@@ -666,8 +666,7 @@
         <pubDate>Fri, 08 Nov 2024 17:13:30 +0800</pubDate>
         
         <guid>https://d4n-sec.github.io/p/grammaranalysis/</guid>
-        <description>&lt;h1 id=&#34;语法分析&#34;&gt;语法分析&lt;/h1&gt;
-&lt;ul&gt;
+        <description>&lt;ul&gt;
 &lt;li&gt;任务
 &lt;ul&gt;
 &lt;li&gt;在&lt;a class=&#34;link&#34; href=&#34;https://d4n-sec.github.io/p/lexicalanalysis/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -831,6 +830,98 @@
 &lt;li&gt;确定结束或者用下一个规则处理&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;如此循环，直到所有式子处理结束&lt;/p&gt;
+&lt;h1 id=&#34;语法分析&#34;&gt;语法分析&lt;/h1&gt;
+&lt;p&gt;语法分析的地位：是编译程序的核心部分&lt;/p&gt;
+&lt;p&gt;语法分析程序的处理：识别由词法分析得出的单词序列是否是给定文法的句子。&lt;/p&gt;
+&lt;p&gt;语法分析的理论基础：上下文无关文法和下推自动机&lt;/p&gt;
+&lt;p&gt;语法分析的方式：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;自上而下语法分析反复使用不同产生式进行推导以谋求与输入符号串相匹配&lt;/li&gt;
+&lt;li&gt;自下而上语法分析对输入符号串寻找不同产生式进行归约直到文法开始符号。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这里所说的输入符号指词法分析所识别的单词。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;下推自动机&#34;&gt;下推自动机&lt;/h2&gt;
+&lt;p&gt;下推自动机模型图（PDA）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241118170941172.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241118170941172&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;PDA和FA的模型相比，多了一个下推栈。&lt;/li&gt;
+&lt;li&gt;PDA的动作由三个因素来决定：当前状态、读头所指向符号、下推栈栈顶符号。&lt;/li&gt;
+&lt;li&gt;一个输入串能被PDA所接受，仅当输入串读完，下推栈变空；或输入串读完，控制器到达某些终态&lt;/li&gt;
+&lt;li&gt;正规文法和有限自动机仅适合于描述和识别高级语言的各类单词，语句可用上下文无关文法来描述，而下推自动机又恰好能识别上下文无关文法所能描述的语言，因此上下文无关文法及其对应的下推自动机就成为编译技术中语法分析的理论基础。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241118171246565.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241118171246565&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241118171541274.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241118171541274&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;自上而下分析法&#34;&gt;自上而下分析法&lt;/h2&gt;
+&lt;p&gt;定义：从文法的开始符号开始，反复使用不同产生式进行推导以谋求与&lt;em&gt;&lt;strong&gt;输入符号串&lt;/strong&gt;&lt;/em&gt;相匹配。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;此处的输入符号串是指词法分析结果的一串二元式&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;一般方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;试探法：带回溯的自上而下分析法。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;缺陷：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果文法存在左递归，语法分析会无限循环下去。（分为直接和间接左递归，可以消除左递归）&lt;/p&gt;
+&lt;p&gt;若产生式存在多个候选式，选择哪个进行推导完全是盲目的。（预测与提左因子）&lt;/p&gt;
+&lt;p&gt;回溯会引起时间和空间的大量消耗。（可以消除回溯，非盲目选择即可消除回溯）&lt;/p&gt;
+&lt;p&gt;如果被识别的语句是错的，算法无法指出错误的确
+切位置。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;带预测分析的pda&#34;&gt;带预测分析的PDA&lt;/h2&gt;
+&lt;p&gt;在PDA中加入预测分析之后，可以消除自上而下分析中出现回溯的现象。此时PDA可以改造为：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241119121345672.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241119121345672&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;改造后，整个分析过程都在预测分析程序控制下工作。&lt;/li&gt;
+&lt;li&gt;预测分析程序用了一个预测分析表，它是预测分析程序分析时的主要依据。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;预测分析表是一矩阵M[A,a]，其中行标A是非终结符，列标a是终结符或串结束符;矩阵元素M[A,a]是存放A的一个候选式，指出当前栈顶符号为A且面临读入符号为a时应选的候选式；或者存放“出错标志”，指出A不该面临读入符号a。&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
         </item>
         <item>
