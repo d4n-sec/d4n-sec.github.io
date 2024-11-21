@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>JNDI on Dan`s Blog</title>
+        <link>https://d4n-sec.github.io/tags/jndi/</link>
+        <description>Recent content in JNDI on Dan`s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>DanSec</copyright>
+        <lastBuildDate>Thu, 21 Nov 2024 10:04:22 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/jndi/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Java基础知识：JNDI</title>
+        <link>https://d4n-sec.github.io/p/javaaboutjndi/</link>
+        <pubDate>Thu, 21 Nov 2024 10:04:22 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/javaaboutjndi/</guid>
+        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121100840910.png" alt="Featured image of post Java基础知识：JNDI" /&gt;&lt;p&gt;OK，又到了喜闻乐见的Java基础知识环节&lt;/p&gt;
+&lt;h1 id=&#34;何为jndi&#34;&gt;何为JNDI&lt;/h1&gt;
+&lt;p&gt;JNDI，即&lt;code&gt;Java Naming and Directory Interface&lt;/code&gt;，直译为 Java命名与&lt;em&gt;&lt;strong&gt;目录&lt;/strong&gt;&lt;/em&gt;接口&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Java&lt;/code&gt;表明了这个玩意儿大概率只在Java中存在&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Interface&lt;/code&gt;表明了这个玩意儿是一个 Interface（接口），Interface 的作用是什么？模拟一种规范&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Naming and Directory&lt;/code&gt;这个的直译其实有些不对，&lt;code&gt;Naming&lt;/code&gt;确实是命名，但是英文中的&lt;code&gt;Directory&lt;/code&gt;其实更偏向于电话簿，地址簿类似的东西&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

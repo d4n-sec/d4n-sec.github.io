@@ -7,7 +7,47 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>DanSec</copyright>
-        <lastBuildDate>Thu, 14 Nov 2024 14:03:12 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 21 Nov 2024 10:04:22 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>JNDI</title>
+        <link>https://d4n-sec.github.io/tags/jndi/</link>
+        <pubDate>Thu, 21 Nov 2024 10:04:22 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/jndi/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>J2EE</title>
+        <link>https://d4n-sec.github.io/tags/j2ee/</link>
+        <pubDate>Thu, 21 Nov 2024 10:00:30 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/j2ee/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Linux</title>
+        <link>https://d4n-sec.github.io/tags/linux/</link>
+        <pubDate>Thu, 21 Nov 2024 10:00:00 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/linux/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>SSH</title>
+        <link>https://d4n-sec.github.io/tags/ssh/</link>
+        <pubDate>Thu, 21 Nov 2024 10:00:00 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/ssh/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>环境</title>
+        <link>https://d4n-sec.github.io/tags/%E7%8E%AF%E5%A2%83/</link>
+        <pubDate>Thu, 21 Nov 2024 10:00:00 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/%E7%8E%AF%E5%A2%83/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>编译原理</title>
         <link>https://d4n-sec.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</link>
         <pubDate>Thu, 14 Nov 2024 14:03:12 +0800</pubDate>
@@ -53,14 +93,6 @@
         <pubDate>Thu, 17 Oct 2024 16:09:39 +0800</pubDate>
         
         <guid>https://d4n-sec.github.io/tags/%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>环境</title>
-        <link>https://d4n-sec.github.io/tags/%E7%8E%AF%E5%A2%83/</link>
-        <pubDate>Mon, 19 Aug 2024 22:11:14 +0800</pubDate>
-        
-        <guid>https://d4n-sec.github.io/tags/%E7%8E%AF%E5%A2%83/</guid>
         <description></description>
         </item>
         <item>

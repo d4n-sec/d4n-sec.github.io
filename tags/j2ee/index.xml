@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>J2EE on Dan`s Blog</title>
+        <link>https://d4n-sec.github.io/tags/j2ee/</link>
+        <description>Recent content in J2EE on Dan`s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>DanSec</copyright>
+        <lastBuildDate>Thu, 21 Nov 2024 10:00:30 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/j2ee/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Java基础知识：J2EE</title>
+        <link>https://d4n-sec.github.io/p/javaaboutj2ee/</link>
+        <pubDate>Thu, 21 Nov 2024 10:00:30 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/javaaboutj2ee/</guid>
+        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121112316304.png" alt="Featured image of post Java基础知识：J2EE" /&gt;&lt;h1 id=&#34;java--j2ee&#34;&gt;JAVA &amp;amp; J2EE&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;Java&lt;/code&gt;和&lt;code&gt;Java EE&lt;/code&gt;（也可称&lt;code&gt;J2EE&lt;/code&gt;，其中的&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/zl1zl2zl3/article/details/86030331&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;故事&lt;/a&gt;）是两个不同概念&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Java&lt;/code&gt;不仅指一种语言，也可以指一种软件系统的流派&lt;/p&gt;
+&lt;p&gt;目前&lt;code&gt;JAVA&lt;/code&gt;有三个平台：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;适用于小型设备和智能卡的&lt;code&gt;Java&lt;/code&gt;平台&lt;code&gt;Micro&lt;/code&gt;版&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Java Platform Micro Edition&lt;/code&gt;=&amp;gt;&lt;code&gt;Java ME&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;适用于桌面系统的&lt;code&gt;Java&lt;/code&gt;平台标准版&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Java Platform Standard Edition&lt;/code&gt;=&amp;gt;&lt;code&gt;Java SE&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;适用于创建服务器应用程序和服务的Java平台企业版&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Java Platform EnterPrise Edition&lt;/code&gt;=&amp;gt;&lt;code&gt;Java EE&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Java EE是将所有基于Java的企业应用开发技术集合在一个体系结构下的平台&lt;/p&gt;
+&lt;p&gt;企业应用开发覆盖面比较广泛，基本上都是围绕数据中心式的Web应用&lt;/p&gt;
+&lt;h1 id=&#34;主流web开发技术&#34;&gt;主流Web开发技术&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;java EE是面向企业开发用的java版本。
+J2EE使用多层的分布式应用模型，有的分四层有的分三层，其实都是差不多的。我这里分三层：表现层（UI）、业务逻辑层（BLL）、数据访问层/持久层框架（DAL）。
+在不同的层上使用不同的框架，那么，不同的层上都有如下的框架：
+表现层框架：SpringMVC框架，Struts2框架、JSF框架、Tapestry框架、WebWork框架
+业务逻辑层框架：Spring框架
+持久层框架：Hibernate框架、MyBatis&lt;/p&gt;
+&lt;p&gt;在市面上大家常用如下的框架组合，可以发挥各框架的最大优势，良好的解决企业级应用的需求。
+Struts+Spring+Hibernate框架（SSH框架）
+SpringMVC+Spring+Hibernate框架
+SpringMVC+Spring+MyBatis框架（SSM框架）&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
