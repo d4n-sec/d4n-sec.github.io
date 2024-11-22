@@ -10,9 +10,10 @@
 <meta property='og:description' content='Java基础知识补充'>
 <meta property='og:url' content='https://d4n-sec.github.io/p/javaaboutjpa/'>
 <meta property='og:site_name' content='Dan`s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='JPA' /><meta property='article:tag' content='基础知识' /><meta property='article:published_time' content='2024-11-22T15:28:55&#43;08:00'/><meta property='article:modified_time' content='2024-11-22T15:28:55&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='JPA' /><meta property='article:tag' content='基础知识' /><meta property='article:published_time' content='2024-11-22T15:28:55&#43;08:00'/><meta property='article:modified_time' content='2024-11-22T15:28:55&#43;08:00'/><meta property='og:image' content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241122153243285.png' />
 <meta name="twitter:title" content="Java基础知识：JPA">
-<meta name="twitter:description" content="Java基础知识补充">
+<meta name="twitter:description" content="Java基础知识补充"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241122153243285.png' />
     <link rel="shortcut icon" href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/paper-plane-64.webp" />
 
     </head>
@@ -270,20 +271,28 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li>
+    <li><a href="#whats-jpa">What&rsquo;s JPA</a>
       <ol>
-        <li><a href="#draft-false">title: &ldquo;Java基础知识：J2EE&rdquo;
-description: Java基础知识补充
-slug: &ldquo;JavaAboutJ2EE&rdquo;
-date: 2024-11-21T10:00:30+08:00
-image: <a href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121112316304.png">https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121112316304.png</a>
-tags: [J2EE]
-categories: [Java学习路]
-hidden: false
-comments: true
-draft: false</a></li>
+        <li><a href="#whats-orm">What&rsquo;s ORM</a>
+          <ol>
+            <li><a href="#summary-of-orm">Summary of ORM</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
+    <li><a href="#how-to-do">How to Do</a>
+      <ol>
+        <li><a href="#non-jpa">Non-JPA</a></li>
+        <li><a href="#use-jpa">Use-JPA</a></li>
+      </ol>
+    </li>
+    <li><a href="#supplementary">Supplementary</a>
+      <ol>
+        <li><a href="#java-data-objects">Java Data Objects</a></li>
+      </ol>
+    </li>
+    <li><a href="#after-all">After All</a></li>
+    <li><a href="#ref">Ref</a></li>
   </ol>
 </nav>
         </div>
@@ -295,8 +304,16 @@ draft: false</a></li>
 
 
             <main class="main full-width">
-    <article class="main-article">
+    <article class="has-image main-article">
     <header class="article-header">
+        <div class="article-image">
+            <a href="/p/javaaboutjpa/">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241122153243285.png" loading="lazy" alt="Featured image of post Java基础知识：JPA" />
+                
+            </a>
+        </div>
+    
 
     <div class="article-details">
     
@@ -352,7 +369,7 @@ draft: false</a></li>
 
 
                 <time class="article-time--reading">
-                    阅读时长: 1 分钟
+                    阅读时长: 3 分钟
                 </time>
             </div>
         
@@ -367,17 +384,156 @@ draft: false</a></li>
     <section class="article-content">
     
     
-    <h2 id="draft-false">title: &ldquo;Java基础知识：J2EE&rdquo;
-description: Java基础知识补充
-slug: &ldquo;JavaAboutJ2EE&rdquo;
-date: 2024-11-21T10:00:30+08:00
-image: <a class="link" href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121112316304.png"  target="_blank" rel="noopener"
-    >https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121112316304.png</a>
-tags: [J2EE]
-categories: [Java学习路]
-hidden: false
-comments: true
-draft: false</h2>
+    <p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241122153243285.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="show"
+	
+	
+></p>
+<h1 id="whats-jpa">What&rsquo;s JPA</h1>
+<p>JPA（Jakarta Persistence API）是一个规范，定义了Java应用程序中持久性的一组概念。JPA提供了一个对象关系映射（ORM）层，允许开发人员使用Java对象进行工作，而无需手动转换对象导向范式和关系数据库之间的差异。JPA实现如<code>Hibernate</code>和<code>EclipseLink</code>处理Java对象和数据库表之间的转换，使开发人员免于编写底层JDBC代码。</p>
+<h2 id="whats-orm">What&rsquo;s ORM</h2>
+<p>ORM是一项任务 - 开发人员有很好的理由手动避免执行这项任务。</p>
+<p>像<code>Hibernate</code>或<code>EclipseLink</code>这样的框架将该任务编纂为一个库或框架，这就是ORM层。作为应用程序架构的一部分，ORM层负责管理软件对象与关系数据库中的表和列之间的转换。</p>
+<p>在Java中，ORM层将Java类和对象转换为可以存储和管理在关系数据库中的形式。默认情况下，被持久化的对象的名称成为表的名称，字段成为列。一旦表设置好，每个表行都对应于应用程序中的一个对象。</p>
+<h3 id="summary-of-orm">Summary of ORM</h3>
+<p>ORM是一种将面向对象的数据模型映射到关系数据库模型的技术。</p>
+<p>ORM层是实现这种映射的框架或库，它负责在应用程序代码和数据库之间进行转换，使开发人员无需手动编写JDBC代码。</p>
+<p>下图说明了JPA和ORM层在应用程序开发中的作用。</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241122154557335.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241122154557335"
+	
+	
+></p>
+<h1 id="how-to-do">How to Do</h1>
+<p>使用一个栗子来感受一下，不使用JPA和使用JPA的差异</p>
+<p>定义一个简单的数据 Java 类 <code>Musician</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Musician</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">Instrument</span><span class="w"> </span><span class="n">mainInstrument</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">ArrayList</span><span class="w"> </span><span class="n">performances</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">Musician</span><span class="p">(</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">){</span><span class="w"> </span><span class="cm">/* constructor setters... */</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setName</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getName</span><span class="p">(){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setMainInstrument</span><span class="p">(</span><span class="n">Instrument</span><span class="w"> </span><span class="n">instr</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">instrument</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">instr</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Instrument</span><span class="w"> </span><span class="nf">getMainInstrument</span><span class="p">(){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">instrument</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// ...Other getters and setters...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>Musician</code>类用于保存数据。它可以包含诸如名称字段之类的基本数据类型，也可以包含对其他类(如<code>Instrument</code>和<code>ArrayList</code>)对象的引用关系。</p>
+<p><code>Musician</code>类的主要目的是保存数据。</p>
+<blockquote>
+<p>这种类型的类有时被称为DTO(数据传输对象)。DTO是软件开发中的一个常见特征。它们可以保存各种类型的数据，但不包含任何业务逻辑。</p>
+</blockquote>
+<h2 id="non-jpa">Non-JPA</h2>
+<p>这时候，如果要去查询或者操作数据库，代码应该如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Musician</span><span class="w"> </span><span class="n">georgeHarrison</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Musician</span><span class="p">(</span><span class="n">0</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;George Harrison&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">myDriver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;org.gjt.mm.mysql.Driver&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">myUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;jdbc:mysql://localhost/test&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">Class</span><span class="p">.</span><span class="na">forName</span><span class="p">(</span><span class="n">myDriver</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">Connection</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DriverManager</span><span class="p">.</span><span class="na">getConnection</span><span class="p">(</span><span class="n">myUrl</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;root&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34; insert into users (id, name) values (?, ?)&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">PreparedStatement</span><span class="w"> </span><span class="n">preparedStmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conn</span><span class="p">.</span><span class="na">prepareStatement</span><span class="p">(</span><span class="n">query</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">preparedStmt</span><span class="p">.</span><span class="na">setInt</span><span class="w">     </span><span class="p">(</span><span class="n">1</span><span class="p">,</span><span class="w"> </span><span class="n">0</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">preparedStmt</span><span class="p">.</span><span class="na">setString</span><span class="w"> </span><span class="p">(</span><span class="n">2</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;George Harrison&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">preparedStmt</span><span class="p">.</span><span class="na">setString</span><span class="w"> </span><span class="p">(</span><span class="n">2</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Rubble&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">preparedStmt</span><span class="p">.</span><span class="na">execute</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">conn</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 省略错误处理代码</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>上方代码和业务场景耦合度相当高。<code>georgeHarrison</code>对象可以来自任何地方(前端提交、外部服务等),并且其ID和名称字段已设置。对象上的字段用于提供SQL插入语句的值。(<code>PreparedStatement</code>类是JDBC的一部分,提供了一种安全地将值应用于SQL查询的方法。)</p>
+<p>虽然JDBC提供了手动配置所带来的可控性，但与JPA相比它更加繁琐。要修改数据库，您首先需要创建一个SQL查询，将Java对象映射到关系数据库中的表。您随后还需要在对象签名发生变化时修改SQL。使用JDBC，维护SQL本身就成为程序员的一项任务，而这个与业务逻辑相距甚远。</p>
+<h2 id="use-jpa">Use-JPA</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JAVA" data-lang="JAVA"><span class="line"><span class="cl"><span class="n">Musician</span><span class="w"> </span><span class="n">georgeHarrison</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Musician</span><span class="p">(</span><span class="n">0</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;George Harrison&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">musicianManager</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">georgeHarrison</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>手动SQL替换为单行代码<code>entityManager.save()</code>，这会告诉JPA需要持久化该对象。从此以后，框架会处理SQL转换。</p>
+<p>因此程序员无需离开面向对象编程的范围。</p>
+<h1 id="supplementary">Supplementary</h1>
+<h2 id="java-data-objects">Java Data Objects</h2>
+<blockquote>
+<p>Java Data Objects (JDO)是一个标准化的持久性框架，它与JPA的主要区别在于在对象中支持持久性逻辑，以及它长期以来对非关系数据存储的支持。 JPA和JDO足够相似，以至于JDO提供程序通常也支持JPA。 请访问 <a class="link" href="https://db.apache.org/jdo/why_jdo.html"  target="_blank" rel="noopener"
+    >Apache JDO Project</a> 了解更多关于JDO与JPA和JDBC等其他持久性标准的信息。</p>
+</blockquote>
+<h1 id="after-all">After All</h1>
+<ul>
+<li>JPA是一个定义Java应用程序持久性概念的规范</li>
+<li>JPA提供了一个ORM层，抽象了Java对象和关系数据库之间的转换</li>
+<li>流行的JPA实现包括Hibernate和EclipseLink</li>
+</ul>
+<h1 id="ref">Ref</h1>
+<p><a class="link" href="https://www.infoworld.com/article/2259807/what-is-jpa-introduction-to-the-java-persistence-api.html"  target="_blank" rel="noopener"
+    >https://www.infoworld.com/article/2259807/what-is-jpa-introduction-to-the-java-persistence-api.html</a></p>
 
 </section>
 
