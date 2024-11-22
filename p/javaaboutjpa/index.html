@@ -291,6 +291,7 @@
         <li><a href="#java-data-objects">Java Data Objects</a></li>
       </ol>
     </li>
+    <li><a href="#other-articles">Other Articles</a></li>
     <li><a href="#after-all">After All</a></li>
     <li><a href="#ref">Ref</a></li>
   </ol>
@@ -369,7 +370,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 3 分钟
+                    阅读时长: 5 分钟
                 </time>
             </div>
         
@@ -525,6 +526,28 @@
 <p>Java Data Objects (JDO)是一个标准化的持久性框架，它与JPA的主要区别在于在对象中支持持久性逻辑，以及它长期以来对非关系数据存储的支持。 JPA和JDO足够相似，以至于JDO提供程序通常也支持JPA。 请访问 <a class="link" href="https://db.apache.org/jdo/why_jdo.html"  target="_blank" rel="noopener"
     >Apache JDO Project</a> 了解更多关于JDO与JPA和JDBC等其他持久性标准的信息。</p>
 </blockquote>
+<h1 id="other-articles">Other Articles</h1>
+<p>JPA（Java Persistence API）是 Java 标准中的一套ORM规范</p>
+<blockquote>
+<p>提供了一些编程的 API 接口，具体实现由 ORM 厂商实现，如Hiernate、TopLink 、Eclipselink等都是 JPA 的具体实现</p>
+</blockquote>
+<p>借助 JPA 技术可以通过注解或者XML描述【对象-关系表】之间的映射关系，并将实体对象持久化到数据库中（即Object Model与Data Model间的映射）。</p>
+<p>JPA是Java持久层API，由Sun公司开发，希望规范、简化Java对象的持久化工作，整合ORM技术，整合第三方ORM框架，建立一种标准的方式，目前也是在按照这个方向发展，但是还没能完全实现。在ORM框架中，Hibernate框架做了较好的 JPA 实现，已获得Sun的兼容认证。</p>
+<p><strong>JPA 的优势：</strong></p>
+<ol>
+<li>
+<p>开发者面向 JPA 规范的接口，但底层的JPA实现可以任意切换：觉得Hibernate好的，可以选择Hibernate JPA实现；觉得TopLink好的，可以选择TopLink JPA实现。</p>
+</li>
+<li>
+<p>开发者可以避免为使用Hibernate学习一套ORM框架，为使用TopLink又要再学习一套ORM框架。</p>
+</li>
+</ol>
+<p><strong>JPA为我们提供了以下规范：</strong></p>
+<ul>
+<li>ORM映射元数据：JPA支持XML和注解两种元数据的形式，元数据描述对象和表之间的映射关系，框架据此将实体对象持久化到数据库表中</li>
+<li>JPA的<strong>Criteria API</strong>：提供API来操作实体对象，执行CRUD操作，框架会自动将之转换为对应的SQL，使开发者从繁琐的 JDBC、SQL中解放出来。</li>
+<li>JPQL查询语言：通过面向对象而非面向数据库的查询语言查询数据，避免程序的SQL语句紧密耦合。</li>
+</ul>
 <h1 id="after-all">After All</h1>
 <ul>
 <li>JPA是一个定义Java应用程序持久性概念的规范</li>
