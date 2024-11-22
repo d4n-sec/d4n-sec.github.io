@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>EJB on Dan`s Blog</title>
+        <link>https://d4n-sec.github.io/tags/ejb/</link>
+        <description>Recent content in EJB on Dan`s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>DanSec</copyright>
+        <lastBuildDate>Fri, 22 Nov 2024 15:01:58 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/ejb/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Java基础知识：EJB</title>
+        <link>https://d4n-sec.github.io/p/javaaboutejb/</link>
+        <pubDate>Fri, 22 Nov 2024 15:01:58 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/javaaboutejb/</guid>
+        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241122152021833.png" alt="Featured image of post Java基础知识：EJB" /&gt;&lt;h1 id=&#34;whats-ejb&#34;&gt;What&amp;rsquo;s EJB&lt;/h1&gt;
+&lt;p&gt;EJB =&amp;gt; &lt;code&gt;Enterprise Java Beans&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;直译：企业 Java Beans&lt;/p&gt;
+&lt;p&gt;EJB 的官方解释：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;商务软件的核心部分是它的业务逻辑。业务逻辑抽象了整个商务过程的流程，并使用计算机语言将他们实现。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;所谓：&amp;quot;&lt;em&gt;&lt;strong&gt;业务逻辑&lt;/strong&gt;&lt;/em&gt;&amp;quot;
+我们注意到在EJB 的概念中主要提到的就是&amp;quot;业务逻辑&amp;quot;的封装，而这个业务逻辑到底是什么？说的那么悬乎，其实这个所谓的&amp;quot;业务逻辑&amp;quot;我们完全可以理解成执行特定任务的&amp;quot;类&amp;quot;。&lt;/p&gt;
+&lt;p&gt;剖析2：所谓：&amp;quot;&lt;em&gt;&lt;strong&gt;将业务逻辑从客户端软件中抽取出来，封装在组件中……运行在一个服务器上&lt;/strong&gt;&lt;/em&gt;&amp;quot;
+既然我们知道了&amp;quot;业务逻辑&amp;quot;的概念就是执行特定任务的&amp;quot;类&amp;quot;，那么，什么叫&amp;quot;从客户端软件中抽取出来&amp;quot;？其实，这个就是把原来放到客户端的&amp;quot;类&amp;quot;，拿出来不放到客户端了，放到一个组件中，并将这个组件放到一个服务器上去运行。&lt;/p&gt;
+&lt;h1 id=&#34;how-to-do&#34;&gt;How to Do&lt;/h1&gt;
+&lt;p&gt;从上面的分析中，可以得知，做法是：&amp;ldquo;把你编写的软件中那些需要执行制定的任务的类，不放到客户端软件上了，而是给他打成包放到一个服务器上了&amp;rdquo;。&lt;/p&gt;
+&lt;p&gt;不管是用&amp;quot;八股文&amp;quot;说，还是用大白话说这个 &lt;em&gt;&lt;strong&gt;EJB&lt;/strong&gt;&lt;/em&gt; 概念都提到了一个词 &lt;em&gt;&lt;strong&gt;客户端软件&lt;/strong&gt;&lt;/em&gt;。客户端软件？难道 EJB 的概念中说的是C/S 软件？&lt;/p&gt;
+&lt;p&gt;是的，没错！&lt;/p&gt;
+&lt;p&gt;EJB 就是将那些&amp;quot;类&amp;quot;放到一个服务器上，用 C/S 形式的软件客户端对服务器上的&amp;quot;类&amp;quot;进行调用。&lt;/p&gt;
+&lt;h1 id=&#34;principle-of-ejb&#34;&gt;Principle of EJB&lt;/h1&gt;
+&lt;p&gt;再来分析 EJB 的底层实现技术，通过底层实现技术来分析EJB 的工作方式。&lt;/p&gt;
+&lt;p&gt;EJB 是运行在独立服务器上的组件，客户端是通过网络对EJB 对象进行调用的。在Java中，能够实现远程对象调用的技术是RMI，而EJB 技术基础正是RMI。通过RMI 技术，J2EE 将EJB 组件创建为远程对象，客户端就可以通过网络调用 EJB 对象了。&lt;/p&gt;
+&lt;p&gt;什么是 RMI ？点&lt;a class=&#34;link&#34; href=&#34;https://d4n-sec.github.io/p/rmi-study/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;这里&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;优点与缺点&#34;&gt;优点与缺点&lt;/h2&gt;
+&lt;h3 id=&#34;优点&#34;&gt;优点&lt;/h3&gt;
+&lt;p&gt;这种机制给分布计算的系统设计、编程都带来了极大的方便。只要按照RMI 规则设计程序，可以不必再过问在RMI 之下的网络细节了，如：TCP 和Socket 等等。任意两台计算机之间的通讯完全由RMI 负责。调用远程计算机上的对象就像本地对象一样方便。RMI 可将完整的对象作为参数和返回值进行传递，而不仅仅是预定义的数据类型。也就是说，可以将类似Java 哈西表这样的复杂类型作为一个参数进行传递。&lt;/p&gt;
+&lt;h3 id=&#34;缺点&#34;&gt;缺点&lt;/h3&gt;
+&lt;p&gt;如果是较为简单的方法调用，其执行效率也许会比本地执行慢很多，即使和远程Socket机制的简单数据返回的应用相比，也会慢一些，原因是，其在网络间需要传递的信息不仅仅包含该函数的返回值信息，还会包含该对象序列化后的字节内容。&lt;/p&gt;
+&lt;h2 id=&#34;ejb-是以-rmi-为基础的&#34;&gt;EJB 是以 RMI 为基础的&lt;/h2&gt;
+&lt;p&gt;通过RMI 技术，J2EE 将EJB 组件创建为远程对象，EJB 虽然用了RMI 技术，但是却只需要定义远程接口而无需生成他们的实现类，这样就将RMI 技术中的一些细节问题屏蔽了。但不管怎么说，EJB 的基础仍然是RMI，所以，如果你想了解EJB 的原理，只要把RMI的原理搞清楚就行了。你也就弄清楚了什么时候用EJB 什么时候不需要用EJB 了。&lt;/p&gt;
+&lt;h1 id=&#34;when-use-it&#34;&gt;When Use It&lt;/h1&gt;
+&lt;p&gt;通过上面小节的讲解似乎好像 EJB 和开发 Web 应用的B/S 结构的系统关系并不大，其实倒也不然。我们如果把&amp;quot;客户端程序&amp;quot;理解成某一台服务器，这样也是可以被应用的，而且，如果是服务器互相之间做 EJB 的调用的话，也就不存在广域网带宽限制的问题了。但是，如下情况尽量就不要使用EJB 了：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;较为简单的纯Web 应用开发，不需要用EJB。&lt;/li&gt;
+&lt;li&gt;需要与其他服务程序配合使用的应用，但调用或返回的自定义的网络协议可以解决的应用程序,不需要使用EJB。&lt;/li&gt;
+&lt;li&gt;较多人并发访问的C/S 结构的应用程序，尽量不要使用EJB。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;after-all&#34;&gt;After All&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;EJB实现原理： 就是把原来放到客户端实现的代码放到服务器端，并依靠RMI进行通信。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;RMI实现原理 ：就是通过Java对象可序列化机制实现分布计算。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;服务器集群： 就是通过RMI的通信，连接不同功能模块的服务器，以实现一个完整的功能。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;ref&#34;&gt;Ref&lt;/h1&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/kouzhaokui/article/details/89176541&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.csdn.net/kouzhaokui/article/details/89176541&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

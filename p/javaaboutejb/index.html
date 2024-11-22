@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Java基础知识补充'>
+<title>Java基础知识：EJB</title>
+
+<link rel='canonical' href='https://d4n-sec.github.io/p/javaaboutejb/'>
+
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='Java基础知识：EJB'>
+<meta property='og:description' content='Java基础知识补充'>
+<meta property='og:url' content='https://d4n-sec.github.io/p/javaaboutejb/'>
+<meta property='og:site_name' content='Dan`s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='EJB' /><meta property='article:published_time' content='2024-11-22T15:01:58&#43;08:00'/><meta property='article:modified_time' content='2024-11-22T15:01:58&#43;08:00'/><meta property='og:image' content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241122152021833.png' />
+<meta name="twitter:title" content="Java基础知识：EJB">
+<meta name="twitter:description" content="Java基础知识补充"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241122152021833.png' />
+    <link rel="shortcut icon" href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/paper-plane-64.webp" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/TX.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🐹</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Dan`s Blog</a></h1>
+            <h2 class="site-description">今人不见古时月</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='/%E5%85%B3%E4%BA%8E'
+                        target="_blank"
+                        title="contactMe"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1709702435352" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8388" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32z m-40 110.8V792H136V270.8l-27.6-21.5 39.3-50.5 42.8 33.3h643.1l42.8-33.3 39.3 50.5-27.7 21.5z" fill="#bfbfbf" p-id="8389"></path><path d="M833.6 232L512 482 190.4 232l-42.8-33.3-39.3 50.5 27.6 21.5 341.6 265.6c20.2 15.7 48.5 15.7 68.7 0L888 270.8l27.6-21.5-39.3-50.5-42.7 33.2z" p-id="8390" fill="#bfbfbf"></path></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/d4n-sec'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='http://wpa.qq.com/msgrd?v=3&amp;uin=1664022865&amp;site=qq&amp;menu=yes'
+                        target="_blank"
+                        title="QQNum"
+                        rel="me"
+                    >
+                        
+                        
+                            
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1709702077457" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13062" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3C766.5 262.2 689.3 112 511.5 112 331.7 112 256.2 265.2 261 447.9c-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z" p-id="13063" fill="#bfbfbf"></path></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+    </ol>
+    <div class="menu-bottom-section">
+        <ol class="menu">
+
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </ol>
+    </div>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#whats-ejb">What&rsquo;s EJB</a></li>
+    <li><a href="#how-to-do">How to Do</a></li>
+    <li><a href="#principle-of-ejb">Principle of EJB</a>
+      <ol>
+        <li><a href="#优点与缺点">优点与缺点</a>
+          <ol>
+            <li><a href="#优点">优点</a></li>
+            <li><a href="#缺点">缺点</a></li>
+          </ol>
+        </li>
+        <li><a href="#ejb-是以-rmi-为基础的">EJB 是以 RMI 为基础的</a></li>
+      </ol>
+    </li>
+    <li><a href="#when-use-it">When Use It</a></li>
+    <li><a href="#after-all">After All</a></li>
+    <li><a href="#ref">Ref</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/javaaboutejb/">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241122152021833.png" loading="lazy" alt="Featured image of post Java基础知识：EJB" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/java%E5%AD%A6%E4%B9%A0%E8%B7%AF/" >
+                Java学习路
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/javaaboutejb/">Java基础知识：EJB</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Java基础知识补充
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Nov 22, 2024 15:01 &#43;0800</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="whats-ejb">What&rsquo;s EJB</h1>
+<p>EJB =&gt; <code>Enterprise Java Beans</code></p>
+<p>直译：企业 Java Beans</p>
+<p>EJB 的官方解释：</p>
+<blockquote>
+<p>商务软件的核心部分是它的业务逻辑。业务逻辑抽象了整个商务过程的流程，并使用计算机语言将他们实现。</p>
+</blockquote>
+<p>所谓：&quot;<em><strong>业务逻辑</strong></em>&quot;
+我们注意到在EJB 的概念中主要提到的就是&quot;业务逻辑&quot;的封装，而这个业务逻辑到底是什么？说的那么悬乎，其实这个所谓的&quot;业务逻辑&quot;我们完全可以理解成执行特定任务的&quot;类&quot;。</p>
+<p>剖析2：所谓：&quot;<em><strong>将业务逻辑从客户端软件中抽取出来，封装在组件中……运行在一个服务器上</strong></em>&quot;
+既然我们知道了&quot;业务逻辑&quot;的概念就是执行特定任务的&quot;类&quot;，那么，什么叫&quot;从客户端软件中抽取出来&quot;？其实，这个就是把原来放到客户端的&quot;类&quot;，拿出来不放到客户端了，放到一个组件中，并将这个组件放到一个服务器上去运行。</p>
+<h1 id="how-to-do">How to Do</h1>
+<p>从上面的分析中，可以得知，做法是：&ldquo;把你编写的软件中那些需要执行制定的任务的类，不放到客户端软件上了，而是给他打成包放到一个服务器上了&rdquo;。</p>
+<p>不管是用&quot;八股文&quot;说，还是用大白话说这个 <em><strong>EJB</strong></em> 概念都提到了一个词 <em><strong>客户端软件</strong></em>。客户端软件？难道 EJB 的概念中说的是C/S 软件？</p>
+<p>是的，没错！</p>
+<p>EJB 就是将那些&quot;类&quot;放到一个服务器上，用 C/S 形式的软件客户端对服务器上的&quot;类&quot;进行调用。</p>
+<h1 id="principle-of-ejb">Principle of EJB</h1>
+<p>再来分析 EJB 的底层实现技术，通过底层实现技术来分析EJB 的工作方式。</p>
+<p>EJB 是运行在独立服务器上的组件，客户端是通过网络对EJB 对象进行调用的。在Java中，能够实现远程对象调用的技术是RMI，而EJB 技术基础正是RMI。通过RMI 技术，J2EE 将EJB 组件创建为远程对象，客户端就可以通过网络调用 EJB 对象了。</p>
+<p>什么是 RMI ？点<a class="link" href="https://d4n-sec.github.io/p/rmi-study/"  target="_blank" rel="noopener"
+    >这里</a></p>
+<h2 id="优点与缺点">优点与缺点</h2>
+<h3 id="优点">优点</h3>
+<p>这种机制给分布计算的系统设计、编程都带来了极大的方便。只要按照RMI 规则设计程序，可以不必再过问在RMI 之下的网络细节了，如：TCP 和Socket 等等。任意两台计算机之间的通讯完全由RMI 负责。调用远程计算机上的对象就像本地对象一样方便。RMI 可将完整的对象作为参数和返回值进行传递，而不仅仅是预定义的数据类型。也就是说，可以将类似Java 哈西表这样的复杂类型作为一个参数进行传递。</p>
+<h3 id="缺点">缺点</h3>
+<p>如果是较为简单的方法调用，其执行效率也许会比本地执行慢很多，即使和远程Socket机制的简单数据返回的应用相比，也会慢一些，原因是，其在网络间需要传递的信息不仅仅包含该函数的返回值信息，还会包含该对象序列化后的字节内容。</p>
+<h2 id="ejb-是以-rmi-为基础的">EJB 是以 RMI 为基础的</h2>
+<p>通过RMI 技术，J2EE 将EJB 组件创建为远程对象，EJB 虽然用了RMI 技术，但是却只需要定义远程接口而无需生成他们的实现类，这样就将RMI 技术中的一些细节问题屏蔽了。但不管怎么说，EJB 的基础仍然是RMI，所以，如果你想了解EJB 的原理，只要把RMI的原理搞清楚就行了。你也就弄清楚了什么时候用EJB 什么时候不需要用EJB 了。</p>
+<h1 id="when-use-it">When Use It</h1>
+<p>通过上面小节的讲解似乎好像 EJB 和开发 Web 应用的B/S 结构的系统关系并不大，其实倒也不然。我们如果把&quot;客户端程序&quot;理解成某一台服务器，这样也是可以被应用的，而且，如果是服务器互相之间做 EJB 的调用的话，也就不存在广域网带宽限制的问题了。但是，如下情况尽量就不要使用EJB 了：</p>
+<ol>
+<li>较为简单的纯Web 应用开发，不需要用EJB。</li>
+<li>需要与其他服务程序配合使用的应用，但调用或返回的自定义的网络协议可以解决的应用程序,不需要使用EJB。</li>
+<li>较多人并发访问的C/S 结构的应用程序，尽量不要使用EJB。</li>
+</ol>
+<h1 id="after-all">After All</h1>
+<ul>
+<li>
+<p>EJB实现原理： 就是把原来放到客户端实现的代码放到服务器端，并依靠RMI进行通信。</p>
+</li>
+<li>
+<p>RMI实现原理 ：就是通过Java对象可序列化机制实现分布计算。</p>
+</li>
+<li>
+<p>服务器集群： 就是通过RMI的通信，连接不同功能模块的服务器，以实现一个完整的功能。</p>
+</li>
+</ul>
+<h1 id="ref">Ref</h1>
+<p><a class="link" href="https://blog.csdn.net/kouzhaokui/article/details/89176541"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/kouzhaokui/article/details/89176541</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/ejb/">EJB</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/javaaboutjndi/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121100840910.png" loading="lazy" data-key="JavaAboutJNDI" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121100840910.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Java基础知识：JNDI</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/javaaboutj2ee/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121112316304.png" loading="lazy" data-key="JavaAboutJ2EE" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121112316304.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Java基础知识：J2EE</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/userdefineclassloader/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241107144702889.png" loading="lazy" data-key="UserDefineClassLoader" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241107144702889.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Java自定义类加载器</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/javaclasspath/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241107144702889.png" loading="lazy" data-key="JavaClassPath" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241107144702889.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Java ClassPath</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/classloaderloadpath/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241107162525270.png" loading="lazy" data-key="ClassLoaderLoadPath" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241107162525270.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Java默认类加载器的加载路径</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2024 DanSec
+    </section>
+    
+    <section class="powerby">
+        
+            Dan❤Anan <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.23.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
