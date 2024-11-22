@@ -35,7 +35,8 @@
         <pubDate>Thu, 21 Nov 2024 10:00:30 +0800</pubDate>
         
         <guid>https://d4n-sec.github.io/p/javaaboutj2ee/</guid>
-        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121112316304.png" alt="Featured image of post Java基础知识：J2EE" /&gt;&lt;h1 id=&#34;java--j2ee&#34;&gt;JAVA &amp;amp; J2EE&lt;/h1&gt;
+        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121112316304.png" alt="Featured image of post Java基础知识：J2EE" /&gt;&lt;p&gt;概念多且杂，且看且过&lt;/p&gt;
+&lt;h1 id=&#34;java--j2ee&#34;&gt;JAVA &amp;amp; J2EE&lt;/h1&gt;
 &lt;p&gt;&lt;code&gt;Java&lt;/code&gt;和&lt;code&gt;Java EE&lt;/code&gt;（也可称&lt;code&gt;J2EE&lt;/code&gt;，其中的&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/zl1zl2zl3/article/details/86030331&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;故事&lt;/a&gt;）是两个不同概念&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Java&lt;/code&gt;不仅指一种语言，也可以指一种软件系统的流派&lt;/p&gt;
@@ -60,9 +61,35 @@
 &lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Java EE是将所有基于Java的企业应用开发技术集合在一个体系结构下的平台&lt;/p&gt;
+&lt;p&gt;Java EE是将所有基于Java的&lt;em&gt;&lt;strong&gt;企业应用开发技术&lt;/strong&gt;&lt;/em&gt;集合在一个体系结构下的平台&lt;/p&gt;
+&lt;h1 id=&#34;企业应用开发&#34;&gt;企业应用开发&lt;/h1&gt;
 &lt;p&gt;企业应用开发覆盖面比较广泛，基本上都是围绕数据中心式的Web应用&lt;/p&gt;
-&lt;h1 id=&#34;主流web开发技术&#34;&gt;主流Web开发技术&lt;/h1&gt;
+&lt;h2 id=&#34;主流web开发技术&#34;&gt;主流Web开发技术&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Java：SpringBoot，JavaEE SSH，SSM&lt;/li&gt;
+&lt;li&gt;C#: Asp.net&lt;/li&gt;
+&lt;li&gt;Python： Django, Flask&lt;/li&gt;
+&lt;li&gt;PHP： Larave，ThinkPHP，CodeIgnite&lt;/li&gt;
+&lt;li&gt;Node.js: Express, Koa&lt;/li&gt;
+&lt;li&gt;前端：JavaScript，Html, CSS, Vue， react&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;移动开发、数据库开发这三大领域的主流技术都可以关注&lt;/p&gt;
+&lt;h2 id=&#34;数据库&#34;&gt;数据库&lt;/h2&gt;
+&lt;p&gt;绝大多数企业应用都会使用到数据库&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;关系型数据库 MySQL，SQL Server，PostgreSQL&lt;/li&gt;
+&lt;li&gt;非关系型数据库 MongoDB，Counchbase&lt;/li&gt;
+&lt;li&gt;云服务 Firebase，AWS，DocumentDB，Azure&lt;/li&gt;
+&lt;li&gt;轻量级 SQLite，NeDB，Redis&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;框架组合&#34;&gt;框架组合&lt;/h2&gt;
+&lt;p&gt;在市面上大家常用如下的框架组合，可以发挥各框架的最大优势，良好的解决企业级应用的需求&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Struts+Spring+Hibernate框架（SSH框架）&lt;/li&gt;
+&lt;li&gt;SpringMVC+Spring+Hibernate框架&lt;/li&gt;
+&lt;li&gt;SpringMVC+Spring+MyBatis框架（SSM框架）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其他理解&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;java EE是面向企业开发用的java版本。
 J2EE使用多层的分布式应用模型，有的分四层有的分三层，其实都是差不多的。我这里分三层：表现层（UI）、业务逻辑层（BLL）、数据访问层/持久层框架（DAL）。
@@ -70,11 +97,152 @@ J2EE使用多层的分布式应用模型，有的分四层有的分三层，其�
 表现层框架：SpringMVC框架，Struts2框架、JSF框架、Tapestry框架、WebWork框架
 业务逻辑层框架：Spring框架
 持久层框架：Hibernate框架、MyBatis&lt;/p&gt;
-&lt;p&gt;在市面上大家常用如下的框架组合，可以发挥各框架的最大优势，良好的解决企业级应用的需求。
-Struts+Spring+Hibernate框架（SSH框架）
-SpringMVC+Spring+Hibernate框架
-SpringMVC+Spring+MyBatis框架（SSM框架）&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;h1 id=&#34;java-ee&#34;&gt;Java EE&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Java EE是将所有基于Java的企业应用开发技术集合在一个体系结构下的平台&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;与Microsoft公司的.Net相比， Java EE更能满足互联网在智能化Web服务方面的开放性、分布性和平台无关性&lt;/p&gt;
+&lt;p&gt;运用Java技术开发企业应用的标准&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;多层应用开发模型&lt;/li&gt;
+&lt;li&gt;开发平台 - APIs 和服务&lt;/li&gt;
+&lt;li&gt;测试软件包&lt;/li&gt;
+&lt;li&gt;参考实现&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Java EE平台已经成为电信、金融、电子商务、保险、证券等各行业的大型系统的首选开发平台&lt;/p&gt;
+&lt;p&gt;Java EE大致分为几种方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;以EJB3+JPA为核心的经典Java EE开发平台。&lt;/li&gt;
+&lt;li&gt;以Spring为核心的轻量级Java EE企业开发平台。&lt;/li&gt;
+&lt;li&gt;基于Spring boot,Spring cloud开发&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;java-ee应用分层结构&#34;&gt;Java EE应用分层结构&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121181342496.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121181401259.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241121181401259&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;表现层：此层由系列的jsp页面、Velocity页面、PDF文档视图组件组成，负责收集用户请求，并显示处理结果。&lt;/li&gt;
+&lt;li&gt;控制器层：此层由系列控制器组成，这些控制器用于拦截用户请求，并调用业务逻辑组件的业务逻辑方法，处理用户请求，并根据处理结果转发到不同的表现层组件。&lt;/li&gt;
+&lt;li&gt;业务逻辑层：此层由系列的业务逻辑对象组成
+&lt;ul&gt;
+&lt;li&gt;业务逻辑对象实现了系统所需要的业务逻辑方法。这些业务逻辑方法可能是依赖DAO组件实现的业务逻辑方法，也可能仅仅用于暴露Domain Object对象所实现的业务逻辑方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;数据访问对象（Data Access Object，DAO）层：此层由系列的DAO组成，这些DAO实现了对数据库的创建、查询、更新和删除（CRUD）等原子操作。&lt;/li&gt;
+&lt;li&gt;领域对象（Domain Object ）层：此层由系列的POJO（Plain Old Java Object，普通传统的Java对象）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121181540608.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241121181540608&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h1 id=&#34;java-ee的组件和容器&#34;&gt;Java EE的组件和容器&lt;/h1&gt;
+&lt;p&gt;组件：JavaEE基本的软件单元 —— 面包&lt;/p&gt;
+&lt;p&gt;容器：分布式组件的运行环境 —— 烤箱&lt;/p&gt;
+&lt;p&gt;容器为组件提供必需的底层基础功能 —— 服务&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;javaEE的容器由厂商实现,javaEE服务器中均包含Web容器和EJB容器的实现&lt;/li&gt;
+&lt;li&gt;如JDBC、JMS、JNDI服务、持久化、事务支持、并发、安全性、资源和生命周期管理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;轻量级java-ee架构&#34;&gt;轻量级Java EE架构&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;企业Java相关技术&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;JSP、Servlet和JavaBean&lt;/p&gt;
+&lt;p&gt;Struts 2/SpringMVC&lt;/p&gt;
+&lt;p&gt;Hibernate/MyBatis&lt;/p&gt;
+&lt;p&gt;Spring&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Struts2/SpringMVC+Spring+Hibernate/MyBatis&lt;/p&gt;
+&lt;p&gt;Struts2/Spring MVC进行流程控制，Spring进行业务流转,Hibernate/Mybatis进行数据库操作的封装&lt;/p&gt;
+&lt;p&gt;整体框架和业务层用Spring，控制层用Struts/Spring MVC，而持久层用Hibernate/MyBatis&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;jspservlet和javabean&#34;&gt;JSP、Servlet和JavaBean&lt;/h2&gt;
+&lt;h3 id=&#34;jsp&#34;&gt;JSP&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;JSP：全称是JavaServer Page。在html页面中嵌入JSP标记和脚本代码。JSP把静态内容和动态内容的分离，实现了内容和表示的分离。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;JSP，Servlet是最早的Java EE规范之一， 同属表现层，都属于“动态网页技术”&lt;/p&gt;
+&lt;p&gt;静态网页技术就是把做好的html文件直接上传到服务器并直接供客户浏览&lt;/p&gt;
+&lt;p&gt;动态网页技术则是每次都根据用户请求，动态生成响应页面并返回。&lt;/p&gt;
+&lt;p&gt;优势:灵活性，数据保密性&lt;/p&gt;
+&lt;h3 id=&#34;servlet&#34;&gt;Servlet&lt;/h3&gt;
+&lt;p&gt;JSP必须被Web服务器翻译成Servlet，真正在Web服务器内运行的是Servlet。&lt;/p&gt;
+&lt;p&gt;Servlet：实际上就是按照Servlet规范编写的一个java类，与传统的命令行启动的Java应用程序不同，Servlet位于Web服务器内部，并由Web服务器加载并调用。&lt;/p&gt;
+&lt;h3 id=&#34;javabean&#34;&gt;JavaBean&lt;/h3&gt;
+&lt;p&gt;JavaBean 是一种JAVA语言写成的可重用组件，一种特殊的Java类，就是有默认构造方法，只有get,set的方法的java类的对象&lt;/p&gt;
+&lt;p&gt;JavaBean分为可视化组件和非可视化组件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可视化组件可以是简单的GUI元素，如按钮或文本框，也可以是复杂的，如报表组件&lt;/li&gt;
+&lt;li&gt;非可视化组件没有GUI表现形式，用于封装业务逻辑、数据库操作等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;最大优点在于可以实现代码的可重用性&lt;/p&gt;
+&lt;h2 id=&#34;struts-2&#34;&gt;Struts 2&lt;/h2&gt;
+&lt;p&gt;Struts其主要的设计理念是通过控制器将表现逻辑和业务逻辑解耦，以提高系统的可维护性、可扩展性和可重用性。&lt;/p&gt;
+&lt;p&gt;Struts是Java EE应用中使用最早和最广泛的MVC框架，其作者是JSP规范的制定者，也参与了Tomcat的开发。主要分为模型(Model)、视图(Viewer)和控制器(Controller)三部分&lt;/p&gt;
+&lt;p&gt;早期的Struts框架与另一个优秀的MVC框架WebWork相结合产生了全新的Struts 2&lt;/p&gt;
+&lt;p&gt;类似框架： Spring MVC&lt;/p&gt;
+&lt;h2 id=&#34;hibernate&#34;&gt;Hibernate&lt;/h2&gt;
+&lt;p&gt;Hibernate框架是一种开源的、轻量级的ORM框架，它允许将普通的、传统的Java对象（POJO）映射成持久化类，允许应用程序以面向对象的方式来操作POJO，而Hibernate框架负责将这种操作转换成底层的SQL操作。&lt;/p&gt;
+&lt;p&gt;类似框架：mybatis&lt;/p&gt;
+&lt;h2 id=&#34;spring&#34;&gt;Spring&lt;/h2&gt;
+&lt;p&gt;Spring是一个解决了许多Java EE开发中常见问题的强大的轻量级框架。&lt;/p&gt;
+&lt;p&gt;Spring只是抽象了大量Java EE应用中常用代码，将它们抽象成一个框架，通过使用Spring可以大幅度地提高开发效率，并可以保证整个应用具有良好的设计。&lt;/p&gt;
+&lt;p&gt;Spring比较像是一种中间层容器，向上它可以和MVC框架无缝整合，向下可以与各种持久层框架无缝整合。&lt;/p&gt;
+&lt;p&gt;Spring框架的核心是控制翻转IoC(Inversion of Control)/依赖注入DI(Dependence Injection)机制&lt;/p&gt;
+&lt;h2 id=&#34;实际应用&#34;&gt;实际应用&lt;/h2&gt;
+&lt;p&gt;轻量级Java EE应用以传统的JSP作为表现层技术，以系统开源框架Struts/Spring MVC、Spring、Hibernate、MyBatis分别做为MVC层、中间层和持久层，将这些开源框架有机组合在一起，形成开发具有高度的可扩展性、可维护性的Java EE应用的解决方案。&lt;/p&gt;
+&lt;p&gt;如果系统没有使用任何框架：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;软件维护：全部采用JSP和Servlet的应用，分层不够清晰，业务逻辑的实现没有单独分离出来，造成系统后期维护困难。&lt;/li&gt;
+&lt;li&gt;软件复用：每次开发系统都需要重新开发，不仅增加了系统出错的风险，也需要投入更多的人力和物力。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;sshssm结构分析&#34;&gt;SSH/SSM结构分析&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241122095844545.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241122095844545&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h1 id=&#34;web服务器&#34;&gt;WEB服务器&lt;/h1&gt;
+&lt;p&gt;采用SSH/SSM组合架构的软件系统无须专业的Java EE服务器支持，只需要简单的Web服务器就可以运行。Java领域常见的Web服务器都是开源的，而且具有很好的稳定性，以下是其中主流的几个：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Tomcat：Tomcat和Java结合的最好，是Sun官方推荐的JSP服务器。&lt;/li&gt;
+&lt;li&gt;Jetty：一个优秀的Web服务器。Jetty的优点在于，Jetty可以作为一个嵌入式服务器，即：如果在应用中加入Jetty的JAR文件，应用可在代码中对外提供Web服务。&lt;/li&gt;
+&lt;li&gt;Resin：目前最快的JSP、Servlet运行平台、支持EJB。学习免费，商用收费。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;java-ee服务器&#34;&gt;Java EE服务器&lt;/h1&gt;
+&lt;p&gt;除了上述Web服务器以外，还有一些专业的Java EE服务器，相对于普通的Web服务器而言，Java EE服务器支持更多的Java EE特性，比如分布式事务、EJB容器等。常见的主要有以下几个：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;JBoss：开源的Java EE服务器，目前支持EJB 3.0技术。&lt;/li&gt;
+&lt;li&gt;WebLogic和WebShpere：这两个是专业的商务Java EE服务器，价格不菲，但性能等各方面相当出色。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/weixin_51422230/article/details/126952133&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://blog.csdn.net/weixin_51422230/article/details/126952133&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
