@@ -13,7 +13,9 @@
         <pubDate>Thu, 21 Nov 2024 10:00:30 +0800</pubDate>
         
         <guid>https://d4n-sec.github.io/p/javaaboutj2ee/</guid>
-        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121112316304.png" alt="Featured image of post Java基础知识：J2EE" /&gt;&lt;p&gt;概念多且杂，且看且过&lt;/p&gt;
+        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121112316304.png" alt="Featured image of post Java基础知识：J2EE" /&gt;&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;概念多且杂，且看且过&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h1 id=&#34;java--j2ee&#34;&gt;JAVA &amp;amp; J2EE&lt;/h1&gt;
 &lt;p&gt;&lt;code&gt;Java&lt;/code&gt;和&lt;code&gt;Java EE&lt;/code&gt;（也可称&lt;code&gt;J2EE&lt;/code&gt;，其中的&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/zl1zl2zl3/article/details/86030331&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;故事&lt;/a&gt;）是两个不同概念&lt;/p&gt;
