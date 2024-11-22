@@ -7,7 +7,23 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>DanSec</copyright>
-        <lastBuildDate>Fri, 22 Nov 2024 15:01:58 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 22 Nov 2024 15:28:55 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>JPA</title>
+        <link>https://d4n-sec.github.io/tags/jpa/</link>
+        <pubDate>Fri, 22 Nov 2024 15:28:55 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/jpa/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>基础知识</title>
+        <link>https://d4n-sec.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
+        <pubDate>Fri, 22 Nov 2024 15:28:55 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>EJB</title>
         <link>https://d4n-sec.github.io/tags/ejb/</link>
         <pubDate>Fri, 22 Nov 2024 15:01:58 +0800</pubDate>
@@ -133,6 +149,14 @@
         <pubDate>Sun, 28 Jul 2024 01:05:01 +0800</pubDate>
         
         <guid>https://d4n-sec.github.io/tags/java%E5%AD%A6%E4%B9%A0%E8%B7%AF/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>代理模式</title>
+        <link>https://d4n-sec.github.io/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/</link>
+        <pubDate>Sun, 28 Jul 2024 01:05:01 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/</guid>
         <description></description>
         </item>
         <item>

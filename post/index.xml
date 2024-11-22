@@ -7,7 +7,26 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>DanSec</copyright>
-        <lastBuildDate>Fri, 22 Nov 2024 15:01:58 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 22 Nov 2024 15:28:55 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Java基础知识：JPA</title>
+        <link>https://d4n-sec.github.io/p/javaaboutjpa/</link>
+        <pubDate>Fri, 22 Nov 2024 15:28:55 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/javaaboutjpa/</guid>
+        <description>&lt;h2 id=&#34;draft-false&#34;&gt;title: &amp;ldquo;Java基础知识：J2EE&amp;rdquo;
+description: Java基础知识补充
+slug: &amp;ldquo;JavaAboutJ2EE&amp;rdquo;
+date: 2024-11-21T10:00:30+08:00
+image: &lt;a class=&#34;link&#34; href=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121112316304.png&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121112316304.png&lt;/a&gt;
+tags: [J2EE]
+categories: [Java学习路]
+hidden: false
+comments: true
+draft: false&lt;/h2&gt;
+</description>
+        </item>
+        <item>
         <title>Java基础知识：EJB</title>
         <link>https://d4n-sec.github.io/p/javaaboutejb/</link>
         <pubDate>Fri, 22 Nov 2024 15:01:58 +0800</pubDate>
