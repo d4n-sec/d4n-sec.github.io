@@ -128,7 +128,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;benifit-of--with-jndi&#34;&gt;Benifit of  With-JNDI&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id=&#34;benefits-of--with-jndi&#34;&gt;Benefits of  With-JNDI&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;直接使用JDBC或者通过JNDI引用数据源的编程代码量相差无几，但是现在的程序可以不用关心具体JDBC参数了。&lt;/p&gt;
 &lt;p&gt;在系统部署后，如果数据库的相关参数变更，只需要重新配置 mysql-ds.xml 修改其中的JDBC参数，只要保证数据源的名称不变，那么程序源代码就无需修改。&lt;/p&gt;
