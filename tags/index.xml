@@ -7,7 +7,23 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>DanSec</copyright>
-        <lastBuildDate>Fri, 22 Nov 2024 15:28:55 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 23 Nov 2024 10:04:22 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>JNDI</title>
+        <link>https://d4n-sec.github.io/tags/jndi/</link>
+        <pubDate>Sat, 23 Nov 2024 10:04:22 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/jndi/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>基础知识</title>
+        <link>https://d4n-sec.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
+        <pubDate>Sat, 23 Nov 2024 10:04:22 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>JPA</title>
         <link>https://d4n-sec.github.io/tags/jpa/</link>
         <pubDate>Fri, 22 Nov 2024 15:28:55 +0800</pubDate>
@@ -16,27 +32,11 @@
         <description></description>
         </item>
         <item>
-        <title>基础知识</title>
-        <link>https://d4n-sec.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
-        <pubDate>Fri, 22 Nov 2024 15:28:55 +0800</pubDate>
-        
-        <guid>https://d4n-sec.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
-        <description></description>
-        </item>
-        <item>
         <title>EJB</title>
         <link>https://d4n-sec.github.io/tags/ejb/</link>
         <pubDate>Fri, 22 Nov 2024 15:01:58 +0800</pubDate>
         
         <guid>https://d4n-sec.github.io/tags/ejb/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>JNDI</title>
-        <link>https://d4n-sec.github.io/tags/jndi/</link>
-        <pubDate>Thu, 21 Nov 2024 10:04:22 +0800</pubDate>
-        
-        <guid>https://d4n-sec.github.io/tags/jndi/</guid>
         <description></description>
         </item>
         <item>

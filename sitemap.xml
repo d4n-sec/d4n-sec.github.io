@@ -3,27 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://d4n-sec.github.io/</loc>
-    <lastmod>2024-11-22T15:28:55+08:00</lastmod>
+    <lastmod>2024-11-23T10:04:22+08:00</lastmod>
   </url><url>
     <loc>https://d4n-sec.github.io/categories/</loc>
-    <lastmod>2024-11-22T15:28:55+08:00</lastmod>
+    <lastmod>2024-11-23T10:04:22+08:00</lastmod>
+  </url><url>
+    <loc>https://d4n-sec.github.io/p/javaaboutjndi/</loc>
+    <lastmod>2024-11-23T10:04:22+08:00</lastmod>
+  </url><url>
+    <loc>https://d4n-sec.github.io/categories/java%E5%AD%A6%E4%B9%A0%E8%B7%AF/</loc>
+    <lastmod>2024-11-23T10:04:22+08:00</lastmod>
+  </url><url>
+    <loc>https://d4n-sec.github.io/tags/jndi/</loc>
+    <lastmod>2024-11-23T10:04:22+08:00</lastmod>
+  </url><url>
+    <loc>https://d4n-sec.github.io/post/</loc>
+    <lastmod>2024-11-23T10:04:22+08:00</lastmod>
+  </url><url>
+    <loc>https://d4n-sec.github.io/tags/</loc>
+    <lastmod>2024-11-23T10:04:22+08:00</lastmod>
+  </url><url>
+    <loc>https://d4n-sec.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</loc>
+    <lastmod>2024-11-23T10:04:22+08:00</lastmod>
   </url><url>
     <loc>https://d4n-sec.github.io/p/javaaboutjpa/</loc>
     <lastmod>2024-11-22T15:28:55+08:00</lastmod>
   </url><url>
-    <loc>https://d4n-sec.github.io/categories/java%E5%AD%A6%E4%B9%A0%E8%B7%AF/</loc>
-    <lastmod>2024-11-22T15:28:55+08:00</lastmod>
-  </url><url>
     <loc>https://d4n-sec.github.io/tags/jpa/</loc>
-    <lastmod>2024-11-22T15:28:55+08:00</lastmod>
-  </url><url>
-    <loc>https://d4n-sec.github.io/post/</loc>
-    <lastmod>2024-11-22T15:28:55+08:00</lastmod>
-  </url><url>
-    <loc>https://d4n-sec.github.io/tags/</loc>
-    <lastmod>2024-11-22T15:28:55+08:00</lastmod>
-  </url><url>
-    <loc>https://d4n-sec.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</loc>
     <lastmod>2024-11-22T15:28:55+08:00</lastmod>
   </url><url>
     <loc>https://d4n-sec.github.io/tags/ejb/</loc>
@@ -34,12 +40,6 @@
   </url><url>
     <loc>https://d4n-sec.github.io/p/javaaboutldap/</loc>
     <lastmod>2024-11-21T10:05:08+08:00</lastmod>
-  </url><url>
-    <loc>https://d4n-sec.github.io/p/javaaboutjndi/</loc>
-    <lastmod>2024-11-21T10:04:22+08:00</lastmod>
-  </url><url>
-    <loc>https://d4n-sec.github.io/tags/jndi/</loc>
-    <lastmod>2024-11-21T10:04:22+08:00</lastmod>
   </url><url>
     <loc>https://d4n-sec.github.io/tags/j2ee/</loc>
     <lastmod>2024-11-21T10:00:30+08:00</lastmod>
