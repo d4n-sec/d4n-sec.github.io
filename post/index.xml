@@ -647,7 +647,7 @@ J2EE使用多层的分布式应用模型，有的分四层有的分三层，其�
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;Host CloudServer&lt;/code&gt;：&lt;code&gt;CloudServer&lt;/code&gt; 自定义的名字，随你喜欢&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;HostName 1.1.1.5&lt;/code&gt;：&lt;code&gt;1.1.1.5&lt;/code&gt;目标IP&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;HostName 1.1.1.5&lt;/code&gt;：&lt;code&gt;1.1.1.5&lt;/code&gt; SSH 服务端IP&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;User userA&lt;/code&gt;：&lt;code&gt;userA&lt;/code&gt;想要登录的用户名，和服务器切换用户时的&lt;code&gt;user&lt;/code&gt;保持一致&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;IdentityFile ~/.ssh/Hello&lt;/code&gt;：私钥全路径&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Port&lt;/code&gt;：指定端口号&lt;/p&gt;
