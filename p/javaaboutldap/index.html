@@ -249,7 +249,88 @@
     </div>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#whats-ldap">What&rsquo;s LDAP</a>
+      <ol>
+        <li><a href="#protocol-brief-introduction">Protocol Brief Introduction</a>
+          <ol>
+            <li><a href="#series-protocol">Series Protocol</a>
+              <ol>
+                <li><a href="#x500">X.500</a></li>
+                <li><a href="#ldap">LDAP</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#abbr">Abbr</a></li>
+    <li><a href="#understand-x500">Understand X.500</a>
+      <ol>
+        <li><a href="#定义目录系统">定义目录系统</a></li>
+        <li><a href="#dib与dit">DIB与DIT</a></li>
+        <li><a href="#目录服务">目录服务</a></li>
+        <li><a href="#分布式directory">分布式Directory</a></li>
+        <li><a href="#其它">其它</a></li>
+      </ol>
+    </li>
+    <li><a href="#ldaps-safety-specifications">LDAP&rsquo;s Safety Specifications</a></li>
+    <li><a href="#the-practice-of-ldap">The Practice of LDAP</a>
+      <ol>
+        <li><a href="#使用命令行构造ldap树结构">使用命令行构造LDAP树结构</a>
+          <ol>
+            <li><a href="#ldif">LDIF</a></li>
+          </ol>
+        </li>
+        <li><a href="#ldap-命令行构造数据">LDAP 命令行构造数据</a></li>
+        <li><a href="#ldap-ui操作">LDAP UI操作</a>
+          <ol>
+            <li><a href="#ui创建ldap环境与数据">UI创建LDAP环境与数据</a>
+              <ol>
+                <li><a href="#进入phpldapadmin">进入phpLDAPAdmin</a></li>
+                <li><a href="#创建数据">创建数据</a>
+                  <ol>
+                    <li><a href="#创建ou">创建ou</a></li>
+                  </ol>
+                </li>
+              </ol>
+            </li>
+            <li><a href="#已有ldap环境和数据后的ui登录">已有LDAP环境和数据后的UI登录</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#ref">Ref</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="has-image main-article">
@@ -317,7 +398,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 0 分钟
+                    阅读时长: 10 分钟
                 </time>
             </div>
         
@@ -332,7 +413,801 @@
     <section class="article-content">
     
     
-    
+    <h1 id="whats-ldap">What&rsquo;s LDAP</h1>
+<p>Lightweight Directory Access Protocol -&gt; LDAP</p>
+<p>直译：轻量级目录访问协议（Directory -&gt; 又可译为电话簿），但是意义不准确</p>
+<p>不管是目录还是电话簿，核心点为<em><strong>查找</strong></em></p>
+<p>即 Directory 服务内部的数据组织形式是树形结构，这样做的目的是方便<em><strong>查找</strong></em>。其最开始存在的目的是做白页、黄页类应用，而我们可以利用这个结构做其它事情，<em><strong>比如用一个LDAP服务管理公司内所有地方的用户信息</strong></em>，这样就可以做到<em><strong>单点登录</strong></em></p>
+<blockquote>
+<p>白页：个人通信目录，这个在上世纪的美国电影中能见到。为什么是白页—以前使用白色纸张记录个人通信目录。黄页也是这个原因。
+黄页：企业和团体通信目录，例如80、90后熟知的hao123网址黄页</p>
+</blockquote>
+<h2 id="protocol-brief-introduction">Protocol Brief Introduction</h2>
+<p>与LDAP相关的协议很多，但主要是两个系列，这里列出，仅做了解用，感兴趣可以翻看</p>
+<h3 id="series-protocol">Series Protocol</h3>
+<h4 id="x500">X.500</h4>
+<p><a class="link" href="https://www.itu.int/rec/dologin_pub.asp?lang=e&amp;id=T-REC-X.500-200811-S!!PDF-E&amp;type=items"  target="_blank" rel="noopener"
+    >X.500系列协议</a></p>
+<blockquote>
+<p>目录服务的最初协议，完整地描述了目录、目录服务的组成、目录结构等内容。X.500本身只是一个概览，各部分的实现在其子协议如X.501、X.502中，所以说X.500是一个系列协议。</p>
+<p>值得一提的是，常见的X.509公钥证书也属于该系列协议。</p>
+</blockquote>
+<h4 id="ldap">LDAP</h4>
+<p>LDAP并非只有一个协议文件，其涉及到方方面面，每个方面单独由一个协议文件描述，加星号的相对来说很重要</p>
+<p><a class="link" href="https://www.rfc-editor.org/rfc/pdfrfc/rfc4510.txt.pdf"  target="_blank" rel="noopener"
+    >LDAP系列协议</a></p>
+<blockquote>
+<p>RFC4511*：通过TCP传输消息的方式，规定了传输层面的消息类型、消息内容，如绑定、查询等</p>
+<p>RFC4512*：信息模型，规定了schema、object class、attribute type等内容</p>
+<p>RFC4513*：规定了鉴权方式和安全机制：TLS、SASL</p>
+<p>RFC4514：规定了DN的字符串表示方式</p>
+<p>RFC4515：规定了过滤器的格式，过滤器用于查找时指定条件</p>
+<p>RFC4516：规定了统一资源定位符的格式，即LDAP端点长啥样</p>
+<p>RFC4517*：语法和匹配规则，列举了所有允许的语法和匹配规则</p>
+<p>RFC4518：字符串国际化</p>
+<p>RFC4519*：应用程序的schema，列举了所有允许的object class和attribute type</p>
+<p>RFC2377*：推荐的DIT组织方式，即目录服务的树的组织方式</p>
+</blockquote>
+<h1 id="abbr">Abbr</h1>
+<p>LDAP 总是会有一大堆相关缩写，这里列出常见的</p>
+<ul>
+<li>常见</li>
+</ul>
+<blockquote>
+<p>DAP - Directory Access Protocol，即目录访问协议</p>
+<p>LDAP - Lightweight Directory Access Protocol，轻量级目录访问协议</p>
+<p>DIB - Directory Information Base，目录信息库</p>
+<p>DIT - Directory Information Tree，目录信息树</p>
+<p>DUA - Directory User Agent，用户代理</p>
+<p>DN - Distinguished Name，可区别名称，即唯一名称</p>
+<p>RDN - Relative Distinguished Name，相对唯一名称，指DIT内某个节点上的名称，上层节点的DN配合上本节点的RDN，能够构成本节点的DN</p>
+</blockquote>
+<ul>
+<li>一些属性类型的介绍</li>
+</ul>
+<blockquote>
+<p>c - country name，国家名</p>
+<p>cn - common name，通用名称</p>
+<p>dc - domain component，域名组件</p>
+<p>o - organization name，机构名</p>
+<p>ou - organization unit name，机构的单位名</p>
+<p>sn - surname，姓</p>
+<p>st - state or province name，州或省</p>
+</blockquote>
+<h1 id="understand-x500">Understand X.500</h1>
+<p>如果不看X.500协议，LDAP中的很多东西是看不懂的。X.500定义了目录服务，LDAP只是它的轻量级实现。</p>
+<p>所以如果对 X.500 有一些差不多的认知，LDAP就已经可以理解了，<del>毕竟是阉割版</del></p>
+<p>我们看看 X.500 规定了什么。</p>
+<h2 id="定义目录系统">定义目录系统</h2>
+<p>Directory旨在提供一个用户友好的name-address类的映射，其中name不可变，address允许动态变化，即key-value结构。Directory由一批系统组成，每个系统持有对应现实世界的逻辑数据，这些存储的数据叫做DIB，即目录信息库。整体架构如下</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241125181515404.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241125181515404"
+	
+	
+></p>
+<p>一个标准的目录系统，有以下几部分</p>
+<ul>
+<li>目录服务</li>
+<li>目录服务的用户</li>
+<li>访问端点-目录服务用来暴露自己</li>
+<li>用户和服务之间使用协议如<code>LDAP</code>进行交互</li>
+<li>用户使用LDAP客户端访问目录服务</li>
+</ul>
+<h2 id="dib与dit">DIB与DIT</h2>
+<p>目录信息库，由DIT（目录信息树）、节点Entry、Entry中的属性及属性值构成。</p>
+<ul>
+<li>Entry代表一个节点，类型可以是object，也可以是alias，后者表示一个object entry的别名</li>
+<li>一个Entry内可以拥有多个属性</li>
+<li>一个属性内可以拥有一个Type，以及多个Value</li>
+</ul>
+<p>下图展示了一个DIT的树形结构：</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241125181752110.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241125181752110"
+	
+	
+></p>
+<p>一个假设的DIT如下</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241125181942148.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241125181942148"
+	
+	
+></p>
+<p>则<code>DN：{C=GB, L=Winslow, O=Graphic Services, CN=Laser Printer}</code>代表了<code>Laser Printer</code>。</p>
+<p>你可能会想，DIB和常见的数据库有什么关系呢？</p>
+<p><del>实际上他们没什么关系</del></p>
+<p>类似HTTP和TCP。硬要说有关系的话，DIB更加垂直吧🤔，仅适用于这种树形存储结构，查询多、更新少；</p>
+<p>数据库则更加通用，相对而言也更加底层。</p>
+<p>DIB只是规定了一种存储键值对数据的树形结构，可以用任何方式实现DIB，包括关系型数据库。理论上，HTTP也可以是其它实现，比如QUIC。</p>
+<h2 id="目录服务">目录服务</h2>
+<details><summary>对目录的一些增删改查操作，看一眼就行</summary>
+<blockquote>
+<ul>
+<li>
+<p>读操作</p>
+<ul>
+<li>Read：读指定的entry。LDAP不支持此操作</li>
+<li>Compare：比较给的值和指定entry的值是否一致。这个在验证密码时有用</li>
+<li>List：列出指定entry的所有子entry</li>
+<li>Search：列出满足指定过滤器的所有entry</li>
+<li>Abandon：放弃，作用在一个挂起请求上，标识客户端对该请求不在感兴趣</li>
+</ul>
+</li>
+<li>
+<p>修改操作</p>
+<ul>
+<li>添加entry</li>
+<li>移除entry</li>
+<li>修改entry</li>
+<li>修改DN，修改某个entry的相对名称。如果该entry有子节点，则子节点的这部分名字也会被修改</li>
+</ul>
+</li>
+<li>
+<p>其它可能的输出</p>
+<ul>
+<li>错误</li>
+<li>转移（referral）：可能当前服务无法处理这个请求，它会返回一个新的端点，类似HTTP的重定向</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</details>
+<h2 id="分布式directory">分布式Directory</h2>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241125182800121.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241125182800121"
+	
+	
+></p>
+<ul>
+<li>DSA：Directory System Agent。用来连接服务和DUA。他可以缓存Directory数据，可以用本地数据直接响应，也可以单纯做一个转发</li>
+<li>LDAP Server：是Directory Service的一部分。他可以直接使用本地数据，也可以转发到其它LDAP Server获取数据</li>
+</ul>
+<h2 id="其它">其它</h2>
+<p>协议还规定了目录服务的访问安全、备份等操作，这里暂时忽略。之后值得探究的倒是其安全协议 X.509</p>
+<h1 id="ldaps-safety-specifications">LDAP&rsquo;s Safety Specifications</h1>
+<ul>
+<li>使用TLS安全传输</li>
+<li>提供简单的匿名和账号密码认证</li>
+<li>支持SASL构建鉴权和安全服务层</li>
+</ul>
+<h1 id="the-practice-of-ldap">The Practice of LDAP</h1>
+<p>LDAP目前最常用的用途是做<em><strong>单点登录</strong></em>，在这个场景中 LDAP 一般存储关于用户、用户认证信息、组、用户成员等等，充当一个用户信息的中心仓库，通常使用为用户认证和授权</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241125202043207.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241125202043207"
+	
+	
+></p>
+<h2 id="使用命令行构造ldap树结构">使用命令行构造LDAP树结构</h2>
+<p><em><strong>！！！！</strong></em></p>
+<blockquote>
+<p>由于该方式过于底层，偏离学习初衷，故命令行方式构造数据树的实验笔者<em><strong>仅做记录</strong></em></p>
+</blockquote>
+<blockquote>
+<p>不同版本的 Linux 安装方法差别非常大！</p>
+<p>此次实验记录的是快速搭建一个 LDAP 学习和测试环境，没有进行其他高级配置。建议使用虚拟机和全新安装的系统进行操作。</p>
+</blockquote>
+<h3 id="ldif">LDIF</h3>
+<p>LDAP Data Interchange Format，是一个格式化文件</p>
+<p>LDAP 数据交换格式文件，它以文本形式存储，用于在服务器之间交换数据。</p>
+<p>添加数据以及修改数据都需要通过 LDIF 文件来进行，可以跟关系型数据库的 SQL 文件做类比。</p>
+<p>LDIF 文件的格式一般如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">dn</span><span class="err">:</span> <span class="err">&lt;识别名&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="err">&lt;属性</span> <span class="mi">1</span><span class="err">&gt;:</span> <span class="err">&lt;值</span> <span class="mi">1</span><span class="err">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="err">&lt;属性</span> <span class="mi">2</span><span class="err">&gt;:</span> <span class="err">&lt;值</span> <span class="mi">2</span><span class="err">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">...</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="ldap-命令行构造数据">LDAP 命令行构造数据</h2>
+<p>本次涉及软件：</p>
+<blockquote>
+<ul>
+<li>操作系统：<strong>CentOS 7.4.1708 最小安装（已关闭 SELinux 和防火墙）</strong></li>
+<li>应用软件：<strong>openldap 2.4.44 、phpldapadmin 1.2.3</strong></li>
+</ul>
+</blockquote>
+<ol>
+<li>CentOS 7 上安装并使用 OpenLDAP</li>
+</ol>
+<blockquote>
+<p><code>yum install -y openldap-clients openldap-servers</code></p>
+</blockquote>
+<ol start="2">
+<li>创建数据库配置文件</li>
+</ol>
+<blockquote>
+<p><code>cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG &amp;&amp; chown ldap:ldap /var/lib/ldap/DB_CONFIG </code></p>
+</blockquote>
+<ol start="3">
+<li>启动 OpenLDAP 服务</li>
+</ol>
+<blockquote>
+<p>开启：<code>systemctl start slapd </code></p>
+<p>开机自启：<code>systemctl enable slapd</code></p>
+</blockquote>
+<hr>
+<p>如果没有出现错误，那么 OpenLDAP 的安装就算完成了，不过当前的目录数据库还是空的，下面我们要对数据库进行初始化。</p>
+<ol start="4">
+<li><span id="setting">设置</span> OpenLDAP 管理员密码</li>
+</ol>
+<blockquote>
+<p><code>slappasswd</code></p>
+<p>输入密码，确认后会生成<code>{SSHA}xxxxx</code>这样的东西，记作<code>passwdA值</code></p>
+</blockquote>
+<ol start="5">
+<li>生成 LDIF 文件</li>
+</ol>
+<blockquote>
+<p><code>cat &lt;&lt; EOF &gt; chrootpw.ldif</code></p>
+<p>然后将下方文本修改对应内容后，去掉所有注释，然后在命令行中粘贴回车</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">dn</span><span class="err">:</span> <span class="nx">olcDatabase</span><span class="p">={</span><span class="mi">0</span><span class="p">}</span><span class="nx">config</span><span class="p">,</span><span class="nx">cn</span><span class="p">=</span><span class="nx">config</span>
+</span></span><span class="line"><span class="cl"><span class="nx">changetype</span><span class="err">:</span> <span class="nx">modify</span>
+</span></span><span class="line"><span class="cl"><span class="nx">add</span><span class="err">:</span> <span class="nx">olcRootPW</span>
+</span></span><span class="line"><span class="cl"><span class="nx">olcRootPW</span><span class="err">:</span> <span class="p">{</span><span class="nx">SSHA</span><span class="p">}</span><span class="nx">xxxxx</span>  <span class="c">#{SSHA}xxxxx 修改为上一步记下来的 passwdA值</span>
+</span></span><span class="line"><span class="cl"><span class="nx">EOF</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<ol start="6">
+<li>执行 LDIF 文件</li>
+</ol>
+<blockquote>
+<p><code>ldapadd -Y EXTERNAL -H ldapi:/// -f chrootpw.ldif</code></p>
+</blockquote>
+<ol start="7">
+<li>导入预设的模式</li>
+</ol>
+<blockquote>
+<p><code>find /etc/openldap/schema/ -name &quot;*.ldif&quot; -exec ldapadd -Y EXTERNAL -H ldapi:/// -D &quot;cn=config&quot; -f {} \;</code></p>
+</blockquote>
+<hr>
+<p>接下来要使用命令行来新建根节点</p>
+<ol start="8">
+<li>生成根节点管理员密码</li>
+</ol>
+<blockquote>
+<p>同<a class="link" href="#setting" >上一次</a>的操作，生成后保存为 passwdBBBB值</p>
+<p>根节点管理员密码与 OpenLDAP 管理员密码不是同一回事！一个 LDAP 数据库可以包含多个目录树。</p>
+</blockquote>
+<ol start="9">
+<li>生成 LDIF 文件</li>
+</ol>
+<p>首先请想好一个域名。以 zenandidi.com 为例：</p>
+<p>下面根节点的 DN 应该这样写：<code>dc=zenandidi,dc=com</code></p>
+<blockquote>
+<p><code>cat &lt;&lt; EOF &gt; chdomain.ldif</code></p>
+<p>然后将下方文本修改对应内容后，去掉所有注释，然后在命令行中粘贴回车</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">dn</span><span class="err">:</span> <span class="nx">olcDatabase</span><span class="p">={</span><span class="mi">1</span><span class="p">}</span><span class="nx">monitor</span><span class="p">,</span><span class="nx">cn</span><span class="p">=</span><span class="nx">config</span>
+</span></span><span class="line"><span class="cl"><span class="nx">changetype</span><span class="err">:</span> <span class="nx">modify</span>
+</span></span><span class="line"><span class="cl"><span class="nx">replace</span><span class="err">:</span> <span class="nx">olcAccess</span>
+</span></span><span class="line"><span class="cl"><span class="nx">olcAccess</span><span class="err">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">}</span><span class="nx">to</span> <span class="err">*</span> <span class="nx">by</span> <span class="nx">dn</span><span class="p">.</span><span class="nx">base</span><span class="p">=</span><span class="s2">&#34;gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">read</span> <span class="nx">by</span> <span class="nx">dn</span><span class="p">.</span><span class="nx">base</span><span class="p">=</span><span class="s2">&#34;cn=Manager,dc=xxx,dc=xxx&#34;</span> <span class="nx">read</span> <span class="nx">by</span> <span class="err">*</span> <span class="nx">none</span> <span class="c">#修改 dc=xxx,dc=xxx 为自己的域名</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">dn</span><span class="err">:</span> <span class="nx">olcDatabase</span><span class="p">={</span><span class="mi">2</span><span class="p">}</span><span class="nx">hdb</span><span class="p">,</span><span class="nx">cn</span><span class="p">=</span><span class="nx">config</span>
+</span></span><span class="line"><span class="cl"><span class="nx">changetype</span><span class="err">:</span> <span class="nx">modify</span>
+</span></span><span class="line"><span class="cl"><span class="nx">replace</span><span class="err">:</span> <span class="nx">olcSuffix</span>
+</span></span><span class="line"><span class="cl"><span class="nx">olcSuffix</span><span class="err">:</span> <span class="nx">dc</span><span class="p">=</span><span class="nx">xxx</span><span class="p">,</span><span class="nx">dc</span><span class="p">=</span><span class="nx">xxx</span>    <span class="c">#修改 dc=xxx,dc=xxx 为自己的域名</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">dn</span><span class="err">:</span> <span class="nx">olcDatabase</span><span class="p">={</span><span class="mi">2</span><span class="p">}</span><span class="nx">hdb</span><span class="p">,</span><span class="nx">cn</span><span class="p">=</span><span class="nx">config</span>
+</span></span><span class="line"><span class="cl"><span class="nx">changetype</span><span class="err">:</span> <span class="nx">modify</span>
+</span></span><span class="line"><span class="cl"><span class="nx">replace</span><span class="err">:</span> <span class="nx">olcRootDN</span>
+</span></span><span class="line"><span class="cl"><span class="nx">olcRootDN</span><span class="err">:</span> <span class="nx">cn</span><span class="p">=</span><span class="nx">Manager</span><span class="p">,</span><span class="nx">dc</span><span class="p">=</span><span class="nx">xxx</span><span class="p">,</span><span class="nx">dc</span><span class="p">=</span><span class="nx">xxx</span> <span class="c">#修改 dc=xxx,dc=xxx 为自己的域名</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">dn</span><span class="err">:</span> <span class="nx">olcDatabase</span><span class="p">={</span><span class="mi">2</span><span class="p">}</span><span class="nx">hdb</span><span class="p">,</span><span class="nx">cn</span><span class="p">=</span><span class="nx">config</span>
+</span></span><span class="line"><span class="cl"><span class="nx">changetype</span><span class="err">:</span> <span class="nx">modify</span>
+</span></span><span class="line"><span class="cl"><span class="nx">add</span><span class="err">:</span> <span class="nx">olcRootPW</span>
+</span></span><span class="line"><span class="cl"><span class="nx">olcRootPW</span><span class="err">:</span> <span class="p">{</span><span class="nx">SSHA</span><span class="p">}</span><span class="nx">xxxxx</span>  <span class="c">#{SSHA}xxxxx 修改为上一步记下来的值</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">dn</span><span class="err">:</span> <span class="nx">olcDatabase</span><span class="p">={</span><span class="mi">2</span><span class="p">}</span><span class="nx">hdb</span><span class="p">,</span><span class="nx">cn</span><span class="p">=</span><span class="nx">config</span>
+</span></span><span class="line"><span class="cl"><span class="nx">changetype</span><span class="err">:</span> <span class="nx">modify</span>
+</span></span><span class="line"><span class="cl"><span class="nx">add</span><span class="err">:</span> <span class="nx">olcAccess</span>
+</span></span><span class="line"><span class="cl"><span class="nx">olcAccess</span><span class="err">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">}</span><span class="nx">to</span> <span class="nx">attrs</span><span class="p">=</span><span class="nx">userPassword</span><span class="p">,</span><span class="nx">shadowLastChange</span> <span class="nx">by</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">dn</span><span class="p">=</span><span class="s2">&#34;cn=Manager,dc=xxx,dc=xxx&#34;</span> <span class="nx">write</span> <span class="nx">by</span> <span class="nx">anonymous</span> <span class="nx">auth</span> <span class="nx">by</span> <span class="nx">self</span> <span class="nx">write</span> <span class="nx">by</span> <span class="err">*</span> <span class="nx">none</span> <span class="c">#修改 dc=xxx,dc=xxx 为自己的域名</span>
+</span></span><span class="line"><span class="cl"><span class="nx">olcAccess</span><span class="err">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">}</span><span class="nx">to</span> <span class="nx">dn</span><span class="p">.</span><span class="nx">base</span><span class="p">=</span><span class="s2">&#34;&#34;</span> <span class="nx">by</span> <span class="err">*</span> <span class="nx">read</span>
+</span></span><span class="line"><span class="cl"><span class="nx">olcAccess</span><span class="err">:</span> <span class="p">{</span><span class="mi">2</span><span class="p">}</span><span class="nx">to</span> <span class="err">*</span> <span class="nx">by</span> <span class="nx">dn</span><span class="p">=</span><span class="s2">&#34;cn=Manager,dc=xxx,dc=xxx&#34;</span> <span class="nx">write</span> <span class="nx">by</span> <span class="err">*</span> <span class="nx">read</span> <span class="c">#修改 dc=xxx,dc=xxx 为自己的域名</span>
+</span></span><span class="line"><span class="cl"><span class="nx">EOF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<ol start="10">
+<li>执行 LDIF 文件</li>
+</ol>
+<blockquote>
+<p><code>ldapmodify -Y EXTERNAL -H ldapi:/// -f chdomain.ldif</code></p>
+</blockquote>
+<hr>
+<p>接下来，开始进行添加用户、组节点</p>
+<ol start="11">
+<li>生成 LDIF 文件</li>
+</ol>
+<blockquote>
+<p><code>cat &lt;&lt; EOF &gt; basedomain.ldif</code></p>
+<p>然后将下方文本修改对应内容后，去掉所有注释，然后在命令行中粘贴回车</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">dn</span><span class="err">:</span> <span class="nx">dc</span><span class="p">=</span><span class="nx">xxx</span><span class="p">,</span><span class="nx">dc</span><span class="p">=</span><span class="nx">xxx</span>   <span class="c">#修改 dc=xxx,dc=xxx 为自己的域名</span>
+</span></span><span class="line"><span class="cl"><span class="nx">objectClass</span><span class="err">:</span> <span class="nx">top</span>
+</span></span><span class="line"><span class="cl"><span class="nx">objectClass</span><span class="err">:</span> <span class="nx">dcObject</span>
+</span></span><span class="line"><span class="cl"><span class="nx">objectclass</span><span class="err">:</span> <span class="nx">organization</span>
+</span></span><span class="line"><span class="cl"><span class="nx">o</span><span class="err">:</span> <span class="nx">root_ldap</span>
+</span></span><span class="line"><span class="cl"><span class="nx">dc</span><span class="err">:</span> <span class="nx">xxx</span> <span class="c">#修改 xxx 为自己域名第一个点左边的内容</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">dn</span><span class="err">:</span> <span class="nx">cn</span><span class="p">=</span><span class="nx">Manager</span><span class="p">,</span><span class="nx">dc</span><span class="p">=</span><span class="nx">xxx</span><span class="p">,</span><span class="nx">dc</span><span class="p">=</span><span class="nx">xxx</span>    <span class="c">#修改 dc=xxx,dc=xxx 为自己的域名</span>
+</span></span><span class="line"><span class="cl"><span class="nx">objectClass</span><span class="err">:</span> <span class="nx">organizationalRole</span>
+</span></span><span class="line"><span class="cl"><span class="nx">cn</span><span class="err">:</span> <span class="nx">Manager</span>
+</span></span><span class="line"><span class="cl"><span class="nx">description</span><span class="err">:</span> <span class="nx">Directory</span> <span class="nx">Manager</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">dn</span><span class="err">:</span> <span class="nx">ou</span><span class="p">=</span><span class="nx">People</span><span class="p">,</span><span class="nx">dc</span><span class="p">=</span><span class="nx">xxx</span><span class="p">,</span><span class="nx">dc</span><span class="p">=</span><span class="nx">xxx</span> <span class="c">#修改 dc=xxx,dc=xxx 为自己的域名</span>
+</span></span><span class="line"><span class="cl"><span class="nx">objectClass</span><span class="err">:</span> <span class="nx">organizationalUnit</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ou</span><span class="err">:</span> <span class="nx">People</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">dn</span><span class="err">:</span> <span class="nx">ou</span><span class="p">=</span><span class="nx">Group</span><span class="p">,</span><span class="nx">dc</span><span class="p">=</span><span class="nx">xxx</span><span class="p">,</span><span class="nx">dc</span><span class="p">=</span><span class="nx">xxx</span>  <span class="c">#修改 dc=xxx,dc=xxx 为自己的域名</span>
+</span></span><span class="line"><span class="cl"><span class="nx">objectClass</span><span class="err">:</span> <span class="nx">organizationalUnit</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ou</span><span class="err">:</span> <span class="nx">Group</span>
+</span></span><span class="line"><span class="cl"><span class="nx">EOF</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<ol start="12">
+<li>执行 LDIF 文件</li>
+</ol>
+<blockquote>
+<p>请先修改下面命令的<code>dc=xxx,dc=xxx</code>为自己的域名然后再执行</p>
+<p><code>ldapadd -x -D cn=Manager,dc=xxx,dc=xxx -W -f basedomain.ldif</code></p>
+<p>然后需要输入设定的根节点管理员密码 （生成<code>passwdBBBB</code>值时输入的密码</p>
+</blockquote>
+<ol start="13">
+<li>清理 LDIF 文件</li>
+</ol>
+<blockquote>
+<p><code>rm basedomain.ldif chdomain.ldif chrootpw.ldif</code></p>
+</blockquote>
+<p>至此，一个 LDAP 目录树就构建完毕了。</p>
+<h2 id="ldap-ui操作">LDAP UI操作</h2>
+<p>但是 LDAP 的命令行管理工具非常难用，尤其是对于新手来说。</p>
+<p>所以，下面我们来安装<code>phpLDAPadmin</code>这个图形化管理工具，方便新手学习</p>
+<p>如果上面的命令行操作有实际操作的话，那么可以跳转到<a class="link" href="#%E5%B7%B2%E6%9C%89LDAP%E7%8E%AF%E5%A2%83%E5%92%8C%E6%95%B0%E6%8D%AE%E5%90%8E%E7%9A%84UI%E6%93%8D%E4%BD%9C" >这里</a></p>
+<h3 id="ui创建ldap环境与数据">UI创建LDAP环境与数据</h3>
+<h4 id="进入phpldapadmin">进入phpLDAPAdmin</h4>
+<p>该操作使用<code>docker-compose</code>一键部署<code>openLDAP</code>、<code>phpldapadmin</code>和<code>self-service-password</code></p>
+<ol>
+<li>准备<code>open-ldap</code>的<code>docker-compose</code>文件</li>
+</ol>
+<p>如下直接给出笔者的实验<code>docker-compose</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;2&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">openldap</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">osixia/openldap:1.5.0 </span><span class="w"> </span><span class="c">### 如果有私有仓库可以从自己的私有仓库拉取镜像</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">openldap</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">LDAP_LOG_LEVEL</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;256&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">LDAP_ORGANISATION</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;ndzzmc&#34;</span><span class="w">   </span><span class="c">### 您的组织名称</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">LDAP_DOMAIN</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;gsymgsym.com&#34;</span><span class="w">    </span><span class="c">### 公司域名</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">LDAP_BASE_DN</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;dc=gsymgsym,dc=com&#34;</span><span class="w">   </span><span class="c">### 根据域名组成</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">LDAP_ADMIN_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Aa123+Bb&#34;</span><span class="w">   </span><span class="c">### 密码自己来设置</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">LDAP_CONFIG_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Aa123+BbCc&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">LDAP_READONLY_USER</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;false&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">#LDAP_READONLY_USER_USERNAME: &#34;readonly&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">#LDAP_READONLY_USER_PASSWORD: &#34;readonly&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">LDAP_RFC2307BIS_SCHEMA</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;false&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">LDAP_BACKEND</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;mdb&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">#LDAP_TLS: &#34;true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">#LDAP_TLS_CRT_FILENAME: &#34;zaq.test.pem&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">#LDAP_TLS_KEY_FILENAME: &#34;zaq.test.key&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">#LDAP_TLS_DH_PARAM_FILENAME: &#34;dhparam.pem&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">#LDAP_TLS_CA_CRT_FILENAME: &#34;ca.crt&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">#LDAP_TLS_ENFORCE: &#34;false&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">#LDAP_TLS_CIPHER_SUITE: &#34;SECURE256:-VERS-SSL3.0&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># LDAP_TLS_VERIFY_CLIENT: &#34;demand&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">LDAP_REPLICATION</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;false&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">#LDAP_REPLICATION_CONFIG_SYNCPROV: &#39;binddn=&#34;cn=admin,cn=config&#34; bindmethod=simple credentials=&#34;$$LDAP_CONFIG_PASSWORD&#34; searchbase=&#34;cn=config&#34; type=refreshAndPersist retry=&#34;60 +&#34; timeout=1 starttls=critical&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">#LDAP_REPLICATION_DB_SYNCPROV: &#39;binddn=&#34;cn=admin,$$LDAP_BASE_DN&#34; bindmethod=simple credentials=&#34;$$LDAP_ADMIN_PASSWORD&#34; searchbase=&#34;$$LDAP_BASE_DN&#34; type=refreshAndPersist interval=00:00:00:10 retry=&#34;60 +&#34; timeout=1 starttls=critical&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">#LDAP_REPLICATION_HOSTS: &#34;#PYTHON2BASH:[&#39;ldap://ldap.example.org&#39;,&#39;ldap://ldap2.example.org&#39;]&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">KEEP_EXISTING_CONFIG</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;false&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">LDAP_REMOVE_CONFIG_AFTER_SETUP</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">#LDAP_SSL_HELPER_PREFIX: &#34;ldap&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">tty</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">stdin_open</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/opt/openldap/ldap:/var/lib/ldap</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/opt/openldap/slapd.d:/etc/ldap/slapd.d</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/opt/openldap/certs:/container/service/lapd/assets/certs</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;389:389&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;636:636&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># For replication to work correctly, domainname and hostname must be</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># set correctly so that &#34;hostname&#34;.&#34;domainname&#34; equates to the</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># fully-qualified domain name for the host.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">domainname</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;gsymgsym.com&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;ldap-server&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">phpldapadmin</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">osixia/phpldapadmin:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">phpldapadmin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">PHPLDAPADMIN_LDAP_HOSTS</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;openldap&#34;</span><span class="w">   </span><span class="c">### 如果部署后登录不进去有可能是这里出了问题，直接换为部署openldap服务的可达IP试试</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">PHPLDAPADMIN_HTTPS</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;false&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;50081:80&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">openldap</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">self-service-password</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">self-service-password</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">tiredofit/self-service-password:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;50080:80&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">LDAP_SERVER=ldap://openldap:389</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">LDAP_BINDDN=cn=admin,dc=gsymgsym,dc=com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">LDAP_BINDPASS=XXXX</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">LDAP_BASE_SEARCH=dc=gsymgsym,dc=com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">MAIL_FROM=it@open.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">MAIL_FROM_NAME=账号自助服务平台</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">SMTP_DEBUG=0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">SMTP_HOST=smtp.qiye.aliyun.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">SMTP_USER=it@open.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">SMTP_PASS=jYda52VZ8Ftw1111</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">SMTP_PORT=465</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">SMTP_SECURE_TYPE=ssl</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">SMTP_AUTH_ON=true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">NOTIFY_ON_CHANGE=true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/etc/localtime:/etc/localtime</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/opt/openldap/self-service-password/htdocs:/www/ssp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/opt/openldap/self-service-password/logs:/www/logs</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">deploy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">limits</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">           </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">2G</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">reservations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">           </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l">512M</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>Docker 部署</li>
+</ol>
+<blockquote>
+<p><code>docker-compose up -d</code></p>
+</blockquote>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241125212300170.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241125212300170"
+	
+	
+></p>
+<p>然后点击Login登录</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241125212348944.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241125212348944"
+	
+	
+></p>
+<p>Login DN 根据<code>docker-compose</code>就是<code>cn=admin,dc=gsymgsym,dc=com</code></p>
+<p>Password 就是<code>LDAP_ADMIN_PASSWORD</code>的设置项<code>Aa123+Bb</code></p>
+<p>下图的报错是测试错误密码</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241125212626161.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241125212626161"
+	
+	
+></p>
+<p>正确登录后，如下图</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241125212715821.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241125212715821"
+	
+	
+></p>
+<h4 id="创建数据">创建数据</h4>
+<p>这里先在dc下面创建一个<code>ou=group</code>和一个<code>ou=user</code>。暂时先不按部分区分</p>
+<p>如果想再更细节区分的话，则就先创建一个ou，再在该ou下创建一个<code>ou=group</code>即可。</p>
+<h5 id="创建ou">创建ou</h5>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/0wh7x-x0ylm-10hz.gif"
+	
+	
+	
+	loading="lazy"
+	
+		alt="0wh7x-x0ylm-10hz"
+	
+	
+></p>
+<p>重复此操作，创建<code>ou=user</code></p>
+<p>&ndash;TODO&ndash;</p>
+<h3 id="已有ldap环境和数据后的ui登录">已有LDAP环境和数据后的UI登录</h3>
+<ol>
+<li>安装phpLDAPadmin</li>
+</ol>
+<blockquote>
+<p><code>yum -y install phpldapadmin</code></p>
+</blockquote>
+<ol start="2">
+<li>修改phpLDAPadmin的配置文件</li>
+</ol>
+<blockquote>
+<p><code>vi /etc/phpldapadmin/config.php</code></p>
+<p>请按实际情况以及注释提示修改以下内容，完成去除 # 号和后面的注释，在命令行窗口中按下 G（大写），然后按下 O（大写），将上面修改的内容直接粘贴到命令行窗口中，再按下 ESC ，最后输入<code>:wq</code>按回车。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$servers</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Datastore</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$servers</span><span class="o">-&gt;</span><span class="na">newServer</span><span class="p">(</span><span class="s1">&#39;ldap_pla&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$servers</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="s1">&#39;server&#39;</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;My LDAP Server&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$servers</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="s1">&#39;server&#39;</span><span class="p">,</span><span class="s1">&#39;host&#39;</span><span class="p">,</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$servers</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="s1">&#39;server&#39;</span><span class="p">,</span><span class="s1">&#39;port&#39;</span><span class="p">,</span><span class="mi">389</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$servers</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="s1">&#39;server&#39;</span><span class="p">,</span><span class="s1">&#39;base&#39;</span><span class="p">,</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;dc=xxx,dc=xxx&#39;</span><span class="p">));</span> <span class="c1">#修改 dc=xxx,dc=xxx 为自己的域名
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$servers</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">,</span><span class="s1">&#39;auth_type&#39;</span><span class="p">,</span><span class="s1">&#39;session&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$servers</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">,</span><span class="s1">&#39;bind_id&#39;</span><span class="p">,</span><span class="s1">&#39;cn=Manager,dc=xxx,dc=xxx&#39;</span><span class="p">);</span>   <span class="c1">#修改 dc=xxx,dc=xxx 为自己的域名
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$servers</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">,</span><span class="s1">&#39;bind_pass&#39;</span><span class="p">,</span><span class="s1">&#39;&lt;密码&gt;&#39;</span><span class="p">);</span> <span class="c1">#填入 5.7.1 设定的根节点管理员密码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$servers</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="s1">&#39;server&#39;</span><span class="p">,</span><span class="s1">&#39;tls&#39;</span><span class="p">,</span><span class="k">false</span><span class="p">);</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<ol start="3">
+<li>启动<code>httpd</code>服务</li>
+</ol>
+<blockquote>
+<p>启动：<code>systemctl start httpd</code></p>
+<p>开机启动：<code>systemctl enable httpd</code></p>
+</blockquote>
+<ol start="4">
+<li>登录phpLDAPadmin</li>
+</ol>
+<blockquote>
+<p>打开浏览器，访问 http://CentOS7IP/phpldapadmin ，然后按图片中的提示登录即可。</p>
+</blockquote>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/v2-fb61d749b627993fd2a2eb4b8c793d9f_1440w.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="v2-fb61d749b627993fd2a2eb4b8c793d9f_1440w"
+	
+	
+></p>
+<p>配置完效果如下</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/v2-e2728ad753765e90636bb53bc7457ee7_1440w.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="v2-e2728ad753765e90636bb53bc7457ee7_1440w"
+	
+	
+></p>
+<h1 id="ref">Ref</h1>
+<p><a class="link" href="https://blog.csdn.net/zou8944/article/details/122287398"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/zou8944/article/details/122287398</a></p>
+<p><a class="link" href="https://blog.csdn.net/pushiqiang/article/details/119982651"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/pushiqiang/article/details/119982651</a></p>
+<p><a class="link" href="https://www.cnblogs.com/siyunianhua/p/18309700"  target="_blank" rel="noopener"
+    >https://www.cnblogs.com/siyunianhua/p/18309700</a></p>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/32732045"  target="_blank" rel="noopener"
+    >https://zhuanlan.zhihu.com/p/32732045</a></p>
+<p><a class="link" href="https://blog.csdn.net/ysf15609260848/article/details/126002321"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/ysf15609260848/article/details/126002321</a></p>
+<p><a class="link" href="https://blog.csdn.net/ysf15609260848/article/details/126002452"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/ysf15609260848/article/details/126002452</a></p>
+
 </section>
 
 
