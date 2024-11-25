@@ -491,28 +491,33 @@
 </div><h2 id="benefits-of--with-jndi">Benefits of  With-JNDI</h2>
 <blockquote>
 <p>直接使用JDBC或者通过JNDI引用数据源的编程代码量相差无几，但是现在的程序可以不用关心具体JDBC参数了。</p>
-<p>在系统部署后，如果数据库的相关参数变更，只需要重新配置 mysql-ds.xml 修改其中的JDBC参数，只要保证数据源的名称不变，那么程序源代码就无需修改。</p>
+<p>在系统部署后，如果数据库的相关参数变更，只需要重新配置 <code>mysql-ds.xml</code> 修改其中的JDBC参数，只要保证数据源的名称不变，那么程序源代码就无需修改。</p>
 <p>由此可见，JNDI避免了程序与数据库之间的紧耦合，使应用更加易于配置、易于部署。</p>
 </blockquote>
 <h1 id="re-understand-the-jndi">Re-understand the JNDI</h1>
 <p>核心点是：<em><strong>把资源取个名字，再根据名字来找资源</strong></em></p>
 <ul>
 <li>
-<p>如何给资源取名字？通过配置文件，通过RMI，Whatever</p>
+<p>如何给资源取名字？通过配置文件，通过<a class="link" href="https://d4n-sec.github.io/p/rmi-study/"  target="_blank" rel="noopener"
+    >RMI</a>，Whatever.</p>
 </li>
 <li>
 <p>重点是什么？是给当前应用服务器所管理的所有资源一个唯一的标识，资源可以包括包括数据库，网页，文件，连接池等等。</p>
 </li>
 </ul>
 <blockquote>
-<p>JNDI提供了一种统一的方式，可以用在网络上查找和访问服务。通过指定一个资源名称，该名称对应于数据库或命名服务中的一个记录，同时返回相关服务所必须的信息。</p>
+<p>JNDI提供了<em><strong>一种统一的方式</strong></em>，可以用在网络上查找和访问服务。通过指定一个资源名称，该名称对应于数据库或命名服务中的一个记录，同时返回相关服务所必须的信息。</p>
 </blockquote>
 <p><code>JNDI</code>主要有两部分组成：应用程序编程接口和服务供应商接口。</p>
 <ul>
 <li>应用程序编程接口提供了Java应用程序访问各种命名和目录服务的功能</li>
 <li>服务供应商接口提供了任意一种服务的供应商使用的功能。</li>
 </ul>
+<hr>
+<p>！！！！</p>
 <p>JNDI（Java Name Directory Interface）是为应用服务器管理资源所设置的目录样式的<em><strong>唯一标识</strong></em>（就像是<em><strong>电话簿</strong></em>一样），数据库、网页、文档等</p>
+<p>！！！！</p>
+<hr>
 <h1 id="ref">Ref</h1>
 <p><a class="link" href="https://blog.csdn.net/belongtocode/article/details/106327415"  target="_blank" rel="noopener"
     >https://blog.csdn.net/belongtocode/article/details/106327415</a></p>
@@ -567,6 +572,25 @@
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/javaaboutldap/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241125100106320.png" loading="lazy" data-key="JavaAboutLDAP" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241125100106320.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Java基础知识：LDAP</h2>
+        </div>
+    </a>
+</article>
+
             
                 
 <article class="has-image">
@@ -639,25 +663,6 @@
 
         <div class="article-details">
             <h2 class="article-title">Java ClassPath</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/javaproxystudy/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240728010634169.png" loading="lazy" data-key="JavaProxyStudy" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240728010634169.png"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Java代理模式</h2>
         </div>
     </a>
 </article>

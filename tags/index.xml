@@ -7,20 +7,36 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>DanSec</copyright>
-        <lastBuildDate>Sat, 23 Nov 2024 10:04:22 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>JNDI</title>
-        <link>https://d4n-sec.github.io/tags/jndi/</link>
-        <pubDate>Sat, 23 Nov 2024 10:04:22 +0800</pubDate>
+        <lastBuildDate>Mon, 25 Nov 2024 13:28:42 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>MarkDown</title>
+        <link>https://d4n-sec.github.io/tags/markdown/</link>
+        <pubDate>Mon, 25 Nov 2024 13:28:42 +0800</pubDate>
         
-        <guid>https://d4n-sec.github.io/tags/jndi/</guid>
+        <guid>https://d4n-sec.github.io/tags/markdown/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>LDAP</title>
+        <link>https://d4n-sec.github.io/tags/ldap/</link>
+        <pubDate>Mon, 25 Nov 2024 08:05:08 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/ldap/</guid>
         <description></description>
         </item>
         <item>
         <title>基础知识</title>
         <link>https://d4n-sec.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
-        <pubDate>Sat, 23 Nov 2024 10:04:22 +0800</pubDate>
+        <pubDate>Mon, 25 Nov 2024 08:05:08 +0800</pubDate>
         
         <guid>https://d4n-sec.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>JNDI</title>
+        <link>https://d4n-sec.github.io/tags/jndi/</link>
+        <pubDate>Sat, 23 Nov 2024 10:04:22 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/jndi/</guid>
         <description></description>
         </item>
         <item>
