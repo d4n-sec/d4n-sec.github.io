@@ -1788,7 +1788,7 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;找到协议为&lt;code&gt;LDAP&lt;/code&gt;的第一个流量，右键该项-&amp;gt;跟踪流-&amp;gt;TCP Stream，得到如下&lt;/p&gt;
+&lt;p&gt;找到协议为&lt;code&gt;LDAP&lt;/code&gt;的第一个流量，&lt;strong&gt;右键该项-&amp;gt;跟踪流-&amp;gt;TCP Stream&lt;/strong&gt;，得到如下&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241126212706039.png&#34;
 	
 	
