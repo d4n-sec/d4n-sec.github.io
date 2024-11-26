@@ -312,11 +312,31 @@
                 <li><a href="#创建数据">创建数据</a>
                   <ol>
                     <li><a href="#创建ou">创建ou</a></li>
+                    <li><a href="#创建-posix-group">创建 Posix Group</a></li>
+                    <li><a href="#创建-user-account">创建 User Account</a></li>
+                    <li><a href="#为用户填写其他属性">为用户填写其他属性</a></li>
                   </ol>
                 </li>
               </ol>
             </li>
             <li><a href="#已有ldap环境和数据后的ui登录">已有LDAP环境和数据后的UI登录</a></li>
+          </ol>
+        </li>
+        <li><a href="#ldap与第三方集成">LDAP与第三方集成</a>
+          <ol>
+            <li><a href="#ldap和jria的集成">LDAP和JRIA的集成</a>
+              <ol>
+                <li><a href="#补充解释">补充解释</a></li>
+              </ol>
+            </li>
+            <li><a href="#ldap和confluence的集成">LDAP和Confluence的集成</a></li>
+            <li><a href="#ldap和nexus的集成">LDAP和Nexus的集成</a></li>
+            <li><a href="#ldap和harbor的集成">LDAP和Harbor的集成</a>
+              <ol>
+                <li><a href="#新版本">新版本</a></li>
+                <li><a href="#旧版本">旧版本</a></li>
+              </ol>
+            </li>
           </ol>
         </li>
       </ol>
@@ -398,7 +418,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 10 分钟
+                    阅读时长: 13 分钟
                 </time>
             </div>
         
@@ -1118,8 +1138,52 @@
 	
 	
 ></p>
-<p>重复此操作，创建<code>ou=user</code></p>
-<p>&ndash;TODO&ndash;</p>
+<p>重复此操作，创建<code>ou=user</code>，结果如下图</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241126131634209.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241126131634209"
+	
+	
+></p>
+<h5 id="创建-posix-group">创建 Posix Group</h5>
+<p>接下来创建Posix Group在<code>group</code>下</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/wyqid-99xbj.gif"
+	
+	
+	
+	loading="lazy"
+	
+		alt="wyqid-99xbj"
+	
+	
+></p>
+<h5 id="创建-user-account">创建 User Account</h5>
+<p>在<code>ou=user</code>下创建用户</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/vvfob-uhvgf.gif"
+	
+	
+	
+	loading="lazy"
+	
+		alt="vvfob-uhvgf"
+	
+	
+></p>
+<h5 id="为用户填写其他属性">为用户填写其他属性</h5>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/ji71q-5y1j4.gif"
+	
+	
+	
+	loading="lazy"
+	
+		alt="ji71q-5y1j4"
+	
+	
+></p>
 <h3 id="已有ldap环境和数据后的ui登录">已有LDAP环境和数据后的UI登录</h3>
 <ol>
 <li>安装phpLDAPadmin</li>
@@ -1194,7 +1258,312 @@
 	
 	
 ></p>
-<h1 id="ref">Ref</h1>
+<h2 id="ldap与第三方集成">LDAP与第三方集成</h2>
+<p>第三方平台的集成基本上按照操作手册来做，故不做实验</p>
+<p>仅做记录</p>
+<h3 id="ldap和jria的集成">LDAP和JRIA的集成</h3>
+<ol>
+<li>登录进<code>JRIA</code>的控制台（需要是管理员身份）</li>
+<li>点击：配置—&gt;用户管理—&gt;用户目录—&gt;添加目录—&gt;LDAP</li>
+</ol>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/fbc6918f37c7924197dfc69cbfb25755.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="fbc6918f37c7924197dfc69cbfb25755"
+	
+	
+></p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/fbc6918f37c7924197dfc69cbfb25755.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="fbc6918f37c7924197dfc69cbfb25755"
+	
+	
+></p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/31b8466529fcc1645027fb0a61cae7cc.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="31b8466529fcc1645027fb0a61cae7cc"
+	
+	
+></p>
+<h4 id="补充解释">补充解释</h4>
+<p>特别解释几个属性的含义：</p>
+<p>LDAP模式</p>
+<ul>
+<li>“基础DN” 填写LDAP的根节点，类似dc=zaq,dc=test;
+“附加用户DN” 填写限制用户搜索范围的值，类似ou=people，不填的话从基础DN开始搜索；
+“附加组DN” 填写限制用户组搜索范围的值，和上一项类似；</li>
+</ul>
+<p>LDAP权限</p>
+<ul>
+<li>只读：JIRA只能从LDAP中读取用户以及用户组信息，所有对用户及用户组的修改不能通过JIRA进行。
+本地只读：相比只读来说，可以在JIRA中添加组，并且会将LDAP同步过来的用户加入到该组中。
+读写：不但可以读取LDAP上的用户及组信息，还可以通过JIRA修改这些信息，这些信息会自动同步到LDAP。</li>
+</ul>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/8e84a4b415229700c13da3b5bd70141e.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="8e84a4b415229700c13da3b5bd70141e"
+	
+	
+></p>
+<h3 id="ldap和confluence的集成">LDAP和Confluence的集成</h3>
+<p>找到gitlab的配置文件：<code>/etc/gitlab/gitlab.rb</code>，然后修改下面的内容</p>
+<blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="c1">### LDAP Settings</span>
+</span></span><span class="line"><span class="cl"><span class="c1">###! Docs: https://docs.gitlab.com/omnibus/settings/ldap.html</span>
+</span></span><span class="line"><span class="cl"><span class="c1">###! **Be careful not to break the indentation in the ldap_servers block. It is</span>
+</span></span><span class="line"><span class="cl"><span class="c1">###!   in yaml format and the spaces must be retained. Using tabs will not work.**</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="n">gitlab_rails</span><span class="o">[</span><span class="s1">&#39;ldap_enabled&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="kp">true</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># gitlab_rails[&#39;prevent_ldap_sign_in&#39;] = false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">###! **remember to close this block with &#39;EOS&#39; below**</span>
+</span></span><span class="line"><span class="cl"> <span class="n">gitlab_rails</span><span class="o">[</span><span class="s1">&#39;ldap_servers&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load</span> <span class="s">&lt;&lt;-&#39;EOS&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s"></span>   <span class="ss">main</span><span class="p">:</span> <span class="c1"># &#39;main&#39; is the GitLab &#39;provider ID&#39; of this LDAP server</span>
+</span></span><span class="line"><span class="cl">     <span class="ss">label</span><span class="p">:</span> <span class="s1">&#39;LDAP&#39;</span>
+</span></span><span class="line"><span class="cl">     <span class="ss">host</span><span class="p">:</span> <span class="s1">&#39;xx.xx.xx.xx&#39;</span>  <span class="c1">### LDAP服务地址</span>
+</span></span><span class="line"><span class="cl">     <span class="ss">port</span><span class="p">:</span> <span class="mi">389</span>
+</span></span><span class="line"><span class="cl">     <span class="ss">uid</span><span class="p">:</span> <span class="s1">&#39;uid&#39;</span>   <span class="c1">### 指定登录gitlab使用LDAP的哪个字段作为账号</span>
+</span></span><span class="line"><span class="cl">     <span class="ss">bind_dn</span><span class="p">:</span> <span class="s1">&#39;cn=admin,dc=zaq,dc=test&#39;</span>  <span class="c1">### 这里用自己的管理员账号（需要一个有read权限的账号验证通过后搜索用户输入的用户名是否存在）</span>
+</span></span><span class="line"><span class="cl">     <span class="ss">password</span><span class="p">:</span> <span class="s1">&#39;XXX&#39;</span>
+</span></span><span class="line"><span class="cl">     <span class="ss">encryption</span><span class="p">:</span> <span class="s1">&#39;plain&#39;</span> <span class="c1"># &#34;start_tls&#34; or &#34;simple_tls&#34; or &#34;plain&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#     verify_certificates: true</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#     smartcard_auth: false</span>
+</span></span><span class="line"><span class="cl">     <span class="ss">active_directory</span><span class="p">:</span> <span class="kp">false</span>       <span class="c1">### 如果是 Active Directory LDAP server 则设为true</span>
+</span></span><span class="line"><span class="cl">     <span class="ss">allow_username_or_email_login</span><span class="p">:</span> <span class="kp">true</span>  <span class="c1">### 是否允许email登录</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#     lowercase_usernames: false    ### 是否将用户名转为小写</span>
+</span></span><span class="line"><span class="cl">     <span class="ss">block_auto_created_users</span><span class="p">:</span> <span class="kp">false</span>   <span class="c1">### 是否自动创建用户。如果设置为true则自动注册的账户是被锁定的，需要管理员账户手动的为这些账户解锁，因此此处将其设置为false。当设置为false的时候，就需要保证，对于第三方登录的用户完全可控。</span>
+</span></span><span class="line"><span class="cl">     <span class="ss">base</span><span class="p">:</span> <span class="s1">&#39;ou=people,dc=zaq,dc=com&#39;</span>   <span class="c1">### 从哪个位置搜索用户，这里填自己的</span>
+</span></span><span class="line"><span class="cl">     <span class="ss">user_filter</span><span class="p">:</span> <span class="s1">&#39;&#39;</span>     <span class="c1">### 表示以某种过滤条件筛选用户，比如我们只希望组为gitlab的用户来访问GitLab，则这里可以设置为：memberOf=ou=gitlab,ou=people,dc=zaq,dc=com</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#	 attributes:	# LDAP 中用户的属性</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#	   username: [&#39;uid&#39;, &#39;userid&#39;, &#39;sAMAccountName&#39;]</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#      email: [&#39;mail&#39;, &#39;email&#39;, &#39;userPrincipalName&#39;]</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#      name: &#39;cn&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#      first_name: &#39;givenName&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#      last_name:  &#39;sn&#39;</span>
+</span></span><span class="line"><span class="cl">     <span class="c1">## EE only</span>
+</span></span><span class="line"><span class="cl">     <span class="ss">group_base</span><span class="p">:</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">     <span class="ss">admin_group</span><span class="p">:</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">     <span class="ss">sync_ssh_keys</span><span class="p">:</span> <span class="kp">false</span>
+</span></span><span class="line"><span class="cl"> <span class="no">EOS</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<p>修改完后重启GitLab！</p>
+<p>最后最好再取消GitLab的注册功能，新用户只能通过 LDAP 认证的方式进行登陆。</p>
+<p>拉取代码时要用LDAP创建的账号密码拉取。</p>
+<h3 id="ldap和nexus的集成">LDAP和Nexus的集成</h3>
+<ol>
+<li>登录管理员账号</li>
+</ol>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/7162286dc6f76fceba126353661f3219.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="7162286dc6f76fceba126353661f3219"
+	
+	
+></p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/ad70b545603a246422f77f585dfacefb.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="ad70b545603a246422f77f585dfacefb"
+	
+	
+></p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/458a3b3dcbd24cc1ffbb446f916b9c7d.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="458a3b3dcbd24cc1ffbb446f916b9c7d"
+	
+	
+></p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/a71cbfcb19ecccfbd71a02968b099519.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="a71cbfcb19ecccfbd71a02968b099519"
+	
+	
+></p>
+<h3 id="ldap和harbor的集成">LDAP和Harbor的集成</h3>
+<p>特别注意</p>
+<blockquote>
+<p>在没有添加任何用户之前，你可以修改认证模式（Database模式或者LDAP模式）, 但当Harbor系统中已经有至少一个用户之后（除了admin用户外），将不能够修改认证模式。</p>
+</blockquote>
+<h4 id="新版本">新版本</h4>
+<p>新版本的可以直接在页面进行修改，如下：</p>
+<p>登录管理员账户，选中配置管理</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/fa5b6831e2a940711ae277ab2917653e.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="fa5b6831e2a940711ae277ab2917653e"
+	
+	
+></p>
+<h4 id="旧版本">旧版本</h4>
+<p>老版本则需要修改<code>harbor.cfg</code>文件，如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="c">##By default the auth mode is db_auth, i.e. the credentials are stored in a local database.</span>
+</span></span><span class="line"><span class="cl"><span class="c">#Set it to ldap_auth if you want to verify a user&#39;s credentials against an LDAP server.</span>
+</span></span><span class="line"><span class="cl"><span class="nx">auth_mode</span> <span class="p">=</span> <span class="nx">ldap_auth</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c">#The url for an ldap endpoint.</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ldap_url</span> <span class="p">=</span> <span class="nx">xx</span><span class="p">.</span><span class="nx">xx</span><span class="p">.</span><span class="nx">xx</span><span class="p">.</span><span class="nx">xx</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c">#A user&#39;s DN who has the permission to search the LDAP/AD server.</span>
+</span></span><span class="line"><span class="cl"><span class="c">#If your LDAP/AD server does not support anonymous search, you should configure this DN and ldap_search_pwd.</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ldap_searchdn</span> <span class="p">=</span> <span class="nx">cn</span><span class="p">=</span><span class="nx">admin</span><span class="p">,</span><span class="nx">dc</span><span class="p">=</span><span class="nx">zaq</span><span class="p">,</span><span class="nx">dc</span><span class="p">=</span><span class="nx">test</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c">#the password of the ldap_searchdn</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ldap_search_pwd</span> <span class="p">=</span> <span class="nx">xxx</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c">#The base DN from which to look up a user in LDAP/AD</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ldap_basedn</span> <span class="p">=</span> <span class="nx">dc</span><span class="p">=</span><span class="nx">zaq</span><span class="p">,</span><span class="nx">dc</span><span class="p">=</span><span class="nx">com</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c">#Search filter for LDAP/AD, make sure the syntax of the filter is correct.</span>
+</span></span><span class="line"><span class="cl"><span class="c">#ldap_filter = (objectClass=person)</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c"># The attribute used in a search to match a user, it could be uid, cn, email, sAMAccountName or other attributes depending on your LDAP/AD</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ldap_uid</span> <span class="p">=</span> <span class="nx">uid</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c">#the scope to search for users, 0-LDAP_SCOPE_BASE, 1-LDAP_SCOPE_ONELEVEL, 2-LDAP_SCOPE_SUBTREE</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ldap_scope</span> <span class="p">=</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c">#Timeout (in seconds)  when connecting to an LDAP Server. The default value (and most reasonable) is 5 seconds.</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ldap_timeout</span> <span class="p">=</span> <span class="mi">5</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c">#Verify certificate from LDAP server</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ldap_verify_cert</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c">#The base dn from which to lookup a group in LDAP/AD</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ldap_group_basedn</span> <span class="p">=</span> <span class="nx">ou</span><span class="p">=</span><span class="nx">IT</span><span class="p">,</span><span class="nx">dc</span><span class="p">=</span><span class="nx">shileizcc</span><span class="p">,</span><span class="nx">dc</span><span class="p">=</span><span class="nx">com</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c">#filter to search LDAP/AD group</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ldap_group_filter</span> <span class="p">=</span> <span class="nx">objectclass</span><span class="p">=</span><span class="nx">group</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c">#The attribute used to name a LDAP/AD group, it could be cn, name</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ldap_group_gid</span> <span class="p">=</span> <span class="nx">cn</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c">#The scope to search for ldap groups. 0-LDAP_SCOPE_BASE, 1-LDAP_SCOPE_ONELEVEL, 2-LDAP_SCOPE_SUBTREE</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ldap_group_scope</span> <span class="p">=</span> <span class="mi">2</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="ref">Ref</h1>
 <p><a class="link" href="https://blog.csdn.net/zou8944/article/details/122287398"  target="_blank" rel="noopener"
     >https://blog.csdn.net/zou8944/article/details/122287398</a></p>
 <p><a class="link" href="https://blog.csdn.net/pushiqiang/article/details/119982651"  target="_blank" rel="noopener"
