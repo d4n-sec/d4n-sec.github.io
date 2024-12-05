@@ -7,7 +7,116 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>DanSec</copyright>
-        <lastBuildDate>Mon, 25 Nov 2024 13:28:42 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 05 Dec 2024 16:46:33 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Windows 根据端口查找进程</title>
+        <link>https://d4n-sec.github.io/p/port-pid-taskfile/</link>
+        <pubDate>Thu, 05 Dec 2024 16:46:33 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/port-pid-taskfile/</guid>
+        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241205164904770.png" alt="Featured image of post Windows 根据端口查找进程" /&gt;&lt;details&gt;&lt;summary&gt;前情提要&lt;/summary&gt;
+&lt;p&gt;由于有&lt;a class=&#34;link&#34; href=&#34;https://d4n-sec.github.io/p/javaaboutjndi/#---todo---&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;这个待办&lt;/a&gt;的存在，我将尝试去证明：&lt;code&gt;JNDI&lt;/code&gt;配置后，与数据库通信层的连接代码是交给了 Tomcat，JBOSS 等完成&lt;/p&gt;
+&lt;p&gt;虽然可能没什么意义，但是有疑问想要自己解决不总是坏的&lt;/p&gt;
+&lt;p&gt;在Debug时，尝试通过通讯层面证明为&lt;code&gt;Tomcat&lt;/code&gt;与&lt;code&gt;Mysql&lt;/code&gt;通信&lt;/p&gt;
+&lt;p&gt;在抓包过程中，很遗憾，只能得到目的端口和来源端口信息（当然咯，网络层面通讯进行数据库查询带什么本地进程信息呢？），如下图&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241205165612177.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20241205165612177&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;3306&lt;/code&gt;是&lt;code&gt;MySQL&lt;/code&gt;的默认端口，&lt;del&gt;如果&lt;code&gt;4894&lt;/code&gt;是固定端口，且该服务属于&lt;code&gt;Tomcat&lt;/code&gt;的话，此次证明就可以告一段落了&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;显然没有那么简单，重新运行发现连接数据库&lt;code&gt;3306&lt;/code&gt;-&lt;code&gt;Server 端口&lt;/code&gt;所对应的&lt;code&gt;Client&lt;/code&gt;端口并不固定，那么只能说明将要进行连接时，&lt;code&gt;Client&lt;/code&gt;从 OS 处申请了一个端口，也没有指定。&lt;/p&gt;
+&lt;p&gt;所以如果可以找到&lt;code&gt;端口&lt;/code&gt;对应的&lt;code&gt;进程&lt;/code&gt;对应的&lt;code&gt;文件位置&lt;/code&gt;，如果该文件处于&lt;code&gt;Tomcat&lt;/code&gt;目录，而非&lt;code&gt;JDK&lt;/code&gt;，项目目录，岂不是也可以证明是&lt;code&gt;Tomcat&lt;/code&gt;发起连接的？&lt;/p&gt;
+&lt;p&gt;答案：很遗憾，不能，找到的是 JDK 中的 &lt;code&gt;java.exe&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;当然了笨蛋，JVM 管所有，所以如果有 java 程序发起连接，都需要经过 JVM 啊，JVM 当然来源于 &lt;code&gt;java.exe&lt;/code&gt; 咯，笨蛋&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;但是尽管这是让自己无语的一次脑洞尝试，但这次的排查有一些知识点可以记下来，故有此文章&lt;/p&gt;
+&lt;/details&gt;
+&lt;h1 id=&#34;端口号查进程id&#34;&gt;端口号查进程id&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;进程id&lt;/code&gt;，也叫&lt;code&gt;pid&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;需要知道的东西：需要查询的端口号&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在有端口号的前提下，可以通过如下命令进行端口查询&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 只看某一个端口
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;C&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;nl&#34;&gt;\Users\Dan&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&amp;gt;netstat -ano|findstr 5994&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  TCP    172.24.176.1:5994      172.24.189.19:3306     ESTABLISHED     20444
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 想看看所有端口
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;C&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;nl&#34;&gt;\Users\Dan&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&amp;gt;netstat -ano&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;活动连接
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  协议  本地地址          外部地址        状态           PID
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  TCP    0.0.0.0:135            0.0.0.0:0              LISTENING       1140
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  TCP    0.0.0.0:445            0.0.0.0:0              LISTENING       4
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  TCP    0.0.0.0:1024           0.0.0.0:0              LISTENING       856
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  TCP    0.0.0.0:1999           0.0.0.0:0              LISTENING       15032
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  ...........
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;根据pid，就可以确定一个具体的进程了&lt;/p&gt;
+&lt;h1 id=&#34;进程id查任务名&#34;&gt;进程id查任务名&lt;/h1&gt;
+&lt;p&gt;命令如下&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 20444 修改为需查询的 PID 号
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;C&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;nl&#34;&gt;\Users\Dan&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&amp;gt;tasklist|findstr &amp;#34;20444&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;java.exe                     20444 Console                    1    184,196 K
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;但是笔者不满足，笔者想要知道可执行文件的具体目录位置&lt;/p&gt;
+&lt;p&gt;所以有下&lt;/p&gt;
+&lt;h1 id=&#34;进程id查文件所在位置&#34;&gt;进程id查文件所在位置&lt;/h1&gt;
+&lt;p&gt;命令如下&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 20444 修改为需查询的 PID 号
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;C&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;nl&#34;&gt;\Users\Dan&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&amp;gt;wmic process where processid=20444 get processid,executablepath,name&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	ExecutablePath                                  Name      ProcessId
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	D:\Program Files\Java\jdk-17.0.11\bin\java.exe  java.exe  20444
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;OK，记录在此&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>一些好用的 MarkDown 语法</title>
         <link>https://d4n-sec.github.io/p/usefullmarkdowngrammar/</link>
         <pubDate>Mon, 25 Nov 2024 13:28:42 +0800</pubDate>
