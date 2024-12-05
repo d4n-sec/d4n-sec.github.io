@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='JVM 对已经运行起来的进程查询参数或者环境变量等相关信息'>
+<title>JVM 运行时参数查询</title>
+
+<link rel='canonical' href='https://d4n-sec.github.io/p/jvmruntimepathenv/'>
+
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='JVM 运行时参数查询'>
+<meta property='og:description' content='JVM 对已经运行起来的进程查询参数或者环境变量等相关信息'>
+<meta property='og:url' content='https://d4n-sec.github.io/p/jvmruntimepathenv/'>
+<meta property='og:site_name' content='Dan`s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='JVM env' /><meta property='article:tag' content='Runtime Options' /><meta property='article:tag' content='jinfo' /><meta property='article:published_time' content='2024-12-05T17:18:22&#43;08:00'/><meta property='article:modified_time' content='2024-12-05T17:18:22&#43;08:00'/><meta property='og:image' content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241205172029711.png' />
+<meta name="twitter:title" content="JVM 运行时参数查询">
+<meta name="twitter:description" content="JVM 对已经运行起来的进程查询参数或者环境变量等相关信息"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241205172029711.png' />
+    <link rel="shortcut icon" href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/paper-plane-64.webp" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/TX.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🐹</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Dan`s Blog</a></h1>
+            <h2 class="site-description">今人不见古时月</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='/%E5%85%B3%E4%BA%8E'
+                        target="_blank"
+                        title="contactMe"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1709702435352" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8388" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32z m-40 110.8V792H136V270.8l-27.6-21.5 39.3-50.5 42.8 33.3h643.1l42.8-33.3 39.3 50.5-27.7 21.5z" fill="#bfbfbf" p-id="8389"></path><path d="M833.6 232L512 482 190.4 232l-42.8-33.3-39.3 50.5 27.6 21.5 341.6 265.6c20.2 15.7 48.5 15.7 68.7 0L888 270.8l27.6-21.5-39.3-50.5-42.7 33.2z" p-id="8390" fill="#bfbfbf"></path></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/d4n-sec'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='http://wpa.qq.com/msgrd?v=3&amp;uin=1664022865&amp;site=qq&amp;menu=yes'
+                        target="_blank"
+                        title="QQNum"
+                        rel="me"
+                    >
+                        
+                        
+                            
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1709702077457" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13062" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3C766.5 262.2 689.3 112 511.5 112 331.7 112 256.2 265.2 261 447.9c-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z" p-id="13063" fill="#bfbfbf"></path></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+    </ol>
+    <div class="menu-bottom-section">
+        <ol class="menu">
+
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </ol>
+    </div>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#jinfo">Jinfo</a></li>
+    <li><a href="#常用命令">常用命令</a>
+      <ol>
+        <li><a href="#-flag">-flag</a>
+          <ol>
+            <li><a href="#普通用法">普通用法</a></li>
+            <li><a href="#打印指定名称的参数">打印指定名称的参数</a></li>
+            <li><a href="#打开或关闭参数">打开或关闭参数</a>
+              <ol>
+                <li><a href="#示例">示例</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#-sysprops">-sysprops</a></li>
+      </ol>
+    </li>
+    <li><a href="#ref">Ref</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/jvmruntimepathenv/">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241205172029711.png" loading="lazy" alt="Featured image of post JVM 运行时参数查询" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/java%E5%AD%A6%E4%B9%A0%E8%B7%AF/" >
+                Java学习路
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/jvmruntimepathenv/">JVM 运行时参数查询</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            JVM 对已经运行起来的进程查询参数或者环境变量等相关信息
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Dec 05, 2024 17:18 &#43;0800</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 2 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <details><summary>前情提要</summary>
+<p>紧接<a class="link" href="https://d4n-sec.github.io/p/port-pid-taskfile/"  target="_blank" rel="noopener"
+    >此文</a>的前情提要</p>
+<p>在找到对应端口对应的文件目录后，有点绝望，JDK 目录连上了我的知识点，却击碎了我的幻想</p>
+<p>但是咱不是善于认输的人，有没有什么办法可以看到正在运行的<code>java</code>进程的相关配置参数或者环境变量呢？</p>
+<p>答案：有的，所以如下</p>
+<p>但是即使知道了环境变量，由于是通过案例通过<code>Tomcat</code>部署（移植到类中直接运行失败），所以也无法排除是否是<code>Tomcat</code>发起连接还是业务代码发起连接</p>
+<p>不管怎么说，学到了就记录</p>
+</details>
+<h1 id="jinfo">Jinfo</h1>
+<blockquote>
+<p>jinfo — 查看进程参数</p>
+</blockquote>
+<p><code>jinfo</code> 是 JDK 自带的命令，可以用来查看<em><strong>正在运行</strong></em>的 java 应用程序的扩展参数，包括 Java System 属性 和 JVM命令行参数；也可以动态的修改正在运行的 JVM 一些参数。当系统崩溃时，jinfo可以从core文件里面知道崩溃的Java应用程序的配置信息。</p>
+<p><code>jinfo -help</code> 结果如下：</p>
+<blockquote>
+<p>参数说明：</p>
+<p><code>-flag &lt;name&gt;</code>：打印指定名称的参数。
+<code>-flag [+|-]&lt;name&gt;</code> ：打开或关闭参数。
+<code>-flag &lt;name&gt;=&lt;value&gt;</code> ：设置参数。
+<code>-flags</code> ：打印当前指定java进程中已经设定的所有JVM参数信息。
+<code>-sysprops</code> ：打印当前java进程中设定的系统环境参数。
+<code>&lt;no option&gt;</code> ：打印上面两个选项。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">&gt; jinfo -help
+</span></span><span class="line"><span class="cl">Usage:
+</span></span><span class="line"><span class="cl">    jinfo <span class="o">[</span>option<span class="o">]</span> &lt;pid&gt;
+</span></span><span class="line"><span class="cl">        <span class="o">(</span>to connect to running process<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    jinfo <span class="o">[</span>option<span class="o">]</span> &lt;executable &lt;core&gt;
+</span></span><span class="line"><span class="cl">        <span class="o">(</span>to connect to a core file<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    jinfo <span class="o">[</span>option<span class="o">]</span> <span class="o">[</span>server_id@<span class="o">]</span>&lt;remote server IP or hostname&gt;
+</span></span><span class="line"><span class="cl">        <span class="o">(</span>to connect to remote debug server<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">where &lt;option&gt; is one of:
+</span></span><span class="line"><span class="cl">    -flag &lt;name&gt;         to print the value of the named VM flag
+</span></span><span class="line"><span class="cl">    -flag <span class="o">[</span>+<span class="p">|</span>-<span class="o">]</span>&lt;name&gt;    to <span class="nb">enable</span> or disable the named VM flag
+</span></span><span class="line"><span class="cl">    -flag &lt;name&gt;<span class="o">=</span>&lt;value&gt; to <span class="nb">set</span> the named VM flag to the given value
+</span></span><span class="line"><span class="cl">    -flags               to print VM flags
+</span></span><span class="line"><span class="cl">    -sysprops            to print Java system properties
+</span></span><span class="line"><span class="cl">    &lt;no option&gt;          to print both of the above
+</span></span><span class="line"><span class="cl">    -h <span class="p">|</span> -help           to print this <span class="nb">help</span> message
+</span></span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<h1 id="常用命令">常用命令</h1>
+<h2 id="-flag">-flag</h2>
+<h3 id="普通用法">普通用法</h3>
+<p><code>jinfo -flags pid</code></p>
+<blockquote>
+<p>打印当前指定java进程中已经设定的所有JVM参数信息</p>
+</blockquote>
+<p>输出如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl"># 8008 修改为已知的 pid
+</span></span><span class="line"><span class="cl">C<span class="p">:</span><span class="nl">\Users\Dan</span><span class="c1">&gt;&#34;D:\Program Files\Java\jdk-17.0.11\bin\jinfo.exe&#34; -flags 8008</span>
+</span></span><span class="line"><span class="cl">VM Flags:
+</span></span><span class="line"><span class="cl">-XX:CICompilerCount=4 -XX:ConcGCThreads=2 -XX:G1ConcRefinementThreads=8 -XX:G1EagerReclaimRemSetThreshold=16 -XX:G1HeapRegionSize=2097152 -XX:GCDrainStackTargetSize=64 -XX:InitialHeapSize=266338304 -XX:+ManagementServer -XX:MarkStackSize=4194304 -XX:MaxHeapSize=4242538496 -XX:MaxNewSize=2543845376 -XX:MinHeapDeltaBytes=2097152 -XX:MinHeapSize=8388608 -XX:NonNMethodCodeHeapSize=5839372 -XX:NonProfiledCodeHeapSize=122909434 -XX:ProfiledCodeHeapSize=122909434 -XX:ReservedCodeCacheSize=251658240 -XX:+SegmentedCodeCache -XX:SoftMaxHeapSize=4242538496 -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:+UseFastUnorderedTimeStamps -XX:+UseG1GC -XX:-UseLargePagesIndividualAllocation
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此项返回值对于笔者来说，暂时没有多少有用的信息，所以有如下</p>
+<h3 id="打印指定名称的参数">打印指定名称的参数</h3>
+<p>注意是 <em><strong>-flag</strong></em> 而不是 flags</p>
+<p><code>jinfo -flag [指定参数] pid</code></p>
+<p>输出如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl"># 8008 修改为已知的 pid
+</span></span><span class="line"><span class="cl">C<span class="p">:</span><span class="nl">\Users\Dan</span><span class="c1">&gt;&#34;D:\Program Files\Java\jdk-17.0.11\bin\jinfo.exe&#34; -flag MinHeapDeltaBytes 24348</span>
+</span></span><span class="line"><span class="cl">-XX:MinHeapDeltaBytes=2097152
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="打开或关闭参数">打开或关闭参数</h3>
+<p><code>jinfo -flag [+/-][指定参数] pid</code>，且参数必须被<code>JVM</code>支持</p>
+<p>示例给出网上的结果</p>
+<h4 id="示例">示例</h4>
+<p>运行如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">jinfo -flag +PrintGC 7663
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>查看</p>
+<p><code>jinfo -flags 7663</code></p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241205175431009.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241205175431009"
+	
+	
+></p>
+<p>图中可见，参数已经成功添加</p>
+<h2 id="-sysprops">-sysprops</h2>
+<p><code>jinfo -sysprops pid</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl"># 8008 修改为已知的 pid
+</span></span><span class="line"><span class="cl">C<span class="p">:</span><span class="nl">\Users\Dan</span><span class="c1">&gt;&#34;D:\Program Files\Java\jdk-17.0.11\bin\jinfo.exe&#34; -sysprops 8008</span>
+</span></span><span class="line"><span class="cl">Java System Properties:
+</span></span><span class="line"><span class="cl">#Tue Dec 03 16:00:11 CST 2024
+</span></span><span class="line"><span class="cl">java.specification.version=17
+</span></span><span class="line"><span class="cl">sun.cpu.isalist=amd64
+</span></span><span class="line"><span class="cl">sun.jnu.encoding=GBK
+</span></span><span class="line"><span class="cl">java.class.path=D\:\\ProgramFiles\\Tomcat\\Tomcat.11.0.0-fastjson\\bin\\bootstrap.jar;D\:\\ProgramFiles\\Tomcat\\Tomcat.11.0.0-fastjson\\bin\\tomcat-juli.jar
+</span></span><span class="line"><span class="cl">java.vm.vendor=Oracle Corporation
+</span></span><span class="line"><span class="cl">sun.arch.data.model=64
+</span></span><span class="line"><span class="cl">user.variant=
+</span></span><span class="line"><span class="cl">catalina.useNaming=true
+</span></span><span class="line"><span class="cl">.....
+</span></span><span class="line"><span class="cl">user.dir=D\:\\ProgramFiles\\Tomcat\\Tomcat.11.0.0-fastjson\\bin
+</span></span><span class="line"><span class="cl">.....
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="ref">Ref</h1>
+<p><a class="link" href="https://blog.csdn.net/wangzhongshun/article/details/122298396"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/wangzhongshun/article/details/122298396</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/jvm-env/">JVM Env</a>
+        
+            <a href="/tags/runtime-options/">Runtime Options</a>
+        
+            <a href="/tags/jinfo/">Jinfo</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/javaaboutldap/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241125100106320.png" loading="lazy" data-key="JavaAboutLDAP" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241125100106320.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Java基础知识：LDAP</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/javaaboutjndi/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121100840910.png" loading="lazy" data-key="JavaAboutJNDI" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121100840910.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Java基础知识：JNDI</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/javaaboutjpa/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241122153243285.png" loading="lazy" data-key="JavaAboutJPA" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241122153243285.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Java基础知识：JPA</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/javaaboutejb/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241122152021833.png" loading="lazy" data-key="JavaAboutEJB" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241122152021833.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Java基础知识：EJB</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/javaaboutj2ee/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121112316304.png" loading="lazy" data-key="JavaAboutJ2EE" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121112316304.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Java基础知识：J2EE</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2024 DanSec
+    </section>
+    
+    <section class="powerby">
+        
+            Dan❤Anan <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.23.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
