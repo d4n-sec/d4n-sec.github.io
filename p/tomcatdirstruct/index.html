@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Tomcat目录结构学习，WEB-INF重点补充'>
+<title>Tomcat目录结构学习</title>
+
+<link rel='canonical' href='https://d4n-sec.github.io/p/tomcatdirstruct/'>
+
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='Tomcat目录结构学习'>
+<meta property='og:description' content='Tomcat目录结构学习，WEB-INF重点补充'>
+<meta property='og:url' content='https://d4n-sec.github.io/p/tomcatdirstruct/'>
+<meta property='og:site_name' content='Dan`s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Tomcat' /><meta property='article:tag' content='WEB-INF' /><meta property='article:published_time' content='2024-12-06T11:03:48&#43;08:00'/><meta property='article:modified_time' content='2024-12-06T11:03:48&#43;08:00'/><meta property='og:image' content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241206110927949.png' />
+<meta name="twitter:title" content="Tomcat目录结构学习">
+<meta name="twitter:description" content="Tomcat目录结构学习，WEB-INF重点补充"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241206110927949.png' />
+    <link rel="shortcut icon" href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/paper-plane-64.webp" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/TX.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🐹</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Dan`s Blog</a></h1>
+            <h2 class="site-description">今人不见古时月</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='/%E5%85%B3%E4%BA%8E'
+                        target="_blank"
+                        title="contactMe"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1709702435352" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8388" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32z m-40 110.8V792H136V270.8l-27.6-21.5 39.3-50.5 42.8 33.3h643.1l42.8-33.3 39.3 50.5-27.7 21.5z" fill="#bfbfbf" p-id="8389"></path><path d="M833.6 232L512 482 190.4 232l-42.8-33.3-39.3 50.5 27.6 21.5 341.6 265.6c20.2 15.7 48.5 15.7 68.7 0L888 270.8l27.6-21.5-39.3-50.5-42.7 33.2z" p-id="8390" fill="#bfbfbf"></path></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/d4n-sec'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='http://wpa.qq.com/msgrd?v=3&amp;uin=1664022865&amp;site=qq&amp;menu=yes'
+                        target="_blank"
+                        title="QQNum"
+                        rel="me"
+                    >
+                        
+                        
+                            
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1709702077457" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13062" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3C766.5 262.2 689.3 112 511.5 112 331.7 112 256.2 265.2 261 447.9c-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z" p-id="13063" fill="#bfbfbf"></path></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+    </ol>
+    <div class="menu-bottom-section">
+        <ol class="menu">
+
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </ol>
+    </div>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#tomcat">Tomcat</a></li>
+    <li><a href="#目录结构一览">目录结构一览</a></li>
+    <li><a href="#webapps">Webapps</a>
+      <ol>
+        <li><a href="#root">ROOT</a></li>
+        <li><a href="#app目录">App目录</a>
+          <ol>
+            <li><a href="#app目录标准结构">App目录标准结构</a></li>
+            <li><a href="#web-inf">WEB-INF</a></li>
+            <li><a href="#meta-inf">META-INF</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#其他位置文件映射">其他位置文件映射</a></li>
+    <li><a href="#confcatalina">conf\Catalina</a></li>
+    <li><a href="#ref">Ref</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/tomcatdirstruct/">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241206110927949.png" loading="lazy" alt="Featured image of post Tomcat目录结构学习" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" >
+                基础知识
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/tomcatdirstruct/">Tomcat目录结构学习</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Tomcat目录结构学习，WEB-INF重点补充
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Dec 06, 2024 11:03 &#43;0800</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 7 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="tomcat">Tomcat</h1>
+<p>基本信息暂时不作过多介绍了，本文聚焦于Tomcat的目录结构理解</p>
+<h1 id="目录结构一览">目录结构一览</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Tomcat
+</span></span><span class="line"><span class="cl">├── bin
+</span></span><span class="line"><span class="cl">│   ├── bootstrap.jar
+</span></span><span class="line"><span class="cl">│   ├── catalina-tasks.xml
+</span></span><span class="line"><span class="cl">│   ├── catalina.bat
+</span></span><span class="line"><span class="cl">│   ├── service.bat
+</span></span><span class="line"><span class="cl">│   ├── shutdown.bat
+</span></span><span class="line"><span class="cl">│   ├── startup.bat
+</span></span><span class="line"><span class="cl">│   ├── tomcat11.exe
+</span></span><span class="line"><span class="cl">│   ├── tomcat11w.exe
+</span></span><span class="line"><span class="cl">│   ├── version.sh
+</span></span><span class="line"><span class="cl"><span class="p">|</span>	├── .........
+</span></span><span class="line"><span class="cl"><span class="p">|</span>
+</span></span><span class="line"><span class="cl">├── conf	<span class="c1"># 用来存放tomcat的一些配置文件</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   ├── Catalina				<span class="c1"># Catalina 为一个目录，可以设置默认加载的项目，初始状态下可能不存在</span>
+</span></span><span class="line"><span class="cl">│   ├── catalina.properties
+</span></span><span class="line"><span class="cl">│   ├── context.xml				<span class="c1"># context.xml 可以用来配置数据源之类的</span>
+</span></span><span class="line"><span class="cl">│   ├── logging.properties
+</span></span><span class="line"><span class="cl">│   ├── server.xml				<span class="c1"># server.xml 可以设置端口号、设置域名或IP、默认加载的项目、请求编码 </span>
+</span></span><span class="line"><span class="cl">│   ├── tomcat-users.xml		<span class="c1"># tomcat-users.xml 用来配置管理tomcat的用户与权限 </span>
+</span></span><span class="line"><span class="cl">│   ├── tomcat-users.xsd
+</span></span><span class="line"><span class="cl">│   └── web.xml					<span class="c1"># web.xml 可以设置tomcat支持的文件类型 </span>
+</span></span><span class="line"><span class="cl">│
+</span></span><span class="line"><span class="cl">├── lib		<span class="c1"># lib目录主要用来存放tomcat运行需要加载的jar包，建议只把Tomcat需要的jar包放到这个目录下</span>
+</span></span><span class="line"><span class="cl">│			<span class="c1"># 例如，像连接数据库的jdbc的包(mysql-connector-java-8.0.16.jar)我们可以加入到lib目录中来</span>
+</span></span><span class="line"><span class="cl">│   ├── annotations-api.jar
+</span></span><span class="line"><span class="cl">│   ├── catalina-storeconfig.jar
+</span></span><span class="line"><span class="cl">│   ├── tomcat-i18n-es.jar
+</span></span><span class="line"><span class="cl">│   ├── .......
+</span></span><span class="line"><span class="cl"><span class="p">|</span>
+</span></span><span class="line"><span class="cl">├── logs	<span class="c1"># 顾名思义，一些日志的保存点</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>
+</span></span><span class="line"><span class="cl">├── src		<span class="c1"># 并非自带，笔者同时下载了源码zip包，自行创建的目录，放入了源码</span>
+</span></span><span class="line"><span class="cl">│   └── apache-tomcat-11.0.0-src.zip
+</span></span><span class="line"><span class="cl"><span class="p">|</span>
+</span></span><span class="line"><span class="cl">├── temp	<span class="c1"># temp目录用户存放tomcat在运行过程中产生的临时文件。（清空不会对tomcat运行带来影响） </span>
+</span></span><span class="line"><span class="cl">│   └── safeToDelete.tmp 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>
+</span></span><span class="line"><span class="cl">├── webapps
+</span></span><span class="line"><span class="cl">│   ├── ROOT
+</span></span><span class="line"><span class="cl">│   ├── ........ <span class="c1"># 稍后重点介绍</span>
+</span></span><span class="line"><span class="cl">│
+</span></span><span class="line"><span class="cl">├── work	<span class="c1"># work 目录用来存放tomcat在运行时的编译后文件，例如运行时生成的文件，最终运行的文件都在这里。通过webapps中的项目生成的！</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>			<span class="c1"># 可以把这个目录下的内容删除，再次运行时会生再次生成work目录。</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>			<span class="c1"># 当客户端用户访问一个JSP文件时，Tomcat会通过JSP生成Java文件，然后再编译Java文件生成class文件</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>			<span class="c1"># 生成的java和class文件都会存放到这个目录下。</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>			<span class="c1"># 清空work目录，然后重启tomcat，可以达到清除缓存的作用。</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>			<span class="c1"># 可以把这个目录下的内容删除，再次运行时会生再次生成work目录</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>
+</span></span><span class="line"><span class="cl">├── LICENSE				<span class="c1"># 许可证</span>
+</span></span><span class="line"><span class="cl">└── NOTICE				<span class="c1"># 说明文件</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其他没有列出的<em><strong>根目录下的普通文件</strong></em>不重要</p>
+<h1 id="webapps">Webapps</h1>
+<p><code>Tomcat</code>的目录结构中，最值得关注的目录这个是发布和访问目录</p>
+<blockquote>
+<p><code>webapps</code>目录用来存放应用程序，当tomcat启动时会去加载webapps目录下的应用程序。</p>
+<p>可以以<em><strong>文件夹</strong></em>、<em><strong>war包</strong></em>、<em><strong>jar包</strong></em>的形式发布应用。</p>
+<p>也可以把应用程序放置在磁盘的任意位置，在配置文件中映射好就行，<a class="link" href="#%E5%85%B6%E4%BB%96%E4%BD%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%98%A0%E5%B0%84" >如下</a></p>
+</blockquote>
+<p>其中又分为<code>ROOT</code>目录和其他目录</p>
+<h2 id="root">ROOT</h2>
+<p>默认情况下，没有访问路径的请求，会被映射到<code>ROOT</code>目录中</p>
+<p>举例：如果访问<code>http://localhost:8080/</code>的话，就回去查找<code>ROOT</code>目录</p>
+<p>证明：</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241206154055568.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241206154055568"
+	
+	
+></p>
+<p><code>12133.txt</code>内容如下</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241206154133213.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241206154133213"
+	
+	
+></p>
+<p>这时候，如果访问<code>http://127.0.0.1:8080/12133.txt</code>，结果如下</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241206154216194.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241206154216194"
+	
+	
+></p>
+<h2 id="app目录">App目录</h2>
+<p>其他目录一般遵循一个标准结构，我们统称这种目录为App目录</p>
+<p>下图中的前4个目录都可以称为App目录</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241206154333019.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241206154333019"
+	
+	
+></p>
+<p>例如：访问<code>http://127.0.0.1:8080/examples/</code>，那么默认访问的是<code>http://127.0.0.1:8080/examples/index.html</code></p>
+<p>效果如下</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241206154513479.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241206154513479"
+	
+	
+></p>
+<p><code>index.html</code>内容如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE HTML&gt;</span><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Apache Tomcat Examples<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Apache Tomcat Examples<span class="p">&lt;/</span><span class="nt">H3</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;servlets&#34;</span><span class="p">&gt;</span>Servlets examples<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;jsp&#34;</span><span class="p">&gt;</span>JSP Examples<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;websocket/index.xhtml&#34;</span><span class="p">&gt;</span>WebSocket Examples<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>完全对应了</p>
+<h3 id="app目录标准结构">App目录标准结构</h3>
+<p>Tomcat 自带的 App目录的目录内容如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">examples/
+</span></span><span class="line"><span class="cl">├── META-INF
+</span></span><span class="line"><span class="cl">├── WEB-INF
+</span></span><span class="line"><span class="cl">├── index.html
+</span></span><span class="line"><span class="cl">├── jsp
+</span></span><span class="line"><span class="cl">├── servlets
+</span></span><span class="line"><span class="cl">└── websocket
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中，<code>WEB-INF</code>是必要的重要目录，且必须是这个名字！</p>
+<h3 id="web-inf">WEB-INF</h3>
+<p><code>WEB-INF</code> 一般是受保护的资源目录，浏览器通过url不可以直接访问的目录</p>
+<ul>
+<li>/WEB-INF/web.xml
+Web应用程序配置文件，描述了 servlet 和其他的应用组件配置及命名规则。
+必要文件，web项目的基本配置文件。（较新的版本中可以没有该文件，但是学习过程中还是需要该文件）</li>
+<li>/WEB-INF/classes/
+包含了站点所有用的 class 文件，包括 servlet class 和非servlet class，他们不能包含在 .jar文件中。
+web项目中如果<em><strong>没有源码</strong></em>，<em><strong>则该目录不会出现</strong></em></li>
+<li>/WEB-INF/lib/
+存放web应用需要的各种JAR文件，放置仅在这个应用中要求使用的<code>jar</code>文件,如数据库驱动<code>jar</code>文件。
+web项目要是<em><strong>没有依赖任何jar</strong></em>，<em><strong>则该目录不会出现</strong></em></li>
+<li>/WEB-INF/src/
+源码目录，按照包名结构放置各个 Java 文件。</li>
+<li>/WEB-INF/database.properties
+数据库配置文件</li>
+<li>/WEB-INF/tags/
+存放了自定义标签文件
+该目录并不一定为 tags，<em><strong>可以根据自己的喜好和习惯为自己的标签文件库命名</strong></em>，当使用自定义的标签文件库名称时，在使用标签文件时就必须声明正确的标签文件库路径。例如：当自定义标签文件库名称为 simpleTags 时，在使用 simpleTags 目录下的标签文件时，就必须在 jsp 文件头声明为：<code>&lt;%@ taglibprefix=&quot;tags&quot; tagdir=&quot;/WEB-INF/simpleTags&quot; % &gt;</code></li>
+<li>/WEB-INF/jsp/
+jsp 文件的存放位置。改目录没有特定的声明，同样，可以根据自己的喜好与习惯来命名。此目录主要存放的是 jsp 1.2 以下版本的文件，为区分 jsp 2.0 文件，通常使用 jsp 命名，当然你也可以命名为 jspOldEdition 。</li>
+</ul>
+<h3 id="meta-inf">META-INF</h3>
+<ul>
+<li>jar文件</li>
+</ul>
+<blockquote>
+<p>开发中可以直接使用java class文件来运行程序，不过这样不太方便，所以出现了jar文件来提供发布和运行，jar文件实际上是class文件的zip压缩存档，有很多工具都可以操纵这种格式的文件，</p>
+</blockquote>
+<p>但是jar文件本身并不能表达应用程序的便签信息，于是出现了META-INF目录</p>
+<blockquote>
+<p>jar文件中有一个特定的目录来存放标签信息：META-INF目录</p>
+<p>为了提供存档的便签信息，出现了<code>META-INF/Manifest.mf</code>文件，它包含了jar文件的内容描述，在应用程序运行时向JVM提供应用程序的信息。</p>
+</blockquote>
+<p>jar文件都有一个默认产生的META-INF目录和其中的manifest.mf文件</p>
+<p>使用jar命令可以直接产生META-INF目录和manifest.mf文件</p>
+<p><code>Manifest.mf</code>文件示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">Manifest-Version</span><span class="err">:</span> <span class="mf">1.0</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Created-By</span><span class="err">:</span> <span class="nx">IntelliJ</span> <span class="nx">IDEA</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Built-By</span><span class="err">:</span> <span class="nx">Dan</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Build-Jdk</span><span class="err">:</span> <span class="nx">Oracle</span> <span class="nx">OpenJDK</span> <span class="mf">17.0</span><span class="p">.</span><span class="mi">11</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>解析</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">Manifest-Version</span><span class="err">：生成的</span><span class="nx">manifest</span><span class="p">.</span><span class="nx">mf</span><span class="err">文件的版本</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Created-By</span><span class="err">：文件的生成者，一般由</span><span class="nx">jar</span><span class="err">命令行工具生成，这里显示的是：</span><span class="nx">IDEA</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Built-By</span><span class="err">：文件的创建用户命名，在</span><span class="nx">IDEA</span><span class="err">的配置文件中可以设置</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Bulid-Jdk</span><span class="err">：所使用的</span><span class="nx">JDK</span><span class="err">环境</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其实<code>manifest.mf</code>文件中的配置信息除了上面的四个之外，还是有很多的，以下是几个常见的属性：</p>
+<blockquote>
+<p>一般属性</p>
+<ol>
+<li>Signature-Vresion：定义jar文件的签名版本</li>
+<li>Class-Path：内部的类搜索路径，提供给应用程序或者类装载器</li>
+</ol>
+<p>应用程序的相关属性</p>
+<ol>
+<li>Main-Class：定义jar文件的入口类，该类必须可执行！一旦定义了该属性就可以使用<code>java -jar 程序名.jar</code>来运行该jar文件</li>
+</ol>
+</blockquote>
+<p><code>Manifest.mf</code>文件格式要求</p>
+<blockquote>
+<p><code>manifest</code>文件中的每一行都是 <code>key－value</code> 对应的；</p>
+<p>属性名开头，接着是 &ldquo;:&rdquo; ，然后是属性值；</p>
+<p>每行最多72个字符，如果需要增加，可以在下一行续行，续行以空格开头，以空格开头的行都会被视为前一行的续行。</p>
+</blockquote>
+<h1 id="其他位置文件映射">其他位置文件映射</h1>
+<p>找到<code>conf/server.xml</code>文件中的 <code>host</code> 标签，在 <code>host</code> 标签内定义子标签<code>Context</code></p>
+<p>Context标签必须定义 docBase（实际文件所在文件夹路径:例F:\test）属性，path（访问虚拟路径:例/files）属性</p>
+<p>举例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl">      <span class="nt">&lt;Host</span> <span class="na">name=</span><span class="s">&#34;localhost&#34;</span>  <span class="na">appBase=</span><span class="s">&#34;webapps&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">unpackWARs=</span><span class="s">&#34;true&#34;</span> <span class="na">autoDeploy=</span><span class="s">&#34;true&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">          # 下列是重点
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;Context</span> <span class="na">docBase=</span><span class="s">&#34;F:\test&#34;</span> <span class="na">path=</span><span class="s">&#34;/files&#34;</span><span class="nt">&gt;&lt;/Context&gt;</span>
+</span></span><span class="line"><span class="cl">        .....
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;/Host&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>配置好后，访问路径 <code>localhost:8080/files/css.txt</code> 即可访问到实际路径 <code>F:\test\css.txt</code> 文件</p>
+<h1 id="confcatalina">conf\Catalina</h1>
+<p>这个目录由上可知，这个目录的配置有关于默认加载的项目</p>
+<p>而大名鼎鼎的IDEA，即是通过控制<code>conf\Catalina\localhost</code>下的<code>*.xml</code>文件，来映射设置<code>Tomcat</code>与项目output目录之间的关系</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241206170721412.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241206170721412"
+	
+	
+></p>
+<p>上图可以看到，内容其实与<code>conf/server.xml</code>中的配置内容无二，只是这个无需考虑放入到指定位置</p>
+<p>补充：</p>
+<blockquote>
+<p>xml 文件内容含义如下：</p>
+<ul>
+<li>
+<p><code>path</code> 表示工程的访问路径:<code>/jndidemo_war_exploded</code></p>
+</li>
+<li>
+<p><code>docBase</code> 表示实际的工程目录在哪里，也就是我们需要访问<code>jndidemo_war_exploded</code>文件夹在我们主机上的全路径</p>
+</li>
+</ul>
+<p>注意：这个地方<code>path</code>的参数即<code>/jndidemo_war_exploded</code>要与配置文件名称相一致，可以看到配置文件为<code>jndidemo_war_exploded.xml</code>，其文件名称与<code>path</code>的参数即<code>/jndidemo_war_exploded</code>相一致</p>
+</blockquote>
+<h1 id="ref">Ref</h1>
+<p><a class="link" href="https://blog.csdn.net/m0_68988603/article/details/124285667"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/m0_68988603/article/details/124285667</a></p>
+<p><a class="link" href="https://blog.csdn.net/Helen_1997_1997/article/details/131935349"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/Helen_1997_1997/article/details/131935349</a></p>
+<p><a class="link" href="https://blog.csdn.net/u011479200/article/details/108244382"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/u011479200/article/details/108244382</a></p>
+<p><a class="link" href="https://blog.csdn.net/qq_38449518/article/details/82414069"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/qq_38449518/article/details/82414069</a></p>
+<p><a class="link" href="https://blog.csdn.net/MrYushiwen/article/details/113383917"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/MrYushiwen/article/details/113383917</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/tomcat/">Tomcat</a>
+        
+            <a href="/tags/web-inf/">WEB-INF</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/jvmproperties/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241205181225915.png" loading="lazy" data-key="JvmProperties" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241205181225915.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">JVM 启动属性/环境变量</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/jvmruntimepathenv/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241205172029711.png" loading="lazy" data-key="JvmRuntimePathEnv" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241205172029711.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">JVM 运行时参数查询</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/javaaboutldap/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241125100106320.png" loading="lazy" data-key="JavaAboutLDAP" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241125100106320.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Java基础知识：LDAP</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/javaaboutjndi/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121100840910.png" loading="lazy" data-key="JavaAboutJNDI" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241121100840910.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Java基础知识：JNDI</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/javaaboutjpa/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241122153243285.png" loading="lazy" data-key="JavaAboutJPA" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241122153243285.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Java基础知识：JPA</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2024 DanSec
+    </section>
+    
+    <section class="powerby">
+        
+            Dan❤Anan <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.23.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
