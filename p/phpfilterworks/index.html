@@ -543,7 +543,7 @@
 <blockquote>
 <p>关于<code>php://filter</code>的基本知识需要读者自行补充</p>
 </blockquote>
-<p>上述的报错问题，在<code>php://filter</code>中其实有优化，不满足n的倍数，会截断掉最后余下的不满n倍数的字符串</p>
+<p>上述的报错问题，在<code>php://filter</code>中其实有优化，会截断忽略不满足要求的字符（这里的要求是n的倍数），会截断掉最后<em><strong>余下的不满n倍数</strong></em>的字符串</p>
 <p>例如上方最后一个栗子中的<code>var_dump(@iconv('UCS-2LE','UCS-2BE','x?&lt;uc cucvcsa(b;)&gt;?'));</code>，如果放在<code>php://filter</code>，会直接截断忽略</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -577,9 +577,81 @@
 	
 	
 ></p>
-<h1 id="总结">总结</h1>
-<p>PHP中，同样是编码转换，<code>php://filter</code>会截断忽略不满足要求的字符，但是直接使用<code>iconv()</code>不会智能忽略</p>
-<p>所以<code>php://fileter</code>可以被用来做一些操作，清除文件内容</p>
+<p>这样的截断忽略在<code>convert.base64-decode</code>中也有体现</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nx">error_reporting</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$strr</span> <span class="o">=</span> <span class="s2">&#34;&lt;?php exit();&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$r</span> <span class="o">=</span> <span class="nx">preg_replace</span><span class="p">(</span><span class="s1">&#39;|[^a-z0-9A-Z+/]|s&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nv">$strr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$r</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$a1</span> <span class="o">=</span> <span class="nx">base64_decode</span><span class="p">(</span><span class="nv">$r</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">file_put_contents</span><span class="p">(</span><span class="s1">&#39;php://filter/write=convert.base64-decode/resource=shell.php&#39;</span><span class="p">,</span><span class="nv">$strr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$a2</span> <span class="o">=</span> <span class="nx">file_get_contents</span><span class="p">(</span><span class="s1">&#39;shell.php&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$rr</span> <span class="o">=</span>  <span class="nv">$a1</span> <span class="o">===</span> <span class="nv">$a2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$rr</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Debug信息：</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241217161612326.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241217161612326"
+	
+	
+></p>
+<p>输出：</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241217161520089.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20241217161520089"
+	
+	
+></p>
+<p>所以可知：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;txt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">preg_replace</span><span class="p">(</span><span class="s1">&#39;|[^a-z0-9A-Z+/]|s&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;txt&#39;</span><span class="p">]);</span> <span class="c1">//使得 &#34;&lt;?php exit();&#34; ==&gt; &#34;phpexit&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">base64_decode</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;txt&#39;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 等价于
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">file_put_contents</span><span class="p">(</span><span class="s1">&#39;php://filter/write=convert.base64-decode/resource=xxx.php&#39;</span><span class="p">,</span><span class="nv">$strr</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="总结">总结</h1>
+<p>PHP中，同样是编码转换，<code>php://filter</code>会截断忽略不满足要求的字符，但是直接使用对应函数，不会智能忽略</p>
+<p>所以<code>php://fileter</code>可以被用来做一些操作，清除或者使得原文件内容不可被识别</p>
 <h1 id="ref">Ref</h1>
 <p><a class="link" href="https://www.php.net/manual/en/filters.convert.php"  target="_blank" rel="noopener"
     >https://www.php.net/manual/en/filters.convert.php</a></p>
