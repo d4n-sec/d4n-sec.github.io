@@ -7431,7 +7431,7 @@ classpath：对应 AppClassLoader。java虚拟机系统参数&lt;code&gt;java.cl
         <pubDate>Wed, 06 Nov 2024 14:52:13 +0800</pubDate>
         
         <guid>https://d4n-sec.github.io/p/bytecodeanndloadclass/</guid>
-        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240807214918011.png" alt="Featured image of post Java字节码与类加载器" /&gt;&lt;p&gt;本章深入了解&lt;strong&gt;Java字节码&lt;/strong&gt;以及加载Java字节码的&lt;strong&gt;类加载器&lt;/strong&gt;相关姿势&lt;/p&gt;
+        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240807214918011.png" alt="Featured image of post Java字节码与类加载器" /&gt;&lt;p&gt;本章深入了解&lt;strong&gt;Java字节码&lt;/strong&gt;以及加载Java字节码的&lt;strong&gt;类加载器&lt;/strong&gt;相关姿势！&lt;/p&gt;
 &lt;h1 id=&#34;java字节码&#34;&gt;Java字节码&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Java 在刚刚诞生之时曾经提出过一个非常著名的口号: “&lt;strong&gt;一次编写，到处运行（write once，run anywhere）&lt;/strong&gt;”，这句话充分表达了软件开发人员对冲破平台界限的渴求。“与平台无关”的理想最终实现在操作系统的运用层上: 虚拟机提供商开发了许多可以运行在不同平台上的虚拟机，这些虚拟机都可以载入和执行同一种平台无关的字节码，从而实现了程序的“一次编写到处运行”。&lt;/p&gt;
