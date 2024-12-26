@@ -272,6 +272,7 @@
             <nav id="TableOfContents">
   <ol>
     <li><a href="#期望效果">期望效果</a></li>
+    <li><a href="#笔者环境">笔者环境</a></li>
     <li><a href="#源码安装环境">源码安装环境</a>
       <ol>
         <li><a href="#编译环境">编译环境</a></li>
@@ -289,9 +290,10 @@
       </ol>
     </li>
     <li><a href="#vscode设置">VScode设置</a></li>
-    <li><a href="#源码安装相关知识补充">源码安装相关知识补充</a>
+    <li><a href="#效果">效果</a></li>
+    <li><a href="#相关知识补充">相关知识补充</a>
       <ol>
-        <li>
+        <li><a href="#源码安装">源码安装</a>
           <ol>
             <li><a href="#configure">configure</a>
               <ol>
@@ -379,7 +381,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 3 分钟
+                    阅读时长: 4 分钟
                 </time>
             </div>
         
@@ -441,6 +443,12 @@
 <li>我无法得知<code>php://filter</code>伪协议的具体实现</li>
 </ol>
 <p>这些当然可以通过看源码来获取，但是如果能实现对<code>php</code>的<code>debug</code>，那岂不是美哉</p>
+<h1 id="笔者环境">笔者环境</h1>
+<ul>
+<li>系统：<code>WSL2 Ubuntu24.04</code></li>
+<li>IDE：<code>VScode（WSL 连接）</code></li>
+<li>语言环境：<code>xp</code>面板安装的<code>php7.0.33</code></li>
+</ul>
 <h1 id="源码安装环境">源码安装环境</h1>
 <h2 id="编译环境">编译环境</h2>
 <div class="highlight"><div class="chroma">
@@ -499,7 +507,7 @@
 </span></span><span class="line"><span class="cl">sudo apt install gcc -y <span class="o">&amp;&amp;</span>
 </span></span><span class="line"><span class="cl">sudo apt install make -y <span class="o">&amp;&amp;</span>
 </span></span><span class="line"><span class="cl">sudo apt install openssl -y <span class="o">&amp;&amp;</span>
-</span></span><span class="line"><span class="cl">sudo apt install curl -y <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">sudo apt install curl -y
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 如下是可选依赖，怕报错的话就安装上吧</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># xml</span>
@@ -540,7 +548,19 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="调试环境">调试环境</h2>
-<h1 id="php-源码安装">PHP 源码安装</h1>
+<p><code>gdb</code>是调试工具，需要安装</p>
+<blockquote>
+<p><code>/usr/bin/gdbus</code>不是<code>gdb</code></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install gdb
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="php-源码安装">PHP 源码安装</h1>
 <h2 id="下载php源码">下载PHP源码</h2>
 <p>去<a class="link" href="https://github.com/php/php-src/releases"  target="_blank" rel="noopener"
     >这里</a>找到你需要的版本的源码</p>
@@ -654,6 +674,7 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>配置完成后，就可以快乐的调试php源码啦</p>
+<h1 id="效果">效果</h1>
 <p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/2024%E5%B9%B412%E6%9C%8826%E6%97%A5124913.gif"
 	
 	
@@ -664,7 +685,8 @@
 	
 	
 ></p>
-<h1 id="源码安装相关知识补充">源码安装相关知识补充</h1>
+<h1 id="相关知识补充">相关知识补充</h1>
+<h2 id="源码安装">源码安装</h2>
 <p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241226122741890.png"
 	
 	
