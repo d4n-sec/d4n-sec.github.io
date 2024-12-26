@@ -7,12 +7,44 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>DanSec</copyright>
-        <lastBuildDate>Tue, 17 Dec 2024 14:05:49 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 25 Dec 2024 19:06:13 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Debug</title>
+        <link>https://d4n-sec.github.io/tags/debug/</link>
+        <pubDate>Wed, 25 Dec 2024 19:06:13 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/debug/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Php</title>
         <link>https://d4n-sec.github.io/tags/php/</link>
-        <pubDate>Tue, 17 Dec 2024 14:05:49 +0800</pubDate>
+        <pubDate>Wed, 25 Dec 2024 19:06:13 +0800</pubDate>
         
         <guid>https://d4n-sec.github.io/tags/php/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Src</title>
+        <link>https://d4n-sec.github.io/tags/src/</link>
+        <pubDate>Wed, 25 Dec 2024 19:06:13 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/src/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>WSL</title>
+        <link>https://d4n-sec.github.io/tags/wsl/</link>
+        <pubDate>Wed, 25 Dec 2024 18:56:18 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/wsl/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>虚拟机</title>
+        <link>https://d4n-sec.github.io/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/</link>
+        <pubDate>Wed, 25 Dec 2024 18:56:18 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/</guid>
         <description></description>
         </item>
         <item>
