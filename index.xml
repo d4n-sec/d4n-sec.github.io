@@ -7,7 +7,60 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>DanSec</copyright>
-        <lastBuildDate>Wed, 25 Dec 2024 19:06:13 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 27 Dec 2024 15:11:06 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>文章标题</title>
+        <link>https://d4n-sec.github.io/p/jstest/</link>
+        <pubDate>Fri, 27 Dec 2024 15:11:06 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/jstest/</guid>
+        <description>&lt;p&gt;1&lt;/p&gt;
+&lt;script&gt;      console.log(&#39;hhhhhldm&#39;);  &lt;/script&gt;
+&lt;p&gt;2&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>php exit 死亡绕过</title>
+        <link>https://d4n-sec.github.io/p/phpexitdeathbypass/</link>
+        <pubDate>Thu, 26 Dec 2024 18:21:52 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/phpexitdeathbypass/</guid>
+        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241226182819883.png" alt="Featured image of post php exit 死亡绕过" /&gt;&lt;p&gt;最近在复习一些内容，做记录，免得又忘了&lt;/p&gt;
+&lt;h1 id=&#34;demo1&#34;&gt;Demo1&lt;/h1&gt;
+&lt;p&gt;给出题目demo，如下：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;demo1.php&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;php&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;show_source&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;__FILE__&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$content&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$_GET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;content&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$data&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$_GET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$data&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;lt;?php exit();?&amp;gt;&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;file_put_contents&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$content&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;demo1.php&lt;/code&gt;针对的是最简单的写马：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;content&lt;/code&gt;传变量名，以&lt;code&gt;.php&lt;/code&gt;作为后缀&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;data&lt;/code&gt;传入一句话马&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;但是因为&lt;code&gt;data&lt;/code&gt;做了死亡拼接&lt;code&gt;&#39;&amp;lt;?php exit();?&amp;gt;&#39; . $data&lt;/code&gt;，正常的所有马都不会被执行，怎么办？&lt;/p&gt;
+&lt;p&gt;必须要把&lt;code&gt;&amp;lt;?php exit();?&amp;gt;&lt;/code&gt;的执行无效化&lt;/p&gt;
+&lt;h1 id=&#34;无效化&#34;&gt;无效化&lt;/h1&gt;
+&lt;p&gt;网上的解法是，利用&lt;code&gt;file_put_contents&lt;/code&gt;会对&lt;code&gt;$content&lt;/code&gt;第一个参数中的伪协议进行处理&lt;/p&gt;
+&lt;h1 id=&#34;ref&#34;&gt;Ref&lt;/h1&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.freebuf.com/articles/web/266565.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.freebuf.com/articles/web/266565.html&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>PHP本体的C语言源码调试</title>
         <link>https://d4n-sec.github.io/p/phpsrcdebug/</link>
         <pubDate>Wed, 25 Dec 2024 19:06:13 +0800</pubDate>

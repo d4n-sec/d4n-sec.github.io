@@ -3,7 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://d4n-sec.github.io/</loc>
-    <lastmod>2024-12-25T19:06:13+08:00</lastmod>
+    <lastmod>2024-12-27T15:11:06+08:00</lastmod>
+  </url><url>
+    <loc>https://d4n-sec.github.io/post/</loc>
+    <lastmod>2024-12-27T15:11:06+08:00</lastmod>
+  </url><url>
+    <loc>https://d4n-sec.github.io/p/jstest/</loc>
+    <lastmod>2024-12-27T15:11:06+08:00</lastmod>
+  </url><url>
+    <loc>https://d4n-sec.github.io/p/phpexitdeathbypass/</loc>
+    <lastmod>2024-12-26T18:21:52+08:00</lastmod>
   </url><url>
     <loc>https://d4n-sec.github.io/categories/</loc>
     <lastmod>2024-12-25T19:06:13+08:00</lastmod>
@@ -15,9 +24,6 @@
     <lastmod>2024-12-25T19:06:13+08:00</lastmod>
   </url><url>
     <loc>https://d4n-sec.github.io/p/phpsrcdebug/</loc>
-    <lastmod>2024-12-25T19:06:13+08:00</lastmod>
-  </url><url>
-    <loc>https://d4n-sec.github.io/post/</loc>
     <lastmod>2024-12-25T19:06:13+08:00</lastmod>
   </url><url>
     <loc>https://d4n-sec.github.io/tags/src/</loc>
