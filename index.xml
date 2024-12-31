@@ -8,13 +8,21 @@
         <language>zh-cn</language>
         <copyright>DanSec</copyright>
         <lastBuildDate>Fri, 27 Dec 2024 17:08:46 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>工具箱-前端实现</title>
-        <link>https://d4n-sec.github.io/p/myzhetengtools/</link>
+        <title>Tools</title>
+        <link>https://d4n-sec.github.io/tools/</link>
         <pubDate>Fri, 27 Dec 2024 17:08:46 +0800</pubDate>
         
-        <guid>https://d4n-sec.github.io/p/myzhetengtools/</guid>
-        <description>&lt;img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241227171037184.png" alt="Featured image of post 工具箱-前端实现" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://d4n-sec.github.io/LinesCompare.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;文本对比&lt;/a&gt;&lt;/p&gt;
+        <guid>https://d4n-sec.github.io/tools/</guid>
+        <description>&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://d4n-sec.github.io/LinesCompare.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;文本对比工具&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&amp;ndash;TODO&amp;ndash;&lt;/p&gt;
+&lt;!-- [JSON格式化](https://d4n-sec.github.io/JSONFormat.html)
+
+[Base64编码](https://d4n-sec.github.io/Base64.html)
+
+[正则表达式测试](https://d4n-sec.github.io/RegexTest.html)
+
+[正则表达式生成器](https://d4n-sec.github.io/RegexGenerator.html) --&gt;
 </description>
         </item>
         <item>
