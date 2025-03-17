@@ -293,7 +293,7 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#常规二次urldecode">常规二次urldecode</a></li>
+        <li><a href="#常规二次urldecode">常规二次UrlDecode</a></li>
         <li><a href="#小技巧">小技巧</a></li>
         <li><a href="#使用场景">使用场景</a></li>
       </ol>
@@ -390,7 +390,9 @@
     
     
     <p>FYI.</p>
-<h2 id="常规二次urldecode">常规二次urldecode</h2>
+<p><code>file_put_content()</code>会默认进行一次<code>urldecode</code>，<code>php</code>接收时也会默认进行一次</p>
+<p>此为默认的二次<code>URLdecode</code>场景</p>
+<h2 id="常规二次urldecode">常规二次UrlDecode</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
