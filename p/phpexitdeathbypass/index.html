@@ -10,7 +10,7 @@
 <meta property='og:description' content='bypass php exit'>
 <meta property='og:url' content='https://d4n-sec.github.io/p/phpexitdeathbypass/'>
 <meta property='og:site_name' content='Dan`s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-12-26T18:21:52&#43;08:00'/><meta property='article:modified_time' content='2024-12-26T18:21:52&#43;08:00'/><meta property='og:image' content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241226182819883.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='php' /><meta property='article:tag' content='bypass' /><meta property='article:published_time' content='2024-12-26T18:21:52&#43;08:00'/><meta property='article:modified_time' content='2024-12-26T18:21:52&#43;08:00'/><meta property='og:image' content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241226182819883.png' />
 <meta name="twitter:title" content="php exit 死亡绕过">
 <meta name="twitter:description" content="bypass php exit"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241226182819883.png' />
@@ -328,6 +328,14 @@
 
     <div class="article-details">
     
+    <header class="article-category">
+        
+            <a href="/categories/%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0/" >
+                安全学习
+            </a>
+        
+    </header>
+    
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
@@ -428,6 +436,10 @@
 <p><em><strong>利用容忍性和编码可控，将<code>&lt;?php exit();?&gt;</code>无效化</strong></em></p>
 <h2 id="方法一">方法一</h2>
 <p><strong>使用base64解码将<code>&lt;?php exit();?&gt;</code>中的非base64编码字符去掉</strong></p>
+<blockquote>
+<p>这样<code>&lt;?php exit();?&gt;</code>就变成了<code>phpexit</code>，并不是<code>php</code>脚本文件格式，无法被识别执行</p>
+</blockquote>
+<p>代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1045,6 +1057,14 @@
 
     <footer class="article-footer">
     
+    <section class="article-tags">
+        
+            <a href="/tags/php/">Php</a>
+        
+            <a href="/tags/bypass/">Bypass</a>
+        
+    </section>
+
 
     
     <section class="article-copyright">
@@ -1067,6 +1087,66 @@
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/htaccessphpstudy/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250114112548159.png" loading="lazy" data-key="Htaccessphpstudy" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250114112548159.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">.htaccess 文件利用方式</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/phpfilterworks/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241217141336178.png" loading="lazy" data-key="PhpFilterWorks" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241217141336178.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PHP Filter 伪协议实现细节</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/pte%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PTE知识记录</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     
