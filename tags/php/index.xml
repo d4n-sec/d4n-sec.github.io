@@ -219,7 +219,7 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;h6 id=&#34;错误解析-host&#34;&gt;错误解析 host&lt;/h6&gt;
+&lt;h6 id=&#34;错误解析&#34;&gt;错误解析&lt;/h6&gt;
 &lt;p&gt;正常情况&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250317160113489.png&#34;
 	
@@ -231,7 +231,7 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;使用&lt;code&gt;//&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;使用&lt;code&gt;//&lt;/code&gt;，使其错误解析&lt;code&gt;host&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250317160136794.png&#34;
 	
 	
