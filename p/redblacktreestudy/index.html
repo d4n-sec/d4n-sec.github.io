@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='相关名词整理 发现之前的逻辑有点不对，重新整理一份 树 树是由节点（Node）和边（Edge）组成的有限集合，满足以下条件： 根节点（Root）：存'>
+<title>文章标题</title>
+
+<link rel='canonical' href='https://d4n-sec.github.io/p/redblacktreestudy/'>
+
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='文章标题'>
+<meta property='og:description' content='相关名词整理 发现之前的逻辑有点不对，重新整理一份 树 树是由节点（Node）和边（Edge）组成的有限集合，满足以下条件： 根节点（Root）：存'>
+<meta property='og:url' content='https://d4n-sec.github.io/p/redblacktreestudy/'>
+<meta property='og:site_name' content='Dan`s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='python' /><meta property='article:tag' content='RBT' /><meta property='article:published_time' content='2025-04-11T14:41:27&#43;08:00'/><meta property='article:modified_time' content='2025-04-11T14:41:27&#43;08:00'/><meta property='og:image' content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250411144030133.png' />
+<meta name="twitter:title" content="文章标题">
+<meta name="twitter:description" content="相关名词整理 发现之前的逻辑有点不对，重新整理一份 树 树是由节点（Node）和边（Edge）组成的有限集合，满足以下条件： 根节点（Root）：存"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250411144030133.png' />
+    <link rel="shortcut icon" href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/paper-plane-64.webp" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/TX.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🐹</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Dan`s Blog</a></h1>
+            <h2 class="site-description">今人不见古时月</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='/%E5%85%B3%E4%BA%8E'
+                        target="_blank"
+                        title="contactMe"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1709702435352" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8388" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32z m-40 110.8V792H136V270.8l-27.6-21.5 39.3-50.5 42.8 33.3h643.1l42.8-33.3 39.3 50.5-27.7 21.5z" fill="#bfbfbf" p-id="8389"></path><path d="M833.6 232L512 482 190.4 232l-42.8-33.3-39.3 50.5 27.6 21.5 341.6 265.6c20.2 15.7 48.5 15.7 68.7 0L888 270.8l27.6-21.5-39.3-50.5-42.7 33.2z" p-id="8390" fill="#bfbfbf"></path></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/d4n-sec'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='http://wpa.qq.com/msgrd?v=3&amp;uin=1664022865&amp;site=qq&amp;menu=yes'
+                        target="_blank"
+                        title="QQNum"
+                        rel="me"
+                    >
+                        
+                        
+                            
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1709702077457" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13062" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3C766.5 262.2 689.3 112 511.5 112 331.7 112 256.2 265.2 261 447.9c-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z" p-id="13063" fill="#bfbfbf"></path></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/tools/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Tools</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+    </ol>
+    <div class="menu-bottom-section">
+        <ol class="menu">
+
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </ol>
+    </div>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#相关名词整理">相关名词整理</a>
+      <ol>
+        <li><a href="#树">树</a></li>
+        <li><a href="#二叉树">二叉树</a></li>
+      </ol>
+    </li>
+    <li><a href="#平衡树">平衡树</a>
+      <ol>
+        <li><a href="#二叉平衡树">二叉平衡树</a></li>
+      </ol>
+    </li>
+    <li><a href="#红黑树">红黑树</a></li>
+    <li><a href="#增删改查">增删改查</a>
+      <ol>
+        <li><a href="#增">增</a></li>
+        <li><a href="#删">删</a></li>
+      </ol>
+    </li>
+    <li><a href="#代码实现">代码实现</a></li>
+    <li><a href="#ref">Ref</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/redblacktreestudy/">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250411144030133.png" loading="lazy" alt="Featured image of post 文章标题" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" >
+                基础知识
+            </a>
+        
+            <a href="/categories/%E4%BB%A3%E7%A0%81%E5%AD%A6%E4%B9%A0/" >
+                代码学习
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/redblacktreestudy/">文章标题</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Apr 11, 2025 14:41 &#43;0800</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 8 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="相关名词整理">相关名词整理</h1>
+<p>发现之前的逻辑有点不对，重新整理一份</p>
+<h2 id="树">树</h2>
+<p><strong>树</strong>是由节点（Node）和边（Edge）组成的有限集合，满足以下条件：</p>
+<ol>
+<li><strong>根节点（Root）</strong>：存在且仅存在一个特定的节点，称为树的根节点。</li>
+<li><strong>子节点与父节点</strong>：除根节点外，每个节点通过一条边唯一地连接到一个称为其<strong>父节点</strong>的节点。</li>
+<li><strong>子树（Subtree）</strong>：每个节点可以有零个或多个<strong>子节点</strong>，子节点对应的子树是互不相交的集合。</li>
+<li><strong>无环性</strong>：树中不存在环路（即从任一节点出发沿着边遍历，无法回到该节点）。</li>
+<li><strong>连通性</strong>：所有节点通过边连接，且从根节点出发可通过边到达任意其他节点。</li>
+</ol>
+<h2 id="二叉树">二叉树</h2>
+<p>首先，二叉树是树</p>
+<p><strong>二叉树</strong>是由节点（Node）构成的有限集合，满足以下条件：</p>
+<ol>
+<li><strong>节点结构</strong>：每个节点最多有<strong><em>两</em>个子节点</strong>，分别称为<strong>左子节点（Left Child）<strong>和</strong>右子节点（Right Child）</strong>。</li>
+<li><strong>子树性质</strong>：左子节点和右子节点各自构成一个独立的<strong>二叉树</strong>（可以为空树）。</li>
+<li><strong>根节点</strong>：存在且仅存在一个根节点（若二叉树非空）。</li>
+<li><strong>无环与连通性</strong>：与普通树一致，二叉树中不存在环路，且所有节点通过边与根节点连通。</li>
+</ol>
+<h1 id="平衡树">平衡树</h1>
+<p>B-Tree，又称B树，B-树，定义如下</p>
+<ol>
+<li>每个节点最多包含 <strong><em>m</em>−1</strong> 个键（Key），最少包含 <strong>⌈<em>m</em>/2⌉−1</strong> 个键（根节点和叶子节点可能有例外）。</li>
+<li>每个节点最多有 <em><strong>m</strong></em> 个子节点（<em>m</em> 是 B树的阶，通常取值≥3）。</li>
+<li><strong>键的作用</strong>：数据按顺序排列，同时起到索引作用，用于路由查询路径。</li>
+</ol>
+<h2 id="二叉平衡树">二叉平衡树</h2>
+<p>即AVL，详解可以见<a class="link" href="https://d4n-sec.github.io/p/bstandavlstudy/#%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91"  target="_blank" rel="noopener"
+    >这里</a></p>
+<h1 id="红黑树">红黑树</h1>
+<p>AVL固然很好，但是因为增加元素/节点的时候很容易去修改整个树的结构，因为AVL很强调树的平衡性。</p>
+<p>如果频繁修改树结构的话，业务开销的占比就会降低了，固然是我们不希望看到的。</p>
+<p>但又同时：树的平衡和查找开销低的特点我们都想要，那么<em><strong>红黑树</strong></em>就是满足这个条件的一个解决方案</p>
+<hr>
+<p><em><strong>红黑树</strong></em>是一种自平衡的二叉搜索树，通过以下五个性质确保高效的操作时间复杂度（O(log n)）：</p>
+<ol>
+<li><strong>颜色属性</strong>：每个节点必须是<strong>红色</strong>或<strong>黑色</strong>。</li>
+<li><strong>根节点属性</strong>：根节点必须为<strong>黑色</strong>。</li>
+<li><strong>叶子节点属性</strong>：所有叶子节点（NIL节点，即空节点）均为<strong>黑色</strong>。</li>
+<li><strong>红色节点约束</strong>：红色节点的子节点必须为<strong>黑色</strong>（即不存在两个连续的红色节点）。</li>
+<li><strong>黑高一致性</strong>：从任一节点到其所有后代叶子节点的路径上，包含相同数量的黑色节点（称为<strong>黑高</strong>）。</li>
+</ol>
+<p>并且包含一些规则</p>
+<ol>
+<li>节点分为<strong>红色</strong>或者<strong>黑色</strong>；</li>
+<li>根节点必为<strong>黑色</strong>；</li>
+<li>叶子节点都为<strong>黑色</strong>，且为<strong>null</strong>；</li>
+<li>连接红色节点的两个子节点都为<strong>黑色</strong>（红黑树不会出现相邻的红色节点，可以出现相邻的黑色节点）；</li>
+<li>从<strong>任意节点出发</strong>，到其每个叶子节点的路径中包含<strong>相同数量</strong>的<strong>黑色</strong>节点；</li>
+<li><strong>新加入</strong>到红黑树的节点为<strong>红色</strong>节点；</li>
+</ol>
+<p>结合图理解</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250411100131528.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250411100131528"
+	
+	
+></p>
+<p>下图是红黑树吗？</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250411100505319.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250411100505319"
+	
+	
+></p>
+<p>不是，因为不满足条件<strong>黑高一致性</strong></p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250411100531918.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250411100531918"
+	
+	
+></p>
+<h1 id="增删改查">增删改查</h1>
+<p>聚焦于增和删</p>
+<h2 id="增">增</h2>
+<p><strong>情况一：</strong></p>
+<p>插入的新节点 N 是红黑树的根节点，这种情况下，我们把节点 N 的颜色由红色变为黑色，性质2（根是黑色）被满足。同时 N 被染成黑色后，红黑树所有路径上的黑色节点数量增加一个，性质5（从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点）仍然被满足。</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250411101436709.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250411101436709"
+	
+	
+></p>
+<p><strong>情况二：</strong></p>
+<p>N 的父节点是黑色，这种情况下，性质4（每个红色节点必须有两个黑色的子节点）和性质5没有受到影响，不需要调整。</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250411101453282.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250411101453282"
+	
+	
+></p>
+<hr>
+<p>情况三，四，五比较复杂，没耐心的直接看最后的对比图</p>
+<hr>
+<p><strong>情况三：</strong></p>
+<p>N 的父节点是红色（节点 P 为红色，其父节点必然为黑色），叔叔节点 U 也是红色。由于 P 和 N 均为红色，所有性质4被打破，此时需要进行调整。</p>
+<p>这种情况下，先将 P 和 U 的颜色染成黑色，再将 G 的颜色染成红色。此时经过 G 的路径上的黑色节点数量不变，性质5仍然满足。但需要注意的是 G 被染成红色后，可能会和它的父节点形成连续的红色节点，此时需要递归向上调整。</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250411101541811.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250411101541811"
+	
+	
+></p>
+<p><strong>情况四：</strong></p>
+<p>N 的父节点为红色，叔叔节点为黑色。节点 N 是 P 的右孩子，且节点 P 是 G 的左孩子。此时先对节点 P 进行左旋，调整 N 与 P 的位置。接下来按照情况五进行处理，以恢复性质4。</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250411101612252.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250411101612252"
+	
+	
+></p>
+<p><strong>情况五：</strong></p>
+<p>N 的父节点为红色，叔叔节点为黑色。N 是 P 的左孩子，且节点 P 是 G 的左孩子。此时对 G 进行右旋，调整 P 和 G 的位置，并互换颜色。经过这样的调整后，性质4被恢复，同时也未破坏性质5。</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250411101624139.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250411101624139"
+	
+	
+></p>
+<p>上面五种情况中，情况一和情况二比较简单，情况三、四、五稍复杂。但如果细心观察，会发现这三种情况的区别在于叔叔节点的颜色，如果叔叔节点为红色，直接变色即可。如果叔叔节点为黑色，则需要先选择，再交换颜色。当把这三种情况的图画在一起就区别就比较容易观察了，如下图：</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250411101634677.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250411101634677"
+	
+	
+></p>
+<p>其他的就是对称操作了</p>
+<h2 id="删">删</h2>
+<p>红黑树删除操作的复杂度在于删除对象的各种排列组合的情况复杂多样，但是可以通过理论来进行缩减</p>
+<p>按照二叉搜索树（BST）规则删除节点：</p>
+<ul>
+<li>无子节点：直接删除。</li>
+<li>一个子节点：用子节点替代。</li>
+<li>两个子节点：用后继节点替代，转为删除后继节点。</li>
+</ul>
+<p>如果被删除节点存在两个子节点，那么红黑树会将后继节点的数据复制到被删除节点的位置，<strong>仅覆盖数据值</strong>，<em><strong>不改变</strong></em>被删除节点的<strong>颜色或指针</strong></p>
+<p>那么此时，等于删除了后继节点，故 <strong>删除节点有两个子节点</strong> == <strong>删除后继结点</strong></p>
+<blockquote>
+<p><strong>从数据上看</strong>确实是删除了需要删除的节点，但是<strong>红黑树关注的是树结构，颜色是否都符合红黑树规则</strong>，所以对于红黑树来说，<strong>删除的数据不重要，只有结构和规则不匹配才重要</strong>。</p>
+</blockquote>
+<p>又因为后继结点最多只有一个子节点，故 <strong>删除后继结点</strong> == <strong>删除一个子节点/无子节点</strong></p>
+<blockquote>
+<p>后继节点按照BST右树最小元素来看：</p>
+<p>若节点 <em>x</em> 有右子树，则其后继节点为右子树的最左节点。</p>
+<p>由于该节点是右子树中的“最左”节点，它不可能有左子节点（否则会更小的节点存在，与其“最左”矛盾）。因此，该后继节点最多仅有一个右子节点，或无子节点。</p>
+</blockquote>
+<p>所以 <strong>删除节点有两个子节点</strong> == <strong>删除后继结点</strong> == <strong>删除一个子节点/无子节点</strong></p>
+<p>所以情况就变成了两种情况</p>
+<ul>
+<li>无子节点：直接删除。</li>
+<li>一个子节点：用子节点替代。</li>
+</ul>
+<p>那么此时，所有的情况就变成了四种，只有一种情况需要重点考虑</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>所有的情况</th>
+<th>被删除节点为红色</th>
+<th>被删除节点为黑色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>被删除节点为无子节点</strong></td>
+<td>直接删除即可</td>
+<td>复杂处理，<em><strong>见下</strong></em></td>
+</tr>
+<tr>
+<td><strong>被删除节点有一个子节点</strong></td>
+<td>不存在<br />该结构的出现不满足红黑树黑高一致性</td>
+<td>子节点必为红色，否则违反黑高一致性<br />修复方法为：子红节点替换被删除黑节点，颜色变为黑色</td>
+</tr>
+</tbody>
+</table></div>
+<p>被删除节点为黑色且被删除节点无子节点，需要进行复杂处理，可能的情况如下</p>
+<blockquote>
+<p>被删除节点为根节点：直接删除，红黑树转空树</p>
+</blockquote>
+<p>如果被删除节点 <em>D</em> 为叶子节点且被删除节点无子节点，观察：</p>
+<ol>
+<li>
+<p>兄弟节点 <em>B</em> 为红色，其子节点必为黑色（性质4）。父节点 <em>P</em> 为黑色</p>
+<p>修复：</p>
+<p>1.1）将父节点 <em>P</em> 染为红色，兄弟节点 <em>B</em> 染为黑色。</p>
+<p>1.2）对父节点 <em>P</em> 进行左旋（若兄弟在右侧）或右旋（若兄弟在左侧）。</p>
+<p>1.3）此时，原兄弟的子节点 <em>L</em>/<em>R</em> 成为新的兄弟节点（必为黑色），进入 <strong>情况2、3、4</strong> 继续处理。</p>
+<p>1）例子：删除005</p>
+<p>1）删除过程：</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/2025%E5%B9%B44%E6%9C%8811%E6%97%A5133128.gif"
+	
+	
+	
+	loading="lazy"
+	
+		alt="2025年4月11日133128"
+	
+	
+></p>
+<p>1）本情况处理结果：</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250411133958576.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250411133958576"
+	
+	
+></p>
+<p>（例子后续接情况2，此时以<strong>深色黑色 NULL LEAF</strong>作为参考）</p>
+</li>
+<li>
+<p>兄弟节点是黑色，且其子节点均为黑色</p>
+<p>修复：</p>
+<p>2.1）将兄弟节点 <em>S</em> 染为红色。</p>
+<p>2.2）若父节点<em>P</em>为红色：</p>
+<ul>
+<li>将 <em>P</em> 染为黑色，修复完成（路径黑色高度恢复）</li>
+</ul>
+<p>2.2）例子：删除 001</p>
+<p>2.2）删除过程：</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/2025%E5%B9%B44%E6%9C%8811%E6%97%A5134712.gif"
+	
+	
+	
+	loading="lazy"
+	
+		alt="2025年4月11日134712"
+	
+	
+></p>
+<p>2.2）本情况处理结果：</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250411134731232.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250411134731232"
+	
+	
+></p>
+<p>2.3）若父节点<em>P</em>为黑色：</p>
+<ul>
+<li>将 <em>P</em> 视为新的删除位置，递归向上处理（可能进入情况1、2、3、4）。</li>
+</ul>
+<p>2.3）例子：删除001</p>
+<p>2.3）删除过程：</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/2025%E5%B9%B44%E6%9C%8811%E6%97%A5135510.gif"
+	
+	
+	
+	loading="lazy"
+	
+		alt="2025年4月11日135510"
+	
+	
+></p>
+<p>2.3）本情况处理结果：</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250411135546021.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250411135546021"
+	
+	
+></p>
+</li>
+<li>
+<p>兄弟节点是黑色，且近侄子节点为红色，远侄子节点为黑色</p>
+<p>修复：</p>
+<p>3.1）将兄弟节点 <em>S</em> 染为红色，近侄子 <em>C</em> 染为黑色。</p>
+<p>3.2）对兄弟节点 <em>S</em> 进行左旋（若兄弟在左侧）。</p>
+<p>3.3）此时远侄子 <em>D</em> 成为新的兄弟节点，进入 <strong>情况4</strong>。</p>
+<p>3）例子：删除0013</p>
+<p>3）删除过程：</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/2025%E5%B9%B44%E6%9C%8811%E6%97%A5140821.gif"
+	
+	
+	
+	loading="lazy"
+	
+		alt="2025年4月11日140821"
+	
+	
+></p>
+<p>3）本情况处理结果：</p>
+</li>
+</ol>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250411140905266.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250411140905266"
+	
+	
+></p>
+<ol start="4">
+<li>
+<p>兄弟节点是黑色，且远侄子节点为红色</p>
+<p>修复：</p>
+<p>4）对父节点 <em>P</em> 进行左旋（若兄弟在右侧）。</p>
+<p>4）将兄弟节点 <em>S</em> 染为父节点 <em>P</em> 的颜色。</p>
+<p>4）将父节点 <em>P</em> 染为黑色，远侄子 <em>D</em> 染为黑色。</p>
+<p>4）<strong>修复完成</strong>：旋转后，删除路径的黑色高度恢复，且无连续红色节点。</p>
+<p>4）例子：删除009</p>
+<p>4）删除过程：</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/2025%E5%B9%B44%E6%9C%8811%E6%97%A5142314.gif"
+	
+	
+	
+	loading="lazy"
+	
+		alt="2025年4月11日142314"
+	
+	
+></p>
+<p>4）本情况处理结果：</p>
+</li>
+</ol>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250411142349147.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250411142349147"
+	
+	
+></p>
+<p>删的情况到此结束了</p>
+<hr>
+<p>如果没有看懂的话，可以进入这个<a class="link" href="https://www.cs.usfca.edu/~galles/visualization/RedBlack.html"  target="_blank" rel="noopener"
+    >网站</a>，结合所写情况一步步调试查看即可</p>
+<h1 id="代码实现">代码实现</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">graphviz</span> <span class="kn">import</span> <span class="n">Digraph</span>
+</span></span><span class="line"><span class="cl"><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&#34;PATH&#34;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">os</span><span class="o">.</span><span class="n">pathsep</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;D:\Program Files\Graphviz\bin&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">RBNode</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;RED&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span>  <span class="c1"># RED/BLACK</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">RedBlackTree</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">NIL</span> <span class="o">=</span> <span class="n">RBNode</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;BLACK&#39;</span><span class="p">)</span>  <span class="c1"># 哨兵节点</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NIL</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">left_rotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34; 左旋操作 &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">right</span>
+</span></span><span class="line"><span class="cl">        <span class="n">x</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">left</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">y</span><span class="o">.</span><span class="n">left</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NIL</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">y</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">x</span>
+</span></span><span class="line"><span class="cl">        <span class="n">y</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">parent</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">parent</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">NIL</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">y</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="n">x</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">left</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">x</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">y</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">x</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">y</span>
+</span></span><span class="line"><span class="cl">        <span class="n">y</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">x</span>
+</span></span><span class="line"><span class="cl">        <span class="n">x</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">y</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">right_rotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34; 右旋操作 &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">x</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">left</span>
+</span></span><span class="line"><span class="cl">        <span class="n">y</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">right</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">right</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NIL</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">x</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">y</span>
+</span></span><span class="line"><span class="cl">        <span class="n">x</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">parent</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">y</span><span class="o">.</span><span class="n">parent</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">NIL</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">x</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">y</span> <span class="o">==</span> <span class="n">y</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">right</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">y</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">x</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">y</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">x</span>
+</span></span><span class="line"><span class="cl">        <span class="n">x</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">y</span>
+</span></span><span class="line"><span class="cl">        <span class="n">y</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">x</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34; 插入主逻辑 &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">new_node</span> <span class="o">=</span> <span class="n">RBNode</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">new_node</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NIL</span>
+</span></span><span class="line"><span class="cl">        <span class="n">new_node</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NIL</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1"># 标准BST插入</span>
+</span></span><span class="line"><span class="cl">        <span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NIL</span>
+</span></span><span class="line"><span class="cl">        <span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="n">current</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NIL</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">parent</span> <span class="o">=</span> <span class="n">current</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">new_node</span><span class="o">.</span><span class="n">key</span> <span class="o">&lt;</span> <span class="n">current</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">left</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">right</span>
+</span></span><span class="line"><span class="cl">        <span class="n">new_node</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">parent</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">NIL</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">new_node</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">new_node</span><span class="o">.</span><span class="n">key</span> <span class="o">&lt;</span> <span class="n">parent</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">parent</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">new_node</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">parent</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">new_node</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        <span class="c1"># 修正红黑树性质</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">_insert_fixup</span><span class="p">(</span><span class="n">new_node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">_insert_fixup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34; 插入后修正颜色和旋转 &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">color</span> <span class="o">==</span> <span class="s1">&#39;RED&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">parent</span> <span class="o">==</span> <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">left</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">uncle</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">right</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">uncle</span><span class="o">.</span><span class="n">color</span> <span class="o">==</span> <span class="s1">&#39;RED&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1"># Case 1: 叔叔是红色</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;BLACK&#39;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">uncle</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;BLACK&#39;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;RED&#39;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span>
+</span></span><span class="line"><span class="cl">                <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">right</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="c1"># Case 2: 叔叔是黑色且当前节点是右子</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">parent</span>
+</span></span><span class="line"><span class="cl">                        <span class="bp">self</span><span class="o">.</span><span class="n">left_rotate</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1"># Case 3: 叔叔是黑色且当前节点是左子</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;BLACK&#39;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;RED&#39;</span>
+</span></span><span class="line"><span class="cl">                    <span class="bp">self</span><span class="o">.</span><span class="n">right_rotate</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">uncle</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">left</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">uncle</span><span class="o">.</span><span class="n">color</span> <span class="o">==</span> <span class="s1">&#39;RED&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;BLACK&#39;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">uncle</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;BLACK&#39;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;RED&#39;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span>
+</span></span><span class="line"><span class="cl">                <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">left</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">parent</span>
+</span></span><span class="line"><span class="cl">                        <span class="bp">self</span><span class="o">.</span><span class="n">right_rotate</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;BLACK&#39;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;RED&#39;</span>
+</span></span><span class="line"><span class="cl">                    <span class="bp">self</span><span class="o">.</span><span class="n">left_rotate</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;BLACK&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">visualize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;rbtree&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34; 生成可视化图形 &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dot</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">(</span><span class="n">comment</span><span class="o">=</span><span class="s1">&#39;Red Black Tree&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">_add_nodes</span><span class="p">(</span><span class="n">dot</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dot</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">view</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># dot.view()</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># os.remove(filename)  # 清理临时文件</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">_add_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dot</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34; 递归添加节点和边 &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">NIL</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">color</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                <span class="n">shape</span><span class="o">=</span><span class="s1">&#39;circle&#39;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span> <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">color</span> <span class="o">==</span> <span class="s1">&#39;RED&#39;</span> <span class="k">else</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">fontcolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span> <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">color</span> <span class="o">==</span> <span class="s1">&#39;BLACK&#39;</span> <span class="k">else</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">style</span><span class="o">=</span><span class="s1">&#39;filled&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">left</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NIL</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">key</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">_add_nodes</span><span class="p">(</span><span class="n">dot</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NIL</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">key</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">_add_nodes</span><span class="p">(</span><span class="n">dot</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 测试示例</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rbt</span> <span class="o">=</span> <span class="n">RedBlackTree</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">26</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rbt</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">rbt</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250411150124553.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250411150124553"
+	
+	
+></p>
+<h1 id="ref">Ref</h1>
+<p><a class="link" href="https://blog.csdn.net/cy973071263/article/details/122543826"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/cy973071263/article/details/122543826</a></p>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/91960960"  target="_blank" rel="noopener"
+    >https://zhuanlan.zhihu.com/p/91960960</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/python/">Python</a>
+        
+            <a href="/tags/rbt/">RBT</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/bstandavlstudy/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250410191854060.png" loading="lazy" data-key="BSTandAVLstudy" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250410191854060.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">BST与AVL树学习</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/go-study/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/OIP-C.jpg" loading="lazy" data-key="" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/OIP-C.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Go Study</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/phpfilterworks/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241217141336178.png" loading="lazy" data-key="PhpFilterWorks" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241217141336178.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PHP Filter 伪协议实现细节</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/phpfiltersconvert/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241217151118502.png" loading="lazy" data-key="PhpFiltersConvert" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241217151118502.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PHP 转换过滤器</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/tomcatdirstruct/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241206110927949.png" loading="lazy" data-key="TomcatDirStruct" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241206110927949.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Tomcat目录结构学习</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 DanSec
+    </section>
+    
+    <section class="powerby">
+        
+            Dan❤Anan <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.23.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
