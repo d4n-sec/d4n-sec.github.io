@@ -296,17 +296,13 @@
         <li><a href="#二-核心原理">二、 核心原理</a>
           <ol>
             <li><a href="#1-浏览器的自我修养rfc-标准的硬性规定">1. 浏览器的“自我修养”：RFC 标准的硬性规定</a></li>
-            <li><a href="#2-为什么-burp-手动发送--会导致-400500-报错">2. 为什么 Burp 手动发送 <code>#</code> 会导致 400/500 报错？</a>
+            <li><a href="#2-为什么-burp-手动发送--可能会导致-400500-报错">2. 为什么 Burp 手动发送 <code>#</code> 可能会导致 400/500 报错？</a>
               <ol>
                 <li><a href="#a-nginxapache-等-web-服务器视角400-bad-request">A. Nginx/Apache 等 Web 服务器视角（400 Bad Request）</a></li>
                 <li><a href="#b-后端框架视角500-internal-server-error">B. 后端框架视角（500 Internal Server Error）</a></li>
               </ol>
             </li>
-            <li><a href="#3-前端路由的基石hash-模式">3. 前端路由的基石：Hash 模式</a>
-              <ol>
-                <li><a href="#对比-history-模式">对比 History 模式</a></li>
-              </ol>
-            </li>
+            <li><a href="#3-前端路由的基石hash-模式">3. 前端路由的基石：Hash 模式</a></li>
           </ol>
         </li>
         <li><a href="#三-after-all">三、 After All</a></li>
@@ -380,7 +376,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 5 分钟
+                    阅读时长: 6 分钟
                 </time>
             </div>
         
@@ -396,13 +392,13 @@
     
     
     <h2 id="一-问题背景">一、 问题背景</h2>
-<p>在最近的一次测试（<del>实则几年前</del>）中，我发现了一个有趣的现象，并在随后使用 Burp Suite 进行验证时产生了新的疑问：</p>
+<p>在最近的一次测试（<del>实则几年前</del>）中，我发现了一个有趣的现象，并用 Burp Suite 进行验证时产生了新的疑问：</p>
 <ol>
 <li><strong>浏览器的“隐形”行为</strong>：当我使用浏览器访问带有 <code>#</code> 的 URL 时，查看网络请求包（Network tab），发现浏览器发送给服务器的请求路径中，<strong>默认去掉了 <code>#</code> 及其后面的所有内容</strong>。</li>
 <li><strong>Burp 的“强制”行为</strong>：为了验证服务器对 <code>#</code> 的处理，我使用 Burp Suite 拦截数据包，手动在 Request Line 的 URL 路径中添加了 <code>#</code> 号（例如 <code>GET /api/test#123</code>）。</li>
-<li><strong>服务器的异常响应</strong>：结果出乎意料，服务端（无论是 Nginx 网关还是后端的 Flask/Java 框架）并没有忽略这个符号，而是直接返回了 <strong>400 Bad Request</strong> 或 <strong>500 Internal Server Error</strong>。</li>
+<li><strong>服务器的异常响应</strong>：结果出乎意料，服务端直接返回了 <strong>400 Bad Request</strong></li>
 </ol>
-<p>这就引出了一连串值得深思的问题：</p>
+<p>这就引出了笔者一些疑问：</p>
 <ul>
 <li>浏览器自动丢弃 <code>#</code> 是一种“行业约定”还是“硬性标准”？</li>
 <li>为什么手动发送 <code>#</code> 会导致服务器报错？</li>
@@ -429,7 +425,7 @@
 </div>
 </div><p>服务器根本不知道你想要看页面的哪个片段，它只负责把整个页面发给你，剩下的定位工作由浏览器自己完成。</p>
 <hr>
-<h3 id="2-为什么-burp-手动发送--会导致-400500-报错">2. 为什么 Burp 手动发送 <code>#</code> 会导致 400/500 报错？</h3>
+<h3 id="2-为什么-burp-手动发送--可能会导致-400500-报错">2. 为什么 Burp 手动发送 <code>#</code> 可能会导致 400/500 报错？</h3>
 <p>当我们在 Burp Suite 中绕过浏览器的过滤机制，强制发送如下报文：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -453,7 +449,121 @@
 <li><strong>解析崩溃</strong>：某些框架在解析 URL 参数时，遇到未转义的特殊字符可能会触发代码层面的 Unhandled Exception，从而直接导致 500 错误。</li>
 </ul>
 <p><strong>PS</strong>：如果你真的想把 <code>#</code> 字符作为参数值发送给服务器（例如作为搜索关键字），必须对其进行 URL 编码，即发送 <code>%23</code>。</p>
-<hr>
+<blockquote>
+<p>但是实操下来，简单的Demo并不能复现400/500状态码</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nginx version: nginx/1.24.0 <span class="o">(</span>Ubuntu<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Flask version: 3.0.2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>flask.py</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">defaults</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/&lt;path:path&gt;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">catch_all</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 获取请求信息</span>
+</span></span><span class="line"><span class="cl">    <span class="n">request_uri</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;REQUEST_URI&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">raw_path</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;RAW_URI&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Path: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s1">, REQUEST_URI: </span><span class="si">{</span><span class="n">request_uri</span><span class="si">}</span><span class="s1">, RAW_URI: </span><span class="si">{</span><span class="n">raw_path</span><span class="si">}</span><span class="s1">, Method: </span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">200</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">6001</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>direct request flask</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="nf">GET</span> <span class="nn">/123#</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</span></span><span class="line"><span class="cl"><span class="n">Host</span><span class="o">:</span> <span class="l">localhost:6001</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+</span></span><span class="line"><span class="cl"><span class="n">Server</span><span class="o">:</span> <span class="l">Werkzeug/3.0.1 Python/3.12.3</span>
+</span></span><span class="line"><span class="cl"><span class="n">Date</span><span class="o">:</span> <span class="l">Thu, 25 Dec 2025 05:55:42 GMT</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content-Type</span><span class="o">:</span> <span class="l">text/html; charset=utf-8</span>
+</span></span><span class="line"><span class="cl"><span class="n">Connection</span><span class="o">:</span> <span class="l">close</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content-Length</span><span class="o">:</span> <span class="l">58</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Path: 123, REQUEST_URI: /123#, RAW_URI: /123#, Method: GET
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>request flask behind nginx</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="nf">GET</span> <span class="nn">/123#</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</span></span><span class="line"><span class="cl"><span class="n">Host</span><span class="o">:</span> <span class="l">localhost:6000</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+</span></span><span class="line"><span class="cl"><span class="n">Server</span><span class="o">:</span> <span class="l">nginx/1.24.0 (Ubuntu)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Date</span><span class="o">:</span> <span class="l">Thu, 25 Dec 2025 05:59:30 GMT</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content-Type</span><span class="o">:</span> <span class="l">text/html; charset=utf-8</span>
+</span></span><span class="line"><span class="cl"><span class="n">Connection</span><span class="o">:</span> <span class="l">keep-alive</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content-Length</span><span class="o">:</span> <span class="l">58</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Path: 123, REQUEST_URI: /123#, RAW_URI: /123#, Method: GET
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
 <h3 id="3-前端路由的基石hash-模式">3. 前端路由的基石：Hash 模式</h3>
 <p>正是因为 <strong>“改变 URL 中的 <code>#</code> 部分不会触发 HTTP 请求”</strong> 这一特性，才诞生了现代单页应用（SPA）中最经典的前端路由模式——<strong>Hash 模式</strong>。</p>
 <p>在 Vue Router 或 React Router 的 Hash 模式下：</p>
@@ -463,10 +573,23 @@
 <li><strong>捕获变化</strong>：浏览器提供了 <code>window.onhashchange</code> 事件，前端框架监听这个事件。</li>
 <li><strong>动态渲染</strong>：监听到 hash 变化后，JS 根据 <code>#</code> 后的内容（如 <code>user</code>），动态将页面中的组件替换为“用户页组件”。</li>
 </ol>
-<h4 id="对比-history-模式">对比 History 模式</h4>
-<p>另一种流行的 <strong>History 模式</strong>（利用 HTML5 <code>pushState</code> API）虽然去掉了 <code>#</code>，让 URL 看起来更美观（如 <code>/home/user</code>），但它失去“天然不请求服务器”的屏障。
-因此，History 模式必须要求服务端（Nginx）进行配合：配置 fallback 规则，将所有找不到资源的请求都重定向回 <code>index.html</code>，否则用户手动刷新页面时，服务器会真的去请求 <code>/home/user</code> 这个文件，导致 404 错误。</p>
-<hr>
+<blockquote>
+<p>AI补充</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="err">对比</span><span class="w"> </span><span class="n">History</span><span class="w"> </span><span class="err">模式</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">另一种流行的</span><span class="w"> </span><span class="o">**</span><span class="n">History</span><span class="w"> </span><span class="err">模式</span><span class="o">**</span><span class="err">（利用</span><span class="w"> </span><span class="n">HTML5</span><span class="w"> </span><span class="o">`</span><span class="n">pushState</span><span class="o">`</span><span class="w"> </span><span class="n">API</span><span class="err">）虽然去掉了</span><span class="w"> </span><span class="o">`</span><span class="c1">#`，让 URL 看起来更美观（如 `/home/user`），但它失去“天然不请求服务器”的屏障。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">因此，</span><span class="n">History</span><span class="w"> </span><span class="err">模式必须要求服务端（</span><span class="n">Nginx</span><span class="err">）进行配合：配置</span><span class="w"> </span><span class="n">fallback</span><span class="w"> </span><span class="err">规则，将所有找不到资源的请求都重定向回</span><span class="w"> </span><span class="o">`</span><span class="k">index</span><span class="p">.</span><span class="n">html</span><span class="o">`</span><span class="err">，否则用户手动刷新页面时，服务器会真的去请求</span><span class="w"> </span><span class="o">`/</span><span class="n">home</span><span class="o">/</span><span class="k">user</span><span class="o">`</span><span class="w"> </span><span class="err">这个文件，导致</span><span class="w"> </span><span class="mi">404</span><span class="w"> </span><span class="err">错误。</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
 <p><em><strong>SPA Hash 模式的HTML示例</strong></em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -791,6 +914,16 @@
 </div><blockquote>
 <p>这里使用了<code>window.addEventListener('hashchange', (event) =&gt; {</code>来代替 <code>window.onhashchange</code> ，是一种更推荐的用法</p>
 </blockquote>
+<p><img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/picgo-20251225141831.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20251225141828884"
+	
+	
+></p>
 <h2 id="三-after-all">三、 After All</h2>
 <p>回顾最初的现象，得出了完整的逻辑链条：</p>
 <ol>
@@ -798,6 +931,7 @@
 <li><strong>异常（Exception）</strong>：在 Burp 中强制发送未编码的 <code>#</code>，破坏了 URL 语法或服务端解析规则，因此导致 <strong>400/500 错误</strong>。</li>
 <li><strong>应用（Application）</strong>：前端工程师巧妙利用了“浏览器不发送 # 且不刷新页面”的特性，构建了<strong>Hash 路由</strong>，成为了单页应用架构的核心基石之一。</li>
 </ol>
+<p>是否会出现错误，依赖于中间件以及后端框架的错误处理或者鲁棒性。<del>但是还是学到了<em><strong>window.onhashchange</strong></em>啊喂</del></p>
 
 </section>
 
