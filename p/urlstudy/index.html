@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='URL 中的 # 号去哪了？从 Burp 抓包报错说起 一、 问题背景 在最近的一次测试（实则几年前）中，我发现了一个有趣的现象，并在随后使用 Burp Suite 进行验证时产生了新的'>
-<title></title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Study # in URL'>
+<title>URL 中的 # 号去哪了？从 Burp 抓包报错说起</title>
 
-<link rel='canonical' href='https://d4n-sec.github.io/p/'>
+<link rel='canonical' href='https://d4n-sec.github.io/p/urlstudy/'>
 
-<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content=''>
-<meta property='og:description' content='URL 中的 # 号去哪了？从 Burp 抓包报错说起 一、 问题背景 在最近的一次测试（实则几年前）中，我发现了一个有趣的现象，并在随后使用 Burp Suite 进行验证时产生了新的'>
-<meta property='og:url' content='https://d4n-sec.github.io/p/'>
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='URL 中的 # 号去哪了？从 Burp 抓包报错说起'>
+<meta property='og:description' content='Study # in URL'>
+<meta property='og:url' content='https://d4n-sec.github.io/p/urlstudy/'>
 <meta property='og:site_name' content='Dan`s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' />
-<meta name="twitter:title" content="">
-<meta name="twitter:description" content="URL 中的 # 号去哪了？从 Burp 抓包报错说起 一、 问题背景 在最近的一次测试（实则几年前）中，我发现了一个有趣的现象，并在随后使用 Burp Suite 进行验证时产生了新的">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='URL' /><meta property='article:published_time' content='2025-12-25T04:34:24&#43;08:00'/><meta property='article:modified_time' content='2025-12-25T04:34:24&#43;08:00'/>
+<meta name="twitter:title" content="URL 中的 # 号去哪了？从 Burp 抓包报错说起">
+<meta name="twitter:description" content="Study # in URL">
     <link rel="shortcut icon" href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/paper-plane-64.webp" />
 
     </head>
@@ -290,7 +290,7 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#url-中的--号去哪了从-burp-抓包报错说起">URL 中的 # 号去哪了？从 Burp 抓包报错说起</a>
+    <li>
       <ol>
         <li><a href="#一-问题背景">一、 问题背景</a></li>
         <li><a href="#二-核心原理">二、 核心原理</a>
@@ -328,12 +328,24 @@
 
     <div class="article-details">
     
+    <header class="article-category">
+        
+            <a href="/categories/%E6%9D%82%E5%AD%A6/" >
+                杂学
+            </a>
+        
+    </header>
+    
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/"></a>
+            <a href="/p/urlstudy/">URL 中的 # 号去哪了？从 Burp 抓包报错说起</a>
         </h2>
     
+        
+        <h3 class="article-subtitle">
+            Study # in URL
+        </h3>
         
     </div>
 
@@ -342,6 +354,19 @@
     
     
     <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Dec 25, 2025 04:34 &#43;0800</time>
+            </div>
         
 
         
@@ -370,8 +395,7 @@
     <section class="article-content">
     
     
-    <h1 id="url-中的--号去哪了从-burp-抓包报错说起">URL 中的 # 号去哪了？从 Burp 抓包报错说起</h1>
-<h2 id="一-问题背景">一、 问题背景</h2>
+    <h2 id="一-问题背景">一、 问题背景</h2>
 <p>在最近的一次测试（<del>实则几年前</del>）中，我发现了一个有趣的现象，并在随后使用 Burp Suite 进行验证时产生了新的疑问：</p>
 <ol>
 <li><strong>浏览器的“隐形”行为</strong>：当我使用浏览器访问带有 <code>#</code> 的 URL 时，查看网络请求包（Network tab），发现浏览器发送给服务器的请求路径中，<strong>默认去掉了 <code>#</code> 及其后面的所有内容</strong>。</li>
@@ -780,6 +804,12 @@
 
     <footer class="article-footer">
     
+    <section class="article-tags">
+        
+            <a href="/tags/url/">URL</a>
+        
+    </section>
+
 
     
     <section class="article-copyright">
@@ -802,6 +832,110 @@
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/tryonetryideastructuralsearch/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/202504181535792.png" loading="lazy" data-key="TryonetryIDEAStructuralSearch" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/202504181535792.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">IDEA Structural Search</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/phpsrcdebug/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241225190805331.png" loading="lazy" data-key="PhpSrcDebug" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241225190805331.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PHP本体的C语言源码调试</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/wsltransrecord/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241225185718444.png" loading="lazy" data-key="WslTransRecord" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241225185718444.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">WSL 转移记录</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/ideatomcat/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241206102953223.png" loading="lazy" data-key="IDEATomcat" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241206102953223.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">IDEA与Tomcat</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/usefullmarkdowngrammar/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241125133108907.png" loading="lazy" data-key="UseFullMarkDownGrammar" data-hash="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241125133108907.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">一些好用的 MarkDown 语法</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     
