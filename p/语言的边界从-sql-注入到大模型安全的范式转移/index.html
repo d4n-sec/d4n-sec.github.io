@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='作为一名安全工程师，在处理漏洞的过程中，我始终认为安全的本质是对边界的定义与捍卫。而语言，正是构建这些边界的基石。
+从早期的 SQL 注入到如今的大模型（LLM）Prompt Injection，表面上看是攻击手法的演变，实则是计算架构从**确定性（Deterministic）向概率性（Probabilistic）**迁移时，语言边界控制权的根本性丧失。
+'>
+<title>语言的边界：从 SQL 注入到大模型安全的范式转移</title>
+
+<link rel='canonical' href='https://d4n-sec.github.io/p/%E8%AF%AD%E8%A8%80%E7%9A%84%E8%BE%B9%E7%95%8C%E4%BB%8E-sql-%E6%B3%A8%E5%85%A5%E5%88%B0%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%AE%89%E5%85%A8%E7%9A%84%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB/'>
+
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='语言的边界：从 SQL 注入到大模型安全的范式转移'>
+<meta property='og:description' content='作为一名安全工程师，在处理漏洞的过程中，我始终认为安全的本质是对边界的定义与捍卫。而语言，正是构建这些边界的基石。
+从早期的 SQL 注入到如今的大模型（LLM）Prompt Injection，表面上看是攻击手法的演变，实则是计算架构从**确定性（Deterministic）向概率性（Probabilistic）**迁移时，语言边界控制权的根本性丧失。
+'>
+<meta property='og:url' content='https://d4n-sec.github.io/p/%E8%AF%AD%E8%A8%80%E7%9A%84%E8%BE%B9%E7%95%8C%E4%BB%8E-sql-%E6%B3%A8%E5%85%A5%E5%88%B0%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%AE%89%E5%85%A8%E7%9A%84%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB/'>
+<meta property='og:site_name' content='Dan`s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Security' /><meta property='article:tag' content='LLM' /><meta property='article:tag' content='Philosophy' /><meta property='article:tag' content='Agent' /><meta property='article:tag' content='MCP' /><meta property='article:published_time' content='2026-02-11T10:00:30&#43;08:00'/><meta property='article:modified_time' content='2026-02-11T10:00:30&#43;08:00'/>
+<meta name="twitter:title" content="语言的边界：从 SQL 注入到大模型安全的范式转移">
+<meta name="twitter:description" content="作为一名安全工程师，在处理漏洞的过程中，我始终认为安全的本质是对边界的定义与捍卫。而语言，正是构建这些边界的基石。
+从早期的 SQL 注入到如今的大模型（LLM）Prompt Injection，表面上看是攻击手法的演变，实则是计算架构从**确定性（Deterministic）向概率性（Probabilistic）**迁移时，语言边界控制权的根本性丧失。
+">
+    <link rel="shortcut icon" href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/paper-plane-64.webp" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/TX.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🐹</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Dan`s Blog</a></h1>
+            <h2 class="site-description">今人不见古时月</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='/%E5%85%B3%E4%BA%8E'
+                        target="_blank"
+                        title="contactMe"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1709702435352" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8388" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32z m-40 110.8V792H136V270.8l-27.6-21.5 39.3-50.5 42.8 33.3h643.1l42.8-33.3 39.3 50.5-27.7 21.5z" fill="#bfbfbf" p-id="8389"></path><path d="M833.6 232L512 482 190.4 232l-42.8-33.3-39.3 50.5 27.6 21.5 341.6 265.6c20.2 15.7 48.5 15.7 68.7 0L888 270.8l27.6-21.5-39.3-50.5-42.7 33.2z" p-id="8390" fill="#bfbfbf"></path></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/d4n-sec'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='http://wpa.qq.com/msgrd?v=3&amp;uin=1664022865&amp;site=qq&amp;menu=yes'
+                        target="_blank"
+                        title="QQNum"
+                        rel="me"
+                    >
+                        
+                        
+                            
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1709702077457" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13062" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3C766.5 262.2 689.3 112 511.5 112 331.7 112 256.2 265.2 261 447.9c-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z" p-id="13063" fill="#bfbfbf"></path></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/tools/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Tools</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+    </ol>
+    <div class="menu-bottom-section">
+        <ol class="menu">
+
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </ol>
+    </div>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#1-确定性系统的语义逃逸">1. 确定性系统的“语义逃逸”</a></li>
+        <li><a href="#2-概率性系统的维度攻击">2. 概率性系统的“维度攻击”</a></li>
+        <li><a href="#3-agent-架构下的权限失控">3. Agent 架构下的权限失控</a></li>
+        <li><a href="#4-mcp-server-的防御哲学">4. MCP Server 的防御哲学</a></li>
+        <li><a href="#结语">结语</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E9%9A%8F%E7%AC%94/" >
+                随笔
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E8%AF%AD%E8%A8%80%E7%9A%84%E8%BE%B9%E7%95%8C%E4%BB%8E-sql-%E6%B3%A8%E5%85%A5%E5%88%B0%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%AE%89%E5%85%A8%E7%9A%84%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB/">语言的边界：从 SQL 注入到大模型安全的范式转移</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 11, 2026 10:00 &#43;0800</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>作为一名安全工程师，在处理漏洞的过程中，我始终认为<strong>安全的本质是对边界的定义与捍卫</strong>。而语言，正是构建这些边界的基石。</p>
+<p>从早期的 SQL 注入到如今的大模型（LLM）Prompt Injection，表面上看是攻击手法的演变，实则是计算架构从**确定性（Deterministic）<strong>向</strong>概率性（Probabilistic）**迁移时，语言边界控制权的根本性丧失。</p>
+<h2 id="1-确定性系统的语义逃逸">1. 确定性系统的“语义逃逸”</h2>
+<p>回顾 SQL 注入，很多人认为它只是过滤不严。但从语言学的角度看，它的本质是<strong>控制流（Control Flow）与数据流（Data Flow）的混淆</strong>。</p>
+<p>在 SQL 这种形式化语言中，解释器依赖特定的字符（如单引号 <code>'</code>）来进行词法分析，构建抽象语法树（AST）。攻击者插入的 <code>' OR '1'='1</code>，实际上是在<strong>利用解释器的词法规则，强行闭合了数据节点，并在 AST 中生成了新的逻辑分支</strong>。</p>
+<p>Log4j 漏洞（Log4Shell）则更为激进。它不仅仅是语义修改，而是利用了 <code>${jndi:...}</code> 这种递归解析机制，将数据直接提升为<strong>代码</strong>。这种“数据即代码”的特性，本质上是因为语言设计者在数据通道中保留了过高的<strong>图灵完备性</strong>。</p>
+<p>在确定性系统中，防御是可解的。预编译（PreparedStatement）之所以能根治 SQL 注入，是因为它在协议层面将 SQL 模板（指令）与参数（数据）分开发送。在解析阶段，AST 的结构已经被固定，数据无论如何变化，都无法改变 AST 的拓扑结构。<strong>这是形式化语言给予我们的“上帝视角”——我们可以精确定义边界。</strong></p>
+<h2 id="2-概率性系统的维度攻击">2. 概率性系统的“维度攻击”</h2>
+<p>大模型的出现，彻底打破了这种防御范式。</p>
+<p>LLM 不是一个解析器，它是一个基于统计学的预测机。在 Transformer 架构中，无论是 System Prompt（指令）还是 User Input（数据），在进入模型前都会被 Tokenizer 转换，并被“压扁”在同一个高维向量空间中。</p>
+<p><strong>这意味着，在 LLM 内部，指令和数据在物理上是同构的。</strong> 它们只有权重的区别，没有性质的区别。不存在一个特殊的寄存器用来只存指令，也不存在一块内存只存数据。</p>
+<p>这就是 Prompt Injection 无法被完美防御的理论根源：</p>
+<ol>
+<li><strong>没有独立的控制信道</strong>：我们无法像 SQL 预编译那样，物理隔离指令和数据。</li>
+<li><strong>自然语言的歧义性</strong>：自然语言本身就是**带内信令（In-band Signaling）**系统。没有任何一个字符（如引号）能像在 C 语言里那样具有绝对的定界作用。</li>
+<li><strong>对抗本质的改变</strong>：攻击者不再是寻找解析器的逻辑 Bug，而是在<strong>高维特征空间中寻找对抗样本</strong>。Prompt Injection 本质上是在通过微调输入的向量方向，将模型输出的概率分布推向攻击者期望的（恶意）区域。</li>
+</ol>
+<p>这不再是语法分析的问题，这是<strong>信息论</strong>的问题。当信息熵过高，接收方（LLM）无法准确解构发送方（开发者）的真实意图。</p>
+<h2 id="3-agent-架构下的权限失控">3. Agent 架构下的权限失控</h2>
+<p>如果说 LLM 的幻觉只是“嘴炮”，那么 Agent 和 MCP（Model Context Protocol）的引入，则让 LLM 具备了<strong>副作用（Side Effect）</strong>。这让安全风险从“内容安全”升级到了“系统安全”。</p>
+<p>在 Agent 架构中，LLM 扮演了<strong>决策中枢</strong>的角色。这导致了经典的**混淆代理人（Confused Deputy）**问题的复活：</p>
+<ul>
+<li><strong>攻击者</strong>（User）通过 Prompt Injection 控制了 <strong>代理人</strong>（LLM）。</li>
+<li><strong>代理人</strong>（LLM）持有合法的凭证，向 <strong>受害者</strong>（MCP Server）发起请求。</li>
+<li><strong>受害者</strong>（MCP Server）看到请求来自授信的 LLM，于是执行了操作（如删除文件）。</li>
+</ul>
+<p>这里的核心矛盾在于：<strong>我们把系统最高的决策权（Root of Trust），交给了一个基于概率、不可解释且极易受控的黑盒（LLM）。</strong></p>
+<h2 id="4-mcp-server-的防御哲学">4. MCP Server 的防御哲学</h2>
+<p>针对 MCP Server 的安全设计，必须放弃“LLM 能理解安全规则”的幻想，回归到最底层的**零信任（Zero Trust）**原则。</p>
+<p><strong>MCP Server 必须假设上游的 Agent 已经沦陷。</strong></p>
+<ol>
+<li><strong>意图与能力的解耦</strong>：LLM 只能表达“我想读文件”（意图），但 MCP Server 必须校验“你能不能读这个文件”（能力）。这种校验不能依赖 LLM 的自我审查，必须在 MCP 层通过确定性的代码逻辑（如 ACL、RBAC）强制执行。</li>
+<li><strong>降维打击</strong>：Agent 的输出往往是 JSON 等结构化数据。这其实是一个将**自然语言（高维/模糊）<strong>强制坍缩为</strong>形式化语言（低维/精确）**的过程。MCP Server 应利用这一过程，对 JSON Schema 进行极度严格的校验，任何不符合预期的字段都应导致请求拒绝，而不是让 LLM 去“猜”如何处理。</li>
+<li><strong>执行沙箱</strong>：对于涉及代码执行或复杂逻辑的 Tool，必须在隔离的沙箱环境中运行。不能让自然语言的模糊性渗透到宿主机的操作系统层面。</li>
+</ol>
+<h2 id="结语">结语</h2>
+<p>从 SQL 注入到大模型安全，我们面对的始终是同一个问题：<strong>如何在不可信的输入中，建立可信的计算逻辑。</strong></p>
+<p>只不过，以前我们通过形式化语言的语法树来锁定边界；而在 AI 时代，面对概率性的混沌，我们需要用更严苛的外部架构约束，去规训那不可控的智能。安全工程师的战场，正从代码审计室，转移到了概率与架构的无人区。</p>
+<p>一些小思考</p>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/security/">Security</a>
+        
+            <a href="/tags/llm/">LLM</a>
+        
+            <a href="/tags/philosophy/">Philosophy</a>
+        
+            <a href="/tags/agent/">Agent</a>
+        
+            <a href="/tags/mcp/">MCP</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2026 DanSec
+    </section>
+    
+    <section class="powerby">
+        
+            Dan❤Anan <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.23.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

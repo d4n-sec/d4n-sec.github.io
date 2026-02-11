@@ -7,7 +7,47 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>DanSec</copyright>
-        <lastBuildDate>Thu, 25 Dec 2025 04:34:24 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 11 Feb 2026 10:00:30 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Agent</title>
+        <link>https://d4n-sec.github.io/tags/agent/</link>
+        <pubDate>Wed, 11 Feb 2026 10:00:30 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/agent/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>LLM</title>
+        <link>https://d4n-sec.github.io/tags/llm/</link>
+        <pubDate>Wed, 11 Feb 2026 10:00:30 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/llm/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>MCP</title>
+        <link>https://d4n-sec.github.io/tags/mcp/</link>
+        <pubDate>Wed, 11 Feb 2026 10:00:30 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/mcp/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Philosophy</title>
+        <link>https://d4n-sec.github.io/tags/philosophy/</link>
+        <pubDate>Wed, 11 Feb 2026 10:00:30 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/philosophy/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Security</title>
+        <link>https://d4n-sec.github.io/tags/security/</link>
+        <pubDate>Wed, 11 Feb 2026 10:00:30 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/tags/security/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>URL</title>
         <link>https://d4n-sec.github.io/tags/url/</link>
         <pubDate>Thu, 25 Dec 2025 04:34:24 +0800</pubDate>

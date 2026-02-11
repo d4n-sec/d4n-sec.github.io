@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>LLM on Dan`s Blog</title>
+        <link>https://d4n-sec.github.io/tags/llm/</link>
+        <description>Recent content in LLM on Dan`s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>DanSec</copyright>
+        <lastBuildDate>Wed, 11 Feb 2026 10:00:30 +0800</lastBuildDate><atom:link href="https://d4n-sec.github.io/tags/llm/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>语言的边界：从 SQL 注入到大模型安全的范式转移</title>
+        <link>https://d4n-sec.github.io/p/%E8%AF%AD%E8%A8%80%E7%9A%84%E8%BE%B9%E7%95%8C%E4%BB%8E-sql-%E6%B3%A8%E5%85%A5%E5%88%B0%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%AE%89%E5%85%A8%E7%9A%84%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB/</link>
+        <pubDate>Wed, 11 Feb 2026 10:00:30 +0800</pubDate>
+        
+        <guid>https://d4n-sec.github.io/p/%E8%AF%AD%E8%A8%80%E7%9A%84%E8%BE%B9%E7%95%8C%E4%BB%8E-sql-%E6%B3%A8%E5%85%A5%E5%88%B0%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%AE%89%E5%85%A8%E7%9A%84%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB/</guid>
+        <description>&lt;p&gt;作为一名安全工程师，在处理漏洞的过程中，我始终认为&lt;strong&gt;安全的本质是对边界的定义与捍卫&lt;/strong&gt;。而语言，正是构建这些边界的基石。&lt;/p&gt;
+&lt;p&gt;从早期的 SQL 注入到如今的大模型（LLM）Prompt Injection，表面上看是攻击手法的演变，实则是计算架构从**确定性（Deterministic）&lt;strong&gt;向&lt;/strong&gt;概率性（Probabilistic）**迁移时，语言边界控制权的根本性丧失。&lt;/p&gt;
+&lt;h2 id=&#34;1-确定性系统的语义逃逸&#34;&gt;1. 确定性系统的“语义逃逸”&lt;/h2&gt;
+&lt;p&gt;回顾 SQL 注入，很多人认为它只是过滤不严。但从语言学的角度看，它的本质是&lt;strong&gt;控制流（Control Flow）与数据流（Data Flow）的混淆&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;在 SQL 这种形式化语言中，解释器依赖特定的字符（如单引号 &lt;code&gt;&#39;&lt;/code&gt;）来进行词法分析，构建抽象语法树（AST）。攻击者插入的 &lt;code&gt;&#39; OR &#39;1&#39;=&#39;1&lt;/code&gt;，实际上是在&lt;strong&gt;利用解释器的词法规则，强行闭合了数据节点，并在 AST 中生成了新的逻辑分支&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;Log4j 漏洞（Log4Shell）则更为激进。它不仅仅是语义修改，而是利用了 &lt;code&gt;${jndi:...}&lt;/code&gt; 这种递归解析机制，将数据直接提升为&lt;strong&gt;代码&lt;/strong&gt;。这种“数据即代码”的特性，本质上是因为语言设计者在数据通道中保留了过高的&lt;strong&gt;图灵完备性&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;在确定性系统中，防御是可解的。预编译（PreparedStatement）之所以能根治 SQL 注入，是因为它在协议层面将 SQL 模板（指令）与参数（数据）分开发送。在解析阶段，AST 的结构已经被固定，数据无论如何变化，都无法改变 AST 的拓扑结构。&lt;strong&gt;这是形式化语言给予我们的“上帝视角”——我们可以精确定义边界。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2-概率性系统的维度攻击&#34;&gt;2. 概率性系统的“维度攻击”&lt;/h2&gt;
+&lt;p&gt;大模型的出现，彻底打破了这种防御范式。&lt;/p&gt;
+&lt;p&gt;LLM 不是一个解析器，它是一个基于统计学的预测机。在 Transformer 架构中，无论是 System Prompt（指令）还是 User Input（数据），在进入模型前都会被 Tokenizer 转换，并被“压扁”在同一个高维向量空间中。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;这意味着，在 LLM 内部，指令和数据在物理上是同构的。&lt;/strong&gt; 它们只有权重的区别，没有性质的区别。不存在一个特殊的寄存器用来只存指令，也不存在一块内存只存数据。&lt;/p&gt;
+&lt;p&gt;这就是 Prompt Injection 无法被完美防御的理论根源：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;没有独立的控制信道&lt;/strong&gt;：我们无法像 SQL 预编译那样，物理隔离指令和数据。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自然语言的歧义性&lt;/strong&gt;：自然语言本身就是**带内信令（In-band Signaling）**系统。没有任何一个字符（如引号）能像在 C 语言里那样具有绝对的定界作用。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;对抗本质的改变&lt;/strong&gt;：攻击者不再是寻找解析器的逻辑 Bug，而是在&lt;strong&gt;高维特征空间中寻找对抗样本&lt;/strong&gt;。Prompt Injection 本质上是在通过微调输入的向量方向，将模型输出的概率分布推向攻击者期望的（恶意）区域。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这不再是语法分析的问题，这是&lt;strong&gt;信息论&lt;/strong&gt;的问题。当信息熵过高，接收方（LLM）无法准确解构发送方（开发者）的真实意图。&lt;/p&gt;
+&lt;h2 id=&#34;3-agent-架构下的权限失控&#34;&gt;3. Agent 架构下的权限失控&lt;/h2&gt;
+&lt;p&gt;如果说 LLM 的幻觉只是“嘴炮”，那么 Agent 和 MCP（Model Context Protocol）的引入，则让 LLM 具备了&lt;strong&gt;副作用（Side Effect）&lt;/strong&gt;。这让安全风险从“内容安全”升级到了“系统安全”。&lt;/p&gt;
+&lt;p&gt;在 Agent 架构中，LLM 扮演了&lt;strong&gt;决策中枢&lt;/strong&gt;的角色。这导致了经典的**混淆代理人（Confused Deputy）**问题的复活：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;攻击者&lt;/strong&gt;（User）通过 Prompt Injection 控制了 &lt;strong&gt;代理人&lt;/strong&gt;（LLM）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;代理人&lt;/strong&gt;（LLM）持有合法的凭证，向 &lt;strong&gt;受害者&lt;/strong&gt;（MCP Server）发起请求。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;受害者&lt;/strong&gt;（MCP Server）看到请求来自授信的 LLM，于是执行了操作（如删除文件）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这里的核心矛盾在于：&lt;strong&gt;我们把系统最高的决策权（Root of Trust），交给了一个基于概率、不可解释且极易受控的黑盒（LLM）。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;4-mcp-server-的防御哲学&#34;&gt;4. MCP Server 的防御哲学&lt;/h2&gt;
+&lt;p&gt;针对 MCP Server 的安全设计，必须放弃“LLM 能理解安全规则”的幻想，回归到最底层的**零信任（Zero Trust）**原则。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;MCP Server 必须假设上游的 Agent 已经沦陷。&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;意图与能力的解耦&lt;/strong&gt;：LLM 只能表达“我想读文件”（意图），但 MCP Server 必须校验“你能不能读这个文件”（能力）。这种校验不能依赖 LLM 的自我审查，必须在 MCP 层通过确定性的代码逻辑（如 ACL、RBAC）强制执行。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;降维打击&lt;/strong&gt;：Agent 的输出往往是 JSON 等结构化数据。这其实是一个将**自然语言（高维/模糊）&lt;strong&gt;强制坍缩为&lt;/strong&gt;形式化语言（低维/精确）**的过程。MCP Server 应利用这一过程，对 JSON Schema 进行极度严格的校验，任何不符合预期的字段都应导致请求拒绝，而不是让 LLM 去“猜”如何处理。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;执行沙箱&lt;/strong&gt;：对于涉及代码执行或复杂逻辑的 Tool，必须在隔离的沙箱环境中运行。不能让自然语言的模糊性渗透到宿主机的操作系统层面。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;结语&#34;&gt;结语&lt;/h2&gt;
+&lt;p&gt;从 SQL 注入到大模型安全，我们面对的始终是同一个问题：&lt;strong&gt;如何在不可信的输入中，建立可信的计算逻辑。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;只不过，以前我们通过形式化语言的语法树来锁定边界；而在 AI 时代，面对概率性的混沌，我们需要用更严苛的外部架构约束，去规训那不可控的智能。安全工程师的战场，正从代码审计室，转移到了概率与架构的无人区。&lt;/p&gt;
+&lt;p&gt;一些小思考&lt;/p&gt;</description>
+        </item>
+        
+    </channel>
+</rss>
