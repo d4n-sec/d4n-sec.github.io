@@ -2,7 +2,7 @@
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='作为一名安全工程师，在处理漏洞的过程中，我始终认为安全的本质是对边界的定义与捍卫。而语言，正是构建这些边界的基石。
-从早期的 SQL 注入到如今的大模型（LLM）Prompt Injection，表面上看是攻击手法的演变，实则是计算架构从**确定性（Deterministic）向概率性（Probabilistic）**迁移时，语言边界控制权的根本性丧失。
+从早期的 SQL 注入到如今的大模型（LLM）Prompt Injection，表面上看是攻击手法的演变，实则是计算架构从确定性(Deterministic) 向 **概率性(Probabilistic)**迁移时，语言边界控制权的根本性丧失。
 '>
 <title>语言的边界：从 SQL 注入到大模型安全的范式转移</title>
 
@@ -10,14 +10,14 @@
 
 <link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='语言的边界：从 SQL 注入到大模型安全的范式转移'>
 <meta property='og:description' content='作为一名安全工程师，在处理漏洞的过程中，我始终认为安全的本质是对边界的定义与捍卫。而语言，正是构建这些边界的基石。
-从早期的 SQL 注入到如今的大模型（LLM）Prompt Injection，表面上看是攻击手法的演变，实则是计算架构从**确定性（Deterministic）向概率性（Probabilistic）**迁移时，语言边界控制权的根本性丧失。
+从早期的 SQL 注入到如今的大模型（LLM）Prompt Injection，表面上看是攻击手法的演变，实则是计算架构从确定性(Deterministic) 向 **概率性(Probabilistic)**迁移时，语言边界控制权的根本性丧失。
 '>
 <meta property='og:url' content='https://d4n-sec.github.io/p/%E8%AF%AD%E8%A8%80%E7%9A%84%E8%BE%B9%E7%95%8C%E4%BB%8E-sql-%E6%B3%A8%E5%85%A5%E5%88%B0%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%AE%89%E5%85%A8%E7%9A%84%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB/'>
 <meta property='og:site_name' content='Dan`s Blog'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Security' /><meta property='article:tag' content='LLM' /><meta property='article:tag' content='Philosophy' /><meta property='article:tag' content='Agent' /><meta property='article:tag' content='MCP' /><meta property='article:published_time' content='2026-02-11T10:00:30&#43;08:00'/><meta property='article:modified_time' content='2026-02-11T10:00:30&#43;08:00'/>
 <meta name="twitter:title" content="语言的边界：从 SQL 注入到大模型安全的范式转移">
 <meta name="twitter:description" content="作为一名安全工程师，在处理漏洞的过程中，我始终认为安全的本质是对边界的定义与捍卫。而语言，正是构建这些边界的基石。
-从早期的 SQL 注入到如今的大模型（LLM）Prompt Injection，表面上看是攻击手法的演变，实则是计算架构从**确定性（Deterministic）向概率性（Probabilistic）**迁移时，语言边界控制权的根本性丧失。
+从早期的 SQL 注入到如今的大模型（LLM）Prompt Injection，表面上看是攻击手法的演变，实则是计算架构从确定性(Deterministic) 向 **概率性(Probabilistic)**迁移时，语言边界控制权的根本性丧失。
 ">
     <link rel="shortcut icon" href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/paper-plane-64.webp" />
 
@@ -385,7 +385,7 @@
     
     
     <p>作为一名安全工程师，在处理漏洞的过程中，我始终认为<strong>安全的本质是对边界的定义与捍卫</strong>。而语言，正是构建这些边界的基石。</p>
-<p>从早期的 SQL 注入到如今的大模型（LLM）Prompt Injection，表面上看是攻击手法的演变，实则是计算架构从**确定性（Deterministic）<strong>向</strong>概率性（Probabilistic）**迁移时，语言边界控制权的根本性丧失。</p>
+<p>从早期的 SQL 注入到如今的大模型（LLM）Prompt Injection，表面上看是攻击手法的演变，实则是计算架构从<strong>确定性(Deterministic)</strong> 向 **概率性(Probabilistic)**迁移时，语言边界控制权的根本性丧失。</p>
 <h2 id="1-确定性系统的语义逃逸">1. 确定性系统的“语义逃逸”</h2>
 <p>回顾 SQL 注入，很多人认为它只是过滤不严。但从语言学的角度看，它的本质是<strong>控制流（Control Flow）与数据流（Data Flow）的混淆</strong>。</p>
 <p>在 SQL 这种形式化语言中，解释器依赖特定的字符（如单引号 <code>'</code>）来进行词法分析，构建抽象语法树（AST）。攻击者插入的 <code>' OR '1'='1</code>，实际上是在<strong>利用解释器的词法规则，强行闭合了数据节点，并在 AST 中生成了新的逻辑分支</strong>。</p>
@@ -398,7 +398,7 @@
 <p>这就是 Prompt Injection 无法被完美防御的理论根源：</p>
 <ol>
 <li><strong>没有独立的控制信道</strong>：我们无法像 SQL 预编译那样，物理隔离指令和数据。</li>
-<li><strong>自然语言的歧义性</strong>：自然语言本身就是**带内信令（In-band Signaling）**系统。没有任何一个字符（如引号）能像在 C 语言里那样具有绝对的定界作用。</li>
+<li><strong>自然语言的歧义性</strong>：自然语言本身就是**带内信令(In-band Signaling)**系统。没有任何一个字符（如引号）能像在 C 语言里那样具有绝对的定界作用。</li>
 <li><strong>对抗本质的改变</strong>：攻击者不再是寻找解析器的逻辑 Bug，而是在<strong>高维特征空间中寻找对抗样本</strong>。Prompt Injection 本质上是在通过微调输入的向量方向，将模型输出的概率分布推向攻击者期望的（恶意）区域。</li>
 </ol>
 <p>这不再是语法分析的问题，这是<strong>信息论</strong>的问题。当信息熵过高，接收方（LLM）无法准确解构发送方（开发者）的真实意图。</p>
@@ -412,11 +412,11 @@
 </ul>
 <p>这里的核心矛盾在于：<strong>我们把系统最高的决策权（Root of Trust），交给了一个基于概率、不可解释且极易受控的黑盒（LLM）。</strong></p>
 <h2 id="4-mcp-server-的防御哲学">4. MCP Server 的防御哲学</h2>
-<p>针对 MCP Server 的安全设计，必须放弃“LLM 能理解安全规则”的幻想，回归到最底层的**零信任（Zero Trust）**原则。</p>
+<p>针对 MCP Server 的安全设计，必须放弃“LLM 能理解安全规则”的幻想，回归到最底层的**零信任(Zero Trust)**原则。</p>
 <p><strong>MCP Server 必须假设上游的 Agent 已经沦陷。</strong></p>
 <ol>
 <li><strong>意图与能力的解耦</strong>：LLM 只能表达“我想读文件”（意图），但 MCP Server 必须校验“你能不能读这个文件”（能力）。这种校验不能依赖 LLM 的自我审查，必须在 MCP 层通过确定性的代码逻辑（如 ACL、RBAC）强制执行。</li>
-<li><strong>降维打击</strong>：Agent 的输出往往是 JSON 等结构化数据。这其实是一个将**自然语言（高维/模糊）<strong>强制坍缩为</strong>形式化语言（低维/精确）**的过程。MCP Server 应利用这一过程，对 JSON Schema 进行极度严格的校验，任何不符合预期的字段都应导致请求拒绝，而不是让 LLM 去“猜”如何处理。</li>
+<li><strong>降维打击</strong>：Agent 的输出往往是 JSON 等结构化数据。这其实是一个将**自然语言(高维/模糊)<strong>强制坍缩为</strong>形式化语言(低维/精确)**的过程。MCP Server 应利用这一过程，对 JSON Schema 进行极度严格的校验，任何不符合预期的字段都应导致请求拒绝，而不是让 LLM 去“猜”如何处理。</li>
 <li><strong>执行沙箱</strong>：对于涉及代码执行或复杂逻辑的 Tool，必须在隔离的沙箱环境中运行。不能让自然语言的模糊性渗透到宿主机的操作系统层面。</li>
 </ol>
 <h2 id="结语">结语</h2>
