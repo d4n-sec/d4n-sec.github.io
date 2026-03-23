@@ -6,7 +6,8 @@
 
 <link rel='canonical' href='https://d4n-sec.github.io/p/phpfilterworks/'>
 
-<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='PHP Filter 伪协议实现细节'>
+
+<link rel="stylesheet" href="/scss/style.min.1a6eab8f97c7ad47119bcfe4ea87cc5227d4789df170608fabd9b3910bc037f2.css"><meta property='og:title' content='PHP Filter 伪协议实现细节'>
 <meta property='og:description' content='关于PHP Filter 伪协议中间流过滤器的一些细节'>
 <meta property='og:url' content='https://d4n-sec.github.io/p/phpfilterworks/'>
 <meta property='og:site_name' content='Dan`s Blog'>
@@ -447,7 +448,7 @@
 </span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="nv">$utf8String</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="nv">$gbkString</span><span class="p">;</span> <span class="c1">// 输出 GBK 编码的字符串
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">echo</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
 </span></span></span></code></pre></td></tr></table>
@@ -584,7 +585,7 @@
 </span></span><span class="line"><span class="cl"><span class="nx">file_put_contents</span><span class="p">(</span><span class="s1">&#39;php://filter/write=convert.iconv.UCS-2LE.UCS-2BE/resource=shell.php&#39;</span><span class="p">,</span><span class="s1">&#39;x?&lt;uc cucvcsa(b;)&gt;?&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">//file_put_contents 可以将第二个参数的内容，放入第一个参数中，第一个参数设置了中间流过滤器
 </span></span></span><span class="line"><span class="cl"><span class="c1">//所以，file_put_contents 将第二个参数的内容按照第一个参数的设置过滤后放入shell.php中
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$a</span> <span class="o">=</span> <span class="nx">file_get_contents</span><span class="p">(</span><span class="s1">&#39;shell.php&#39;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$a</span> <span class="o">=</span> <span class="nx">file_get_contents</span><span class="p">(</span><span class="s1">&#39;shell.php&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nv">$a</span><span class="o">.</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -665,9 +666,9 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;txt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">preg_replace</span><span class="p">(</span><span class="s1">&#39;|[^a-z0-9A-Z+/]|s&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;txt&#39;</span><span class="p">]);</span> <span class="c1">//使得 &#34;&lt;?php exit();&#34; ==&gt; &#34;phpexit&#34;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">base64_decode</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;txt&#39;</span><span class="p">]);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">base64_decode</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;txt&#39;</span><span class="p">]);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 等价于
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">file_put_contents</span><span class="p">(</span><span class="s1">&#39;php://filter/write=convert.base64-decode/resource=xxx.php&#39;</span><span class="p">,</span><span class="nv">$strr</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">file_put_contents</span><span class="p">(</span><span class="s1">&#39;php://filter/write=convert.base64-decode/resource=xxx.php&#39;</span><span class="p">,</span><span class="nv">$strr</span><span class="p">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="总结">总结</h1>
@@ -684,7 +685,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">file_put_contents</span><span class="p">(</span><span class="s1">&#39;php://filter/write=convert.base64-decode/resource=xxx.php&#39;</span><span class="p">,</span><span class="nv">$strr</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">//等价于
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">file_put_contents</span><span class="p">(</span><span class="s1">&#39;php://filter/convert.base64-decode/resource=xxx.php&#39;</span><span class="p">,</span><span class="nv">$strr</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">file_put_contents</span><span class="p">(</span><span class="s1">&#39;php://filter/convert.base64-decode/resource=xxx.php&#39;</span><span class="p">,</span><span class="nv">$strr</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">//函数指定之后，可以尝试省略 write read 关键字
 </span></span></span></code></pre></td></tr></table>
 </div>
@@ -723,6 +724,31 @@
     </footer>
 
 
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });
+    })
+</script>
     
 </article>
 

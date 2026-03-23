@@ -6,7 +6,8 @@
 
 <link rel='canonical' href='https://d4n-sec.github.io/p/redblacktreestudy/'>
 
-<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='红黑树整理'>
+
+<link rel="stylesheet" href="/scss/style.min.1a6eab8f97c7ad47119bcfe4ea87cc5227d4789df170608fabd9b3910bc037f2.css"><meta property='og:title' content='红黑树整理'>
 <meta property='og:description' content='就当补补课咯'>
 <meta property='og:url' content='https://d4n-sec.github.io/p/redblacktreestudy/'>
 <meta property='og:site_name' content='Dan`s Blog'>
@@ -597,25 +598,25 @@
 </ul>
 <p>那么此时，所有的情况就变成了四种，只有一种情况需要重点考虑</p>
 <div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>所有的情况</th>
-<th>被删除节点为红色</th>
-<th>被删除节点为黑色</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>被删除节点为无子节点</strong></td>
-<td>直接删除即可</td>
-<td>复杂处理，<em><strong>见下</strong></em></td>
-</tr>
-<tr>
-<td><strong>被删除节点有一个子节点</strong></td>
-<td>不存在<br />该结构的出现不满足红黑树黑高一致性</td>
-<td>子节点必为红色，否则违反黑高一致性<br />修复方法为：子红节点替换被删除黑节点，颜色变为黑色</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>所有的情况</th>
+          <th>被删除节点为红色</th>
+          <th>被删除节点为黑色</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>被删除节点为无子节点</strong></td>
+          <td>直接删除即可</td>
+          <td>复杂处理，<em><strong>见下</strong></em></td>
+      </tr>
+      <tr>
+          <td><strong>被删除节点有一个子节点</strong></td>
+          <td>不存在<br />该结构的出现不满足红黑树黑高一致性</td>
+          <td>子节点必为红色，否则违反黑高一致性<br />修复方法为：子红节点替换被删除黑节点，颜色变为黑色</td>
+      </tr>
+  </tbody>
 </table></div>
 <p>被删除节点为黑色且被删除节点无子节点，需要进行复杂处理，可能的情况如下</p>
 <blockquote>
@@ -1129,6 +1130,31 @@
     </footer>
 
 
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });
+    })
+</script>
     
 </article>
 

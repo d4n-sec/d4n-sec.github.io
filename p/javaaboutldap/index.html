@@ -6,7 +6,8 @@
 
 <link rel='canonical' href='https://d4n-sec.github.io/p/javaaboutldap/'>
 
-<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='Java基础知识：LDAP'>
+
+<link rel="stylesheet" href="/scss/style.min.1a6eab8f97c7ad47119bcfe4ea87cc5227d4789df170608fabd9b3910bc037f2.css"><meta property='og:title' content='Java基础知识：LDAP'>
 <meta property='og:description' content='Java基础知识补充'>
 <meta property='og:url' content='https://d4n-sec.github.io/p/javaaboutldap/'>
 <meta property='og:site_name' content='Dan`s Blog'>
@@ -1008,7 +1009,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;2&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">services</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">openldap</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">osixia/openldap:1.5.0 </span><span class="w"> </span><span class="c">### 如果有私有仓库可以从自己的私有仓库拉取镜像</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">openldap</span><span class="w">
@@ -1242,10 +1243,10 @@
 </span></span><span class="line"><span class="cl"><span class="nv">$servers</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="s1">&#39;server&#39;</span><span class="p">,</span><span class="s1">&#39;host&#39;</span><span class="p">,</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$servers</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="s1">&#39;server&#39;</span><span class="p">,</span><span class="s1">&#39;port&#39;</span><span class="p">,</span><span class="mi">389</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$servers</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="s1">&#39;server&#39;</span><span class="p">,</span><span class="s1">&#39;base&#39;</span><span class="p">,</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;dc=xxx,dc=xxx&#39;</span><span class="p">));</span> <span class="c1">#修改 dc=xxx,dc=xxx 为自己的域名
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$servers</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">,</span><span class="s1">&#39;auth_type&#39;</span><span class="p">,</span><span class="s1">&#39;session&#39;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">$servers</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">,</span><span class="s1">&#39;auth_type&#39;</span><span class="p">,</span><span class="s1">&#39;session&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$servers</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">,</span><span class="s1">&#39;bind_id&#39;</span><span class="p">,</span><span class="s1">&#39;cn=Manager,dc=xxx,dc=xxx&#39;</span><span class="p">);</span>   <span class="c1">#修改 dc=xxx,dc=xxx 为自己的域名
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$servers</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">,</span><span class="s1">&#39;bind_pass&#39;</span><span class="p">,</span><span class="s1">&#39;&lt;密码&gt;&#39;</span><span class="p">);</span> <span class="c1">#填入 5.7.1 设定的根节点管理员密码
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$servers</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="s1">&#39;server&#39;</span><span class="p">,</span><span class="s1">&#39;tls&#39;</span><span class="p">,</span><span class="k">false</span><span class="p">);</span> 
+</span></span></span><span class="line"><span class="cl"><span class="nv">$servers</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">,</span><span class="s1">&#39;bind_pass&#39;</span><span class="p">,</span><span class="s1">&#39;&lt;密码&gt;&#39;</span><span class="p">);</span> <span class="c1">#填入 5.7.1 设定的根节点管理员密码
+</span></span></span><span class="line"><span class="cl"><span class="nv">$servers</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="s1">&#39;server&#39;</span><span class="p">,</span><span class="s1">&#39;tls&#39;</span><span class="p">,</span><span class="k">false</span><span class="p">);</span> 
 </span></span></code></pre></td></tr></table>
 </div>
 </div></blockquote>
@@ -1389,7 +1390,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">###! **remember to close this block with &#39;EOS&#39; below**</span>
 </span></span><span class="line"><span class="cl"> <span class="n">gitlab_rails</span><span class="o">[</span><span class="s1">&#39;ldap_servers&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load</span> <span class="s">&lt;&lt;-&#39;EOS&#39;
-</span></span></span><span class="line"><span class="cl"><span class="s"></span>   <span class="ss">main</span><span class="p">:</span> <span class="c1"># &#39;main&#39; is the GitLab &#39;provider ID&#39; of this LDAP server</span>
+</span></span></span><span class="line"><span class="cl">   <span class="ss">main</span><span class="p">:</span> <span class="c1"># &#39;main&#39; is the GitLab &#39;provider ID&#39; of this LDAP server</span>
 </span></span><span class="line"><span class="cl">     <span class="ss">label</span><span class="p">:</span> <span class="s1">&#39;LDAP&#39;</span>
 </span></span><span class="line"><span class="cl">     <span class="ss">host</span><span class="p">:</span> <span class="s1">&#39;xx.xx.xx.xx&#39;</span>  <span class="c1">### LDAP服务地址</span>
 </span></span><span class="line"><span class="cl">     <span class="ss">port</span><span class="p">:</span> <span class="mi">389</span>
@@ -1604,7 +1605,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nn">com.study.ldapp</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LdapUser</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LdapUser</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">cn</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">sn</span><span class="p">;</span><span class="w">
@@ -1616,7 +1617,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">uidNumber</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">gidNumber</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="cm">/**忽略get\set方法**/</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>一个模拟客户端</p>
@@ -1925,25 +1926,25 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nn">com.study.ldapp</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Hashtable</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Hashtable</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.Context</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.NamingEnumeration</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.NamingException</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.directory.Attribute</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.directory.BasicAttribute</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.directory.BasicAttributes</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.directory.DirContext</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.directory.ModificationItem</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.directory.SearchControls</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.directory.SearchResult</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.ldap.Control</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.ldap.InitialLdapContext</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.ldap.LdapContext</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.Context</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.NamingEnumeration</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.NamingException</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.directory.Attribute</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.directory.BasicAttribute</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.directory.BasicAttributes</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.directory.DirContext</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.directory.ModificationItem</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.directory.SearchControls</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.directory.SearchResult</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.ldap.Control</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.ldap.InitialLdapContext</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.ldap.LdapContext</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LdapStore</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LdapStore</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">NamingException</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;ldap://localhost:389/&#34;</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">basedn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;dc=gsymgsym,dc=com&#34;</span><span class="p">;</span><span class="w">  </span><span class="c1">// basedn</span><span class="w">
@@ -2219,7 +2220,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">time</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">1000</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">time</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>使用Wireshark监听本地回环流量，指定<code>tcp.port=389</code></p>
@@ -2342,6 +2343,31 @@
     </footer>
 
 
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });
+    })
+</script>
     
 </article>
 

@@ -38,7 +38,7 @@
     &gt;发 issue&lt;/a&gt;，或直接&lt;a class=&#34;link&#34; href=&#34;https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/compare&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;发 pull request&lt;/a&gt; 给我。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;本文另有&lt;a class=&#34;link&#34; href=&#34;README.md&#34; &gt;繁體中文版&lt;/a&gt;。&lt;/p&gt;
-&lt;h2 id=&#34;原文版本历史historymd&#34;&gt;&lt;a class=&#34;link&#34; href=&#34;history.md&#34; &gt;原文版本历史&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&#34;原文版本历史&#34;&gt;&lt;a class=&#34;link&#34; href=&#34;history.md&#34; &gt;原文版本历史&lt;/a&gt;&lt;/h2&gt;
 &lt;h2 id=&#34;目录&#34;&gt;目录&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%a3%b0%e6%98%8e&#34; &gt;声明&lt;/a&gt;&lt;/li&gt;
@@ -192,7 +192,7 @@
 &lt;p&gt;以&lt;code&gt;请将你的回复发送到……&lt;/code&gt;来结束你的问题多半会使你得不到回答。如果你觉得花几秒钟在邮件客户端设置一下回复地址都麻烦，我们也觉得花几秒钟思考你的问题更麻烦。如果你的邮件程序不支持这样做，&lt;a class=&#34;link&#34; href=&#34;http://linuxmafia.com/faq/Mail/muas.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;换个好点的&lt;/a&gt;；如果是操作系统不支持这种邮件程序，也换个好点的。&lt;/p&gt;
 &lt;p&gt;在论坛，要求通过电子邮件回复是非常无礼的，除非你认为回复的信息可能比较敏感（有人会为了某些未知的原因，只让你而不是整个论坛知道答案）。如果你只是想在有人回复讨论串时得到电子邮件提醒，可以要求网页论坛发送给你。几乎所有论坛都支持诸如&lt;code&gt;追踪此讨论串&lt;/code&gt;、&lt;code&gt;有回复时发送邮件提醒&lt;/code&gt;等功能。&lt;/p&gt;
-&lt;h3 id=&#34;a-name使用清晰正确精准且合乎语法的语句使用清晰正确精准且合乎语法的语句a&#34;&gt;&lt;a name=&#34;使用清晰、正确、精准且合乎语法的语句&#34;&gt;使用清晰、正确、精准且合乎语法的语句&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;使用清晰正确精准且合乎语法的语句&#34;&gt;&lt;a name=&#34;使用清晰、正确、精准且合乎语法的语句&#34;&gt;使用清晰、正确、精准且合乎语法的语句&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;我们从经验中发现，粗心的提问者通常也会粗心地写程序与思考（我敢打包票）。回答粗心大意者的问题很不值得，我们宁愿把时间耗在别处。&lt;/p&gt;
 &lt;p&gt;正确的拼写、标点符号和大小写是很重要的。一般来说，如果你觉得这样做很麻烦，不想在乎这些，那我们也觉得麻烦，不想在乎你的提问。花点额外的精力斟酌一下字句，用不着太僵硬与正式 —— 事实上，黑客文化很看重能准确地使用非正式、俚语和幽默的语句。但它&lt;strong&gt;必须很&lt;/strong&gt;准确，而且有迹象表明你是在思考和关注问题。&lt;/p&gt;
 &lt;p&gt;正确地拼写、使用标点和大小写，不要将&lt;code&gt;its&lt;/code&gt;混淆为&lt;code&gt;it&#39;s&lt;/code&gt;，&lt;code&gt;loose&lt;/code&gt;搞成&lt;code&gt;lose&lt;/code&gt;或者将&lt;code&gt;discrete&lt;/code&gt;弄成&lt;code&gt;discreet&lt;/code&gt;。不要&lt;strong&gt;全部用大写&lt;/strong&gt;，这会被视为无礼的大声嚷嚷（全部小写也好不到哪去，因为不易阅读。&lt;a class=&#34;link&#34; href=&#34;http://en.wikipedia.org/wiki/Alan_Cox&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;

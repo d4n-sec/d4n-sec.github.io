@@ -6,7 +6,8 @@
 
 <link rel='canonical' href='https://d4n-sec.github.io/p/ciscn2019web/'>
 
-<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='CISCN 2019 web writeup'>
+
+<link rel="stylesheet" href="/scss/style.min.1a6eab8f97c7ad47119bcfe4ea87cc5227d4789df170608fabd9b3910bc037f2.css"><meta property='og:title' content='CISCN 2019 web writeup'>
 <meta property='og:description' content='CTF 回顾记录'>
 <meta property='og:url' content='https://d4n-sec.github.io/p/ciscn2019web/'>
 <meta property='og:site_name' content='Dan`s Blog'>
@@ -775,16 +776,16 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nv">$b</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="c1">//O:4:&#34;xctf&#34;:1:{s:4:&#34;flag&#34;;s:3:&#34;111&#34;;}
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">unserialize</span><span class="p">(</span><span class="nv">$b</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">unserialize</span><span class="p">(</span><span class="nv">$b</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">//bad requests
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nv">$b</span> <span class="o">=</span> <span class="nx">str_replace</span><span class="p">(</span><span class="s1">&#39;O:4:&#34;xctf&#34;:1&#39;</span><span class="p">,</span> <span class="s1">&#39;O:4:&#34;xctf&#34;:2&#39;</span><span class="p">,</span> <span class="nv">$b</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nv">$b</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="c1">//O:4:&#34;xctf&#34;:2:{s:4:&#34;flag&#34;;s:3:&#34;111&#34;;}
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">unserialize</span><span class="p">(</span><span class="nv">$b</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">unserialize</span><span class="p">(</span><span class="nv">$b</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">//no bad requests
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
 </span></span></span></code></pre></td></tr></table>
 </div>
@@ -1065,6 +1066,31 @@
     </footer>
 
 
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });
+    })
+</script>
     
 </article>
 

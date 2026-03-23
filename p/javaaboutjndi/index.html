@@ -6,7 +6,8 @@
 
 <link rel='canonical' href='https://d4n-sec.github.io/p/javaaboutjndi/'>
 
-<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='Java基础知识：JNDI'>
+
+<link rel="stylesheet" href="/scss/style.min.1a6eab8f97c7ad47119bcfe4ea87cc5227d4789df170608fabd9b3910bc037f2.css"><meta property='og:title' content='Java基础知识：JNDI'>
 <meta property='og:description' content='Java基础知识补充'>
 <meta property='og:url' content='https://d4n-sec.github.io/p/javaaboutjndi/'>
 <meta property='og:site_name' content='Dan`s Blog'>
@@ -301,7 +302,7 @@
     </li>
     <li><a href="#re-understand-the-jndi">Re-understand the JNDI</a></li>
     <li><a href="#ref">Ref</a></li>
-    <li><a href="#---todo---">&mdash;TODO&mdash;</a></li>
+    <li><a href="#todo">&mdash;TODO&mdash;</a></li>
   </ol>
 </nav>
         </div>
@@ -434,20 +435,20 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Connection</span><span class="w"> </span><span class="n">conn</span><span class="o">=</span><span class="kc">null</span><span class="p">;</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">Class</span><span class="p">.</span><span class="na">forName</span><span class="p">(</span><span class="s">&#34;com.mysql.jdbc.Driver&#34;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getContextClassLoader</span><span class="p">());</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">conn</span><span class="o">=</span><span class="n">DriverManager</span><span class="p">.</span><span class="na">getConnection</span><span class="p">(</span><span class="s">&#34;jdbc:mysql://MyDBServer?user=xxx&amp;password=xxx&#34;</span><span class="p">);</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">......</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">conn</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">if</span><span class="p">(</span><span class="n">conn</span><span class="o">!=</span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">conn</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="p">(</span><span class="n">SQLException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这是传统派的做法，也是以前非Java程序员（如Delphi、VB等）常见的做法。这种做法一般在小规模的开发过程中不会产生问题，只要程序员熟悉Java语言、了解JDBC技术和MySQL，可以很快开发出相应的应用程序。</p>
@@ -493,7 +494,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Connection</span><span class="w"> </span><span class="n">conn</span><span class="o">=</span><span class="kc">null</span><span class="p">;</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">Context</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">InitialContext</span><span class="p">();</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">Object</span><span class="w"> </span><span class="n">datasourceRef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="p">.</span><span class="na">lookup</span><span class="p">(</span><span class="s">&#34;java:MySqlDS&#34;</span><span class="p">);</span><span class="w"> </span><span class="c1">//该行是重点关注行</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">//引用数据源 </span><span class="w">
@@ -501,15 +502,15 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">conn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ds</span><span class="p">.</span><span class="na">getConnection</span><span class="p">();</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">......</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">c</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">if</span><span class="p">(</span><span class="n">conn</span><span class="o">!=</span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">conn</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="p">(</span><span class="n">SQLException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="benefits-of--with-jndi">Benefits of  With-JNDI</h2>
@@ -553,7 +554,7 @@
     >https://blog.csdn.net/ibigboy/article/details/84308580</a></p>
 <p><a class="link" href="https://www.cnblogs.com/dion-90/articles/9029581.html"  target="_blank" rel="noopener"
     >https://www.cnblogs.com/dion-90/articles/9029581.html</a></p>
-<h1 id="---todo---">&mdash;TODO&mdash;</h1>
+<h1 id="todo">&mdash;TODO&mdash;</h1>
 <p>JNDI Tomcat 或者 JBOSS 配置后，跟踪程序流，查看是否是由Tomcat/JBOSS进行数据库连接</p>
 
 </section>
@@ -583,6 +584,31 @@
     </footer>
 
 
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });
+    })
+</script>
     
 </article>
 
