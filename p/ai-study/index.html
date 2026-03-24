@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=' title: &ldquo;大模型学习笔记：从 Loss 到梯度下降&rdquo; date: 2026-03-23T17:40:00&#43;08:00 slug: ai-study categories: - 技术 tags: - AI - 大模型 - 梯度下降 math: true 废话不多说，直接开始吧
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='废话不多说，直接开始吧
 本文面向的是笔者自己和一些了解大模型的一大堆基础概念，但是从来没有穿起过的，想要学习的读者
+作者读文献 English 和 中文 语言系统混了，不要介意（4级难度）
 '>
-<title></title>
+<title>大模型学习笔记：从 Loss 到梯度下降</title>
 
-<link rel='canonical' href='https://d4n-sec.github.io/p/'>
+<link rel='canonical' href='https://d4n-sec.github.io/p/ai-study/'>
 
 
-<link rel="stylesheet" href="/scss/style.min.1a6eab8f97c7ad47119bcfe4ea87cc5227d4789df170608fabd9b3910bc037f2.css"><meta property='og:title' content=''>
-<meta property='og:description' content=' title: &ldquo;大模型学习笔记：从 Loss 到梯度下降&rdquo; date: 2026-03-23T17:40:00&#43;08:00 slug: ai-study categories: - 技术 tags: - AI - 大模型 - 梯度下降 math: true 废话不多说，直接开始吧
+<link rel="stylesheet" href="/scss/style.min.1a6eab8f97c7ad47119bcfe4ea87cc5227d4789df170608fabd9b3910bc037f2.css"><meta property='og:title' content='大模型学习笔记：从 Loss 到梯度下降'>
+<meta property='og:description' content='废话不多说，直接开始吧
 本文面向的是笔者自己和一些了解大模型的一大堆基础概念，但是从来没有穿起过的，想要学习的读者
+作者读文献 English 和 中文 语言系统混了，不要介意（4级难度）
 '>
-<meta property='og:url' content='https://d4n-sec.github.io/p/'>
+<meta property='og:url' content='https://d4n-sec.github.io/p/ai-study/'>
 <meta property='og:site_name' content='Dan`s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' />
-<meta name="twitter:title" content="">
-<meta name="twitter:description" content=" title: &ldquo;大模型学习笔记：从 Loss 到梯度下降&rdquo; date: 2026-03-23T17:40:00&#43;08:00 slug: ai-study categories: - 技术 tags: - AI - 大模型 - 梯度下降 math: true 废话不多说，直接开始吧
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='AI' /><meta property='article:tag' content='大模型' /><meta property='article:tag' content='梯度下降' /><meta property='article:published_time' content='2026-03-23T17:40:00&#43;08:00'/><meta property='article:modified_time' content='2026-03-23T17:40:00&#43;08:00'/>
+<meta name="twitter:title" content="大模型学习笔记：从 Loss 到梯度下降">
+<meta name="twitter:description" content="废话不多说，直接开始吧
 本文面向的是笔者自己和一些了解大模型的一大堆基础概念，但是从来没有穿起过的，想要学习的读者
+作者读文献 English 和 中文 语言系统混了，不要介意（4级难度）
 ">
     <link rel="shortcut icon" href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/paper-plane-64.webp" />
 
@@ -297,20 +300,6 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li>
-      <ol>
-        <li><a href="#math-true">title: &ldquo;大模型学习笔记：从 Loss 到梯度下降&rdquo;
-date: 2026-03-23T17:40:00+08:00
-slug: ai-study
-categories:
-- 技术
-tags:
-- AI
-- 大模型
-- 梯度下降
-math: true</a></li>
-      </ol>
-    </li>
     <li><a href="#before-all">Before ALL</a></li>
     <li><a href="#如何获得大模型">如何获得大模型</a>
       <ol>
@@ -355,10 +344,18 @@ math: true</a></li>
 
     <div class="article-details">
     
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8A%80%E6%9C%AF/" >
+                技术
+            </a>
+        
+    </header>
+    
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/"></a>
+            <a href="/p/ai-study/">大模型学习笔记：从 Loss 到梯度下降</a>
         </h2>
     
         
@@ -369,6 +366,19 @@ math: true</a></li>
     
     
     <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 23, 2026 17:40 &#43;0800</time>
+            </div>
         
 
         
@@ -397,18 +407,7 @@ math: true</a></li>
     <section class="article-content">
     
     
-    <hr>
-<h2 id="math-true">title: &ldquo;大模型学习笔记：从 Loss 到梯度下降&rdquo;
-date: 2026-03-23T17:40:00+08:00
-slug: ai-study
-categories:
-- 技术
-tags:
-- AI
-- 大模型
-- 梯度下降
-math: true</h2>
-<p>废话不多说，直接开始吧</p>
+    <p>废话不多说，直接开始吧</p>
 <p>本文面向的是笔者自己和一些了解大模型的一大堆基础概念，但是从来没有穿起过的，想要学习的读者</p>
 <p>作者读文献 English 和 中文 语言系统混了，不要介意（4级难度）</p>
 <p>若有错误，恳请更正</p>
@@ -660,6 +659,16 @@ $$<p>只做一轮迭代，$W\_{1}$ 就从 2 变成 2.16。下一轮预测值会�
 
     <footer class="article-footer">
     
+    <section class="article-tags">
+        
+            <a href="/tags/ai/">AI</a>
+        
+            <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/">大模型</a>
+        
+            <a href="/tags/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/">梯度下降</a>
+        
+    </section>
+
 
     
     <section class="article-copyright">
