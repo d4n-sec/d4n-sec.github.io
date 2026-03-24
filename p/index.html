@@ -1,27 +1,24 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='废话不多说，直接开始吧
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=' title: &ldquo;大模型学习笔记：从 Loss 到梯度下降&rdquo; date: 2026-03-23T17:40:00&#43;08:00 slug: ai-study categories: - 技术 tags: - AI - 大模型 - 梯度下降 math: true 废话不多说，直接开始吧
 本文面向的是笔者自己和一些了解大模型的一大堆基础概念，但是从来没有穿起过的，想要学习的读者
-作者读文献 English 和 中文 语言系统混了，不要介意（4级难度）
 '>
-<title>大模型学习笔记：从 Loss 到梯度下降</title>
+<title></title>
 
-<link rel='canonical' href='https://d4n-sec.github.io/p/ai-study/'>
+<link rel='canonical' href='https://d4n-sec.github.io/p/'>
 
 
-<link rel="stylesheet" href="/scss/style.min.1a6eab8f97c7ad47119bcfe4ea87cc5227d4789df170608fabd9b3910bc037f2.css"><meta property='og:title' content='大模型学习笔记：从 Loss 到梯度下降'>
-<meta property='og:description' content='废话不多说，直接开始吧
+<link rel="stylesheet" href="/scss/style.min.1a6eab8f97c7ad47119bcfe4ea87cc5227d4789df170608fabd9b3910bc037f2.css"><meta property='og:title' content=''>
+<meta property='og:description' content=' title: &ldquo;大模型学习笔记：从 Loss 到梯度下降&rdquo; date: 2026-03-23T17:40:00&#43;08:00 slug: ai-study categories: - 技术 tags: - AI - 大模型 - 梯度下降 math: true 废话不多说，直接开始吧
 本文面向的是笔者自己和一些了解大模型的一大堆基础概念，但是从来没有穿起过的，想要学习的读者
-作者读文献 English 和 中文 语言系统混了，不要介意（4级难度）
 '>
-<meta property='og:url' content='https://d4n-sec.github.io/p/ai-study/'>
+<meta property='og:url' content='https://d4n-sec.github.io/p/'>
 <meta property='og:site_name' content='Dan`s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='AI' /><meta property='article:tag' content='大模型' /><meta property='article:tag' content='梯度下降' /><meta property='article:published_time' content='2026-03-23T17:40:00&#43;08:00'/><meta property='article:modified_time' content='2026-03-23T17:40:00&#43;08:00'/>
-<meta name="twitter:title" content="大模型学习笔记：从 Loss 到梯度下降">
-<meta name="twitter:description" content="废话不多说，直接开始吧
+<meta property='og:type' content='article'><meta property='article:section' content='Post' />
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content=" title: &ldquo;大模型学习笔记：从 Loss 到梯度下降&rdquo; date: 2026-03-23T17:40:00&#43;08:00 slug: ai-study categories: - 技术 tags: - AI - 大模型 - 梯度下降 math: true 废话不多说，直接开始吧
 本文面向的是笔者自己和一些了解大模型的一大堆基础概念，但是从来没有穿起过的，想要学习的读者
-作者读文献 English 和 中文 语言系统混了，不要介意（4级难度）
 ">
     <link rel="shortcut icon" href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/paper-plane-64.webp" />
 
@@ -300,6 +297,20 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
+    <li>
+      <ol>
+        <li><a href="#math-true">title: &ldquo;大模型学习笔记：从 Loss 到梯度下降&rdquo;
+date: 2026-03-23T17:40:00+08:00
+slug: ai-study
+categories:
+- 技术
+tags:
+- AI
+- 大模型
+- 梯度下降
+math: true</a></li>
+      </ol>
+    </li>
     <li><a href="#before-all">Before ALL</a></li>
     <li><a href="#如何获得大模型">如何获得大模型</a>
       <ol>
@@ -344,18 +355,10 @@
 
     <div class="article-details">
     
-    <header class="article-category">
-        
-            <a href="/categories/%E6%8A%80%E6%9C%AF/" >
-                技术
-            </a>
-        
-    </header>
-    
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/ai-study/">大模型学习笔记：从 Loss 到梯度下降</a>
+            <a href="/p/"></a>
         </h2>
     
         
@@ -366,19 +369,6 @@
     
     
     <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">Mar 23, 2026 17:40 &#43;0800</time>
-            </div>
         
 
         
@@ -407,7 +397,18 @@
     <section class="article-content">
     
     
-    <p>废话不多说，直接开始吧</p>
+    <hr>
+<h2 id="math-true">title: &ldquo;大模型学习笔记：从 Loss 到梯度下降&rdquo;
+date: 2026-03-23T17:40:00+08:00
+slug: ai-study
+categories:
+- 技术
+tags:
+- AI
+- 大模型
+- 梯度下降
+math: true</h2>
+<p>废话不多说，直接开始吧</p>
 <p>本文面向的是笔者自己和一些了解大模型的一大堆基础概念，但是从来没有穿起过的，想要学习的读者</p>
 <p>作者读文献 English 和 中文 语言系统混了，不要介意（4级难度）</p>
 <p>若有错误，恳请更正</p>
@@ -501,7 +502,7 @@
 <p>这样来看</p>
 <p>导数（梯度）就是那个确定性的方向！ 导数不仅仅是一个数值，它在数学上代表了<strong>当前空间地形中，下降最快的确切方向</strong>。</p>
 <ul>
-<li>有了导数，我们就不用瞎猜了。导数直接告诉模型：“$W_{1}$ 是你往左走 0.02 步， $W_{2}$你往右走 0.05 步，Loss 保证能下降！” <del>见例子</del></li>
+<li>有了导数，我们就不用瞎猜了。导数直接告诉模型：“$W\_{1}$ 是你往左走 0.02 步， $W\_{2}$你往右走 0.05 步，Loss 保证能下降！” <del>见例子</del></li>
 <li>导数把一个“瞎猫碰死耗子”的随机搜索问题，变成了一个“蒙着眼下山（沿着最陡的坡走）”的确定性几何问题。</li>
 </ul>
 <h3 id="简单小例子1">简单小例子1</h3>
@@ -510,9 +511,9 @@
 <p>模型公式：
 </p>
 $$
-\hat{Y} = X \times W_{1} \times W_{2}
+\hat{Y} = X \times W\_{1} \times W\_{2}
 $$<p>
-其中 $W_{1}$ 和 $W_{2}$ 是需要训练的参数，初始随机值设为 $W_{1}=2$、$W_{2}=2$。</p>
+其中 $W\_{1}$ 和 $W\_{2}$ 是需要训练的参数，初始随机值设为 $W\_{1}=2$、$W\_{2}=2$。</p>
 <h4 id="第一步前向传播算误差">第一步：前向传播（算误差）</h4>
 <ul>
 <li>预测值：$\hat{Y}=2 \times 2 \times 2=8$</li>
@@ -525,28 +526,28 @@ $$<blockquote>
 <p>这里的平方是为了避免正负误差互相抵消。</p>
 </blockquote>
 <h4 id="第二步链式法则反向找内鬼">第二步：链式法则（反向找“内鬼”）</h4>
-<p>系统要回答：误差主要由谁引起？$W_{1}$ 还是 $W_{2}$？它们该增大还是减小？</p>
+<p>系统要回答：误差主要由谁引起？$W\_{1}$ 还是 $W\_{2}$？它们该增大还是减小？</p>
 <p>先看外层：</p>
 $$
 L=(\hat{Y}-10)^2,\quad \frac{\partial L}{\partial \hat{Y}}=2(\hat{Y}-10)=2(8-10)=-4
 $$<p>这表示：如果预测值 $\hat{Y}$ 增大一点，Loss 会减小。</p>
 <p>再看内层：</p>
 $$
-\hat{Y}=XW_{1}W_{2},\quad \frac{\partial \hat{Y}}{\partial W_{1}}=XW_{2}=2 \times 2=4
+\hat{Y}=XW\_{1}W\_{2},\quad \frac{\partial \hat{Y}}{\partial W\_{1}}=XW\_{2}=2 \times 2=4
 $$<p>链式相乘得到：</p>
 $$
-\frac{\partial L}{\partial W_{1}} = \frac{\partial L}{\partial \hat{Y}} \times \frac{\partial \hat{Y}}{\partial W_{1}} = (-4)\times 4 = -16
+\frac{\partial L}{\partial W\_{1}} = \frac{\partial L}{\partial \hat{Y}} \times \frac{\partial \hat{Y}}{\partial W\_{1}} = (-4)\times 4 = -16
 $$<h4 id="第三步梯度下降更新参数">第三步：梯度下降（更新参数）</h4>
 <p>更新公式：
 </p>
 $$
-W_{1} \leftarrow W_{1} - \eta \frac{\partial L}{\partial W_{1}}
+W\_{1} \leftarrow W\_{1} - \eta \frac{\partial L}{\partial W\_{1}}
 $$<p>
 设学习率 $\eta=0.01$，则：
 </p>
 $$
-W_{1} = 2 - 0.01 \times (-16) = 2.16
-$$<p>只做一轮迭代，$W_{1}$ 就从 2 变成 2.16。下一轮预测值会比 8 更接近 10。</p>
+W\_{1} = 2 - 0.01 \times (-16) = 2.16
+$$<p>只做一轮迭代，$W\_{1}$ 就从 2 变成 2.16。下一轮预测值会比 8 更接近 10。</p>
 <h3 id="一些新的问题">一些新的问题</h3>
 <p><em><strong>wow wow wow</strong></em>   Wait a minute</p>
 <p>这里好多数学公式，但是如果其实想要说的是，你只要知道，一通计算之后，我的参数可以使得预测值靠近理论期望值了</p>
@@ -556,47 +557,42 @@ $$<p>只做一轮迭代，$W_{1}$ 就从 2 变成 2.16。下一轮预测值会�
 <p>不明觉厉🦾🦾🦾</p>
 <p>不过这里也牵扯出了一些新问题</p>
 <blockquote>
-<p>1.每一个$W_{n}$都要计算一次吗？并且每一个$W_{n}$都要更新吗？</p>
-<p>2.是如何做到计算出哪个$W_{n}$更应该调整呢？</p>
+<p>1.每一个$W\_{n}$都要计算一次吗？并且每一个$W\_{n}$都要更新吗？</p>
+<p>2.是如何做到计算出哪个$W\_{n}$更应该调整呢？</p>
 </blockquote>
 <h4 id="第一个问题的答案">第一个问题的答案</h4>
 <ul>
-<li>
-<p>是的，每一次训练（每一次反向传播），几百亿个参数全都要被计算一次偏导数（梯度）！ 你可能会觉得这计算量大得离谱，但别忘了，在 GPU 底层，这不是写了 100 亿次的 for 循环，而是一次巨大的矩阵乘法指令 。GPU 最擅长的就是同时对几百万个数字做乘法。</p>
-</li>
-<li>
-<p>但是是否是需要全都要更新一次，还需要如下的解释</p>
+<li>是的，每一次训练（每一次反向传播），几百亿个参数全都要被计算一次偏导数（梯度）！ 你可能会觉得这计算量大得离谱，但别忘了，在 GPU 底层，这不是写了 100 亿次的 for 循环，而是一次巨大的矩阵乘法指令 。GPU 最擅长的就是同时对几百万个数字做乘法。</li>
+<li>但是是否是需要全都要更新一次，还需要如下的解释
 <ul>
-<li>
-<p>如果某个 $w$ 真的刚好处于完美状态，它的“实质更新量”会是 0，也就是说它的值并不会变。</p>
+<li>如果某个 $w$ 真的刚好处于完美状态，它的“实质更新量”会是 0，也就是说它的值并不会变。
 <blockquote>
 <p>还记得神经网络更新参数的公式吗？</p>
 <blockquote>
-<p>$w_{新} = w_{旧} - \text{学习率} \times \text{该} w \text{的梯度（即误差对它的偏导数）}$</p>
+<p>$w\_{新} = w\_{旧} - \text{学习率} \times \text{该} w \text{的梯度（即误差对它的偏导数）}$</p>
 </blockquote>
 <ul>
 <li><strong>如果某个 $w$ 已经处于当前的局部最优解</strong>：意味着在这个特定的维度上，误差已经降到了最低，此时算出来的梯度（坡度）就是 <strong>0</strong>。</li>
-<li>代入公式：$w_{新} = w_{旧} - \text{学习率} \times 0 = w_{旧}$。</li>
+<li>代入公式：$w\_{新} = w\_{旧} - \text{学习率} \times 0 = w\_{旧}$。</li>
 <li>你看，算法很聪明，<strong>它虽然参与了计算，但值并没有发生改变</strong>。</li>
 </ul>
-<p><strong>但为什么 GPU 不写个 <code>if 梯度 == 0: 跳过更新</code> 呢？</strong>
+<p><strong>但为什么 GPU 不写个</strong> <strong><code>if 梯度 == 0: 跳过更新</code></strong> <strong>呢？</strong>
 因为在 GPU 眼里，做 100 亿次毫无分支的矩阵乘减法，比挨个判断“这数字是不是0”要快无数倍。所以哪怕加上个 0，GPU 也会毫不犹豫地把它算完。</p>
 </blockquote>
 </li>
-<li>
-<p>单个 $w$ 的“局部最优”是一种幻觉！</p>
+<li>单个 $w$ 的“局部最优”是一种幻觉！
 <blockquote>
 <p>在潜意识里，可能认为这 100 亿个参数，每个人都有一个自己的“完美数值”，找到了就可以下班了。但实际上，<strong>参数之间是重度耦合的！</strong></p>
 <p>举个“做一锅麻辣烫”的例子：</p>
 <ul>
-<li>$w_1$ 是放盐的量</li>
-<li>$w_2$ 是放醋的量</li>
-<li>$w_3$ 是放辣椒的量</li>
+<li>$w\_1$ 是放盐的量</li>
+<li>$w\_2$ 是放醋的量</li>
+<li>$w\_3$ 是放辣椒的量</li>
 </ul>
-<p>假设在第 100 次训练时，你发现 <strong>盐的味道（$w_1$）刚刚好，处于局部最优，梯度为0，不用调了。</strong>
-但是，你的醋和辣椒放少了，所以接下来你往锅里加了一大堆醋（更新 $w_2$）和一大坨辣椒（更新 $w_3$）。
+<p>假设在第 100 次训练时，你发现 <strong>盐的味道（$w\_1$）刚刚好，处于局部最优，梯度为0，不用调了。</strong>
+但是，你的醋和辣椒放少了，所以接下来你往锅里加了一大堆醋（更新 $w\_2$）和一大坨辣椒（更新 $w\_3$）。
 这时候你再尝一口——<strong>糟糕，因为太酸太辣，原本“刚刚好”的盐味，现在显得太淡了！</strong></p>
-<p>此时，盐的量（$w_1$）<strong>不再是局部最优了</strong>！在下一次反向传播时，误差又会给 $w_1$ 分配一个非 0 的梯度，强迫它再次更新。</p>
+<p>此时，盐的量（$w\_1$）<strong>不再是局部最优了</strong>！在下一次反向传播时，误差又会给 $w\_1$ 分配一个非 0 的梯度，强迫它再次更新。</p>
 </blockquote>
 </li>
 </ul>
@@ -605,45 +601,45 @@ $$<p>只做一轮迭代，$W_{1}$ 就从 2 变成 2.16。下一轮预测值会�
 <h4 id="第二个问题的答案">第二个问题的答案</h4>
 <p>用另一个例子来演示</p>
 <blockquote>
-<p>假设我们有一个极简的两层神经网络，它的预测代码就是连乘： 预测值 = $X \times W_{1} \times W_{2}$</p>
+<p>假设我们有一个极简的两层神经网络，它的预测代码就是连乘： 预测值 = $X \times W\_{1} \times W\_{2}$</p>
 <ul>
 <li>输入值：$X=2$</li>
 <li>正确答案（Target）：$y=12$</li>
-<li>初始的随机参数：假设模型初始化时，$W_1=100$（一个很大的数），$W_2=0.1$（一个很小的数）。</li>
+<li>初始的随机参数：假设模型初始化时，$W\_1=100$（一个很大的数），$W\_2=0.1$（一个很小的数）。</li>
 </ul>
 <p>第一步：前向传播（看看错得有多离谱）</p>
 <ul>
 <li>预测值：$\hat{y}=2\times100\times0.1=20$</li>
 <li>真实答案：$y=12$</li>
 <li>误差（Loss）：$L=(20-12)^2=8^2=64$</li>
-<li>现在误差是 $64$ ，我们要把误差降下来。系统开始算账：“$W_1$ 和 $W_2$，你俩谁的责任大？”</li>
+<li>现在误差是 $64$ ，我们要把误差降下来。系统开始算账：“$W\_1$ 和 $W\_2$，你俩谁的责任大？”</li>
 </ul>
 <p>第二步：反向传播（微积分链式法则找内鬼）
 首先算最外层：误差对外层“预测值”的导数为 $\dfrac{\partial L}{\partial \hat{y}}=2\times(20-12)=16$。（意思就是：现在预测值如果增大 1，误差就会猛增 16；反之，预测值减小，误差就会减小。）</p>
-<p>接下来是见证奇迹的时刻，我们要分别算 $W_1$ 和 $W_2$ 的“背锅值（梯度）”：</p>
+<p>接下来是见证奇迹的时刻，我们要分别算 $W\_1$ 和 $W\_2$ 的“背锅值（梯度）”：</p>
 <ol>
-<li>算 $W_1$ 的背锅值：</li>
+<li>算 $W\_1$ 的背锅值：</li>
 </ol>
 <ul>
-<li>我们看看 $W_1$ 的微小变动，传到最后会变成什么样？</li>
-<li>因为公式是 $X\times W_1\times W_2$，所以 $W_1$ 发生变化时，它必须乘上身后的 $X$ 和 $W_2$ 才能输出。</li>
-<li>$W_1$ 的放大系数：$\dfrac{\partial \hat{y}}{\partial W_1}=X\times W_2=2\times0.1=0.2$。</li>
-<li>$W_1$ 的最终梯度：$\dfrac{\partial L}{\partial W_1}=\dfrac{\partial L}{\partial \hat{y}}\times\dfrac{\partial \hat{y}}{\partial W_1}=16\times0.2=3.2$。</li>
+<li>我们看看 $W\_1$ 的微小变动，传到最后会变成什么样？</li>
+<li>因为公式是 $X\times W\_1\times W\_2$，所以 $W\_1$ 发生变化时，它必须乘上身后的 $X$ 和 $W\_2$ 才能输出。</li>
+<li>$W\_1$ 的放大系数：$\dfrac{\partial \hat{y}}{\partial W\_1}=X\times W\_2=2\times0.1=0.2$。</li>
+<li>$W\_1$ 的最终梯度：$\dfrac{\partial L}{\partial W\_1}=\dfrac{\partial L}{\partial \hat{y}}\times\dfrac{\partial \hat{y}}{\partial W\_1}=16\times0.2=3.2$。</li>
 </ul>
-<ol start="2">
-<li>算 $W_2$ 的背锅值：</li>
+<ol>
+<li>算 $W\_2$ 的背锅值：</li>
 </ol>
 <ul>
-<li>同样，看看 $W_2$ 的微小变动，传到最后会变成什么样？</li>
-<li>因为公式是 $X\times W_1\times W_2$，$W_2$ 发生变化时，它乘上的是前面的 $X$ 和 $W_1$。</li>
-<li>$W_2$ 的放大系数：$\dfrac{\partial \hat{y}}{\partial W_2}=X\times W_1=2\times100=200$。</li>
-<li>$W_2$ 的最终梯度：$\dfrac{\partial L}{\partial W_2}=\dfrac{\partial L}{\partial \hat{y}}\times\dfrac{\partial \hat{y}}{\partial W_2}=16\times200=3200$。</li>
+<li>同样，看看 $W\_2$ 的微小变动，传到最后会变成什么样？</li>
+<li>因为公式是 $X\times W\_1\times W\_2$，$W\_2$ 发生变化时，它乘上的是前面的 $X$ 和 $W\_1$。</li>
+<li>$W\_2$ 的放大系数：$\dfrac{\partial \hat{y}}{\partial W\_2}=X\times W\_1=2\times100=200$。</li>
+<li>$W\_2$ 的最终梯度：$\dfrac{\partial L}{\partial W\_2}=\dfrac{\partial L}{\partial \hat{y}}\times\dfrac{\partial \hat{y}}{\partial W\_2}=16\times200=3200$。</li>
 </ul>
 <p>第三步：真相大白（更新参数）</p>
 <p>你看出来了吗？！</p>
 <ul>
-<li>$W_1$ 的梯度只有 $3.2$</li>
-<li>$W_2$ 的梯度高达 $3200$（是 $W_1$ 的 $1000$ 倍！）</li>
+<li>$W\_1$ 的梯度只有 $3.2$</li>
+<li>$W\_2$ 的梯度高达 $3200$（是 $W\_1$ 的 $1000$ 倍！）</li>
 </ul>
 </blockquote>
 <p>看到这里，大概就能解释为什么是损失和导数来计算背锅值(梯度)了。</p>
@@ -651,7 +647,7 @@ $$<p>只做一轮迭代，$W_{1}$ 就从 2 变成 2.16。下一轮预测值会�
 <p><a class="link" href="/gradient_visualizer.html" >梯度下降演示</a></p>
 <h1 id="小结">小结</h1>
 <p>到这里，我们已经把大模型训练最关键的一条主线串起来了</p>
-<p>先用 Loss 定义“模型错了多少”，再用 导数（梯度） 把“错了多少”转化为“每个参数该怎么改”，最后通过 梯度下降 持续更新参数，让预测一步步逼近目标。</p>
+<p>先用 Loss 定义“模型错了多少”，再用 导数 把“错了多少”转化为“每个参数该怎么改”，最后通过 梯度下降 持续更新参数，让预测一步步逼近目标。</p>
 <p>这套方法的核心价值在于：它把原本几乎不可能的“超高维盲目搜索”，变成了有明确方向的优化过程。参数虽然都参与计算，但不会“平均背锅”——谁对误差更敏感，谁的梯度就更大，谁就会被优先调整。</p>
 <p>因此，训练并不是“记住答案”，而是在反复降低误差的过程中压缩并提炼数据中的规律；当规律积累到一定程度，模型就会表现出我们感受到的理解、推理与泛化能力。</p>
 <h1 id="下节预告">下节预告</h1>
@@ -664,16 +660,6 @@ $$<p>只做一轮迭代，$W_{1}$ 就从 2 变成 2.16。下一轮预测值会�
 
     <footer class="article-footer">
     
-    <section class="article-tags">
-        
-            <a href="/tags/ai/">AI</a>
-        
-            <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/">大模型</a>
-        
-            <a href="/tags/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/">梯度下降</a>
-        
-    </section>
-
 
     
     <section class="article-copyright">

