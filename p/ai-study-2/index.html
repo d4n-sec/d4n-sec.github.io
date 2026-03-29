@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='从链式法则到反向传播，理解梯度计算为何能高效扩展'>
+<title>大模型学习笔记2：链式法则、矩阵与反向传播</title>
+
+<link rel='canonical' href='https://d4n-sec.github.io/p/ai-study-2/'>
+
+
+<link rel="stylesheet" href="/scss/style.min.1a6eab8f97c7ad47119bcfe4ea87cc5227d4789df170608fabd9b3910bc037f2.css"><meta property='og:title' content='大模型学习笔记2：链式法则、矩阵与反向传播'>
+<meta property='og:description' content='从链式法则到反向传播，理解梯度计算为何能高效扩展'>
+<meta property='og:url' content='https://d4n-sec.github.io/p/ai-study-2/'>
+<meta property='og:site_name' content='Dan`s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='AI' /><meta property='article:tag' content='大模型' /><meta property='article:tag' content='反向传播' /><meta property='article:published_time' content='2026-03-29T00:00:00&#43;08:00'/><meta property='article:modified_time' content='2026-03-29T00:00:00&#43;08:00'/>
+<meta name="twitter:title" content="大模型学习笔记2：链式法则、矩阵与反向传播">
+<meta name="twitter:description" content="从链式法则到反向传播，理解梯度计算为何能高效扩展">
+    <link rel="shortcut icon" href="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/paper-plane-64.webp" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/TX.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🐹</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Dan`s Blog</a></h1>
+            <h2 class="site-description">今人不见古时月</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='/%E5%85%B3%E4%BA%8E'
+                        target="_blank"
+                        title="contactMe"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1709702435352" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8388" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32z m-40 110.8V792H136V270.8l-27.6-21.5 39.3-50.5 42.8 33.3h643.1l42.8-33.3 39.3 50.5-27.7 21.5z" fill="#bfbfbf" p-id="8389"></path><path d="M833.6 232L512 482 190.4 232l-42.8-33.3-39.3 50.5 27.6 21.5 341.6 265.6c20.2 15.7 48.5 15.7 68.7 0L888 270.8l27.6-21.5-39.3-50.5-42.7 33.2z" p-id="8390" fill="#bfbfbf"></path></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/d4n-sec'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='http://wpa.qq.com/msgrd?v=3&amp;uin=1664022865&amp;site=qq&amp;menu=yes'
+                        target="_blank"
+                        title="QQNum"
+                        rel="me"
+                    >
+                        
+                        
+                            
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1709702077457" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13062" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3C766.5 262.2 689.3 112 511.5 112 331.7 112 256.2 265.2 261 447.9c-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z" p-id="13063" fill="#bfbfbf"></path></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/tools/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Tools</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+    </ol>
+    <div class="menu-bottom-section">
+        <ol class="menu">
+
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </ol>
+    </div>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#简单回顾一下">简单回顾一下</a></li>
+    <li><a href="#链式法则">链式法则</a>
+      <ol>
+        <li><a href="#举个极端的例子来对比">举个极端的例子来对比</a>
+          <ol>
+            <li><a href="#手动展开解析解法符号求导">手动展开（解析解法/符号求导）</a></li>
+            <li><a href="#链式法则的优雅推导">链式法则的优雅推导</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#矩阵">矩阵</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#矩阵化的终极发现从暴力推导中寻找规律">矩阵化的终极发现：从“暴力推导”中寻找规律</a>
+              <ol>
+                <li><a href="#暴力求偏导纯体力劳动">暴力求偏导（纯体力劳动）</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#矩阵和链式法则的交汇">矩阵和链式法则的交汇</a>
+      <ol>
+        <li><a href="#提取公因式">提取公因式</a>
+          <ol>
+            <li><a href="#1-发现冗余">1. 发现冗余</a></li>
+            <li><a href="#2-提取公因子的逻辑">2. 提取公因子的逻辑</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#反向传播">反向传播</a>
+      <ol>
+        <li><a href="#why-called-backpropagation---反向传播">Why called Backpropagation - 反向传播</a></li>
+        <li><a href="#这就是链式法则的本质">这就是链式法则的本质</a></li>
+      </ol>
+    </li>
+    <li><a href="#双向缓存极致的中间算子化">双向缓存：极致的“中间算子化”</a>
+      <ol>
+        <li><a href="#1-定义前向缓存-h从左往右积">1. 定义前向缓存 H（从左往右积）：</a></li>
+        <li><a href="#2-最终的-g-矩阵全中间算子化">2. 最终的 G 矩阵（全中间算子化）：</a></li>
+        <li><a href="#小结">小结</a></li>
+      </ol>
+    </li>
+    <li><a href="#再小结">再小结</a></li>
+    <li><a href="#巩固理解">巩固理解</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#视角-a前向推理人在画中x-是主角">视角 A：前向推理（人在画中，x 是主角）</a></li>
+            <li><a href="#视角-b反向训练人在画外w-是主角">视角 B：反向训练（人在画外，w 是主角）</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#梯度反方向是最快下降方向">梯度反方向是“最快”下降方向？</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#1-泰勒展开微观世界的线性近似">1. 泰勒展开：微观世界的线性近似</a></li>
+            <li><a href="#2-寻找下降最快的方向">2. 寻找下降最快的方向</a></li>
+            <li><a href="#3-局部最优-vs-全局最优">3. 局部最优 vs 全局最优</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8A%80%E6%9C%AF/" >
+                技术
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/ai-study-2/">大模型学习笔记2：链式法则、矩阵与反向传播</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            从链式法则到反向传播，理解梯度计算为何能高效扩展
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 29, 2026 00:00 &#43;0800</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 12 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>本文用于解决上篇文章的遗留问题</p>
+<h1 id="简单回顾一下">简单回顾一下</h1>
+<p>如果想要知道<em><strong>期望输出</strong></em> $y$ 和<em><strong>模型的真实输出</strong></em> $\hat{y}$ 差，就使用如下公式，这个叫做 Loss</p>
+$$
+Loss = (y - \hat{y})^2
+$$<p>
+如果想要知道<em><strong>某个参数</strong></em>应该往哪个方向变，变多少，即计算变化率(坡度)，则使用求导的方式，得到</p>
+$$
+\frac{\partial Loss}{\partial w}
+$$<p>
+如果想要知道<em><strong>哪个参数</strong></em>影响最大，就把所有参数的排排站，就可以知道谁的影响最大</p>
+$$
+\frac{\partial Loss}{\partial w_1}, \frac{\partial Loss}{\partial w_2}, ..., \frac{\partial Loss}{\partial w_n}
+$$<p>
+这个排序用向量的形式理解，就叫做<em><strong>梯度</strong></em>
+</p>
+$$
+\nabla Loss = \begin{bmatrix} \frac{\partial Loss}{\partial w_1} \\ \frac{\partial Loss}{\partial w_2} \\ \vdots \\ \frac{\partial Loss}{\partial w_n} \end{bmatrix}
+$$<p>
+但是为什么要是向量，为什么要用矩阵，什么是链式法则，如何数学证明梯度下降方向是最优解？</p>
+<p>本章为读者娓娓道来</p>
+<h1 id="链式法则">链式法则</h1>
+<p>直接上例子</p>
+<h2 id="举个极端的例子来对比">举个极端的例子来对比</h2>
+<p>假设我们有一个 3 层的极简网络（实际上大模型有几百层）：</p>
+<ul>
+<li>第一层：$h_1 = w_1 \cdot x$</li>
+<li>第二层：$h_2 = w_2 \cdot h_1$</li>
+<li>第三层：$y = w_3 \cdot h_2$</li>
+<li>Loss：$L = (y - 1)^2$</li>
+</ul>
+<p>我们的目标是求：<strong>Loss 对 $w_1$ 的导数。</strong></p>
+<h3 id="手动展开解析解法符号求导">手动展开（解析解法/符号求导）</h3>
+<p>我们可以先手动求导试试</p>
+<p>如果我们手动展开，把所有中间变量替换掉，$L$ 的公式会变成：
+</p>
+$$
+L = (w_3 \cdot (w_2 \cdot (w_1 \cdot x)) - 1)^2
+$$<p>
+好，现在我们对这个极其冗长的公式直接对 $w_1$ 求导（利用高数里的基本求导公式）。
+算出来的导数结果是：
+</p>
+$$
+\frac{\partial L}{\partial w_1} = 2 \cdot (w_3 \cdot w_2 \cdot w_1 \cdot x - 1) \cdot (w_3 \cdot w_2 \cdot x)
+$$<p>
+此时可以注意到，求导结果的右边。在算导数时，计算机需要重新计算 $w_3 \cdot w_2 \cdot w_1 \cdot x$ ！！！</p>
+<p>但是实际上，$w_3 \cdot w_2 \cdot w_1 \cdot x$ 就是预测值 $\hat{y}$，在计算Loss的时候，该值已经存在了，这个情况下，其实只需要计算$w_3 \cdot w_2 \cdot x$ 就行了</p>
+<p>$x$ 由于是整个知识库的输入端，所以是不断变化的，但是对于单轮训练来说，$w_3$ 和 $w_2$ 是确定的，此时就可以看做
+</p>
+$$
+w_3 \cdot w_2 \cdot x = (w_3 \cdot w_2) \cdot x
+$$<p>
+所以如果要计算 $w_1$ 的导数，就只需要计算 $(w_3 \cdot w_2) \cdot x$ 就行了</p>
+<p>同理：</p>
+<blockquote>
+<p>如果要计算 $w_2$ 的导数，就只需要计算 $(w_3 \cdot w_1) \cdot x$ 就行了</p>
+<p>如果要计算 $w_3$ 的导数，就只需要计算 $(w_2 \cdot w_1) \cdot x$ 就行了</p>
+</blockquote>
+<p>这个计算过程，其实和链式法则是一体的，只不过链式法则告诉我们不需要展开。</p>
+<h3 id="链式法则的优雅推导">链式法则的优雅推导</h3>
+<p>如果我们用链式法则重新审视上面的 3 层网络，求 $\frac{\partial L}{\partial w_1}$ 的过程可以拆解为：</p>
+$$
+\frac{\partial L}{\partial w_1} = \frac{\partial L}{\partial y} \cdot \frac{\partial y}{\partial h_2} \cdot \frac{\partial h_2}{\partial h_1} \cdot \frac{\partial h_1}{\partial w_1}
+$$<p>将每一项单独拎出来看：</p>
+<ul>
+<li>$\frac{\partial L}{\partial y} = 2(y - 1)$ （Loss 对预测值的导数）</li>
+<li>$\frac{\partial y}{\partial h_2} = w_3$ （第三层对第二层输出的导数）</li>
+<li>$\frac{\partial h_2}{\partial h_1} = w_2$ （第二层对第一层输出的导数）</li>
+<li>$\frac{\partial h_1}{\partial w_1} = x$ （第一层对权重的导数）</li>
+</ul>
+<p>把它们乘起来：
+</p>
+$$
+\frac{\partial L}{\partial w_1} = 2(y - 1) \cdot w_3 \cdot w_2 \cdot x
+$$<p>你会惊奇地发现，这和我们手动展开算出来的结果<strong>完全一致</strong>！</p>
+<p>但是，链式法则提供了一个极其重要的工程视角：<strong>局部性（Locality）</strong>。
+在计算 $w_1$ 的导数时，我们不需要知道整个网络的全局公式，只需要知道：</p>
+<ol>
+<li>上一层传回来的“压力”（梯度）。</li>
+<li>本层自己的输入和权重。</li>
+</ol>
+<p>他证明了：<em><strong>只需要知道上一层的计算结果，本层的输入权重，即可完成本层的求导计算</strong></em></p>
+<h1 id="矩阵">矩阵</h1>
+<p>为什么是矩阵？其实工作量上来之后就能看到规律了</p>
+<p>刚才的例子让我们了解到了一些基本条件，但是如果参数量再多一点会怎么？</p>
+<p>假设有5个参数 $w$
+</p>
+$$
+w_n = w_1 , w_2 , w_3 , w_4 , w_5
+$$<p>假设整个方程是：
+</p>
+$$
+\begin{aligned}
+h_1 &= w_1 \cdot x + b_1 \\
+h_2 &= w_2 \cdot h_1 - b_2 \\
+h_3 &= w_3 \cdot h_2 - b_3 \\
+h_4 &= w_4 \cdot h_3 + b_4 \\
+y &= w_5 \cdot h_4 + b_5
+\end{aligned}
+$$<p>那么手动展开后，这个式子就变成了：</p>
+$$
+y = w_5 \cdot (w_4 \cdot (w_3 \cdot (w_2 \cdot (w_1 \cdot x + b_1) - b_2) - b_3) + b_4) + b_5
+$$<p>整理一下得到
+</p>
+$$
+y = (w_5 w_4 w_3 w_2 w_1) \cdot x + (w_5 w_4 w_3 w_2) \cdot b_1 - (w_5 w_4 w_3) \cdot b_2 - (w_5 w_4) \cdot b_3 + w_5 \cdot b_4 + b_5
+$$<p>即
+</p>
+$$
+y = (w_5 w_4 w_3 w_2 w_1) \cdot x + C
+$$<p>
+对$w_1$求偏导的话得到</p>
+$$
+\frac{\partial y}{\partial w_1} = w_5 w_4 w_3 w_2 x = (w_5 w_4 w_3 w_2) \cdot x
+$$<h3 id="矩阵化的终极发现从暴力推导中寻找规律">矩阵化的终极发现：从“暴力推导”中寻找规律</h3>
+<p>抛开所谓的中间变量 $h$，抛开抽象的链式法则。我们直接面对最原始、最庞大的展开式。</p>
+<p>已知展开后的公式为：
+</p>
+$$
+y = (w_5 w_4 w_3 w_2 w_1) \cdot x + (w_5 w_4 w_3 w_2) \cdot b_1 + (w_5 w_4 w_3) \cdot b_2 + (w_5 w_4) \cdot b_3 + w_5 \cdot b_4 + b_5
+$$<h4 id="暴力求偏导纯体力劳动">暴力求偏导（纯体力劳动）</h4>
+<p>我们对每一个 $w$ 逐一求导，看看结果长什么样：</p>
+<ul>
+<li><strong>对 $w_1$ 求导</strong>：
+$\frac{\partial y}{\partial w_1} = (w_5 w_4 w_3 w_2) \cdot x + C$</li>
+<li><strong>对 $w_2$ 求导</strong>：
+$\frac{\partial y}{\partial w_2} = (w_5 w_4 w_3 \cdot w_1) \cdot x + C$</li>
+<li><strong>对 $w_3$ 求导</strong>：
+$\frac{\partial y}{\partial w_3} = (w_5 w_4 \cdot w_2 w_1) \cdot x + C$</li>
+<li><strong>对 $w_4$ 求导</strong>：
+$\frac{\partial y}{\partial w_4} = (w_5 \cdot w_3 w_2 w_1) \cdot x + C$</li>
+<li><strong>对 $w_5$ 求导</strong>：
+$\frac{\partial y}{\partial w_5} = (w_4 w_3 w_2 w_1) \cdot x + C$</li>
+</ul>
+<p>那如果要对 $w_1$ 进行调整，假设学习系数是 $\eta$，那么调整的计算表达式就是：</p>
+$$
+w_1' = w_1 - \eta \cdot (w_5 w_4 w_3 w_2 \cdot x)
+$$<p>做一下移项和拓展，就可以得到：
+</p>
+$$
+\begin{aligned}
+w_1 - w_1' &= \eta \cdot (w_5 w_4 w_3 w_2) \cdot x \\
+w_2 - w_2' &= \eta \cdot (w_5 w_4 w_3 w_1) \cdot x \\
+w_3 - w_3' &= \eta \cdot (w_5 w_4 w_2 w_1) \cdot x \\
+w_4 - w_4' &= \eta \cdot (w_5 w_3 w_2 w_1) \cdot x \\
+w_5 - w_5' &= \eta \cdot (w_4 w_3 w_2 w_1) \cdot x 
+\end{aligned}
+$$<p>
+诶？是不是有一点点矩阵的味道了？</p>
+<p>如果把 $w_n$的原始值写作向量 $\mathbf{w}$，变化后的结果 $w'$ 写作 $\mathbf{w}'$：
+</p>
+$$
+\mathbf{w} = \begin{bmatrix} w_1 \\ w_2 \\ w_3 \\ w_4 \\ w_5 \end{bmatrix}, \quad \mathbf{w}' = \begin{bmatrix} w_1' \\ w_2' \\ w_3' \\ w_4' \\ w_5' \end{bmatrix}
+$$<p>
+那么易得（实际就是凑出来的）梯度向量 $\mathbf{G}$ 就是：
+</p>
+$$
+\mathbf{G} = \begin{bmatrix} 
+w_5 w_4 w_3 w_2 \\
+w_5 w_4 w_3 w_1 \\
+w_5 w_4 w_2 w_1 \\
+w_5 w_3 w_2 w_1 \\
+w_4 w_3 w_2 w_1 
+\end{bmatrix}
+$$<p>
+最终的权重更新公式（计算方式）就是：
+</p>
+$$
+\mathbf{w} - \mathbf{w}' =  \eta \cdot \mathbf{G} \cdot x
+$$<p><em><strong>那什么是梯度呢？</strong></em></p>
+<p>如果严谨一些，此时$\mathbf{G}$只能算作<em><strong>输出对权重的偏导数部分</strong></em>，完整的梯度的定义就是
+</p>
+$$
+\nabla L(\mathbf{w}) =  \mathbf{G} \cdot x
+$$<p>
+然后更新参数的表达式就变成了
+</p>
+$$
+\mathbf{w}' =  \mathbf{w} - \eta \cdot \nabla L(\mathbf{w})
+$$<p>
+这便是，最开始学到的<em><strong>梯度以及梯度参与的计算式子</strong></em></p>
+<h1 id="矩阵和链式法则的交汇">矩阵和链式法则的交汇</h1>
+<p>你可能会问：“链式法则”又起到了什么作用？</p>
+<h2 id="提取公因式">提取公因式</h2>
+<p>逻辑就在你“凑”出来的这个 $\mathbf{G}$ 向量里：
+</p>
+$$
+\mathbf{G} = \begin{bmatrix} 
+\mathbf{w_5 w_4 w_3} \cdot w_2 \\
+\mathbf{w_5 w_4 w_3} \cdot w_1 \\
+\mathbf{w_5 w_4} \cdot w_2 w_1 \\
+\mathbf{w_5} \cdot w_3 w_2 w_1 \\
+w_4 w_3 w_2 w_1 
+\end{bmatrix}
+$$<h3 id="1-发现冗余">1. 发现冗余</h3>
+<p>仔细看前两行：为了算 $w_1$ 和 $w_2$ 的梯度，你都重复计算了 $\mathbf{w_5 \cdot w_4 \cdot w_3}$。
+在 5 层网络里这不算什么，但如果是 1000 层网络：</p>
+<ul>
+<li>算第 1 层的梯度要乘 999 次。</li>
+<li>算第 2 层的梯度又要乘 999 次。</li>
+<li><strong>总计算量是 $O(N^2)$，这是灾难性的。</strong></li>
+</ul>
+<h3 id="2-提取公因子的逻辑">2. 提取公因子的逻辑</h3>
+<p>如果我们换个思路，定义一个中间变量 $\delta$（Delta）：</p>
+<ul>
+<li>$\delta_5 = 1$</li>
+<li>$\delta_4 = \delta_5 \cdot w_5$</li>
+<li>$\delta_3 = \delta_4 \cdot w_4 = w_5 w_4$</li>
+<li>$\delta_2 = \delta_3 \cdot w_3 = w_5 w_4 w_3$</li>
+</ul>
+<p>现在，你的 $\mathbf{G}$ 向量变成了：
+</p>
+$$
+\mathbf{G} = \begin{bmatrix} 
+\delta_2 \cdot w_2 \\
+\delta_2 \cdot w_1 \\
+\delta_3 \cdot w_2 w_1 \\
+\delta_4 \cdot w_3 w_2 w_1 \\
+\delta_5 \cdot w_4 w_3 w_2 w_1 
+\end{bmatrix}
+$$<h1 id="反向传播">反向传播</h1>
+<p>但是实际计算的顺序，因为要借助缓存，所以计算顺序是从下往上计算的；</p>
+<p>按照 $\mathbf{G}$ 向量的例子，过程如下，<em><strong>先计算最下方的算式</strong></em>，这一步结束后获取了$\delta_5 = 1$ （初始值）
+</p>
+$$
+w_5 = \delta_5 \cdot w_4 w_3 w_2 w_1 
+$$<p>同样的，第二次计算的式子如下，这一步结束后 获取了$\delta_4 = \delta_5 \cdot w_5 = w_5 $ （其中 $\delta_5$ 复用缓存结果）</p>
+$$
+w_4 = \delta_4 \cdot w_3 w_2 w_1
+$$<p>同样的，第三次计算的式子如下，这一步结束后 获取了$\delta_3 = \delta_4 \cdot w_4 = w_5 w_4 $ （其中 $\delta_4$ 复用缓存结果）</p>
+$$
+w_3 = \delta_3 \cdot w_2 w_1
+$$<p>同样的，第四次计算的式子如下，这一步结束后 获取了$\delta_2 = \delta_3 \cdot w_3 = w_5 w_4 w_3$ （其中 $\delta_3$ 复用缓存结果）</p>
+$$
+w_2 = \delta_2 \cdot w_1
+$$<p>最后，第五次计算的式子如下，这一步直接复用缓存结果 $\delta_2 = w_5 w_4 w_3$</p>
+$$
+w_1 = \delta_2 \cdot w_2
+$$<p>此刻，我们已经计算出了所有的 $\delta$，也就计算出了所有的 $\mathbf{G}$ 向量的元素</p>
+<h2 id="why-called-backpropagation---反向传播">Why called Backpropagation - 反向传播</h2>
+<p><em><strong>由于这个计算过程是反向的，所以叫做反向传播</strong></em></p>
+<p>既然链式法则只是简单的乘法，为什么 AI 领域要专门发明“反向传播”这个词？</p>
+<p>这是因为在计算机实现中，<strong>顺序决定了效率</strong>。</p>
+<p>想象一下，如果你有 1000 层网络：</p>
+<ul>
+<li><strong>从左往右算（前向模式求导）</strong>：每计算一个参数的导数，都要从头往后走一遍。对于大模型的亿万级参数，这会算到天荒地老。</li>
+<li><strong>从右往左算（反向模式求导）</strong>：我们从 Loss 开始，把梯度像接力棒一样往回传。每一层收到的梯度，都是前面所有层累积的结果。</li>
+</ul>
+<p><strong>这就是反向传播：它是链式法则在神经网络上的高效实现。</strong></p>
+<h2 id="这就是链式法则的本质">这就是链式法则的本质</h2>
+<p>这种“<strong>先算出一部分乘积并存起来，供后面所有人复用</strong>”的逻辑，在数学上写出来就是：
+</p>
+$$
+\frac{\partial y}{\partial w_1} = \underbrace{\frac{\partial y}{\partial h_4} \cdot \frac{\partial h_4}{\partial h_3} \cdot \frac{\partial h_3}{\partial h_2}}_{\text{提前算好的 } \delta} \cdot \frac{\partial h_2}{\partial h_1} \cdot \frac{\partial h_1}{\partial w_1}
+$$<p>“凑”出来的 $\mathbf{G}$ 是<strong>结果</strong>，而“链式法则”是<strong>达到这个结果的最快路径</strong>（即实操中类似缓存思想）</p>
+<ul>
+<li><strong>链式法则</strong>：负责“提取公因子”（让大家少算重复逻辑）</li>
+</ul>
+<h1 id="双向缓存极致的中间算子化">双向缓存：极致的“中间算子化”</h1>
+<p>为了追求极致的计算速度，我们不仅缓存后向的 $\delta$，也可以缓存前向的中间积 $H$：</p>
+<h2 id="1-定义前向缓存-h从左往右积">1. 定义前向缓存 H（从左往右积）：</h2>
+<ul>
+<li>$H_0 = 1$</li>
+<li>$H_1 = w_1 \cdot H_0 = w_1$</li>
+<li>$H_2 = w_2 \cdot H_1 = w_2 w_1$</li>
+<li>$H_3 = w_3 \cdot H_2 = w_3 w_2 w_1$</li>
+<li>$H_4 = w_4 \cdot H_3 = w_4 w_3 w_2 w_1$</li>
+</ul>
+<h2 id="2-最终的-g-矩阵全中间算子化">2. 最终的 G 矩阵（全中间算子化）：</h2>
+$$
+\mathbf{G} = \begin{bmatrix} 
+\delta_1 \cdot H_0 \\
+\delta_2 \cdot H_1 \\
+\delta_3 \cdot H_2 \\
+\delta_4 \cdot H_3 \\
+\delta_5 \cdot H_4 
+\end{bmatrix}
+$$<p><em>(注：$\delta_1 = \delta_2 \cdot w_2$，代表从输出一路传到第一层的完整误差链)</em></p>
+<p>而且中间算子之间存在着紧密的<strong>迭代关系</strong>：</p>
+<ul>
+<li><strong>前向迭代</strong>：$H_i = w_i \cdot H_{i-1}$ （每一层的前向信号，都是“上一层的前向信号” $\times$ “当前层权重”）</li>
+<li><strong>后向迭代</strong>：$\delta_i = \delta_{i+1} \cdot w_{i+1}$ （每一层的后向误差，都是“后一层的后向误差” $\times$ “后一层权重”）</li>
+</ul>
+<p>这种“邻居传邻居”的递推逻辑，才是**链式法则（Chain Rule）**在工程上能够如此高效的根本原因。</p>
+<p><strong>这就是空间换时间的终极体现：</strong>
+计算每一层的梯度时，我们不再进行任何重复的连乘，只需取出**“左边存好的 $H$”<strong>和</strong>“右边传回的 $\delta$”**直接相乘。计算量从 $O(N^2)$ 瞬间降到了 $O(N)$。</p>
+<h2 id="小结">小结</h2>
+<ul>
+<li>$H_i$：前向接力（Forward Cache）</li>
+</ul>
+<blockquote>
+<p><strong>时机</strong>：发生在从 $x$ 计算到 $y$ 的过程中（前向传播）。
+<strong>目的</strong>：为了算出最终的预测值 $y$。
+<strong>缓存价值</strong>：在算 $y$ 的路上，每一层算出的结果（比如 $H_2 = w_2 w_1$）都被悄悄存了下来。因为稍后的反向传播<strong>必须</strong>用到这些来计算权重对输出的影响。</p>
+</blockquote>
+<ul>
+<li>$\delta_i$：后向接力（Backward Cache）</li>
+</ul>
+<blockquote>
+<p><strong>时机</strong>：发生在计算出 Loss 后，从后往前推的过程中（反向传播）。
+<strong>目的</strong>：为了实现<strong>链式法则</strong>。
+<strong>缓存价值</strong>：它存储了“误差信号”的累积（比如 $\delta_3 = w_5 w_4$）。每一层都直接复用后一层的累积结果，而不需要从最末尾重新连乘一遍。</p>
+</blockquote>
+<h1 id="再小结">再小结</h1>
+<p>直到现在，利用一些算数方法，获得了$\mathbf{G}$，就可以利用如下公式进行参数调整了
+</p>
+$$
+\mathbf{w}' = \mathbf{w} - \eta \cdot \mathbf{G} \cdot x
+$$<p>新的参数 $\mathbf{w}'$ 又会开启新一轮的计算。通过不断重复“前向计算 $\to$ 计算损失 $\to$ 反向传播 $\to$ 参数更新”的过程，模型会像在山坡上行走一样，一步步挪向误差最小的谷底。</p>
+<h1 id="巩固理解">巩固理解</h1>
+<p>那到此，参数$w_n$合集，输入$x$，以及输出$y$在高维空间的意义是什么呢？</p>
+<p>这要分两个视角，并且为了方便理解，暂时不考虑$y$为向量的情况</p>
+<p>那么此时，我们可以从两个截然不同的视角来观察这个世界：</p>
+<h3 id="视角-a前向推理人在画中x-是主角">视角 A：前向推理（人在画中，x 是主角）</h3>
+<ul>
+<li><strong>世界观</strong>：你构造了一个由参数 $\mathbf{w}$ 定义的“数学世界” $f(\mathbf{x}; \mathbf{w})$。</li>
+<li><strong>主角</strong>：当你在这个世界的“地面”上投入一个多维向量 $\mathbf{x}$，这个世界会反馈给你一个对应的“海拔高度”（输出 $y$）。</li>
+<li><strong>目标</strong>：我们希望这个世界给出的高度 $y'$，能够完美对齐真理中的那个目标高度 $y$。</li>
+<li><strong>参数 $\mathbf{w}$ 的意义</strong>：它们是这个世界的“造物主”。调整 $\mathbf{w}$，就是在重塑这个世界的山川地貌（函数曲面），直到能在大多数情况下，输出的$y'$距离和期望的$y$的高度差是最小的（包括已知的版图和未知的版图）</li>
+</ul>
+<h3 id="视角-b反向训练人在画外w-是主角">视角 B：反向训练（人在画外，w 是主角）</h3>
+<ul>
+<li>
+<p><strong>世界观</strong>：这不再是预测的世界，而是“检讨错误”的世界。此时的数学函数变成了损失函数 $Loss = L(\mathbf{w}; \mathbf{x}, y)$。</p>
+</li>
+<li>
+<p><strong>主角</strong>：权重向量 $\mathbf{w}$，它现在变成了需要不断调整位置的“旅行者”。</p>
+</li>
+<li>
+<p><strong>场景</strong>：已知的真理数据 $(\mathbf{x}, y)$（常量）像全息投影一样，在 $\mathbf{w}$ 的多维空间里投射出了一片起伏不平的“误差地形”。</p>
+</li>
+<li>
+<p><strong>目标</strong>：根据脚下地形的坡度（梯度 $\nabla L$），一步步往下走，寻找那个让“误差海拔（Loss）”最低的经纬度坐标。</p>
+</li>
+<li>
+<p><strong>权重向量 $\mathbf{w}$</strong>：就是你的“经纬度”，决定了你在地图上的位置。</p>
+</li>
+<li>
+<p><strong>输入数据 $(x, y)$</strong>：就是“全息投影仪”，它在权重空间里投射出了一片起伏不平的地形（损失函数曲面）。</p>
+</li>
+<li>
+<p><strong>梯度 $\nabla L(\mathbf{w})$</strong>：就是你脚下那块地最陡峭的方向。它结合了模型的结构（系数 $\mathbf{G}$）和当前的输入信号 $x$。</p>
+</li>
+<li>
+<p><strong>学习率 $\eta$</strong>：就是你的“步长”，决定了你这一步迈多大。</p>
+</li>
+<li>
+<p><strong>前向缓存（Activations）</strong>：是你在“吸气”时留下的案底，记录了 $x$ 走过的痕迹。</p>
+</li>
+<li>
+<p><strong>后向传播（Backprop）</strong>：是你在“呼气”时利用案底，即时算出每一步该如何修正。</p>
+</li>
+</ul>
+<p><strong>结论：</strong> 只要我们朝着梯度 $\nabla L(\mathbf{w})$ 的<strong>反方向</strong>迈出一小步，就能确保我们在当前这一刻，是以最快的速度在“下山”。</p>
+<h1 id="梯度反方向是最快下降方向">梯度反方向是“最快”下降方向？</h1>
+<p>局部最快下降方向可以通过数学推导来看看，为什么偏偏要沿着梯度的<strong>反方向</strong>走？</p>
+<h3 id="1-泰勒展开微观世界的线性近似">1. 泰勒展开：微观世界的线性近似</h3>
+<p>假设我们的损失函数是 $L(\mathbf{w})$。当我们给权重一个极其微小的变化 $\Delta \mathbf{w}$ 时，新的损失值可以用一阶泰勒展开来近似：</p>
+$$
+L(\mathbf{w} + \Delta \mathbf{w}) \approx L(\mathbf{w}) + \nabla L(\mathbf{w})^T \cdot \Delta \mathbf{w}
+$$<p>这里 $\nabla L(\mathbf{w})$ 是梯度向量，$\Delta \mathbf{w}$ 是我们的步进方向。</p>
+<h3 id="2-寻找下降最快的方向">2. 寻找下降最快的方向</h3>
+<p>为了让损失函数减小得最快，我们需要让 $L(\mathbf{w} + \Delta \mathbf{w}) - L(\mathbf{w})$ 这个差值尽可能小（也就是负得越多越好）。</p>
+<p>根据上面的公式，这个差值等于两个向量的点积：
+</p>
+$$
+\text{Change} = \nabla L(\mathbf{w})^T \cdot \Delta \mathbf{w} = \|\nabla L(\mathbf{w})\| \cdot \|\Delta \mathbf{w}\| \cdot \cos \theta
+$$<p>其中 $\theta$ 是梯度向量和步进方向之间的夹角。</p>
+<ul>
+<li>当 $\cos \theta = 1$ 时（$\theta = 0^\circ$），增加最快。</li>
+<li>当 $\cos \theta = -1$ 时（$\theta = 180^\circ$），减少最快。</li>
+</ul>
+<p><strong>结论：</strong> 当步进方向 $\Delta \mathbf{w}$ 与梯度方向完全相反时，函数值下降最快。这就是为什么更新公式里要写成 $\mathbf{w} - \eta \nabla L$。</p>
+<h3 id="3-局部最优-vs-全局最优">3. 局部最优 vs 全局最优</h3>
+<p>梯度下降就像是一个“近视眼”在下山：</p>
+<ul>
+<li><strong>贪心性</strong>：它只看脚下那一寸土地哪里最陡，就往哪里走。</li>
+<li><strong>局限性</strong>：如果山谷里有一个小坑（局部最优解），它一旦掉进去，周围都是向上的坡，它就会觉得已经到了最低点，从而停下来。</li>
+<li><strong>凸函数</strong>：只有当整个山坡是一个完美的“碗”状（凸函数，Convex Function）时，梯度下降才能保证找到唯一的全局最低点。</li>
+</ul>
+<p>而在深度学习中，地形往往极其复杂，布满了数以亿计的局部最优解和鞍点。这也是为什么我们需要 <strong>动量（Momentum）</strong>、<strong>自适应学习率（Adam）</strong> 等技巧来帮助模型跳出这些“小坑”。</p>
+<p>不过这都是些后话了</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/ai/">AI</a>
+        
+            <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/">大模型</a>
+        
+            <a href="/tags/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/">反向传播</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });
+    })
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/ai-study/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">大模型学习笔记：从 Loss 到梯度下降</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="d4n-sec/d4n-sec.github.io"
+        issue-term="pathname"
+        
+        label="comment"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2026 DanSec
+    </section>
+    
+    <section class="powerby">
+        
+            Dan❤Anan <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.23.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
