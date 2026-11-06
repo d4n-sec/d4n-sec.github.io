@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>RMI on Dan`s Blog</title>
+		<link>https://d4n-sec.github.io/tags/rmi/</link>
+		<description>Recent content in RMI on Dan`s Blog</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Mon, 08 Apr 2024 17:29:24 +0800</lastBuildDate>
+		
+			<atom:link href="https://d4n-sec.github.io/tags/rmi/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Rmi Study</title>
+				<link>https://d4n-sec.github.io/p/rmi-study/</link>
+				<pubDate>Mon, 08 Apr 2024 17:29:24 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/rmi-study/</guid>
+				<description>&lt;h1 id=&#34;什么是rmi&#34;&gt;什么是RMI&lt;/h1&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;RMI (Remote Method Invocation) 模型是一种分布式对象应用，使用 RMI 技术可以使一个 JVM 中的对象，调用另一个 JVM 中的对象方法并获取调用结果。这里的另一个 JVM 可以在同一台计算机也可以是远程计算机。因此，RMI 意味着需要一个 Server 端和一个 Client 端。&lt;/p&gt;&#xA;&lt;p&gt;Server 端通常会创建一个对象，并使之可以被远程访问。&lt;/p&gt;&#xA;&lt;p&gt;这个对象被称为远程对象。Server 端需要注册这个对象可以被 Client 远程访问。&lt;/p&gt;&#xA;&lt;p&gt;Client 端调用可以被远程访问的对象上的方法，Client 端就可以和 Server 端进行通信并相互传递信息。&lt;/p&gt;&#xA;&lt;p&gt;RMI 在构建一个分布式应用时十分方便，它和 RPC 一样可以实现分布式应用之间的互相通信，甚至和现在的微服务思想都十分类似。&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>JPA on Dan`s Blog</title>
+		<link>https://d4n-sec.github.io/tags/jpa/</link>
+		<description>Recent content in JPA on Dan`s Blog</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 22 Nov 2024 15:28:55 +0800</lastBuildDate>
+		
+			<atom:link href="https://d4n-sec.github.io/tags/jpa/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Java基础知识：JPA</title>
+				<link>https://d4n-sec.github.io/p/javaaboutjpa/</link>
+				<pubDate>Fri, 22 Nov 2024 15:28:55 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/javaaboutjpa/</guid>
+				<description>&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241122153243285.png&#34; alt=&#34;show&#34;&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;whats-jpa&#34;&gt;What&amp;rsquo;s JPA&lt;/h1&gt;&#xA;&lt;p&gt;JPA（Jakarta Persistence API）是一个规范，定义了Java应用程序中持久性的一组概念。JPA提供了一个对象关系映射（ORM）层，允许开发人员使用Java对象进行工作，而无需手动转换对象导向范式和关系数据库之间的差异。JPA实现如&lt;code&gt;Hibernate&lt;/code&gt;和&lt;code&gt;EclipseLink&lt;/code&gt;处理Java对象和数据库表之间的转换，使开发人员免于编写底层JDBC代码。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

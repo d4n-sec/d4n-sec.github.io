@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Runtime Options on Dan`s Blog</title>
+		<link>https://d4n-sec.github.io/tags/runtime-options/</link>
+		<description>Recent content in Runtime Options on Dan`s Blog</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Thu, 05 Dec 2024 18:09:35 +0800</lastBuildDate>
+		
+			<atom:link href="https://d4n-sec.github.io/tags/runtime-options/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>JVM 启动属性/环境变量</title>
+				<link>https://d4n-sec.github.io/p/jvmproperties/</link>
+				<pubDate>Thu, 05 Dec 2024 18:09:35 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/jvmproperties/</guid>
+				<description>&lt;h1 id=&#34;java-system-properties&#34;&gt;Java System Properties&lt;/h1&gt;&#xA;&lt;p&gt;随你怎么叫：配置参数/启动属性/环境变量/系统属性，都可以，反正大概率都是指&lt;code&gt;Java System Properties&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;为了方便和统一，本文下面统一叫做：JVM 启动参数&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>JVM 运行时参数查询</title>
+				<link>https://d4n-sec.github.io/p/jvmruntimepathenv/</link>
+				<pubDate>Thu, 05 Dec 2024 17:18:22 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/jvmruntimepathenv/</guid>
+				<description>&lt;details&gt;&lt;summary&gt;前情提要&lt;/summary&gt;&#xA;&lt;p&gt;紧接&lt;a href=&#34;https://d4n-sec.github.io/p/port-pid-taskfile/&#34;&gt;此文&lt;/a&gt;的前情提要&lt;/p&gt;&#xA;&lt;p&gt;在找到对应端口对应的文件目录后，有点绝望，JDK 目录连上了我的知识点，却击碎了我的幻想&lt;/p&gt;&#xA;&lt;p&gt;但是咱不是善于认输的人，有没有什么办法可以看到正在运行的&lt;code&gt;java&lt;/code&gt;进程的相关配置参数或者环境变量呢？&lt;/p&gt;&#xA;&lt;p&gt;答案：有的，所以如下&lt;/p&gt;&#xA;&lt;p&gt;但是即使知道了环境变量，由于是通过案例通过&lt;code&gt;Tomcat&lt;/code&gt;部署（移植到类中直接运行失败），所以也无法排除是否是&lt;code&gt;Tomcat&lt;/code&gt;发起连接还是业务代码发起连接&lt;/p&gt;&#xA;&lt;p&gt;不管怎么说，学到了就记录&lt;/p&gt;&#xA;&lt;/details&gt;</description>
+			</item>
+	</channel>
+</rss>

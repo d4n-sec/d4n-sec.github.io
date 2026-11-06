@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>博客 on Dan`s Blog</title>
+		<link>https://d4n-sec.github.io/categories/%E5%8D%9A%E5%AE%A2/</link>
+		<description>Recent content in 博客 on Dan`s Blog</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Wed, 06 Mar 2024 16:26:40 +0800</lastBuildDate>
+		
+			<atom:link href="https://d4n-sec.github.io/categories/%E5%8D%9A%E5%AE%A2/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>BlogToHugo</title>
+				<link>https://d4n-sec.github.io/p/blogtohugo/</link>
+				<pubDate>Wed, 06 Mar 2024 16:26:40 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/blogtohugo/</guid>
+				<description>&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;&#xA;&lt;p&gt;Hugo 搭建其实和hexo差不多，但是介于作者有幸尝试过hexo编译大量文章的经历，可以说hexo的性能已经无法满足我对个人博客的向往，于是乎转Hugo，Hugo 基于Go开发，效率方面毋庸置疑，但是由于该工具出现时间短暂，目前参考资料少，所以笔者在这通过搭建做一些总结&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

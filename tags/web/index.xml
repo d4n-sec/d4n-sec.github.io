@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Web on Dan`s Blog</title>
+		<link>https://d4n-sec.github.io/tags/web/</link>
+		<description>Recent content in Web on Dan`s Blog</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Mon, 17 Mar 2025 11:16:20 +0800</lastBuildDate>
+		
+			<atom:link href="https://d4n-sec.github.io/tags/web/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>CISCN 2019 web writeup</title>
+				<link>https://d4n-sec.github.io/p/ciscn2019web/</link>
+				<pubDate>Mon, 17 Mar 2025 11:16:20 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/ciscn2019web/</guid>
+				<description>&lt;h1 id=&#34;web1&#34;&gt;web1&lt;/h1&gt;&#xA;&lt;p&gt;题目源码链接&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/CISCN&amp;#43;2019&amp;#43;web1.zip&#34;&gt;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/CISCN+2019+web1.zip&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;访问：&lt;code&gt;http://172.28.76.89:8845/CISCN_2019_web1/&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20250317135608960.png&#34; alt=&#34;image-20250317135608960&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;得到提示，利用伪协议获取hint.php和index.php内容&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

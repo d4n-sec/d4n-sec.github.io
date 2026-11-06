@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>WSL on Dan`s Blog</title>
+		<link>https://d4n-sec.github.io/tags/wsl/</link>
+		<description>Recent content in WSL on Dan`s Blog</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Wed, 25 Dec 2024 18:56:18 +0800</lastBuildDate>
+		
+			<atom:link href="https://d4n-sec.github.io/tags/wsl/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>WSL 转移记录</title>
+				<link>https://d4n-sec.github.io/p/wsltransrecord/</link>
+				<pubDate>Wed, 25 Dec 2024 18:56:18 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/wsltransrecord/</guid>
+				<description>&lt;h1 id=&#34;wsl导入导出&#34;&gt;WSL导入/导出&lt;/h1&gt;&#xA;&lt;p&gt;安装好WSL2后，无需安装Ubuntu等发行版，直接导出导入即可，命令简记&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 导出 指定虚拟机 到 指定位置并指定命名&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;wsl --export Ubuntu2404 D:\Ubuntu2404.tar&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 导入&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 指定导入后的虚拟机名字 指定导入后文件存储地 指定导入文件（导入虚拟机文件） 指定 WSL 版本&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;wsl --import Ubuntu2404 D:\ProgramFiles\WSL\Ubuntu2404 D:\ProgramFiles\WSL\_Bak\Ubuntu-24.04.tar --version 2&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;h1 id=&#34;wsl指定默认登陆用户&#34;&gt;WSL指定默认登陆用户&lt;/h1&gt;&#xA;&lt;p&gt;可能出现默认登陆用户变化的情况，解决方案：&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

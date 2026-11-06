@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>FiltersConvert on Dan`s Blog</title>
+		<link>https://d4n-sec.github.io/tags/filtersconvert/</link>
+		<description>Recent content in FiltersConvert on Dan`s Blog</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Tue, 17 Dec 2024 13:09:44 +0800</lastBuildDate>
+		
+			<atom:link href="https://d4n-sec.github.io/tags/filtersconvert/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>PHP 转换过滤器</title>
+				<link>https://d4n-sec.github.io/p/phpfiltersconvert/</link>
+				<pubDate>Tue, 17 Dec 2024 13:09:44 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/phpfiltersconvert/</guid>
+				<description>&lt;h1 id=&#34;php-过滤转换器&#34;&gt;PHP 过滤转换器&lt;/h1&gt;&#xA;&lt;h2 id=&#34;convertbase64&#34;&gt;convert.base64*&lt;/h2&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;包括 &lt;code&gt;convert.base64-encode&lt;/code&gt; &lt;code&gt;convert.base64-decode&lt;/code&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;使用这两个过滤器等同于分别用 &lt;code&gt;base64_encode()&lt;/code&gt; 和 &lt;code&gt;base64_decode()&lt;/code&gt; 函数处理所有的流数据。&lt;/p&gt;&#xA;&lt;h3 id=&#34;设置参数&#34;&gt;设置参数&lt;/h3&gt;&#xA;&lt;p&gt;&lt;code&gt;convert.base64-encode&lt;/code&gt; 支持以一个关联数组给出的参数。&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;如果给出了 &lt;code&gt;line-length&lt;/code&gt;，base64 输出将被用 &lt;code&gt;line-length&lt;/code&gt; 个字符为长度而截成块。&lt;/li&gt;&#xA;&lt;li&gt;如果给出了 &lt;code&gt;line-break-chars&lt;/code&gt;，每块将被用给出的字符隔开。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;这些参数的效果和用 &lt;code&gt;base64_encode()&lt;/code&gt; 再加上 &lt;a href=&#34;https://www.php.net/manual/zh/function.chunk-split.php&#34;&gt;chunk_split()&lt;/a&gt; 相同&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

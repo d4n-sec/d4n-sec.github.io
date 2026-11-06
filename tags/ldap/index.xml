@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>LDAP on Dan`s Blog</title>
+		<link>https://d4n-sec.github.io/tags/ldap/</link>
+		<description>Recent content in LDAP on Dan`s Blog</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Mon, 25 Nov 2024 08:05:08 +0800</lastBuildDate>
+		
+			<atom:link href="https://d4n-sec.github.io/tags/ldap/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Java基础知识：LDAP</title>
+				<link>https://d4n-sec.github.io/p/javaaboutldap/</link>
+				<pubDate>Mon, 25 Nov 2024 08:05:08 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/javaaboutldap/</guid>
+				<description>&lt;h1 id=&#34;whats-ldap&#34;&gt;What&amp;rsquo;s LDAP&lt;/h1&gt;&#xA;&lt;p&gt;Lightweight Directory Access Protocol -&amp;gt; LDAP&lt;/p&gt;&#xA;&lt;p&gt;直译：轻量级目录访问协议（Directory -&amp;gt; 又可译为电话簿），但是意义不准确&lt;/p&gt;&#xA;&lt;p&gt;不管是目录还是电话簿，核心点为&lt;em&gt;&lt;strong&gt;查找&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;即 Directory 服务内部的数据组织形式是树形结构，这样做的目的是方便&lt;em&gt;&lt;strong&gt;查找&lt;/strong&gt;&lt;/em&gt;。其最开始存在的目的是做白页、黄页类应用，而我们可以利用这个结构做其它事情，&lt;em&gt;&lt;strong&gt;比如用一个LDAP服务管理公司内所有地方的用户信息&lt;/strong&gt;&lt;/em&gt;，这样就可以做到&lt;em&gt;&lt;strong&gt;单点登录&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

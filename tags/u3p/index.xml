@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>U3p on Dan`s Blog</title>
+		<link>https://d4n-sec.github.io/tags/u3p/</link>
+		<description>Recent content in U3p on Dan`s Blog</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Sun, 07 Apr 2024 11:03:04 +0800</lastBuildDate>
+		
+			<atom:link href="https://d4n-sec.github.io/tags/u3p/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>About_u3p</title>
+				<link>https://d4n-sec.github.io/p/about_u3p/</link>
+				<pubDate>Sun, 07 Apr 2024 11:03:04 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/about_u3p/</guid>
+				<description>&lt;h2 id=&#34;什么是u3p文件&#34;&gt;什么是u3p文件&lt;/h2&gt;&#xA;&lt;p&gt;.u3p 文件是存储在U3智能驱动器（一种特殊类型的USB闪存驱动器，包括U3 Launchpad平台）上的便携式应用程序。它包含程序可执行文件和配置数据。如果需要在计算机上运行某些文件，请在计算机上运行一些文件。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

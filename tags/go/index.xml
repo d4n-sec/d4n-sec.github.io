@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Go on Dan`s Blog</title>
+		<link>https://d4n-sec.github.io/tags/go/</link>
+		<description>Recent content in Go on Dan`s Blog</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Wed, 06 Mar 2024 14:45:23 +0800</lastBuildDate>
+		
+			<atom:link href="https://d4n-sec.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Go Study</title>
+				<link>https://d4n-sec.github.io/p/go-study/</link>
+				<pubDate>Wed, 06 Mar 2024 14:45:23 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/go-study/</guid>
+				<description>&lt;p&gt;Go学习难点记录与解决（希望能解决）&lt;/p&gt;&#xA;&lt;h1 id=&#34;混淆点&#34;&gt;混淆点&lt;/h1&gt;&#xA;&lt;p&gt;1.Go的包导入&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;导入本质，导入顺序，依赖顺序以及导入优先级，默认路径，为什么是这个默认路径，如何结合默认路径设计项目结构&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
+			</item>
+	</channel>
+</rss>

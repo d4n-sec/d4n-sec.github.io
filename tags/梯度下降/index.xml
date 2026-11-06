@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>梯度下降 on Dan`s Blog</title>
+		<link>https://d4n-sec.github.io/tags/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/</link>
+		<description>Recent content in 梯度下降 on Dan`s Blog</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Mon, 23 Mar 2026 17:40:00 +0800</lastBuildDate>
+		
+			<atom:link href="https://d4n-sec.github.io/tags/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>大模型学习笔记：从 Loss 到梯度下降</title>
+				<link>https://d4n-sec.github.io/p/ai-study/</link>
+				<pubDate>Mon, 23 Mar 2026 17:40:00 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/ai-study/</guid>
+				<description>&lt;p&gt;废话不多说，直接开始吧&lt;/p&gt;&#xA;&lt;p&gt;本文面向的是笔者自己和一些了解大模型的一大堆基础概念，但是从来没有穿起过的，想要学习的读者&lt;/p&gt;&#xA;&lt;p&gt;作者读文献 English 和 中文 语言系统混了，不要介意（4级难度）&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>RBT on Dan`s Blog</title>
+		<link>https://d4n-sec.github.io/tags/rbt/</link>
+		<description>Recent content in RBT on Dan`s Blog</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 11 Apr 2025 14:41:27 +0800</lastBuildDate>
+		
+			<atom:link href="https://d4n-sec.github.io/tags/rbt/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>红黑树整理</title>
+				<link>https://d4n-sec.github.io/p/redblacktreestudy/</link>
+				<pubDate>Fri, 11 Apr 2025 14:41:27 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/redblacktreestudy/</guid>
+				<description>&lt;h1 id=&#34;相关名词整理&#34;&gt;相关名词整理&lt;/h1&gt;&#xA;&lt;p&gt;发现之前的逻辑有点不对，重新整理一份&lt;/p&gt;&#xA;&lt;h2 id=&#34;树&#34;&gt;树&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;树&lt;/strong&gt;是由节点（Node）和边（Edge）组成的有限集合，满足以下条件：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;根节点（Root）&lt;/strong&gt;：存在且仅存在一个特定的节点，称为树的根节点。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;子节点与父节点&lt;/strong&gt;：除根节点外，每个节点通过一条边唯一地连接到一个称为其&lt;strong&gt;父节点&lt;/strong&gt;的节点。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;子树（Subtree）&lt;/strong&gt;：每个节点可以有零个或多个&lt;strong&gt;子节点&lt;/strong&gt;，子节点对应的子树是互不相交的集合。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;无环性&lt;/strong&gt;：树中不存在环路（即从任一节点出发沿着边遍历，无法回到该节点）。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;连通性&lt;/strong&gt;：所有节点通过边连接，且从根节点出发可通过边到达任意其他节点。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;二叉树&#34;&gt;二叉树&lt;/h2&gt;&#xA;&lt;p&gt;首先，二叉树是树&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

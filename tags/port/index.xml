@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Port on Dan`s Blog</title>
+		<link>https://d4n-sec.github.io/tags/port/</link>
+		<description>Recent content in Port on Dan`s Blog</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Thu, 05 Dec 2024 16:46:33 +0800</lastBuildDate>
+		
+			<atom:link href="https://d4n-sec.github.io/tags/port/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Windows 根据端口查找进程</title>
+				<link>https://d4n-sec.github.io/p/port-pid-taskfile/</link>
+				<pubDate>Thu, 05 Dec 2024 16:46:33 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/port-pid-taskfile/</guid>
+				<description>&lt;details&gt;&lt;summary&gt;前情提要&lt;/summary&gt;&#xA;&lt;p&gt;由于有&lt;a href=&#34;https://d4n-sec.github.io/p/javaaboutjndi/#---todo---&#34;&gt;这个待办&lt;/a&gt;的存在，我将尝试去证明：&lt;code&gt;JNDI&lt;/code&gt;配置后，与数据库通信层的连接代码是交给了 Tomcat，JBOSS 等完成&lt;/p&gt;&#xA;&lt;p&gt;虽然可能没什么意义，但是有疑问想要自己解决不总是坏的&lt;/p&gt;&#xA;&lt;p&gt;在Debug时，尝试通过通讯层面证明为&lt;code&gt;Tomcat&lt;/code&gt;与&lt;code&gt;Mysql&lt;/code&gt;通信&lt;/p&gt;&#xA;&lt;p&gt;在抓包过程中，很遗憾，只能得到目的端口和来源端口信息（当然咯，网络层面通讯进行数据库查询带什么本地进程信息呢？），如下图&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241205165612177.png&#34; alt=&#34;image-20241205165612177&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;3306&lt;/code&gt;是&lt;code&gt;MySQL&lt;/code&gt;的默认端口，&lt;del&gt;如果&lt;code&gt;4894&lt;/code&gt;是固定端口，且该服务属于&lt;code&gt;Tomcat&lt;/code&gt;的话，此次证明就可以告一段落了&lt;/del&gt;&lt;/p&gt;&#xA;&lt;p&gt;显然没有那么简单，重新运行发现连接数据库&lt;code&gt;3306&lt;/code&gt;-&lt;code&gt;Server 端口&lt;/code&gt;所对应的&lt;code&gt;Client&lt;/code&gt;端口并不固定，那么只能说明将要进行连接时，&lt;code&gt;Client&lt;/code&gt;从 OS 处申请了一个端口，也没有指定。&lt;/p&gt;&#xA;&lt;p&gt;所以如果可以找到&lt;code&gt;端口&lt;/code&gt;对应的&lt;code&gt;进程&lt;/code&gt;对应的&lt;code&gt;文件位置&lt;/code&gt;，如果该文件处于&lt;code&gt;Tomcat&lt;/code&gt;目录，而非&lt;code&gt;JDK&lt;/code&gt;，项目目录，岂不是也可以证明是&lt;code&gt;Tomcat&lt;/code&gt;发起连接的？&lt;/p&gt;&#xA;&lt;p&gt;答案：很遗憾，不能，找到的是 JDK 中的 &lt;code&gt;java.exe&lt;/code&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;当然了笨蛋，JVM 管所有，所以如果有 java 程序发起连接，都需要经过 JVM 啊，JVM 当然来源于 &lt;code&gt;java.exe&lt;/code&gt; 咯，笨蛋&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;但是尽管这是让自己无语的一次脑洞尝试，但这次的排查有一些知识点可以记下来，故有此文章&lt;/p&gt;&#xA;&lt;/details&gt;</description>
+			</item>
+	</channel>
+</rss>

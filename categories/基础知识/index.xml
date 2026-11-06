@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>基础知识 on Dan`s Blog</title>
+		<link>https://d4n-sec.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
+		<description>Recent content in 基础知识 on Dan`s Blog</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 11 Apr 2025 14:41:27 +0800</lastBuildDate>
+		
+			<atom:link href="https://d4n-sec.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>红黑树整理</title>
+				<link>https://d4n-sec.github.io/p/redblacktreestudy/</link>
+				<pubDate>Fri, 11 Apr 2025 14:41:27 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/redblacktreestudy/</guid>
+				<description>&lt;h1 id=&#34;相关名词整理&#34;&gt;相关名词整理&lt;/h1&gt;&#xA;&lt;p&gt;发现之前的逻辑有点不对，重新整理一份&lt;/p&gt;&#xA;&lt;h2 id=&#34;树&#34;&gt;树&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;树&lt;/strong&gt;是由节点（Node）和边（Edge）组成的有限集合，满足以下条件：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;根节点（Root）&lt;/strong&gt;：存在且仅存在一个特定的节点，称为树的根节点。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;子节点与父节点&lt;/strong&gt;：除根节点外，每个节点通过一条边唯一地连接到一个称为其&lt;strong&gt;父节点&lt;/strong&gt;的节点。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;子树（Subtree）&lt;/strong&gt;：每个节点可以有零个或多个&lt;strong&gt;子节点&lt;/strong&gt;，子节点对应的子树是互不相交的集合。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;无环性&lt;/strong&gt;：树中不存在环路（即从任一节点出发沿着边遍历，无法回到该节点）。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;连通性&lt;/strong&gt;：所有节点通过边连接，且从根节点出发可通过边到达任意其他节点。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;二叉树&#34;&gt;二叉树&lt;/h2&gt;&#xA;&lt;p&gt;首先，二叉树是树&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>BST与AVL树学习</title>
+				<link>https://d4n-sec.github.io/p/bstandavlstudy/</link>
+				<pubDate>Thu, 10 Apr 2025 19:15:26 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/bstandavlstudy/</guid>
+				<description>&lt;p&gt;因为看java内部库实现的时候，没看出来一些典型的算法，补补课相当于&lt;/p&gt;&#xA;&lt;p&gt;&lt;del&gt;别问为什么用python实现&lt;/del&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;二叉查找树&#34;&gt;二叉查找树&lt;/h1&gt;&#xA;&lt;p&gt;Binary Search Tree =&amp;gt; BST&lt;/p&gt;&#xA;&lt;p&gt;二叉查找树根节点的值大于其左子树中任意一个节点的值，小于其右子树中任意一节点的值，且该规则适用于树中的每一个节点。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>PHP Filter 伪协议实现细节</title>
+				<link>https://d4n-sec.github.io/p/phpfilterworks/</link>
+				<pubDate>Tue, 17 Dec 2024 14:05:49 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/phpfilterworks/</guid>
+				<description>&lt;p&gt;在PHP中，关于编码转换，使用&lt;code&gt;php://filter&lt;/code&gt;和&lt;code&gt;iconv()&lt;/code&gt;进行编码转换有所不同&lt;/p&gt;&#xA;&lt;h1 id=&#34;iconv&#34;&gt;iconv&lt;/h1&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;基本语法：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-PHP&#34; data-lang=&#34;PHP&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;iconv&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$in_charset&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$out_charset&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;p&gt;参数说明：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;&lt;code&gt;$in_charset&lt;/code&gt;&lt;/strong&gt;: 输入字符编码，即源字符串的编码。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;&lt;code&gt;$out_charset&lt;/code&gt;&lt;/strong&gt;: 输出字符编码，即目标字符串的编码。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;&lt;code&gt;$str&lt;/code&gt;&lt;/strong&gt;: 要转换的字符串。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;返回值&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;成功时，返回转换后的字符串&lt;/li&gt;&#xA;&lt;li&gt;失败时，返回 &lt;code&gt;false&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/blockquote&gt;</description>
+			</item>
+			<item>
+				<title>PHP 转换过滤器</title>
+				<link>https://d4n-sec.github.io/p/phpfiltersconvert/</link>
+				<pubDate>Tue, 17 Dec 2024 13:09:44 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/phpfiltersconvert/</guid>
+				<description>&lt;h1 id=&#34;php-过滤转换器&#34;&gt;PHP 过滤转换器&lt;/h1&gt;&#xA;&lt;h2 id=&#34;convertbase64&#34;&gt;convert.base64*&lt;/h2&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;包括 &lt;code&gt;convert.base64-encode&lt;/code&gt; &lt;code&gt;convert.base64-decode&lt;/code&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;使用这两个过滤器等同于分别用 &lt;code&gt;base64_encode()&lt;/code&gt; 和 &lt;code&gt;base64_decode()&lt;/code&gt; 函数处理所有的流数据。&lt;/p&gt;&#xA;&lt;h3 id=&#34;设置参数&#34;&gt;设置参数&lt;/h3&gt;&#xA;&lt;p&gt;&lt;code&gt;convert.base64-encode&lt;/code&gt; 支持以一个关联数组给出的参数。&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;如果给出了 &lt;code&gt;line-length&lt;/code&gt;，base64 输出将被用 &lt;code&gt;line-length&lt;/code&gt; 个字符为长度而截成块。&lt;/li&gt;&#xA;&lt;li&gt;如果给出了 &lt;code&gt;line-break-chars&lt;/code&gt;，每块将被用给出的字符隔开。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;这些参数的效果和用 &lt;code&gt;base64_encode()&lt;/code&gt; 再加上 &lt;a href=&#34;https://www.php.net/manual/zh/function.chunk-split.php&#34;&gt;chunk_split()&lt;/a&gt; 相同&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Tomcat目录结构学习</title>
+				<link>https://d4n-sec.github.io/p/tomcatdirstruct/</link>
+				<pubDate>Fri, 06 Dec 2024 00:03:48 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/tomcatdirstruct/</guid>
+				<description>&lt;h1 id=&#34;tomcat&#34;&gt;Tomcat&lt;/h1&gt;&#xA;&lt;p&gt;基本信息暂时不作过多介绍了，本文聚焦于Tomcat的目录结构理解&lt;/p&gt;&#xA;&lt;h1 id=&#34;目录结构一览&#34;&gt;目录结构一览&lt;/h1&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Tomcat&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├── bin&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── bootstrap.jar&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── catalina-tasks.xml&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── catalina.bat&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── service.bat&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── shutdown.bat&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── startup.bat&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── tomcat11.exe&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── tomcat11w.exe&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── version.sh&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;&#x9;├── .........&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├── conf&#x9;&lt;span class=&#34;c1&#34;&gt;# 用来存放tomcat的一些配置文件&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   ├── Catalina&#x9;&#x9;&#x9;&#x9;&lt;span class=&#34;c1&#34;&gt;# Catalina 为一个目录，可以设置默认加载的项目，初始状态下可能不存在&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── catalina.properties&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── context.xml&#x9;&#x9;&#x9;&#x9;&lt;span class=&#34;c1&#34;&gt;# context.xml 可以用来配置数据源之类的&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── logging.properties&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── server.xml&#x9;&#x9;&#x9;&#x9;&lt;span class=&#34;c1&#34;&gt;# server.xml 可以设置端口号、设置域名或IP、默认加载的项目、请求编码 &lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── tomcat-users.xml&#x9;&#x9;&lt;span class=&#34;c1&#34;&gt;# tomcat-users.xml 用来配置管理tomcat的用户与权限 &lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── tomcat-users.xsd&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   └── web.xml&#x9;&#x9;&#x9;&#x9;&#x9;&lt;span class=&#34;c1&#34;&gt;# web.xml 可以设置tomcat支持的文件类型 &lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├── lib&#x9;&#x9;&lt;span class=&#34;c1&#34;&gt;# lib目录主要用来存放tomcat运行需要加载的jar包，建议只把Tomcat需要的jar包放到这个目录下&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│&#x9;&#x9;&#x9;&lt;span class=&#34;c1&#34;&gt;# 例如，像连接数据库的jdbc的包(mysql-connector-java-8.0.16.jar)我们可以加入到lib目录中来&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── annotations-api.jar&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── catalina-storeconfig.jar&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── tomcat-i18n-es.jar&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── .......&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├── logs&#x9;&lt;span class=&#34;c1&#34;&gt;# 顾名思义，一些日志的保存点&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├── src&#x9;&#x9;&lt;span class=&#34;c1&#34;&gt;# 并非自带，笔者同时下载了源码zip包，自行创建的目录，放入了源码&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   └── apache-tomcat-11.0.0-src.zip&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├── temp&#x9;&lt;span class=&#34;c1&#34;&gt;# temp目录用户存放tomcat在运行过程中产生的临时文件。（清空不会对tomcat运行带来影响） &lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   └── safeToDelete.tmp &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├── webapps&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── ROOT&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   ├── ........ &lt;span class=&#34;c1&#34;&gt;# 稍后重点介绍&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├── work&#x9;&lt;span class=&#34;c1&#34;&gt;# work 目录用来存放tomcat在运行时的编译后文件，例如运行时生成的文件，最终运行的文件都在这里。通过webapps中的项目生成的！&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;&#x9;&#x9;&#x9;&lt;span class=&#34;c1&#34;&gt;# 可以把这个目录下的内容删除，再次运行时会生再次生成work目录。&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;&#x9;&#x9;&#x9;&lt;span class=&#34;c1&#34;&gt;# 当客户端用户访问一个JSP文件时，Tomcat会通过JSP生成Java文件，然后再编译Java文件生成class文件&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;&#x9;&#x9;&#x9;&lt;span class=&#34;c1&#34;&gt;# 生成的java和class文件都会存放到这个目录下。&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;&#x9;&#x9;&#x9;&lt;span class=&#34;c1&#34;&gt;# 清空work目录，然后重启tomcat，可以达到清除缓存的作用。&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;&#x9;&#x9;&#x9;&lt;span class=&#34;c1&#34;&gt;# 可以把这个目录下的内容删除，再次运行时会生再次生成work目录&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├── LICENSE&#x9;&#x9;&#x9;&#x9;&lt;span class=&#34;c1&#34;&gt;# 许可证&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;└── NOTICE&#x9;&#x9;&#x9;&#x9;&lt;span class=&#34;c1&#34;&gt;# 说明文件&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;p&gt;其他没有列出的&lt;em&gt;&lt;strong&gt;根目录下的普通文件&lt;/strong&gt;&lt;/em&gt;不重要&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>JVM 启动属性/环境变量</title>
+				<link>https://d4n-sec.github.io/p/jvmproperties/</link>
+				<pubDate>Thu, 05 Dec 2024 18:09:35 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/jvmproperties/</guid>
+				<description>&lt;h1 id=&#34;java-system-properties&#34;&gt;Java System Properties&lt;/h1&gt;&#xA;&lt;p&gt;随你怎么叫：配置参数/启动属性/环境变量/系统属性，都可以，反正大概率都是指&lt;code&gt;Java System Properties&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;为了方便和统一，本文下面统一叫做：JVM 启动参数&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>JVM 运行时参数查询</title>
+				<link>https://d4n-sec.github.io/p/jvmruntimepathenv/</link>
+				<pubDate>Thu, 05 Dec 2024 17:18:22 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/jvmruntimepathenv/</guid>
+				<description>&lt;details&gt;&lt;summary&gt;前情提要&lt;/summary&gt;&#xA;&lt;p&gt;紧接&lt;a href=&#34;https://d4n-sec.github.io/p/port-pid-taskfile/&#34;&gt;此文&lt;/a&gt;的前情提要&lt;/p&gt;&#xA;&lt;p&gt;在找到对应端口对应的文件目录后，有点绝望，JDK 目录连上了我的知识点，却击碎了我的幻想&lt;/p&gt;&#xA;&lt;p&gt;但是咱不是善于认输的人，有没有什么办法可以看到正在运行的&lt;code&gt;java&lt;/code&gt;进程的相关配置参数或者环境变量呢？&lt;/p&gt;&#xA;&lt;p&gt;答案：有的，所以如下&lt;/p&gt;&#xA;&lt;p&gt;但是即使知道了环境变量，由于是通过案例通过&lt;code&gt;Tomcat&lt;/code&gt;部署（移植到类中直接运行失败），所以也无法排除是否是&lt;code&gt;Tomcat&lt;/code&gt;发起连接还是业务代码发起连接&lt;/p&gt;&#xA;&lt;p&gt;不管怎么说，学到了就记录&lt;/p&gt;&#xA;&lt;/details&gt;</description>
+			</item>
+			<item>
+				<title>Java基础知识：LDAP</title>
+				<link>https://d4n-sec.github.io/p/javaaboutldap/</link>
+				<pubDate>Mon, 25 Nov 2024 08:05:08 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/javaaboutldap/</guid>
+				<description>&lt;h1 id=&#34;whats-ldap&#34;&gt;What&amp;rsquo;s LDAP&lt;/h1&gt;&#xA;&lt;p&gt;Lightweight Directory Access Protocol -&amp;gt; LDAP&lt;/p&gt;&#xA;&lt;p&gt;直译：轻量级目录访问协议（Directory -&amp;gt; 又可译为电话簿），但是意义不准确&lt;/p&gt;&#xA;&lt;p&gt;不管是目录还是电话簿，核心点为&lt;em&gt;&lt;strong&gt;查找&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;即 Directory 服务内部的数据组织形式是树形结构，这样做的目的是方便&lt;em&gt;&lt;strong&gt;查找&lt;/strong&gt;&lt;/em&gt;。其最开始存在的目的是做白页、黄页类应用，而我们可以利用这个结构做其它事情，&lt;em&gt;&lt;strong&gt;比如用一个LDAP服务管理公司内所有地方的用户信息&lt;/strong&gt;&lt;/em&gt;，这样就可以做到&lt;em&gt;&lt;strong&gt;单点登录&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Java基础知识：JNDI</title>
+				<link>https://d4n-sec.github.io/p/javaaboutjndi/</link>
+				<pubDate>Sat, 23 Nov 2024 10:04:22 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/javaaboutjndi/</guid>
+				<description>&lt;p&gt;OK，又到了&lt;del&gt;喜闻乐见的&lt;/del&gt;Java基础知识环节&lt;/p&gt;&#xA;&lt;h1 id=&#34;whats-jndi&#34;&gt;What&amp;rsquo;s JNDI&lt;/h1&gt;&#xA;&lt;p&gt;JNDI，即&lt;code&gt;Java Naming and Directory Interface&lt;/code&gt;，直译为 Java命名与&lt;em&gt;&lt;strong&gt;目录&lt;/strong&gt;&lt;/em&gt;接口&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;Java&lt;/code&gt;表明了这个玩意儿大概率只在Java中存在&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Java基础知识：JPA</title>
+				<link>https://d4n-sec.github.io/p/javaaboutjpa/</link>
+				<pubDate>Fri, 22 Nov 2024 15:28:55 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/javaaboutjpa/</guid>
+				<description>&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241122153243285.png&#34; alt=&#34;show&#34;&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;whats-jpa&#34;&gt;What&amp;rsquo;s JPA&lt;/h1&gt;&#xA;&lt;p&gt;JPA（Jakarta Persistence API）是一个规范，定义了Java应用程序中持久性的一组概念。JPA提供了一个对象关系映射（ORM）层，允许开发人员使用Java对象进行工作，而无需手动转换对象导向范式和关系数据库之间的差异。JPA实现如&lt;code&gt;Hibernate&lt;/code&gt;和&lt;code&gt;EclipseLink&lt;/code&gt;处理Java对象和数据库表之间的转换，使开发人员免于编写底层JDBC代码。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Java基础知识：EJB</title>
+				<link>https://d4n-sec.github.io/p/javaaboutejb/</link>
+				<pubDate>Fri, 22 Nov 2024 15:01:58 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/javaaboutejb/</guid>
+				<description>&lt;h1 id=&#34;whats-ejb&#34;&gt;What&amp;rsquo;s EJB&lt;/h1&gt;&#xA;&lt;p&gt;EJB =&amp;gt; &lt;code&gt;Enterprise Java Beans&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;直译：企业 Java Beans&lt;/p&gt;&#xA;&lt;p&gt;EJB 的官方解释：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;商务软件的核心部分是它的业务逻辑。业务逻辑抽象了整个商务过程的流程，并使用计算机语言将他们实现。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;所谓：&amp;quot;&lt;em&gt;&lt;strong&gt;业务逻辑&lt;/strong&gt;&lt;/em&gt;&amp;quot;&#xA;我们注意到在EJB 的概念中主要提到的就是&amp;quot;业务逻辑&amp;quot;的封装，而这个业务逻辑到底是什么？说的那么悬乎，其实这个所谓的&amp;quot;业务逻辑&amp;quot;我们完全可以理解成执行特定任务的&amp;quot;类&amp;quot;。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Java基础知识：J2EE</title>
+				<link>https://d4n-sec.github.io/p/javaaboutj2ee/</link>
+				<pubDate>Thu, 21 Nov 2024 10:00:30 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/javaaboutj2ee/</guid>
+				<description>&lt;ul&gt;&#xA;&lt;li&gt;&lt;em&gt;&lt;strong&gt;概念多且杂，且看且过&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;java--j2ee&#34;&gt;JAVA &amp;amp; J2EE&lt;/h1&gt;&#xA;&lt;p&gt;&lt;code&gt;Java&lt;/code&gt;和&lt;code&gt;Java EE&lt;/code&gt;（也可称&lt;code&gt;J2EE&lt;/code&gt;，其中的&lt;a href=&#34;https://blog.csdn.net/zl1zl2zl3/article/details/86030331&#34;&gt;故事&lt;/a&gt;）是两个不同概念&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;Java&lt;/code&gt;不仅指一种语言，也可以指一种软件系统的流派&lt;/p&gt;&#xA;&lt;p&gt;目前&lt;code&gt;JAVA&lt;/code&gt;有三个平台：&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Java ClassPath</title>
+				<link>https://d4n-sec.github.io/p/javaclasspath/</link>
+				<pubDate>Thu, 07 Nov 2024 16:31:15 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/javaclasspath/</guid>
+				<description>&lt;p&gt;ClassPath是Java中一个重要的环境变量，弄懂他对于Java运行环境的理解有重大的帮助&lt;/p&gt;&#xA;&lt;h1 id=&#34;classpath是什么&#34;&gt;ClassPath是什么&lt;/h1&gt;&#xA;&lt;p&gt;CLASSPATH直译过来是类路径，是Java环境配置中要设置的一个环境变量，就是.class文件的路径，&lt;em&gt;&lt;strong&gt;表示JVM从哪里去寻找要运行的class文件&lt;/strong&gt;&lt;/em&gt;，&lt;code&gt;CLASSPATH = D:\java&lt;/code&gt;表示执行java命令时去&lt;code&gt;D:\java&lt;/code&gt;目录中去找需要被执行的class文件并运行。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Java默认类加载器的加载路径</title>
+				<link>https://d4n-sec.github.io/p/classloaderloadpath/</link>
+				<pubDate>Thu, 07 Nov 2024 16:22:58 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/classloaderloadpath/</guid>
+				<description>&lt;p&gt;&lt;a href=&#34;https://d4n-sec.github.io/p/bytecodeanndloadclass/#java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E6%9C%89%E5%93%AA%E4%BA%9B&#34;&gt;前文&lt;/a&gt;有提到Java的默认&lt;code&gt;ClassLoader&lt;/code&gt;有三种，且三种的&lt;code&gt;ClassLoader&lt;/code&gt;会加载不同的Java类。&lt;/p&gt;&#xA;&lt;p&gt;他们加载的类的路径在哪？&lt;/p&gt;&#xA;&lt;p&gt;是否可以进行设置？&lt;/p&gt;&#xA;&lt;p&gt;本文做一个初步探讨&lt;/p&gt;&#xA;&lt;h1 id=&#34;全量输出&#34;&gt;全量输出&lt;/h1&gt;&#xA;&lt;p&gt;在不配置任何参数的情况下，执行&lt;code&gt;MainTest.java&lt;/code&gt;查看默认路径&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;MainTest.java&lt;/code&gt;内容如下&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Java字节码与类加载器</title>
+				<link>https://d4n-sec.github.io/p/bytecodeanndloadclass/</link>
+				<pubDate>Wed, 06 Nov 2024 14:52:13 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/bytecodeanndloadclass/</guid>
+				<description>&lt;p&gt;本章深入了解&lt;strong&gt;Java字节码&lt;/strong&gt;以及加载Java字节码的&lt;strong&gt;类加载器&lt;/strong&gt;相关姿势！&lt;/p&gt;&#xA;&lt;h1 id=&#34;java字节码&#34;&gt;Java字节码&lt;/h1&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Java 在刚刚诞生之时曾经提出过一个非常著名的口号: “&lt;strong&gt;一次编写，到处运行（write once，run anywhere）&lt;/strong&gt;”，这句话充分表达了软件开发人员对冲破平台界限的渴求。“与平台无关”的理想最终实现在操作系统的运用层上: 虚拟机提供商开发了许多可以运行在不同平台上的虚拟机，这些虚拟机都可以载入和执行同一种平台无关的字节码，从而实现了程序的“一次编写到处运行”。&lt;/p&gt;&#xA;&lt;p&gt;各种不同平台的虚拟机与所有平台都统一使用的程序存储格式—&lt;strong&gt;字节码（ByteCode）&lt;/strong&gt;，因此，可以看出字节码对 Java 生态的重要性。之所以被称为字节码，是因为字节码是由十六进制组成的，而 JVM（Java Virtual Machine）以两个十六进制为一组，即以字节为单位进行读取。在 Java 中使用 &lt;strong&gt;javac&lt;/strong&gt; 命令把源代码编译成字节码文件，一个 .java 源文件从编译成 .class 字节码文件的示例&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241106165423165.png&#34; alt=&#34;image-20241106165423165&#34;&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
+			</item>
+			<item>
+				<title>Java代理模式</title>
+				<link>https://d4n-sec.github.io/p/javaproxystudy/</link>
+				<pubDate>Sun, 28 Jul 2024 01:05:01 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/javaproxystudy/</guid>
+				<description>&lt;h1 id=&#34;代理模式&#34;&gt;代理模式&lt;/h1&gt;&#xA;&lt;p&gt;代理模式是常用的java设计模式。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;代理模式是常用的java设计模式，他的特征是代理类与委托类有同样的接口，代理类主要负责为委托类预处理消息、过滤消息、把消息转发给委托类，以及事后处理消息等。代理类与委托类之间通常会存在关联关系，一个代理类的对象与一个委托类的对象关联，代理类的对象本身并不真正实现服务，而是通过调用委托类的对象的相关方法，来提供特定的服务。简单的说就是，我们在访问实际对象时，是通过代理对象来访问的，代理模式就是在访问实际对象时引入一定程度的间接性，因为这种间接性，可以附加多种用途。&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
+			</item>
+			<item>
+				<title>Go Study</title>
+				<link>https://d4n-sec.github.io/p/go-study/</link>
+				<pubDate>Wed, 06 Mar 2024 14:45:23 +0800</pubDate>
+				<guid>https://d4n-sec.github.io/p/go-study/</guid>
+				<description>&lt;p&gt;Go学习难点记录与解决（希望能解决）&lt;/p&gt;&#xA;&lt;h1 id=&#34;混淆点&#34;&gt;混淆点&lt;/h1&gt;&#xA;&lt;p&gt;1.Go的包导入&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;导入本质，导入顺序，依赖顺序以及导入优先级，默认路径，为什么是这个默认路径，如何结合默认路径设计项目结构&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
+			</item>
+	</channel>
+</rss>
