@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>ClassPath on Dan`s Blog</title>
-		<link>https://d4n-sec.github.io/tags/classpath/</link>
+		<link>https://blog.dansec.vip/tags/classpath/</link>
 		<description>Recent content in ClassPath on Dan`s Blog</description>
 		<generator>Hugo</generator>
 		<language>zh-CN</language>
@@ -12,12 +12,12 @@
 		
 			<lastBuildDate>Thu, 07 Nov 2024 16:31:15 +0800</lastBuildDate>
 		
-			<atom:link href="https://d4n-sec.github.io/tags/classpath/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://blog.dansec.vip/tags/classpath/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>Java ClassPath</title>
-				<link>https://d4n-sec.github.io/p/javaclasspath/</link>
+				<link>https://blog.dansec.vip/p/javaclasspath/</link>
 				<pubDate>Thu, 07 Nov 2024 16:31:15 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/javaclasspath/</guid>
+				<guid>https://blog.dansec.vip/p/javaclasspath/</guid>
 				<description>&lt;p&gt;ClassPath是Java中一个重要的环境变量，弄懂他对于Java运行环境的理解有重大的帮助&lt;/p&gt;&#xA;&lt;h1 id=&#34;classpath是什么&#34;&gt;ClassPath是什么&lt;/h1&gt;&#xA;&lt;p&gt;CLASSPATH直译过来是类路径，是Java环境配置中要设置的一个环境变量，就是.class文件的路径，&lt;em&gt;&lt;strong&gt;表示JVM从哪里去寻找要运行的class文件&lt;/strong&gt;&lt;/em&gt;，&lt;code&gt;CLASSPATH = D:\java&lt;/code&gt;表示执行java命令时去&lt;code&gt;D:\java&lt;/code&gt;目录中去找需要被执行的class文件并运行。&lt;/p&gt;</description>
 			</item>
 	</channel>

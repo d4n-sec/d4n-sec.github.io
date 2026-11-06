@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Categories on Dan`s Blog</title>
-		<link>https://d4n-sec.github.io/categories/</link>
+		<link>https://blog.dansec.vip/categories/</link>
 		<description>Recent content in Categories on Dan`s Blog</description>
 		<generator>Hugo</generator>
 		<language>zh-CN</language>
@@ -12,117 +12,117 @@
 		
 			<lastBuildDate>Sun, 29 Mar 2026 00:00:00 +0800</lastBuildDate>
 		
-			<atom:link href="https://d4n-sec.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://blog.dansec.vip/categories/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>技术</title>
-				<link>https://d4n-sec.github.io/categories/%E6%8A%80%E6%9C%AF/</link>
+				<link>https://blog.dansec.vip/categories/%E6%8A%80%E6%9C%AF/</link>
 				<pubDate>Sun, 29 Mar 2026 00:00:00 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/categories/%E6%8A%80%E6%9C%AF/</guid>
+				<guid>https://blog.dansec.vip/categories/%E6%8A%80%E6%9C%AF/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>网络安全</title>
-				<link>https://d4n-sec.github.io/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</link>
+				<link>https://blog.dansec.vip/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</link>
 				<pubDate>Tue, 24 Mar 2026 00:00:00 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</guid>
+				<guid>https://blog.dansec.vip/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>思考</title>
-				<link>https://d4n-sec.github.io/categories/%E6%80%9D%E8%80%83/</link>
+				<link>https://blog.dansec.vip/categories/%E6%80%9D%E8%80%83/</link>
 				<pubDate>Mon, 23 Mar 2026 17:40:00 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/categories/%E6%80%9D%E8%80%83/</guid>
+				<guid>https://blog.dansec.vip/categories/%E6%80%9D%E8%80%83/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>随笔</title>
-				<link>https://d4n-sec.github.io/categories/%E9%9A%8F%E7%AC%94/</link>
+				<link>https://blog.dansec.vip/categories/%E9%9A%8F%E7%AC%94/</link>
 				<pubDate>Wed, 11 Feb 2026 10:00:30 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/categories/%E9%9A%8F%E7%AC%94/</guid>
+				<guid>https://blog.dansec.vip/categories/%E9%9A%8F%E7%AC%94/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>杂学</title>
-				<link>https://d4n-sec.github.io/categories/%E6%9D%82%E5%AD%A6/</link>
+				<link>https://blog.dansec.vip/categories/%E6%9D%82%E5%AD%A6/</link>
 				<pubDate>Thu, 25 Dec 2025 04:34:24 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/categories/%E6%9D%82%E5%AD%A6/</guid>
+				<guid>https://blog.dansec.vip/categories/%E6%9D%82%E5%AD%A6/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Java学习路</title>
-				<link>https://d4n-sec.github.io/categories/java%E5%AD%A6%E4%B9%A0%E8%B7%AF/</link>
+				<link>https://blog.dansec.vip/categories/java%E5%AD%A6%E4%B9%A0%E8%B7%AF/</link>
 				<pubDate>Tue, 15 Apr 2025 14:59:40 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/categories/java%E5%AD%A6%E4%B9%A0%E8%B7%AF/</guid>
+				<guid>https://blog.dansec.vip/categories/java%E5%AD%A6%E4%B9%A0%E8%B7%AF/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>安全学习</title>
-				<link>https://d4n-sec.github.io/categories/%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0/</link>
+				<link>https://blog.dansec.vip/categories/%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0/</link>
 				<pubDate>Tue, 15 Apr 2025 14:59:40 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/categories/%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0/</guid>
+				<guid>https://blog.dansec.vip/categories/%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>代码学习</title>
-				<link>https://d4n-sec.github.io/categories/%E4%BB%A3%E7%A0%81%E5%AD%A6%E4%B9%A0/</link>
+				<link>https://blog.dansec.vip/categories/%E4%BB%A3%E7%A0%81%E5%AD%A6%E4%B9%A0/</link>
 				<pubDate>Fri, 11 Apr 2025 14:41:27 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/categories/%E4%BB%A3%E7%A0%81%E5%AD%A6%E4%B9%A0/</guid>
+				<guid>https://blog.dansec.vip/categories/%E4%BB%A3%E7%A0%81%E5%AD%A6%E4%B9%A0/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>基础知识</title>
-				<link>https://d4n-sec.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
+				<link>https://blog.dansec.vip/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
 				<pubDate>Fri, 11 Apr 2025 14:41:27 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
+				<guid>https://blog.dansec.vip/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>CTF</title>
-				<link>https://d4n-sec.github.io/categories/ctf/</link>
+				<link>https://blog.dansec.vip/categories/ctf/</link>
 				<pubDate>Mon, 17 Mar 2025 11:16:20 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/categories/ctf/</guid>
+				<guid>https://blog.dansec.vip/categories/ctf/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Windows</title>
-				<link>https://d4n-sec.github.io/categories/windows/</link>
+				<link>https://blog.dansec.vip/categories/windows/</link>
 				<pubDate>Thu, 05 Dec 2024 16:46:33 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/categories/windows/</guid>
+				<guid>https://blog.dansec.vip/categories/windows/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>环境</title>
-				<link>https://d4n-sec.github.io/categories/%E7%8E%AF%E5%A2%83/</link>
+				<link>https://blog.dansec.vip/categories/%E7%8E%AF%E5%A2%83/</link>
 				<pubDate>Thu, 21 Nov 2024 10:00:00 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/categories/%E7%8E%AF%E5%A2%83/</guid>
+				<guid>https://blog.dansec.vip/categories/%E7%8E%AF%E5%A2%83/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Feeling</title>
-				<link>https://d4n-sec.github.io/categories/feeling/</link>
+				<link>https://blog.dansec.vip/categories/feeling/</link>
 				<pubDate>Wed, 06 Nov 2024 14:43:26 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/categories/feeling/</guid>
+				<guid>https://blog.dansec.vip/categories/feeling/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>兴趣</title>
-				<link>https://d4n-sec.github.io/categories/%E5%85%B4%E8%B6%A3/</link>
+				<link>https://blog.dansec.vip/categories/%E5%85%B4%E8%B6%A3/</link>
 				<pubDate>Mon, 05 Aug 2024 21:10:08 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/categories/%E5%85%B4%E8%B6%A3/</guid>
+				<guid>https://blog.dansec.vip/categories/%E5%85%B4%E8%B6%A3/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Books</title>
-				<link>https://d4n-sec.github.io/categories/books/</link>
+				<link>https://blog.dansec.vip/categories/books/</link>
 				<pubDate>Sat, 27 Jul 2024 01:19:29 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/categories/books/</guid>
+				<guid>https://blog.dansec.vip/categories/books/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>博客</title>
-				<link>https://d4n-sec.github.io/categories/%E5%8D%9A%E5%AE%A2/</link>
+				<link>https://blog.dansec.vip/categories/%E5%8D%9A%E5%AE%A2/</link>
 				<pubDate>Wed, 06 Mar 2024 16:26:40 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/categories/%E5%8D%9A%E5%AE%A2/</guid>
+				<guid>https://blog.dansec.vip/categories/%E5%8D%9A%E5%AE%A2/</guid>
 				<description></description>
 			</item>
 	</channel>

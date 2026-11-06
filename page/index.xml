@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Pages on Dan`s Blog</title>
-		<link>https://d4n-sec.github.io/page/</link>
+		<link>https://blog.dansec.vip/page/</link>
 		<description>Recent content in Pages on Dan`s Blog</description>
 		<generator>Hugo</generator>
 		<language>zh-CN</language>
@@ -12,40 +12,40 @@
 		
 			<lastBuildDate>Fri, 27 Dec 2024 17:08:46 +0800</lastBuildDate>
 		
-			<atom:link href="https://d4n-sec.github.io/page/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://blog.dansec.vip/page/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>Tools</title>
-				<link>https://d4n-sec.github.io/tools/</link>
+				<link>https://blog.dansec.vip/tools/</link>
 				<pubDate>Fri, 27 Dec 2024 17:08:46 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/tools/</guid>
+				<guid>https://blog.dansec.vip/tools/</guid>
 				<description>&lt;p&gt;&lt;a href=&#34;https://d4n-sec.github.io/LinesCompare.html&#34;&gt;文本对比工具&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&amp;ndash;TODO&amp;ndash;&lt;/p&gt;&#xA;&lt;!-- [JSON格式化](https://d4n-sec.github.io/JSONFormat.html)&#xA;&#xA;[Base64编码](https://d4n-sec.github.io/Base64.html)&#xA;&#xA;[正则表达式测试](https://d4n-sec.github.io/RegexTest.html)&#xA;&#xA;[正则表达式生成器](https://d4n-sec.github.io/RegexGenerator.html) --&gt;</description>
 			</item>
 			<item>
 				<title>Archives</title>
-				<link>https://d4n-sec.github.io/archives/</link>
+				<link>https://blog.dansec.vip/archives/</link>
 				<pubDate>Tue, 28 May 2019 00:00:00 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/archives/</guid>
+				<guid>https://blog.dansec.vip/archives/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Search</title>
-				<link>https://d4n-sec.github.io/search/</link>
+				<link>https://blog.dansec.vip/search/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>https://d4n-sec.github.io/search/</guid>
+				<guid>https://blog.dansec.vip/search/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>关于</title>
-				<link>https://d4n-sec.github.io/about/</link>
+				<link>https://blog.dansec.vip/about/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>https://d4n-sec.github.io/about/</guid>
+				<guid>https://blog.dansec.vip/about/</guid>
 				<description>&lt;p&gt;我是 Dan，一个喜欢刨根问底的安全工程师。会点 Web，也在摸索二进制和逆向；偶尔摸鱼，认真时想把复杂技术讲得简单一点。这里记录学到的东西，也收留还没想明白的问题。&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>友链</title>
-				<link>https://d4n-sec.github.io/links/</link>
+				<link>https://blog.dansec.vip/links/</link>
 				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-				<guid>https://d4n-sec.github.io/links/</guid>
+				<guid>https://blog.dansec.vip/links/</guid>
 				<description></description>
 			</item>
 	</channel>

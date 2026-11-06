@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>代码学习 on Dan`s Blog</title>
-		<link>https://d4n-sec.github.io/categories/%E4%BB%A3%E7%A0%81%E5%AD%A6%E4%B9%A0/</link>
+		<link>https://blog.dansec.vip/categories/%E4%BB%A3%E7%A0%81%E5%AD%A6%E4%B9%A0/</link>
 		<description>Recent content in 代码学习 on Dan`s Blog</description>
 		<generator>Hugo</generator>
 		<language>zh-CN</language>
@@ -12,26 +12,26 @@
 		
 			<lastBuildDate>Fri, 11 Apr 2025 14:41:27 +0800</lastBuildDate>
 		
-			<atom:link href="https://d4n-sec.github.io/categories/%E4%BB%A3%E7%A0%81%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://blog.dansec.vip/categories/%E4%BB%A3%E7%A0%81%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>红黑树整理</title>
-				<link>https://d4n-sec.github.io/p/redblacktreestudy/</link>
+				<link>https://blog.dansec.vip/p/redblacktreestudy/</link>
 				<pubDate>Fri, 11 Apr 2025 14:41:27 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/redblacktreestudy/</guid>
+				<guid>https://blog.dansec.vip/p/redblacktreestudy/</guid>
 				<description>&lt;h1 id=&#34;相关名词整理&#34;&gt;相关名词整理&lt;/h1&gt;&#xA;&lt;p&gt;发现之前的逻辑有点不对，重新整理一份&lt;/p&gt;&#xA;&lt;h2 id=&#34;树&#34;&gt;树&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;树&lt;/strong&gt;是由节点（Node）和边（Edge）组成的有限集合，满足以下条件：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;根节点（Root）&lt;/strong&gt;：存在且仅存在一个特定的节点，称为树的根节点。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;子节点与父节点&lt;/strong&gt;：除根节点外，每个节点通过一条边唯一地连接到一个称为其&lt;strong&gt;父节点&lt;/strong&gt;的节点。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;子树（Subtree）&lt;/strong&gt;：每个节点可以有零个或多个&lt;strong&gt;子节点&lt;/strong&gt;，子节点对应的子树是互不相交的集合。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;无环性&lt;/strong&gt;：树中不存在环路（即从任一节点出发沿着边遍历，无法回到该节点）。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;连通性&lt;/strong&gt;：所有节点通过边连接，且从根节点出发可通过边到达任意其他节点。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;二叉树&#34;&gt;二叉树&lt;/h2&gt;&#xA;&lt;p&gt;首先，二叉树是树&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>BST与AVL树学习</title>
-				<link>https://d4n-sec.github.io/p/bstandavlstudy/</link>
+				<link>https://blog.dansec.vip/p/bstandavlstudy/</link>
 				<pubDate>Thu, 10 Apr 2025 19:15:26 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/bstandavlstudy/</guid>
+				<guid>https://blog.dansec.vip/p/bstandavlstudy/</guid>
 				<description>&lt;p&gt;因为看java内部库实现的时候，没看出来一些典型的算法，补补课相当于&lt;/p&gt;&#xA;&lt;p&gt;&lt;del&gt;别问为什么用python实现&lt;/del&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;二叉查找树&#34;&gt;二叉查找树&lt;/h1&gt;&#xA;&lt;p&gt;Binary Search Tree =&amp;gt; BST&lt;/p&gt;&#xA;&lt;p&gt;二叉查找树根节点的值大于其左子树中任意一个节点的值，小于其右子树中任意一节点的值，且该规则适用于树中的每一个节点。&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>Go Study</title>
-				<link>https://d4n-sec.github.io/p/go-study/</link>
+				<link>https://blog.dansec.vip/p/go-study/</link>
 				<pubDate>Wed, 06 Mar 2024 14:45:23 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/go-study/</guid>
+				<guid>https://blog.dansec.vip/p/go-study/</guid>
 				<description>&lt;p&gt;Go学习难点记录与解决（希望能解决）&lt;/p&gt;&#xA;&lt;h1 id=&#34;混淆点&#34;&gt;混淆点&lt;/h1&gt;&#xA;&lt;p&gt;1.Go的包导入&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;导入本质，导入顺序，依赖顺序以及导入优先级，默认路径，为什么是这个默认路径，如何结合默认路径设计项目结构&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
 			</item>
 	</channel>

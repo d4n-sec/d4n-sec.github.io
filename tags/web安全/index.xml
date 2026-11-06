@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Web安全 on Dan`s Blog</title>
-		<link>https://d4n-sec.github.io/tags/web%E5%AE%89%E5%85%A8/</link>
+		<link>https://blog.dansec.vip/tags/web%E5%AE%89%E5%85%A8/</link>
 		<description>Recent content in Web安全 on Dan`s Blog</description>
 		<generator>Hugo</generator>
 		<language>zh-CN</language>
@@ -12,12 +12,12 @@
 		
 			<lastBuildDate>Tue, 24 Mar 2026 00:00:00 +0800</lastBuildDate>
 		
-			<atom:link href="https://d4n-sec.github.io/tags/web%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://blog.dansec.vip/tags/web%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>信任的代价：我眼中一部 XSS 攻防二十五年的演进史</title>
-				<link>https://d4n-sec.github.io/p/%E4%BF%A1%E4%BB%BB%E7%9A%84%E4%BB%A3%E4%BB%B7%E6%88%91%E7%9C%BC%E4%B8%AD%E4%B8%80%E9%83%A8-xss-%E6%94%BB%E9%98%B2%E4%BA%8C%E5%8D%81%E4%BA%94%E5%B9%B4%E7%9A%84%E6%BC%94%E8%BF%9B%E5%8F%B2/</link>
+				<link>https://blog.dansec.vip/p/%E4%BF%A1%E4%BB%BB%E7%9A%84%E4%BB%A3%E4%BB%B7%E6%88%91%E7%9C%BC%E4%B8%AD%E4%B8%80%E9%83%A8-xss-%E6%94%BB%E9%98%B2%E4%BA%8C%E5%8D%81%E4%BA%94%E5%B9%B4%E7%9A%84%E6%BC%94%E8%BF%9B%E5%8F%B2/</link>
 				<pubDate>Tue, 24 Mar 2026 00:00:00 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/%E4%BF%A1%E4%BB%BB%E7%9A%84%E4%BB%A3%E4%BB%B7%E6%88%91%E7%9C%BC%E4%B8%AD%E4%B8%80%E9%83%A8-xss-%E6%94%BB%E9%98%B2%E4%BA%8C%E5%8D%81%E4%BA%94%E5%B9%B4%E7%9A%84%E6%BC%94%E8%BF%9B%E5%8F%B2/</guid>
+				<guid>https://blog.dansec.vip/p/%E4%BF%A1%E4%BB%BB%E7%9A%84%E4%BB%A3%E4%BB%B7%E6%88%91%E7%9C%BC%E4%B8%AD%E4%B8%80%E9%83%A8-xss-%E6%94%BB%E9%98%B2%E4%BA%8C%E5%8D%81%E4%BA%94%E5%B9%B4%E7%9A%84%E6%BC%94%E8%BF%9B%E5%8F%B2/</guid>
 				<description>&lt;h1 id=&#34;信任的代价我眼中一部-xss-攻防二十五年的演进史&#34;&gt;信任的代价：我眼中一部 XSS 攻防二十五年的演进史&lt;/h1&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;em&gt;&amp;ldquo;所有注入漏洞的本质，都是语义歧义——&lt;br&gt;&#xA;同一段数据，在不同的解析上下文中，被赋予了截然不同的含义。&lt;br&gt;&#xA;防御的本质，是在数据越过上下文边界的那一刻，消除这种歧义。&amp;rdquo;&lt;/em&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
 			</item>
 	</channel>

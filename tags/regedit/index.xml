@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Regedit on Dan`s Blog</title>
-		<link>https://d4n-sec.github.io/tags/regedit/</link>
+		<link>https://blog.dansec.vip/tags/regedit/</link>
 		<description>Recent content in Regedit on Dan`s Blog</description>
 		<generator>Hugo</generator>
 		<language>zh-CN</language>
@@ -12,19 +12,19 @@
 		
 			<lastBuildDate>Thu, 17 Oct 2024 16:09:39 +0800</lastBuildDate>
 		
-			<atom:link href="https://d4n-sec.github.io/tags/regedit/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://blog.dansec.vip/tags/regedit/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>Windows 右键菜单</title>
-				<link>https://d4n-sec.github.io/p/windowsrightmenu/</link>
+				<link>https://blog.dansec.vip/p/windowsrightmenu/</link>
 				<pubDate>Thu, 17 Oct 2024 16:09:39 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/windowsrightmenu/</guid>
+				<guid>https://blog.dansec.vip/p/windowsrightmenu/</guid>
 				<description>&lt;h1 id=&#34;windows-多级右键菜单基础&#34;&gt;Windows 多级右键菜单基础&lt;/h1&gt;&#xA;&lt;h2 id=&#34;修改的键与项&#34;&gt;修改的键与项&lt;/h2&gt;&#xA;&lt;p&gt;Win10鼠标右键菜单管理分为三种情形：右键文件夹、文件以及右键空白区域&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;右键空白区域（分为桌面空白区域和其他文件夹下空白区域）&lt;/li&gt;&#xA;&lt;li&gt;右键文件夹&lt;/li&gt;&#xA;&lt;li&gt;右键文件（分为所有文件和某类型文件两种）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20240914180800214.png&#34; alt=&#34;image-20240914180800214&#34;&gt;&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>Windows 注册表基础</title>
-				<link>https://d4n-sec.github.io/p/windowsregeditbase/</link>
+				<link>https://blog.dansec.vip/p/windowsregeditbase/</link>
 				<pubDate>Tue, 15 Oct 2024 20:53:41 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/windowsregeditbase/</guid>
+				<guid>https://blog.dansec.vip/p/windowsregeditbase/</guid>
 				<description>&lt;h1 id=&#34;windows-注册表基础&#34;&gt;Windows 注册表基础&lt;/h1&gt;&#xA;&lt;h2 id=&#34;windows注册表的本质&#34;&gt;Windows注册表的本质&lt;/h2&gt;&#xA;&lt;p&gt;官方描述&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;注册表是一个分层数据库，其中包含对 Windows 的操作以及 Windows 上运行的应用程序和服务至关重要的数据。 数据以树格式进行结构化。 树中的每个节点称为 &lt;em&gt;键&lt;/em&gt;。 每个键可以同时包含 &lt;em&gt;子项&lt;/em&gt; 和数据条目（称为 &lt;em&gt;值&lt;/em&gt;）。&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
 			</item>
 	</channel>

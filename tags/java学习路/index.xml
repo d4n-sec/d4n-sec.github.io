@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Java学习路 on Dan`s Blog</title>
-		<link>https://d4n-sec.github.io/tags/java%E5%AD%A6%E4%B9%A0%E8%B7%AF/</link>
+		<link>https://blog.dansec.vip/tags/java%E5%AD%A6%E4%B9%A0%E8%B7%AF/</link>
 		<description>Recent content in Java学习路 on Dan`s Blog</description>
 		<generator>Hugo</generator>
 		<language>zh-CN</language>
@@ -12,19 +12,19 @@
 		
 			<lastBuildDate>Sun, 28 Jul 2024 01:05:01 +0800</lastBuildDate>
 		
-			<atom:link href="https://d4n-sec.github.io/tags/java%E5%AD%A6%E4%B9%A0%E8%B7%AF/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://blog.dansec.vip/tags/java%E5%AD%A6%E4%B9%A0%E8%B7%AF/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>Java代理模式</title>
-				<link>https://d4n-sec.github.io/p/javaproxystudy/</link>
+				<link>https://blog.dansec.vip/p/javaproxystudy/</link>
 				<pubDate>Sun, 28 Jul 2024 01:05:01 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/javaproxystudy/</guid>
+				<guid>https://blog.dansec.vip/p/javaproxystudy/</guid>
 				<description>&lt;h1 id=&#34;代理模式&#34;&gt;代理模式&lt;/h1&gt;&#xA;&lt;p&gt;代理模式是常用的java设计模式。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;代理模式是常用的java设计模式，他的特征是代理类与委托类有同样的接口，代理类主要负责为委托类预处理消息、过滤消息、把消息转发给委托类，以及事后处理消息等。代理类与委托类之间通常会存在关联关系，一个代理类的对象与一个委托类的对象关联，代理类的对象本身并不真正实现服务，而是通过调用委托类的对象的相关方法，来提供特定的服务。简单的说就是，我们在访问实际对象时，是通过代理对象来访问的，代理模式就是在访问实际对象时引入一定程度的间接性，因为这种间接性，可以附加多种用途。&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
 			</item>
 			<item>
 				<title>D4n的Java安全路</title>
-				<link>https://d4n-sec.github.io/p/d4n%E7%9A%84java%E5%AE%89%E5%85%A8%E8%B7%AF/</link>
+				<link>https://blog.dansec.vip/p/d4n%E7%9A%84java%E5%AE%89%E5%85%A8%E8%B7%AF/</link>
 				<pubDate>Thu, 06 Apr 2023 00:00:00 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/d4n%E7%9A%84java%E5%AE%89%E5%85%A8%E8%B7%AF/</guid>
+				<guid>https://blog.dansec.vip/p/d4n%E7%9A%84java%E5%AE%89%E5%85%A8%E8%B7%AF/</guid>
 				<description>&lt;p&gt;本章是 D4n的Java安全入门 第一篇，望大佬指正，小白避坑&lt;/p&gt;</description>
 			</item>
 	</channel>

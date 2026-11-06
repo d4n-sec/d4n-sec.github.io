@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>代理模式 on Dan`s Blog</title>
-		<link>https://d4n-sec.github.io/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/</link>
+		<link>https://blog.dansec.vip/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/</link>
 		<description>Recent content in 代理模式 on Dan`s Blog</description>
 		<generator>Hugo</generator>
 		<language>zh-CN</language>
@@ -12,12 +12,12 @@
 		
 			<lastBuildDate>Sun, 28 Jul 2024 01:05:01 +0800</lastBuildDate>
 		
-			<atom:link href="https://d4n-sec.github.io/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://blog.dansec.vip/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>Java代理模式</title>
-				<link>https://d4n-sec.github.io/p/javaproxystudy/</link>
+				<link>https://blog.dansec.vip/p/javaproxystudy/</link>
 				<pubDate>Sun, 28 Jul 2024 01:05:01 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/javaproxystudy/</guid>
+				<guid>https://blog.dansec.vip/p/javaproxystudy/</guid>
 				<description>&lt;h1 id=&#34;代理模式&#34;&gt;代理模式&lt;/h1&gt;&#xA;&lt;p&gt;代理模式是常用的java设计模式。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;代理模式是常用的java设计模式，他的特征是代理类与委托类有同样的接口，代理类主要负责为委托类预处理消息、过滤消息、把消息转发给委托类，以及事后处理消息等。代理类与委托类之间通常会存在关联关系，一个代理类的对象与一个委托类的对象关联，代理类的对象本身并不真正实现服务，而是通过调用委托类的对象的相关方法，来提供特定的服务。简单的说就是，我们在访问实际对象时，是通过代理对象来访问的，代理模式就是在访问实际对象时引入一定程度的间接性，因为这种间接性，可以附加多种用途。&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
 			</item>
 	</channel>

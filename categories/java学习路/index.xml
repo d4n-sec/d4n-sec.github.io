@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Java学习路 on Dan`s Blog</title>
-		<link>https://d4n-sec.github.io/categories/java%E5%AD%A6%E4%B9%A0%E8%B7%AF/</link>
+		<link>https://blog.dansec.vip/categories/java%E5%AD%A6%E4%B9%A0%E8%B7%AF/</link>
 		<description>Recent content in Java学习路 on Dan`s Blog</description>
 		<generator>Hugo</generator>
 		<language>zh-CN</language>
@@ -12,138 +12,138 @@
 		
 			<lastBuildDate>Tue, 15 Apr 2025 14:59:40 +0800</lastBuildDate>
 		
-			<atom:link href="https://d4n-sec.github.io/categories/java%E5%AD%A6%E4%B9%A0%E8%B7%AF/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://blog.dansec.vip/categories/java%E5%AD%A6%E4%B9%A0%E8%B7%AF/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>CommonsBeanutils1学习速记</title>
-				<link>https://d4n-sec.github.io/p/commonsbeanutils1study/</link>
+				<link>https://blog.dansec.vip/p/commonsbeanutils1study/</link>
 				<pubDate>Tue, 15 Apr 2025 14:59:40 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/commonsbeanutils1study/</guid>
+				<guid>https://blog.dansec.vip/p/commonsbeanutils1study/</guid>
 				<description>&lt;h1 id=&#34;前置知识&#34;&gt;前置知识&lt;/h1&gt;&#xA;&lt;p&gt;&lt;code&gt;TemplatesImpl&lt;/code&gt;中的字节码加载流程&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;TemplatesImpl.newTransformer&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&#x9;-&amp;gt;TemplatesImpl.getTransletInstance&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&#x9;&#x9;-&amp;gt;TemplatesImpl._class&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;_transletIndex&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;.newInstance&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;p&gt;其中&lt;code&gt;TemplatesImpl._class[_transletIndex]&lt;/code&gt;在如下调用栈里的&lt;code&gt;loader.defineClass处&lt;/code&gt;进行了类加载&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>JVM 启动属性/环境变量</title>
-				<link>https://d4n-sec.github.io/p/jvmproperties/</link>
+				<link>https://blog.dansec.vip/p/jvmproperties/</link>
 				<pubDate>Thu, 05 Dec 2024 18:09:35 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/jvmproperties/</guid>
+				<guid>https://blog.dansec.vip/p/jvmproperties/</guid>
 				<description>&lt;h1 id=&#34;java-system-properties&#34;&gt;Java System Properties&lt;/h1&gt;&#xA;&lt;p&gt;随你怎么叫：配置参数/启动属性/环境变量/系统属性，都可以，反正大概率都是指&lt;code&gt;Java System Properties&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;为了方便和统一，本文下面统一叫做：JVM 启动参数&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>JVM 运行时参数查询</title>
-				<link>https://d4n-sec.github.io/p/jvmruntimepathenv/</link>
+				<link>https://blog.dansec.vip/p/jvmruntimepathenv/</link>
 				<pubDate>Thu, 05 Dec 2024 17:18:22 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/jvmruntimepathenv/</guid>
+				<guid>https://blog.dansec.vip/p/jvmruntimepathenv/</guid>
 				<description>&lt;details&gt;&lt;summary&gt;前情提要&lt;/summary&gt;&#xA;&lt;p&gt;紧接&lt;a href=&#34;https://d4n-sec.github.io/p/port-pid-taskfile/&#34;&gt;此文&lt;/a&gt;的前情提要&lt;/p&gt;&#xA;&lt;p&gt;在找到对应端口对应的文件目录后，有点绝望，JDK 目录连上了我的知识点，却击碎了我的幻想&lt;/p&gt;&#xA;&lt;p&gt;但是咱不是善于认输的人，有没有什么办法可以看到正在运行的&lt;code&gt;java&lt;/code&gt;进程的相关配置参数或者环境变量呢？&lt;/p&gt;&#xA;&lt;p&gt;答案：有的，所以如下&lt;/p&gt;&#xA;&lt;p&gt;但是即使知道了环境变量，由于是通过案例通过&lt;code&gt;Tomcat&lt;/code&gt;部署（移植到类中直接运行失败），所以也无法排除是否是&lt;code&gt;Tomcat&lt;/code&gt;发起连接还是业务代码发起连接&lt;/p&gt;&#xA;&lt;p&gt;不管怎么说，学到了就记录&lt;/p&gt;&#xA;&lt;/details&gt;</description>
 			</item>
 			<item>
 				<title>Java基础知识：LDAP</title>
-				<link>https://d4n-sec.github.io/p/javaaboutldap/</link>
+				<link>https://blog.dansec.vip/p/javaaboutldap/</link>
 				<pubDate>Mon, 25 Nov 2024 08:05:08 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/javaaboutldap/</guid>
+				<guid>https://blog.dansec.vip/p/javaaboutldap/</guid>
 				<description>&lt;h1 id=&#34;whats-ldap&#34;&gt;What&amp;rsquo;s LDAP&lt;/h1&gt;&#xA;&lt;p&gt;Lightweight Directory Access Protocol -&amp;gt; LDAP&lt;/p&gt;&#xA;&lt;p&gt;直译：轻量级目录访问协议（Directory -&amp;gt; 又可译为电话簿），但是意义不准确&lt;/p&gt;&#xA;&lt;p&gt;不管是目录还是电话簿，核心点为&lt;em&gt;&lt;strong&gt;查找&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;即 Directory 服务内部的数据组织形式是树形结构，这样做的目的是方便&lt;em&gt;&lt;strong&gt;查找&lt;/strong&gt;&lt;/em&gt;。其最开始存在的目的是做白页、黄页类应用，而我们可以利用这个结构做其它事情，&lt;em&gt;&lt;strong&gt;比如用一个LDAP服务管理公司内所有地方的用户信息&lt;/strong&gt;&lt;/em&gt;，这样就可以做到&lt;em&gt;&lt;strong&gt;单点登录&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>Java基础知识：JNDI</title>
-				<link>https://d4n-sec.github.io/p/javaaboutjndi/</link>
+				<link>https://blog.dansec.vip/p/javaaboutjndi/</link>
 				<pubDate>Sat, 23 Nov 2024 10:04:22 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/javaaboutjndi/</guid>
+				<guid>https://blog.dansec.vip/p/javaaboutjndi/</guid>
 				<description>&lt;p&gt;OK，又到了&lt;del&gt;喜闻乐见的&lt;/del&gt;Java基础知识环节&lt;/p&gt;&#xA;&lt;h1 id=&#34;whats-jndi&#34;&gt;What&amp;rsquo;s JNDI&lt;/h1&gt;&#xA;&lt;p&gt;JNDI，即&lt;code&gt;Java Naming and Directory Interface&lt;/code&gt;，直译为 Java命名与&lt;em&gt;&lt;strong&gt;目录&lt;/strong&gt;&lt;/em&gt;接口&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;Java&lt;/code&gt;表明了这个玩意儿大概率只在Java中存在&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>Java基础知识：JPA</title>
-				<link>https://d4n-sec.github.io/p/javaaboutjpa/</link>
+				<link>https://blog.dansec.vip/p/javaaboutjpa/</link>
 				<pubDate>Fri, 22 Nov 2024 15:28:55 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/javaaboutjpa/</guid>
+				<guid>https://blog.dansec.vip/p/javaaboutjpa/</guid>
 				<description>&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241122153243285.png&#34; alt=&#34;show&#34;&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;whats-jpa&#34;&gt;What&amp;rsquo;s JPA&lt;/h1&gt;&#xA;&lt;p&gt;JPA（Jakarta Persistence API）是一个规范，定义了Java应用程序中持久性的一组概念。JPA提供了一个对象关系映射（ORM）层，允许开发人员使用Java对象进行工作，而无需手动转换对象导向范式和关系数据库之间的差异。JPA实现如&lt;code&gt;Hibernate&lt;/code&gt;和&lt;code&gt;EclipseLink&lt;/code&gt;处理Java对象和数据库表之间的转换，使开发人员免于编写底层JDBC代码。&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>Java基础知识：EJB</title>
-				<link>https://d4n-sec.github.io/p/javaaboutejb/</link>
+				<link>https://blog.dansec.vip/p/javaaboutejb/</link>
 				<pubDate>Fri, 22 Nov 2024 15:01:58 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/javaaboutejb/</guid>
+				<guid>https://blog.dansec.vip/p/javaaboutejb/</guid>
 				<description>&lt;h1 id=&#34;whats-ejb&#34;&gt;What&amp;rsquo;s EJB&lt;/h1&gt;&#xA;&lt;p&gt;EJB =&amp;gt; &lt;code&gt;Enterprise Java Beans&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;直译：企业 Java Beans&lt;/p&gt;&#xA;&lt;p&gt;EJB 的官方解释：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;商务软件的核心部分是它的业务逻辑。业务逻辑抽象了整个商务过程的流程，并使用计算机语言将他们实现。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;所谓：&amp;quot;&lt;em&gt;&lt;strong&gt;业务逻辑&lt;/strong&gt;&lt;/em&gt;&amp;quot;&#xA;我们注意到在EJB 的概念中主要提到的就是&amp;quot;业务逻辑&amp;quot;的封装，而这个业务逻辑到底是什么？说的那么悬乎，其实这个所谓的&amp;quot;业务逻辑&amp;quot;我们完全可以理解成执行特定任务的&amp;quot;类&amp;quot;。&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>Java基础知识：J2EE</title>
-				<link>https://d4n-sec.github.io/p/javaaboutj2ee/</link>
+				<link>https://blog.dansec.vip/p/javaaboutj2ee/</link>
 				<pubDate>Thu, 21 Nov 2024 10:00:30 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/javaaboutj2ee/</guid>
+				<guid>https://blog.dansec.vip/p/javaaboutj2ee/</guid>
 				<description>&lt;ul&gt;&#xA;&lt;li&gt;&lt;em&gt;&lt;strong&gt;概念多且杂，且看且过&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;java--j2ee&#34;&gt;JAVA &amp;amp; J2EE&lt;/h1&gt;&#xA;&lt;p&gt;&lt;code&gt;Java&lt;/code&gt;和&lt;code&gt;Java EE&lt;/code&gt;（也可称&lt;code&gt;J2EE&lt;/code&gt;，其中的&lt;a href=&#34;https://blog.csdn.net/zl1zl2zl3/article/details/86030331&#34;&gt;故事&lt;/a&gt;）是两个不同概念&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;Java&lt;/code&gt;不仅指一种语言，也可以指一种软件系统的流派&lt;/p&gt;&#xA;&lt;p&gt;目前&lt;code&gt;JAVA&lt;/code&gt;有三个平台：&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>Java自定义类加载器</title>
-				<link>https://d4n-sec.github.io/p/userdefineclassloader/</link>
+				<link>https://blog.dansec.vip/p/userdefineclassloader/</link>
 				<pubDate>Fri, 08 Nov 2024 11:10:34 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/userdefineclassloader/</guid>
+				<guid>https://blog.dansec.vip/p/userdefineclassloader/</guid>
 				<description>&lt;h1 id=&#34;自定义类加载器的使用&#34;&gt;自定义类加载器的使用&lt;/h1&gt;&#xA;&lt;p&gt;根据&lt;a href=&#34;https://d4n-sec.github.io/p/classloaderloadpath/&#34;&gt;前文&lt;/a&gt;，不管是Bootstrap ClassLoader还是ExtClassLoader等，这些类加载器都只是加载指定的目录下的jar包或者资源。如果在某种情况下，我们需要动态加载一些东西呢？&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>Java ClassPath</title>
-				<link>https://d4n-sec.github.io/p/javaclasspath/</link>
+				<link>https://blog.dansec.vip/p/javaclasspath/</link>
 				<pubDate>Thu, 07 Nov 2024 16:31:15 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/javaclasspath/</guid>
+				<guid>https://blog.dansec.vip/p/javaclasspath/</guid>
 				<description>&lt;p&gt;ClassPath是Java中一个重要的环境变量，弄懂他对于Java运行环境的理解有重大的帮助&lt;/p&gt;&#xA;&lt;h1 id=&#34;classpath是什么&#34;&gt;ClassPath是什么&lt;/h1&gt;&#xA;&lt;p&gt;CLASSPATH直译过来是类路径，是Java环境配置中要设置的一个环境变量，就是.class文件的路径，&lt;em&gt;&lt;strong&gt;表示JVM从哪里去寻找要运行的class文件&lt;/strong&gt;&lt;/em&gt;，&lt;code&gt;CLASSPATH = D:\java&lt;/code&gt;表示执行java命令时去&lt;code&gt;D:\java&lt;/code&gt;目录中去找需要被执行的class文件并运行。&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>Java默认类加载器的加载路径</title>
-				<link>https://d4n-sec.github.io/p/classloaderloadpath/</link>
+				<link>https://blog.dansec.vip/p/classloaderloadpath/</link>
 				<pubDate>Thu, 07 Nov 2024 16:22:58 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/classloaderloadpath/</guid>
+				<guid>https://blog.dansec.vip/p/classloaderloadpath/</guid>
 				<description>&lt;p&gt;&lt;a href=&#34;https://d4n-sec.github.io/p/bytecodeanndloadclass/#java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E6%9C%89%E5%93%AA%E4%BA%9B&#34;&gt;前文&lt;/a&gt;有提到Java的默认&lt;code&gt;ClassLoader&lt;/code&gt;有三种，且三种的&lt;code&gt;ClassLoader&lt;/code&gt;会加载不同的Java类。&lt;/p&gt;&#xA;&lt;p&gt;他们加载的类的路径在哪？&lt;/p&gt;&#xA;&lt;p&gt;是否可以进行设置？&lt;/p&gt;&#xA;&lt;p&gt;本文做一个初步探讨&lt;/p&gt;&#xA;&lt;h1 id=&#34;全量输出&#34;&gt;全量输出&lt;/h1&gt;&#xA;&lt;p&gt;在不配置任何参数的情况下，执行&lt;code&gt;MainTest.java&lt;/code&gt;查看默认路径&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;MainTest.java&lt;/code&gt;内容如下&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>Java字节码与类加载器</title>
-				<link>https://d4n-sec.github.io/p/bytecodeanndloadclass/</link>
+				<link>https://blog.dansec.vip/p/bytecodeanndloadclass/</link>
 				<pubDate>Wed, 06 Nov 2024 14:52:13 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/bytecodeanndloadclass/</guid>
+				<guid>https://blog.dansec.vip/p/bytecodeanndloadclass/</guid>
 				<description>&lt;p&gt;本章深入了解&lt;strong&gt;Java字节码&lt;/strong&gt;以及加载Java字节码的&lt;strong&gt;类加载器&lt;/strong&gt;相关姿势！&lt;/p&gt;&#xA;&lt;h1 id=&#34;java字节码&#34;&gt;Java字节码&lt;/h1&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Java 在刚刚诞生之时曾经提出过一个非常著名的口号: “&lt;strong&gt;一次编写，到处运行（write once，run anywhere）&lt;/strong&gt;”，这句话充分表达了软件开发人员对冲破平台界限的渴求。“与平台无关”的理想最终实现在操作系统的运用层上: 虚拟机提供商开发了许多可以运行在不同平台上的虚拟机，这些虚拟机都可以载入和执行同一种平台无关的字节码，从而实现了程序的“一次编写到处运行”。&lt;/p&gt;&#xA;&lt;p&gt;各种不同平台的虚拟机与所有平台都统一使用的程序存储格式—&lt;strong&gt;字节码（ByteCode）&lt;/strong&gt;，因此，可以看出字节码对 Java 生态的重要性。之所以被称为字节码，是因为字节码是由十六进制组成的，而 JVM（Java Virtual Machine）以两个十六进制为一组，即以字节为单位进行读取。在 Java 中使用 &lt;strong&gt;javac&lt;/strong&gt; 命令把源代码编译成字节码文件，一个 .java 源文件从编译成 .class 字节码文件的示例&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/image-20241106165423165.png&#34; alt=&#34;image-20241106165423165&#34;&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
 			</item>
 			<item>
 				<title>CC6 Demo 学习</title>
-				<link>https://d4n-sec.github.io/p/cc6demo/</link>
+				<link>https://blog.dansec.vip/p/cc6demo/</link>
 				<pubDate>Tue, 06 Aug 2024 21:56:10 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/cc6demo/</guid>
+				<guid>https://blog.dansec.vip/p/cc6demo/</guid>
 				<description>&lt;h1 id=&#34;cc6链&#34;&gt;CC6链&lt;/h1&gt;&#xA;&lt;p&gt;CC6 Demo学习，以及踩坑记录&lt;/p&gt;&#xA;&lt;h2 id=&#34;cc6-demo&#34;&gt;CC6 Demo&lt;/h2&gt;&#xA;&lt;p&gt;CC6能够解决CC1高版本无法利用的问题，先看看CC6链&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;调用栈&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/*&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt; Gadget chain:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt; java.io.ObjectInputStream.readObject()&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt; java.util.HashMap.readObject()&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt; java.util.HashMap.hash()&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt; org.apache.commons.collections.keyvalue.TiedMapEntry.hashCode()&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt; org.apache.commons.collections.keyvalue.TiedMapEntry.getValue()&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt; org.apache.commons.collections.map.LazyMap.get()&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt; org.apache.commons.collections.functors.ChainedTransformer.transform()&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt; org.apache.commons.collections.functors.InvokerTransformer.transform()&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt; java.lang.reflect.Method.invoke()&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt; java.lang.Runtime.exec()&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;*/&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;p&gt;第8行到最后的链路我们已经熟悉了。&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>经典CC1链构造</title>
-				<link>https://d4n-sec.github.io/p/javaclassiccc1/</link>
+				<link>https://blog.dansec.vip/p/javaclassiccc1/</link>
 				<pubDate>Sat, 03 Aug 2024 13:11:25 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/javaclassiccc1/</guid>
+				<guid>https://blog.dansec.vip/p/javaclassiccc1/</guid>
 				<description>&lt;p&gt;假设读者已经了解&lt;code&gt;HashMap&lt;/code&gt;版非经典CC1链的构造原理。&lt;/p&gt;&#xA;&lt;p&gt;如此提到了非经典版的CC1链，代表经典版CC1链和&lt;code&gt;HashMap&lt;/code&gt;版有一定出入。&lt;/p&gt;&#xA;&lt;p&gt;经典版CC1链使用的&lt;code&gt;Map&lt;/code&gt;类为&lt;code&gt;LazyMap&lt;/code&gt;而非&lt;code&gt;HashMap&lt;/code&gt;&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>Java代理模式</title>
-				<link>https://d4n-sec.github.io/p/javaproxystudy/</link>
+				<link>https://blog.dansec.vip/p/javaproxystudy/</link>
 				<pubDate>Sun, 28 Jul 2024 01:05:01 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/javaproxystudy/</guid>
+				<guid>https://blog.dansec.vip/p/javaproxystudy/</guid>
 				<description>&lt;h1 id=&#34;代理模式&#34;&gt;代理模式&lt;/h1&gt;&#xA;&lt;p&gt;代理模式是常用的java设计模式。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;代理模式是常用的java设计模式，他的特征是代理类与委托类有同样的接口，代理类主要负责为委托类预处理消息、过滤消息、把消息转发给委托类，以及事后处理消息等。代理类与委托类之间通常会存在关联关系，一个代理类的对象与一个委托类的对象关联，代理类的对象本身并不真正实现服务，而是通过调用委托类的对象的相关方法，来提供特定的服务。简单的说就是，我们在访问实际对象时，是通过代理对象来访问的，代理模式就是在访问实际对象时引入一定程度的间接性，因为这种间接性，可以附加多种用途。&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
 			</item>
 			<item>
 				<title>程序的设计模式</title>
-				<link>https://d4n-sec.github.io/p/designmode/</link>
+				<link>https://blog.dansec.vip/p/designmode/</link>
 				<pubDate>Sun, 28 Jul 2024 00:05:01 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/designmode/</guid>
+				<guid>https://blog.dansec.vip/p/designmode/</guid>
 				<description>&lt;h1 id=&#34;设计模式&#34;&gt;设计模式&lt;/h1&gt;&#xA;&lt;h2 id=&#34;设计模式简介&#34;&gt;设计模式简介&lt;/h2&gt;&#xA;&lt;p&gt;设计模式（Design pattern）代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式是软件开发人员在软件开发过程中面临的一般问题的解决方案。这些解决方案是众多软件开发人员经过相当长的一段时间的试验和错误总结出来的。&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>CC1Demo</title>
-				<link>https://d4n-sec.github.io/p/cc1demo/</link>
+				<link>https://blog.dansec.vip/p/cc1demo/</link>
 				<pubDate>Sun, 21 Jul 2024 15:58:24 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/cc1demo/</guid>
+				<guid>https://blog.dansec.vip/p/cc1demo/</guid>
 				<description>&lt;p&gt;假设读者已经掌握（笔者博客里的前置文章内涉及技术的）基础知识&lt;/p&gt;&#xA;&lt;p&gt;本文章目的是分析CC链之1 Demo，以及补充相关前置知识，&lt;del&gt;并尝试解决CC1链必要性问题，即CC1的必要路径和可选路径&lt;/del&gt;&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>Rmi Study</title>
-				<link>https://d4n-sec.github.io/p/rmi-study/</link>
+				<link>https://blog.dansec.vip/p/rmi-study/</link>
 				<pubDate>Mon, 08 Apr 2024 17:29:24 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/rmi-study/</guid>
+				<guid>https://blog.dansec.vip/p/rmi-study/</guid>
 				<description>&lt;h1 id=&#34;什么是rmi&#34;&gt;什么是RMI&lt;/h1&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;RMI (Remote Method Invocation) 模型是一种分布式对象应用，使用 RMI 技术可以使一个 JVM 中的对象，调用另一个 JVM 中的对象方法并获取调用结果。这里的另一个 JVM 可以在同一台计算机也可以是远程计算机。因此，RMI 意味着需要一个 Server 端和一个 Client 端。&lt;/p&gt;&#xA;&lt;p&gt;Server 端通常会创建一个对象，并使之可以被远程访问。&lt;/p&gt;&#xA;&lt;p&gt;这个对象被称为远程对象。Server 端需要注册这个对象可以被 Client 远程访问。&lt;/p&gt;&#xA;&lt;p&gt;Client 端调用可以被远程访问的对象上的方法，Client 端就可以和 Server 端进行通信并相互传递信息。&lt;/p&gt;&#xA;&lt;p&gt;RMI 在构建一个分布式应用时十分方便，它和 RPC 一样可以实现分布式应用之间的互相通信，甚至和现在的微服务思想都十分类似。&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
 			</item>
 			<item>
 				<title>D4n的Java安全路</title>
-				<link>https://d4n-sec.github.io/p/d4n%E7%9A%84java%E5%AE%89%E5%85%A8%E8%B7%AF/</link>
+				<link>https://blog.dansec.vip/p/d4n%E7%9A%84java%E5%AE%89%E5%85%A8%E8%B7%AF/</link>
 				<pubDate>Thu, 06 Apr 2023 00:00:00 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/d4n%E7%9A%84java%E5%AE%89%E5%85%A8%E8%B7%AF/</guid>
+				<guid>https://blog.dansec.vip/p/d4n%E7%9A%84java%E5%AE%89%E5%85%A8%E8%B7%AF/</guid>
 				<description>&lt;p&gt;本章是 D4n的Java安全入门 第一篇，望大佬指正，小白避坑&lt;/p&gt;</description>
 			</item>
 	</channel>

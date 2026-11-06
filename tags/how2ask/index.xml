@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>How2Ask on Dan`s Blog</title>
-		<link>https://d4n-sec.github.io/tags/how2ask/</link>
+		<link>https://blog.dansec.vip/tags/how2ask/</link>
 		<description>Recent content in How2Ask on Dan`s Blog</description>
 		<generator>Hugo</generator>
 		<language>zh-CN</language>
@@ -12,12 +12,12 @@
 		
 			<lastBuildDate>Sat, 27 Jul 2024 01:19:29 +0800</lastBuildDate>
 		
-			<atom:link href="https://d4n-sec.github.io/tags/how2ask/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://blog.dansec.vip/tags/how2ask/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>How to Ask Questions The Smart Way</title>
-				<link>https://d4n-sec.github.io/p/how2ask/</link>
+				<link>https://blog.dansec.vip/p/how2ask/</link>
 				<pubDate>Sat, 27 Jul 2024 01:19:29 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/how2ask/</guid>
+				<guid>https://blog.dansec.vip/p/how2ask/</guid>
 				<description>&lt;p&gt;如侵秒删&lt;/p&gt;&#xA;&lt;h1 id=&#34;提问的智慧&#34;&gt;提问的智慧&lt;/h1&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/pulls&#34;&gt;&lt;img src=&#34;https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square&#34; alt=&#34;PRs Welcome&#34;&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;How To Ask Questions The Smart Way&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Copyright © 2001,2006,2014 Eric S. Raymond, Rick Moen&lt;/p&gt;&#xA;&lt;p&gt;本指南英文版版权为 Eric S. Raymond, Rick Moen 所有。&lt;/p&gt;&#xA;&lt;p&gt;原文网址：&lt;a href=&#34;http://www.catb.org/~esr/faqs/smart-questions.html&#34;&gt;http://www.catb.org/~esr/faqs/smart-questions.html&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Copyleft 2001 by D.H.Grand(nOBODY/Ginux), 2010 by Gasolin, 2015 by Ryan Wu&lt;/p&gt;&#xA;&lt;p&gt;本中文指南是基于原文 3.10 版以及 2010 年由 &lt;a href=&#34;https://github.com/gasolin&#34;&gt;Gasolin&lt;/a&gt; 所翻译版本的最新翻译；&lt;/p&gt;</description>
 			</item>
 	</channel>

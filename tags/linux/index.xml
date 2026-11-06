@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Linux on Dan`s Blog</title>
-		<link>https://d4n-sec.github.io/tags/linux/</link>
+		<link>https://blog.dansec.vip/tags/linux/</link>
 		<description>Recent content in Linux on Dan`s Blog</description>
 		<generator>Hugo</generator>
 		<language>zh-CN</language>
@@ -12,12 +12,12 @@
 		
 			<lastBuildDate>Thu, 21 Nov 2024 10:00:00 +0800</lastBuildDate>
 		
-			<atom:link href="https://d4n-sec.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://blog.dansec.vip/tags/linux/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>Linux-创建新用户并使其SSH密钥登录</title>
-				<link>https://d4n-sec.github.io/p/aboutssh/</link>
+				<link>https://blog.dansec.vip/p/aboutssh/</link>
 				<pubDate>Thu, 21 Nov 2024 10:00:00 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/aboutssh/</guid>
+				<guid>https://blog.dansec.vip/p/aboutssh/</guid>
 				<description>&lt;p&gt;本记录执行背景&lt;/p&gt;&#xA;&lt;p&gt;Linux新环境，只有root账号&lt;/p&gt;&#xA;&lt;p&gt;想要达成的目的：&lt;/p&gt;&#xA;&lt;p&gt;创建多个个人账号并使用SSH密钥登录&lt;/p&gt;&#xA;&lt;h1 id=&#34;基本环境&#34;&gt;基本环境&lt;/h1&gt;&#xA;&lt;p&gt;连接Linux Shell后，开启 root ssh远程登录，以方便后续连接&lt;/p&gt;</description>
 			</item>
 	</channel>

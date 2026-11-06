@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>URL on Dan`s Blog</title>
-		<link>https://d4n-sec.github.io/tags/url/</link>
+		<link>https://blog.dansec.vip/tags/url/</link>
 		<description>Recent content in URL on Dan`s Blog</description>
 		<generator>Hugo</generator>
 		<language>zh-CN</language>
@@ -12,12 +12,12 @@
 		
 			<lastBuildDate>Thu, 25 Dec 2025 04:34:24 +0800</lastBuildDate>
 		
-			<atom:link href="https://d4n-sec.github.io/tags/url/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://blog.dansec.vip/tags/url/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>URL 中的 # 号去哪了？从 Burp 抓包报错说起</title>
-				<link>https://d4n-sec.github.io/p/urlstudy/</link>
+				<link>https://blog.dansec.vip/p/urlstudy/</link>
 				<pubDate>Thu, 25 Dec 2025 04:34:24 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/urlstudy/</guid>
+				<guid>https://blog.dansec.vip/p/urlstudy/</guid>
 				<description>&lt;h2 id=&#34;一-问题背景&#34;&gt;一、 问题背景&lt;/h2&gt;&#xA;&lt;p&gt;在最近的一次测试（&lt;del&gt;实则几年前&lt;/del&gt;）中，我发现了一个有趣的现象，并用 Burp Suite 进行验证时产生了新的疑问：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;浏览器的“隐形”行为&lt;/strong&gt;：当我使用浏览器访问带有 &lt;code&gt;#&lt;/code&gt; 的 URL 时，查看网络请求包（Network tab），发现浏览器发送给服务器的请求路径中，&lt;strong&gt;默认去掉了 &lt;code&gt;#&lt;/code&gt; 及其后面的所有内容&lt;/strong&gt;。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Burp 的“强制”行为&lt;/strong&gt;：为了验证服务器对 &lt;code&gt;#&lt;/code&gt; 的处理，我使用 Burp Suite 拦截数据包，手动在 Request Line 的 URL 路径中添加了 &lt;code&gt;#&lt;/code&gt; 号（例如 &lt;code&gt;GET /api/test#123&lt;/code&gt;）。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;服务器的异常响应&lt;/strong&gt;：结果出乎意料，服务端直接返回了 &lt;strong&gt;400 Bad Request&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;这就引出了笔者一些疑问：&lt;/p&gt;</description>
 			</item>
 	</channel>

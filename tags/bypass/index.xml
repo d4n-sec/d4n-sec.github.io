@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Bypass on Dan`s Blog</title>
-		<link>https://d4n-sec.github.io/tags/bypass/</link>
+		<link>https://blog.dansec.vip/tags/bypass/</link>
 		<description>Recent content in Bypass on Dan`s Blog</description>
 		<generator>Hugo</generator>
 		<language>zh-CN</language>
@@ -12,26 +12,26 @@
 		
 			<lastBuildDate>Tue, 14 Jan 2025 11:21:33 +0800</lastBuildDate>
 		
-			<atom:link href="https://d4n-sec.github.io/tags/bypass/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://blog.dansec.vip/tags/bypass/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>.htaccess 文件利用方式</title>
-				<link>https://d4n-sec.github.io/p/htaccessphpstudy/</link>
+				<link>https://blog.dansec.vip/p/htaccessphpstudy/</link>
 				<pubDate>Tue, 14 Jan 2025 11:21:33 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/htaccessphpstudy/</guid>
+				<guid>https://blog.dansec.vip/p/htaccessphpstudy/</guid>
 				<description>&lt;h1 id=&#34;whats-htaccess&#34;&gt;What&amp;rsquo;s .htaccess&lt;/h1&gt;&#xA;&lt;p&gt;&lt;code&gt;.htaccess&lt;/code&gt;文件是 Apache 中有一种特殊的文件，其提供了针对目录改变配置的方法，即在一个特定的文档目录中放置一个包含一条或多条指令的配置文件。此作用文件作用于此目录及其所有子目录。&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>php exit 死亡绕过</title>
-				<link>https://d4n-sec.github.io/p/phpexitdeathbypass/</link>
+				<link>https://blog.dansec.vip/p/phpexitdeathbypass/</link>
 				<pubDate>Thu, 26 Dec 2024 18:21:52 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/phpexitdeathbypass/</guid>
+				<guid>https://blog.dansec.vip/p/phpexitdeathbypass/</guid>
 				<description>&lt;p&gt;最近在复习一些内容，做记录，免得又忘了&lt;/p&gt;&#xA;&lt;h1 id=&#34;demo0&#34;&gt;Demo0&lt;/h1&gt;&#xA;&lt;p&gt;给出题目demo，如下：&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;demo0.php&lt;/code&gt;&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;php&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;show_source&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;__FILE__&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$content&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$_GET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;content&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$data&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$_GET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$data&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;lt;?php exit();?&amp;gt;&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;file_put_contents&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$content&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;p&gt;&lt;code&gt;demo0.php&lt;/code&gt;针对的是最简单的写马：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;code&gt;content&lt;/code&gt;传变量名，以&lt;code&gt;.php&lt;/code&gt;作为后缀&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;data&lt;/code&gt;传入一句话马&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
 			</item>
 			<item>
 				<title>二次URL解码小技巧</title>
-				<link>https://d4n-sec.github.io/p/doubleurldecodetrick/</link>
+				<link>https://blog.dansec.vip/p/doubleurldecodetrick/</link>
 				<pubDate>Mon, 17 Jun 2024 17:17:19 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/doubleurldecodetrick/</guid>
+				<guid>https://blog.dansec.vip/p/doubleurldecodetrick/</guid>
 				<description>&lt;p&gt;FYI.&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;file_put_content()&lt;/code&gt;会默认进行一次&lt;code&gt;urldecode&lt;/code&gt;，&lt;code&gt;php&lt;/code&gt;接收时也会默认进行一次&lt;/p&gt;&#xA;&lt;p&gt;此为默认的二次&lt;code&gt;URLdecode&lt;/code&gt;场景&lt;/p&gt;&#xA;&lt;h2 id=&#34;常规二次urldecode&#34;&gt;常规二次UrlDecode&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;%2569 -&amp;gt; %69 -&amp;gt; i&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;h2 id=&#34;小技巧&#34;&gt;小技巧&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;%6%39 -&amp;gt; %69 -&amp;gt; i&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;h2 id=&#34;使用场景&#34;&gt;使用场景&lt;/h2&gt;&#xA;&lt;p&gt;bypass WAF 对于 &lt;code&gt;%25&lt;/code&gt; 的过滤&lt;/p&gt;</description>
 			</item>
 	</channel>

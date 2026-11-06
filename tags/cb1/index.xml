@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>CB1 on Dan`s Blog</title>
-		<link>https://d4n-sec.github.io/tags/cb1/</link>
+		<link>https://blog.dansec.vip/tags/cb1/</link>
 		<description>Recent content in CB1 on Dan`s Blog</description>
 		<generator>Hugo</generator>
 		<language>zh-CN</language>
@@ -12,12 +12,12 @@
 		
 			<lastBuildDate>Tue, 15 Apr 2025 14:59:40 +0800</lastBuildDate>
 		
-			<atom:link href="https://d4n-sec.github.io/tags/cb1/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://blog.dansec.vip/tags/cb1/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>CommonsBeanutils1学习速记</title>
-				<link>https://d4n-sec.github.io/p/commonsbeanutils1study/</link>
+				<link>https://blog.dansec.vip/p/commonsbeanutils1study/</link>
 				<pubDate>Tue, 15 Apr 2025 14:59:40 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/commonsbeanutils1study/</guid>
+				<guid>https://blog.dansec.vip/p/commonsbeanutils1study/</guid>
 				<description>&lt;h1 id=&#34;前置知识&#34;&gt;前置知识&lt;/h1&gt;&#xA;&lt;p&gt;&lt;code&gt;TemplatesImpl&lt;/code&gt;中的字节码加载流程&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;TemplatesImpl.newTransformer&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&#x9;-&amp;gt;TemplatesImpl.getTransletInstance&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&#x9;&#x9;-&amp;gt;TemplatesImpl._class&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;_transletIndex&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;.newInstance&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;p&gt;其中&lt;code&gt;TemplatesImpl._class[_transletIndex]&lt;/code&gt;在如下调用栈里的&lt;code&gt;loader.defineClass处&lt;/code&gt;进行了类加载&lt;/p&gt;</description>
 			</item>
 	</channel>

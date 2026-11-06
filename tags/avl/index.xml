@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>AVL on Dan`s Blog</title>
-		<link>https://d4n-sec.github.io/tags/avl/</link>
+		<link>https://blog.dansec.vip/tags/avl/</link>
 		<description>Recent content in AVL on Dan`s Blog</description>
 		<generator>Hugo</generator>
 		<language>zh-CN</language>
@@ -12,12 +12,12 @@
 		
 			<lastBuildDate>Thu, 10 Apr 2025 19:15:26 +0800</lastBuildDate>
 		
-			<atom:link href="https://d4n-sec.github.io/tags/avl/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://blog.dansec.vip/tags/avl/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>BST与AVL树学习</title>
-				<link>https://d4n-sec.github.io/p/bstandavlstudy/</link>
+				<link>https://blog.dansec.vip/p/bstandavlstudy/</link>
 				<pubDate>Thu, 10 Apr 2025 19:15:26 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/bstandavlstudy/</guid>
+				<guid>https://blog.dansec.vip/p/bstandavlstudy/</guid>
 				<description>&lt;p&gt;因为看java内部库实现的时候，没看出来一些典型的算法，补补课相当于&lt;/p&gt;&#xA;&lt;p&gt;&lt;del&gt;别问为什么用python实现&lt;/del&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;二叉查找树&#34;&gt;二叉查找树&lt;/h1&gt;&#xA;&lt;p&gt;Binary Search Tree =&amp;gt; BST&lt;/p&gt;&#xA;&lt;p&gt;二叉查找树根节点的值大于其左子树中任意一个节点的值，小于其右子树中任意一节点的值，且该规则适用于树中的每一个节点。&lt;/p&gt;</description>
 			</item>
 	</channel>

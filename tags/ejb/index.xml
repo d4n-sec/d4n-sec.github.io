@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>EJB on Dan`s Blog</title>
-		<link>https://d4n-sec.github.io/tags/ejb/</link>
+		<link>https://blog.dansec.vip/tags/ejb/</link>
 		<description>Recent content in EJB on Dan`s Blog</description>
 		<generator>Hugo</generator>
 		<language>zh-CN</language>
@@ -12,12 +12,12 @@
 		
 			<lastBuildDate>Fri, 22 Nov 2024 15:01:58 +0800</lastBuildDate>
 		
-			<atom:link href="https://d4n-sec.github.io/tags/ejb/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://blog.dansec.vip/tags/ejb/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>Java基础知识：EJB</title>
-				<link>https://d4n-sec.github.io/p/javaaboutejb/</link>
+				<link>https://blog.dansec.vip/p/javaaboutejb/</link>
 				<pubDate>Fri, 22 Nov 2024 15:01:58 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/javaaboutejb/</guid>
+				<guid>https://blog.dansec.vip/p/javaaboutejb/</guid>
 				<description>&lt;h1 id=&#34;whats-ejb&#34;&gt;What&amp;rsquo;s EJB&lt;/h1&gt;&#xA;&lt;p&gt;EJB =&amp;gt; &lt;code&gt;Enterprise Java Beans&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;直译：企业 Java Beans&lt;/p&gt;&#xA;&lt;p&gt;EJB 的官方解释：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;商务软件的核心部分是它的业务逻辑。业务逻辑抽象了整个商务过程的流程，并使用计算机语言将他们实现。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;所谓：&amp;quot;&lt;em&gt;&lt;strong&gt;业务逻辑&lt;/strong&gt;&lt;/em&gt;&amp;quot;&#xA;我们注意到在EJB 的概念中主要提到的就是&amp;quot;业务逻辑&amp;quot;的封装，而这个业务逻辑到底是什么？说的那么悬乎，其实这个所谓的&amp;quot;业务逻辑&amp;quot;我们完全可以理解成执行特定任务的&amp;quot;类&amp;quot;。&lt;/p&gt;</description>
 			</item>
 	</channel>

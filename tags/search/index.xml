@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Search on Dan`s Blog</title>
-		<link>https://d4n-sec.github.io/tags/search/</link>
+		<link>https://blog.dansec.vip/tags/search/</link>
 		<description>Recent content in Search on Dan`s Blog</description>
 		<generator>Hugo</generator>
 		<language>zh-CN</language>
@@ -12,12 +12,12 @@
 		
 			<lastBuildDate>Fri, 18 Apr 2025 15:34:24 +0800</lastBuildDate>
 		
-			<atom:link href="https://d4n-sec.github.io/tags/search/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://blog.dansec.vip/tags/search/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>IDEA Structural Search</title>
-				<link>https://d4n-sec.github.io/p/tryonetryideastructuralsearch/</link>
+				<link>https://blog.dansec.vip/p/tryonetryideastructuralsearch/</link>
 				<pubDate>Fri, 18 Apr 2025 15:34:24 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/tryonetryideastructuralsearch/</guid>
+				<guid>https://blog.dansec.vip/p/tryonetryideastructuralsearch/</guid>
 				<description>&lt;h1 id=&#34;before-all&#34;&gt;Before All&lt;/h1&gt;&#xA;&lt;p&gt;在笔者学习Java反序列化链的时候，时常会碰到寻找合适类的问题，例如在学习Shiro550 CB链时，需要寻找一个类，需要同时满足3个条件：&lt;/p&gt;</description>
 			</item>
 	</channel>

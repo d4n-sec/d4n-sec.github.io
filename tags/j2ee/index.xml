@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>J2EE on Dan`s Blog</title>
-		<link>https://d4n-sec.github.io/tags/j2ee/</link>
+		<link>https://blog.dansec.vip/tags/j2ee/</link>
 		<description>Recent content in J2EE on Dan`s Blog</description>
 		<generator>Hugo</generator>
 		<language>zh-CN</language>
@@ -12,12 +12,12 @@
 		
 			<lastBuildDate>Thu, 21 Nov 2024 10:00:30 +0800</lastBuildDate>
 		
-			<atom:link href="https://d4n-sec.github.io/tags/j2ee/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://blog.dansec.vip/tags/j2ee/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>Java基础知识：J2EE</title>
-				<link>https://d4n-sec.github.io/p/javaaboutj2ee/</link>
+				<link>https://blog.dansec.vip/p/javaaboutj2ee/</link>
 				<pubDate>Thu, 21 Nov 2024 10:00:30 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/javaaboutj2ee/</guid>
+				<guid>https://blog.dansec.vip/p/javaaboutj2ee/</guid>
 				<description>&lt;ul&gt;&#xA;&lt;li&gt;&lt;em&gt;&lt;strong&gt;概念多且杂，且看且过&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;java--j2ee&#34;&gt;JAVA &amp;amp; J2EE&lt;/h1&gt;&#xA;&lt;p&gt;&lt;code&gt;Java&lt;/code&gt;和&lt;code&gt;Java EE&lt;/code&gt;（也可称&lt;code&gt;J2EE&lt;/code&gt;，其中的&lt;a href=&#34;https://blog.csdn.net/zl1zl2zl3/article/details/86030331&#34;&gt;故事&lt;/a&gt;）是两个不同概念&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;Java&lt;/code&gt;不仅指一种语言，也可以指一种软件系统的流派&lt;/p&gt;&#xA;&lt;p&gt;目前&lt;code&gt;JAVA&lt;/code&gt;有三个平台：&lt;/p&gt;</description>
 			</item>
 	</channel>

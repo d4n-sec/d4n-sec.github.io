@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>大模型 on Dan`s Blog</title>
-		<link>https://d4n-sec.github.io/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/</link>
+		<link>https://blog.dansec.vip/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/</link>
 		<description>Recent content in 大模型 on Dan`s Blog</description>
 		<generator>Hugo</generator>
 		<language>zh-CN</language>
@@ -12,19 +12,19 @@
 		
 			<lastBuildDate>Sun, 29 Mar 2026 00:00:00 +0800</lastBuildDate>
 		
-			<atom:link href="https://d4n-sec.github.io/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://blog.dansec.vip/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>大模型学习笔记2：链式法则、矩阵与反向传播</title>
-				<link>https://d4n-sec.github.io/p/ai-study-2/</link>
+				<link>https://blog.dansec.vip/p/ai-study-2/</link>
 				<pubDate>Sun, 29 Mar 2026 00:00:00 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/ai-study-2/</guid>
+				<guid>https://blog.dansec.vip/p/ai-study-2/</guid>
 				<description>&lt;p&gt;本文用于解决上篇文章的遗留问题&lt;/p&gt;&#xA;&lt;h1 id=&#34;简单回顾一下&#34;&gt;简单回顾一下&lt;/h1&gt;&#xA;&lt;p&gt;如果想要知道&lt;em&gt;&lt;strong&gt;期望输出&lt;/strong&gt;&lt;/em&gt; &lt;span class=&#34;math-inline&#34; data-reader-math&gt;&lt;span class=&#34;katex&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;/mrow&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;/span&gt; 和&lt;em&gt;&lt;strong&gt;模型的真实输出&lt;/strong&gt;&lt;/em&gt; &lt;span class=&#34;math-inline&#34; data-reader-math&gt;&lt;span class=&#34;katex&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mover accent=&#34;true&#34;&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;mo&gt;^&lt;/mo&gt;&lt;/mover&gt;&lt;/mrow&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;/span&gt; 差，就使用如下公式，这个叫做 Loss&lt;/p&gt;&#xA;&lt;div class=&#34;math-block&#34; data-reader-math&gt;&lt;span class=&#34;katex&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34; display=&#34;block&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;L&lt;/mi&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;s&lt;/mi&gt;&lt;mi&gt;s&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mo stretchy=&#34;false&#34;&gt;(&lt;/mo&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;mo&gt;−&lt;/mo&gt;&lt;mover accent=&#34;true&#34;&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;mo&gt;^&lt;/mo&gt;&lt;/mover&gt;&lt;msup&gt;&lt;mo stretchy=&#34;false&#34;&gt;)&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;/div&gt;&lt;p&gt;&#xA;如果想要知道&lt;em&gt;&lt;strong&gt;某个参数&lt;/strong&gt;&lt;/em&gt;应该往哪个方向变，变多少，即计算变化率(坡度)，则使用求导的方式，得到&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>大模型学习笔记：从 Loss 到梯度下降</title>
-				<link>https://d4n-sec.github.io/p/ai-study/</link>
+				<link>https://blog.dansec.vip/p/ai-study/</link>
 				<pubDate>Mon, 23 Mar 2026 17:40:00 +0800</pubDate>
-				<guid>https://d4n-sec.github.io/p/ai-study/</guid>
+				<guid>https://blog.dansec.vip/p/ai-study/</guid>
 				<description>&lt;p&gt;废话不多说，直接开始吧&lt;/p&gt;&#xA;&lt;p&gt;本文面向的是笔者自己和一些了解大模型的一大堆基础概念，但是从来没有穿起过的，想要学习的读者&lt;/p&gt;&#xA;&lt;p&gt;作者读文献 English 和 中文 语言系统混了，不要介意（4级难度）&lt;/p&gt;</description>
 			</item>
 	</channel>
