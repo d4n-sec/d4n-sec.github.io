@@ -2731,7 +2731,7 @@
         <div class="article-views">
           <section class="article-view" id="chat-panel" role="tabpanel" aria-labelledby="view-tab-chat" data-view-panel="chat">
             <div class="article-prose" data-article-body>
-              <p><a href="https://d4n-sec.github.io/p/bytecodeanndloadclass/#java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E6%9C%89%E5%93%AA%E4%BA%9B">前文</a>有提到Java的默认<code>ClassLoader</code>有三种，且三种的<code>ClassLoader</code>会加载不同的Java类。</p>
+              <p><a href="/p/bytecodeanndloadclass/#java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E6%9C%89%E5%93%AA%E4%BA%9B">前文</a>有提到Java的默认<code>ClassLoader</code>有三种，且三种的<code>ClassLoader</code>会加载不同的Java类。</p>
 <p>他们加载的类的路径在哪？</p>
 <p>是否可以进行设置？</p>
 <p>本文做一个初步探讨</p>
@@ -2923,7 +2923,7 @@
 <ol start="3">
 <li><code>Application Class Loader</code>加载<code>java.class.path</code>并会搜索应用程序的类路径（包括用户定义的类路径和系统类路径）</li>
 </ol>
-<p>默认情况下，最简单的情况，可以看到加载的类只有<code>java</code>命令的执行目录。也就是ClassPath的默认路径，<a href="https://d4n-sec.github.io/p/javaclasspath/">相关知识链接</a></p>
+<p>默认情况下，最简单的情况，可以看到加载的类只有<code>java</code>命令的执行目录。也就是ClassPath的默认路径，<a href="/p/javaclasspath/">相关知识链接</a></p>
 <h1 id="进阶一点">进阶一点</h1>
 <p>可以看到三个类加载的默认路径还是挺单一的，所以如果我们想要增加类加载器的加载路径，应该如何做呢？</p>
 <blockquote>
@@ -3096,7 +3096,7 @@ classpath：对应 AppClassLoader。java虚拟机系统参数<code>java.class.pa
 </ul>
 <p>注：<code>java -cp ...</code> 是 <code>java -classpath ...</code> 的简写</p>
 <h3 id="-classpath-示例">-classpath 示例</h3>
-<p>省略无关部分，结果如下 在<a href="https://d4n-sec.github.io/p/javaclasspath/#%E8%A7%A3%E5%86%B3">这篇文章</a>中也有用到</p>
+<p>省略无关部分，结果如下 在<a href="/p/javaclasspath/#%E8%A7%A3%E5%86%B3">这篇文章</a>中也有用到</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -3846,6 +3846,6 @@ classpath：对应 AppClassLoader。java虚拟机系统参数<code>java.class.pa
     </div>
   </div>
   <div id="toast-region" class="toast-region" role="status" aria-live="polite" aria-atomic="true"></div>
-  <script type="application/json" id="site-config">{"author":{"avatar":"https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/TX.jpg","name":"Dan"},"baseURL":"https://blog.dansec.vip/","comments":{"attachments":false,"backendURL":"https://dansec.vip/r-53906237f24137656fd1db3f","blogger":"d4n-sec","issueLabel":"","repository":"d4n-sec/d4n-sec.github.io"},"dateFormat":"2006 年 01 月 02 日","isArticle":true,"lang":"zh-cn","languageCode":"zh-CN","reader":{"mode":"constant","typing":true,"typingSpeed":18}}</script><script defer src="/js/threadline.min.10aff5268dcb3aaa200368f78f8d70b8d9985cc0d62fd267e425af546dbdba2f.js" integrity="sha256-EK/1Jo3LOqogA2j3j41wuNmYXMDWL9Jn5CWvVG29ui8="></script>
+  <script type="application/json" id="site-config">{"author":{"avatar":"https://d4n-picture-database.oss-cn-beijing.aliyuncs.com/img/TX.jpg","name":"Dan"},"baseURL":"https://blog.dansec.vip/","comments":{"attachments":false,"backendURL":"https://dansec.vip/r-53906237f24137656fd1db3f","blogger":"d4n-sec","issueLabel":"","repository":"d4n-sec/d4n-sec.github.io"},"dateFormat":"2006 年 01 月 02 日","isArticle":true,"lang":"zh-cn","languageCode":"zh-CN","reader":{"mode":"constant","typing":true,"typingSpeed":18}}</script><script defer src="/js/threadline.min.f853eda99cd10de9ebd42dfdfadbaa25f31cdb04dcf2508a5606f30dab9985f2.js" integrity="sha256-&#43;FPtqZzRDenr1C39&#43;tuqJfMc2wTc8lCKVgbzDauZhfI="></script>
 </body>
 </html>

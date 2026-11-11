@@ -60,7 +60,7 @@
 				<link>https://blog.dansec.vip/p/jvmruntimepathenv/</link>
 				<pubDate>Thu, 05 Dec 2024 17:18:22 +0800</pubDate>
 				<guid>https://blog.dansec.vip/p/jvmruntimepathenv/</guid>
-				<description>&lt;details&gt;&lt;summary&gt;前情提要&lt;/summary&gt;&#xA;&lt;p&gt;紧接&lt;a href=&#34;https://d4n-sec.github.io/p/port-pid-taskfile/&#34;&gt;此文&lt;/a&gt;的前情提要&lt;/p&gt;&#xA;&lt;p&gt;在找到对应端口对应的文件目录后，有点绝望，JDK 目录连上了我的知识点，却击碎了我的幻想&lt;/p&gt;&#xA;&lt;p&gt;但是咱不是善于认输的人，有没有什么办法可以看到正在运行的&lt;code&gt;java&lt;/code&gt;进程的相关配置参数或者环境变量呢？&lt;/p&gt;&#xA;&lt;p&gt;答案：有的，所以如下&lt;/p&gt;&#xA;&lt;p&gt;但是即使知道了环境变量，由于是通过案例通过&lt;code&gt;Tomcat&lt;/code&gt;部署（移植到类中直接运行失败），所以也无法排除是否是&lt;code&gt;Tomcat&lt;/code&gt;发起连接还是业务代码发起连接&lt;/p&gt;&#xA;&lt;p&gt;不管怎么说，学到了就记录&lt;/p&gt;&#xA;&lt;/details&gt;</description>
+				<description>&lt;details&gt;&lt;summary&gt;前情提要&lt;/summary&gt;&#xA;&lt;p&gt;紧接&lt;a href=&#34;https://blog.dansec.vip/p/port-pid-taskfile/&#34;&gt;此文&lt;/a&gt;的前情提要&lt;/p&gt;&#xA;&lt;p&gt;在找到对应端口对应的文件目录后，有点绝望，JDK 目录连上了我的知识点，却击碎了我的幻想&lt;/p&gt;&#xA;&lt;p&gt;但是咱不是善于认输的人，有没有什么办法可以看到正在运行的&lt;code&gt;java&lt;/code&gt;进程的相关配置参数或者环境变量呢？&lt;/p&gt;&#xA;&lt;p&gt;答案：有的，所以如下&lt;/p&gt;&#xA;&lt;p&gt;但是即使知道了环境变量，由于是通过案例通过&lt;code&gt;Tomcat&lt;/code&gt;部署（移植到类中直接运行失败），所以也无法排除是否是&lt;code&gt;Tomcat&lt;/code&gt;发起连接还是业务代码发起连接&lt;/p&gt;&#xA;&lt;p&gt;不管怎么说，学到了就记录&lt;/p&gt;&#xA;&lt;/details&gt;</description>
 			</item>
 			<item>
 				<title>Java基础知识：LDAP</title>
@@ -109,7 +109,7 @@
 				<link>https://blog.dansec.vip/p/classloaderloadpath/</link>
 				<pubDate>Thu, 07 Nov 2024 16:22:58 +0800</pubDate>
 				<guid>https://blog.dansec.vip/p/classloaderloadpath/</guid>
-				<description>&lt;p&gt;&lt;a href=&#34;https://d4n-sec.github.io/p/bytecodeanndloadclass/#java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E6%9C%89%E5%93%AA%E4%BA%9B&#34;&gt;前文&lt;/a&gt;有提到Java的默认&lt;code&gt;ClassLoader&lt;/code&gt;有三种，且三种的&lt;code&gt;ClassLoader&lt;/code&gt;会加载不同的Java类。&lt;/p&gt;&#xA;&lt;p&gt;他们加载的类的路径在哪？&lt;/p&gt;&#xA;&lt;p&gt;是否可以进行设置？&lt;/p&gt;&#xA;&lt;p&gt;本文做一个初步探讨&lt;/p&gt;&#xA;&lt;h1 id=&#34;全量输出&#34;&gt;全量输出&lt;/h1&gt;&#xA;&lt;p&gt;在不配置任何参数的情况下，执行&lt;code&gt;MainTest.java&lt;/code&gt;查看默认路径&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;MainTest.java&lt;/code&gt;内容如下&lt;/p&gt;</description>
+				<description>&lt;p&gt;&lt;a href=&#34;https://blog.dansec.vip/p/bytecodeanndloadclass/#java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E6%9C%89%E5%93%AA%E4%BA%9B&#34;&gt;前文&lt;/a&gt;有提到Java的默认&lt;code&gt;ClassLoader&lt;/code&gt;有三种，且三种的&lt;code&gt;ClassLoader&lt;/code&gt;会加载不同的Java类。&lt;/p&gt;&#xA;&lt;p&gt;他们加载的类的路径在哪？&lt;/p&gt;&#xA;&lt;p&gt;是否可以进行设置？&lt;/p&gt;&#xA;&lt;p&gt;本文做一个初步探讨&lt;/p&gt;&#xA;&lt;h1 id=&#34;全量输出&#34;&gt;全量输出&lt;/h1&gt;&#xA;&lt;p&gt;在不配置任何参数的情况下，执行&lt;code&gt;MainTest.java&lt;/code&gt;查看默认路径&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;MainTest.java&lt;/code&gt;内容如下&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>Java字节码与类加载器</title>
