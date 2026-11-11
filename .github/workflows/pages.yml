@@ -5,27 +5,79 @@ on:
     branches: [main]
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+permissions: {}
 
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  package:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    outputs:
+      artifact_name: ${{ steps.bundle.outputs.name }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - id: bundle
+        name: Collect published site files
+        run: |
+          set -euo pipefail
+          mkdir "$RUNNER_TEMP/site"
+          jq -j '.[] | ., "\u0000"' .threadline-generated.json |
+            rsync -a --from0 --files-from=- ./ "$RUNNER_TEMP/site/"
+          echo "name=github-pages-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          name: ${{ steps.bundle.outputs.name }}
+          path: ${{ runner.temp }}/site
+          include-hidden-files: true
+          retention-days: 7
+
+  pages:
+    needs: package
+    runs-on: ubuntu-24.04
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
-    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
-      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
-        with:
-          path: .
-          include-hidden-files: true
       - id: deploy
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+        with:
+          artifact_name: ${{ needs.package.outputs.artifact_name }}
+
+  aliyun:
+    needs: package
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: aliyun
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: ${{ needs.package.outputs.artifact_name }}
+          path: ${{ runner.temp }}/pages
+      - name: Publish the Pages artifact to Beijing
+        env:
+          DEPLOY_KEY: ${{ secrets.ALIYUN_BLOG_DEPLOY_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          key="$RUNNER_TEMP/blog-deploy-key"
+          trap 'rm -f "$key"' EXIT
+          printf '%s\n' "$DEPLOY_KEY" > "$key"
+          unset DEPLOY_KEY
+          known_hosts="$RUNNER_TEMP/blog-known-hosts"
+          printf '%s\n' '47.95.9.179 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEPUXQ1CH0dmP2848+VEFtU3QKOaBzCTaNNvmXnTped+' > "$known_hosts"
+          archive="$RUNNER_TEMP/blog.tar.gz"
+          gzip -1c "$RUNNER_TEMP/pages/artifact.tar" > "$archive"
+          digest=$(sha256sum "$archive" | cut -d ' ' -f 1)
+          ssh -T -i "$key" -o IdentitiesOnly=yes -o BatchMode=yes -o ConnectTimeout=20 \
+            -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$known_hosts" \
+            blog-deploy@47.95.9.179 "publish $GITHUB_SHA $GITHUB_RUN_ID $digest" < "$archive"
